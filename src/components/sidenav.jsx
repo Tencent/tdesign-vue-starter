@@ -36,13 +36,19 @@ export default {
     },
 
     getActiveName(maxLevel = 2) {
+      if (!this.$route.path) {
+        return '';
+      }
       return this.$route.path.split('/')
               .filter( (item, index) =>  (index <= maxLevel && index > 0) )
-              .map(item => `/${item}`);
+              .map(item => `/${item}`)
+              .join('');
     },
 
     goLink(path) {
-      this.$router.push(path);
+      this.$router.push(path).catch(err => {
+        console.log(err);
+      });
     },
 
     renderNav(list, deep = 0, maxLevel = 2) {
@@ -58,11 +64,13 @@ export default {
             );
           }
           return (
-              <t-menu-item name={item.path} onClick={this.goLink(item.path)}>
+            <router-link to={item.path}>
+              <t-menu-item name={item.path}>
                 {item.icon && <t-icon slot="icon" name={item.icon} />}
                 {item.title}
                 {item.children && this.renderNav(item.children, deep + 1)}
               </t-menu-item>
+            </router-link>
           );
         }
       });

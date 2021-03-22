@@ -44,14 +44,13 @@ export default [
             {
                 title: '基础列表页',
                 path: 'base',
-                component: '/src/page/list-base.vue',
+                component: '/src/pages/list-base.vue',
             },
             {
                 title: '筛选列表页',
                 path: 'select',
-                component: '/src/page/list-select.vue',
+                component: '/src/pages/list-select.vue',
             }
         ]
     },
-
 ]

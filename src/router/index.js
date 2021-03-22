@@ -10,12 +10,19 @@ const getMenuRoutes = (list, parent) => {
                 path: path,
                 component: () => import(component),
                 children: getMenuRoutes(item.children, item),
+                meta: {
+                    title: item.title
+                }
             }
         }) 
     };
 
 const routes = [
-    ...getMenuRoutes(routeConfig)
+    ...getMenuRoutes(routeConfig),
+    {
+      path: '*',
+      redirect: '/dashboard/base'
+    }
 ]
 
 export default routes;
