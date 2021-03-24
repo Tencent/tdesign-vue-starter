@@ -1,57 +1,59 @@
-import menuRoutes from "@/config/routes.js";
+import menuRoutes from '@/config/routes.js';
 
-const getMenuList = (list, basePath) => {
+interface MenuRoute {
+  path: string;
+  title?: string;
+  icon?: string;
+  children: Array<MenuRoute>;
+}
+
+const getMenuList = (list: Array<MenuRoute>, basePath?: string) => {
   if (!list) {
-    return []
+    return [];
   }
   return list.map((item) => {
-     const path =  basePath ? `${basePath}/${item.path}`:  item.path; 
-     return {
-       path: path,
-       title: item.title,
-       icon: item.icon || '',
-       children: getMenuList(item.children, path)
-     }
+    const path = basePath ? `${basePath}/${item.path}` : item.path;
+    return {
+      path,
+      title: item.title,
+      icon: item.icon || '',
+      children: getMenuList(item.children, path),
+    };
   });
 };
 export default {
   props: {
-    theme: "light",
+    theme: String,
     navData: [],
   },
-  data() {
+  data(): any {
     return {
       collapsed: true,
       list: getMenuList(menuRoutes),
     };
   },
   computed: {
-    iconName() {
-      return this.collapsed ? "menu-fold" : "menu-unfold";
+    iconName(): string {
+      return this.collapsed ? 'menu-fold' : 'menu-unfold';
     },
   },
   methods: {
-    changeCollapsed() {
+    changeCollapsed(): void {
       this.collapsed = !this.collapsed;
     },
 
-    getActiveName(maxLevel = 2) {
+    getActiveName(maxLevel = 2): string {
       if (!this.$route.path) {
         return '';
       }
-      return this.$route.path.split('/')
-              .filter( (item, index) =>  (index <= maxLevel && index > 0) )
-              .map(item => `/${item}`)
-              .join('');
+      return this.$route.path
+        .split('/')
+        .filter((item, index) => index <= maxLevel && index > 0)
+        .map((item) => `/${item}`)
+        .join('');
     },
 
-    goLink(path) {
-      this.$router.push(path).catch(err => {
-        console.log(err);
-      });
-    },
-
-    renderNav(list, deep = 0, maxLevel = 2) {
+    renderNav(list: Array<MenuRoute>, deep = 0, maxLevel = 2): any {
       return list.map((item) => {
         if (deep < maxLevel) {
           if (deep === 0) {
@@ -73,23 +75,19 @@ export default {
             </router-link>
           );
         }
+        return '';
       });
     },
   },
-  render(h) {
+  render(): any {
     const navs = this.renderNav(this.list);
     const active = this.getActiveName();
 
     return (
-      <t-menu
-        className="tdesign-sidenav"
-        theme={this.theme}
-        active={active}
-        collapsed={this.collapsed}
-      >
+      <t-menu className="tdesign-sidenav" theme={this.theme} active={active} collapsed={this.collapsed}>
         <span slot="logo">TDesign pro</span>
         {navs}
-        <div slot="options" onClick={this.changeCollapsed }>
+        <div slot="options" onClick={this.changeCollapsed}>
           <t-icon name={this.iconName} />
         </div>
       </t-menu>

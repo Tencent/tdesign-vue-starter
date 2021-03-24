@@ -1,6 +1,6 @@
 <template>
   <div class="tdesign-wrapper">
-      <router-view />
+    <router-view />
   </div>
 </template>
 
@@ -10,5 +10,4 @@
   display: flex;
   flex-direction: column;
 }
-
 </style>
