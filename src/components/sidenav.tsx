@@ -1,5 +1,6 @@
 import menuRoutes from '@/config/routes.js';
-
+import { prefix } from '@/config/global';
+import '@/style/sidenav.less';
 interface MenuRoute {
   path: string;
   title?: string;
@@ -28,7 +29,8 @@ export default {
   },
   data(): any {
     return {
-      collapsed: true,
+      prefix,
+      collapsed: false,
       list: getMenuList(menuRoutes),
     };
   },
@@ -84,7 +86,13 @@ export default {
     const active = this.getActiveName();
 
     return (
-      <t-menu className="tdesign-sidenav" theme={this.theme} active={active} collapsed={this.collapsed}>
+      <t-menu
+        width="232px"
+        className={`${this.prefix}-sidenav`}
+        theme={this.theme}
+        active={active}
+        collapsed={this.collapsed}
+      >
         <span slot="logo">TDesign pro</span>
         {navs}
         <div slot="options" onClick={this.changeCollapsed}>
