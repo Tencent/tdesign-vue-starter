@@ -34,6 +34,6 @@ export default {
 </script>
 <style lang="less" scoped>
 .tdesign-breadcrumb {
-  margin-bottom: 24px;
+  // margin-bottom: 16px;
 }
 </style>

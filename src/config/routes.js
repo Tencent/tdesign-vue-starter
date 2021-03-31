@@ -43,12 +43,12 @@ export default [
     path: '/list',
     icon: 'view-module',
     title: '列表页',
-    component: '/src/layouts/base.vue',
+    component: '/src/layouts/td-layout.vue',
     children: [
       {
         title: '基础列表页',
         path: 'base',
-        component: '/src/pages/demo.vue',
+        component: '/src/pages/list-base.vue',
       },
       {
         title: '筛选列表页',
