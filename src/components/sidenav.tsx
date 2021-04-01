@@ -86,19 +86,22 @@ export default {
     const active = this.getActiveName();
 
     return (
-      <t-menu
-        width="232px"
-        className={`${this.prefix}-sidenav`}
-        theme={this.theme}
-        active={active}
-        collapsed={this.collapsed}
-      >
-        <span slot="logo">TDesign pro</span>
-        {navs}
-        <div slot="options" onClick={this.changeCollapsed}>
-          <t-icon name={this.iconName} />
-        </div>
-      </t-menu>
+      <div>
+        <t-menu
+          width="232px"
+          class={`${this.prefix}-sidenav`}
+          theme={this.theme}
+          active={active}
+          collapsed={this.collapsed}
+        >
+          <span slot="logo">TDesign pro</span>
+          {navs}
+          <div slot="options" onClick={this.changeCollapsed}>
+            <t-icon name={this.iconName} />
+          </div>
+        </t-menu>
+        <div class={`${this.prefix}-sidenav-placeholder${this.collapsed ? '-hidden' : ''}`}></div>
+      </div>
     );
   },
 };

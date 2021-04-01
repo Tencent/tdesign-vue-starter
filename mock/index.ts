@@ -3,7 +3,7 @@ import { MockMethod } from 'vite-plugin-mock';
 const Mock = require('mockjs');
 export default [
   {
-    url: '/api/get',
+    url: '/api/get-list',
     method: 'get',
     response: () => ({
       code: 0,
