@@ -8,11 +8,13 @@ export default [
     response: () => ({
       code: 0,
       data: {
-        name: 'vben',
-        list: Mock.mock({
-          'list|1-10': [{
-            'id|+1': 1,
-        }],
+        ...Mock.mock({
+          'list|1-100': [{
+            'index|+1': 1,
+            'name': '@ctitle(2,4)',
+            'updateTime': '@date("HH:mm:ss")',
+            'adminName': '@cname'
+        }]
       }),
     }
   }),
