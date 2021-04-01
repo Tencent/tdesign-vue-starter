@@ -3,17 +3,17 @@ export default [
     path: '/detail',
     icon: 'chart-pie',
     title: '详情页',
-    component: '/src/layouts/default.vue',
+    component: '/src/layouts/td-layout.vue',
     children: [
       {
         title: '基础详情页',
         path: 'base',
-        component: '/src/pages/demo.vue',
+        component: '/src/pages/detail-base.vue',
       },
       {
         title: '高级详情页',
-        path: 'advance',
-        component: '/src/pages/demo.vue',
+        path: 'advanced',
+        component: '/src/pages/detail-advanced.vue',
       },
     ],
   },
@@ -29,9 +29,14 @@ export default [
         component: '/src/pages/list-base.vue',
       },
       {
-        title: '筛选列表页',
+        title: '基础筛选列表页',
         path: 'select',
         component: '/src/pages/list-select.vue',
+      },
+      {
+        title: '树状筛选列表页',
+        path: 'tree',
+        component: '/src/pages/list-tree.vue',
       },
     ],
   },
@@ -39,17 +44,17 @@ export default [
     path: '/form',
     icon: 'queue',
     title: '表单页',
-    component: '/src/layouts/base.vue',
+    component: '/src/layouts/td-layout.vue',
     children: [
       {
         title: '基础表单页',
         path: 'base',
-        component: '/src/pages/list-base.vue',
+        component: '/src/pages/form-base.vue',
       },
       {
         title: '分步表单页',
-        path: 'select',
-        component: '/src/pages/list-select.vue',
+        path: 'step',
+        component: '/src/pages/form-step.vue',
       },
     ],
   },
@@ -57,7 +62,7 @@ export default [
     path: '/dashboard',
     icon: 'chart-pie',
     title: '仪表板',
-    component: '/src/layouts/default.vue',
+    component: '/src/layouts/td-layout.vue',
     children: [
       {
         title: '基础仪表盘',
