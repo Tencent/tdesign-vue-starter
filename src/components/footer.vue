@@ -1,23 +1,27 @@
 <template>
-<div class="tdesign-footer">
-  <span>
-      Copyright @ 2021-{{ new Date().getFullYear() }} Tencent. All Rights Reserved
-  </span>
-</div>
+  <div :class="prefix + '-footer'">
+    <span> Copyright @ 2021-{{ new Date().getFullYear() }} Tencent. All Rights Reserved </span>
+  </div>
 </template>
 
 <script>
+import { prefix } from '@/config/global';
 export default {
-    name: 'tdesignFooter',
-}
+  name: `${prefix}-footer`,
+  data() {
+    return {
+      prefix,
+    };
+  },
+};
 </script>
 
 <style lang="less" scoped>
-.tdesign-footer {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    padding-top: 24px;
-    opacity: 0.6;
-    line-height: 24px;
-    text-align: center;
+@import '@/style/index';
+
+.@{prefix}-footer {
+  color: rgba(0, 0, 0, 0.3);
+  line-height: 20px;
+  text-align: center;
 }
-</style>>
+</style>
