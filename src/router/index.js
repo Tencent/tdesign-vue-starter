@@ -8,7 +8,7 @@ const getMenuRoutes = (list) => {
     const { path = '', component } = item;
     return {
       path,
-      component: () => import(/* @vite-ignore */ component),
+      component,
       children: getMenuRoutes(item.children, item),
       meta: {
         title: item.title,
@@ -21,7 +21,7 @@ const routes = [
   ...getMenuRoutes(routeConfig),
   {
     path: '*',
-    redirect: '/dashboard/base',
+    redirect: '/list/base',
   },
 ];
 
