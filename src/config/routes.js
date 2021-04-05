@@ -13,7 +13,7 @@ export default [
       {
         title: '高级详情页',
         path: 'advanced',
-        component: '/src/pages/detail-advanced.vue',
+        component: '/src/pages/detail-advanced/index.vue',
       },
     ],
   },
