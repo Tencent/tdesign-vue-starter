@@ -8,7 +8,7 @@ export default [
       {
         title: '基础详情页',
         path: 'base',
-        component: '/src/pages/detail-base.vue',
+        component: '/src/pages/detail-base/index.vue',
       },
       {
         title: '高级详情页',
