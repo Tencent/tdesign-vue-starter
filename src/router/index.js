@@ -8,7 +8,7 @@ const getMenuRoutes = (list) => {
     const { path = '', component } = item;
     return {
       path,
-      component: () => import(component),
+      component: () => import(/* @vite-ignore */ component),
       children: getMenuRoutes(item.children, item),
       meta: {
         title: item.title,
