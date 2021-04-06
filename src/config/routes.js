@@ -54,7 +54,7 @@ export default [
       {
         title: '分步表单页',
         path: 'step',
-        component: () => import('@/pages/form-step.vue'),
+        component: () => import('@/pages/form-step/index.vue'),
       },
     ],
   },
