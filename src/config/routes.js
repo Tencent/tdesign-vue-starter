@@ -49,7 +49,7 @@ export default [
       {
         title: '基础表单页',
         path: 'base',
-        component: () => import('@/pages/form-base.vue'),
+        component: () => import('@/pages/form-base/index.vue'),
       },
       {
         title: '分步表单页',
