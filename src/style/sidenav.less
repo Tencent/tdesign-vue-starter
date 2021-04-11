@@ -1,4 +1,5 @@
 @import './variables.less';
+@import './font-family.less';
 
 .@{prefix} {
     &-sidenav{
@@ -7,8 +8,25 @@
         bottom: 0;
         z-index: 1000;
         transition: all .3s;
+        &-logo-wrapper {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding-left: 24px;
+
+            >img {
+                height: 28px;
+            }
+        }
+        &-logo-normal {
+            font-family: TencentSansKoreanW7;
+            color: @primary-color;
+            font-size: @font-size-l;
+            transition: all .3s;
+        }
     }
 
+    
     &-sidenav-placeholder {
         flex: 1 1 232px;
         min-width: 232px;

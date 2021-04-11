@@ -94,7 +94,10 @@ export default {
           active={active}
           collapsed={this.collapsed}
         >
-          <span slot="logo">TDesign pro</span>
+          <span slot="logo" class={`${this.prefix}-sidenav-logo-wrapper`}>
+            <img src="https://oteam-tdesign-1258344706.cos.ap-guangzhou.myqcloud.com/pro-template/logo-blue.png" />
+            {!this.collapsed && <span class={`${this.prefix}-sidenav-logo-normal`}> TDesign pro</span>}
+          </span>
           {navs}
           <div slot="options" onClick={this.changeCollapsed}>
             <t-icon name={this.iconName} />
