@@ -21,7 +21,7 @@ const routes = [
   ...getMenuRoutes(routeConfig),
   {
     path: '*',
-    redirect: '/list/base',
+    redirect: '/detail/base',
   },
 ];
 
