@@ -1,18 +1,17 @@
 import routeConfig from '@/config/routes.js';
+import VueRouter from 'vue-router';
 
 const getMenuRoutes = (list) => {
   if (!list) {
     return [];
   }
   return list.map((item) => {
-    const { path = '', component } = item;
+    const { path = '', component, meta = { title: item.title } } = item;
     return {
       path,
       component,
       children: getMenuRoutes(item.children, item),
-      meta: {
-        title: item.title,
-      },
+      meta,
     };
   });
 };
@@ -25,4 +24,8 @@ const routes = [
   },
 ];
 
-export default routes;
+const route = new VueRouter({
+  routes,
+});
+
+export default route;

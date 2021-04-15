@@ -9,6 +9,10 @@ export default [
         title: '基础详情页',
         path: 'base',
         component: () => import('@/pages/detail-base/index.vue'),
+        // 默认不填，则需要每个页面都会经过登录的校验，若不需要进行登录校验则将needLogin：设为false
+        meta: {
+          needLogin: false,
+        },
       },
       {
         title: '高级详情页',
