@@ -43,8 +43,8 @@ router.beforeEach(async (to, from, next) => {
     if (user.loginName === '') {
       console.log('重定向到登录页面');
       // 没有用户信息，重定向跳转到登录页面
-      next({ path: '/login/index' });
-      return;
+      // next({ path: '/login/index' });
+      // return;
     }
   }
 
