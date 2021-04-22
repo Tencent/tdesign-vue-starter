@@ -1,47 +1,34 @@
 import menuRoutes from '@/config/routes.js';
 import { prefix } from '@/config/global';
 import '@/style/sidenav.less';
-interface MenuRoute {
-  path: string;
-  title?: string;
-  icon?: string;
-  children: Array<MenuRoute>;
-}
+import proSubMenu from './sub-menu';
 
-const getMenuList = (list: Array<MenuRoute>, basePath?: string) => {
-  if (!list) {
-    return [];
-  }
-  return list.map((item) => {
-    const path = basePath ? `${basePath}/${item.path}` : item.path;
-    return {
-      path,
-      title: item.title,
-      icon: item.icon || '',
-      children: getMenuList(item.children, path),
-    };
-  });
-};
 export default {
+  components: {
+    proSubMenu,
+  },
   props: {
-    theme: String,
     navData: [],
   },
   data(): any {
     return {
       prefix,
-      collapsed: false,
-      list: getMenuList(menuRoutes),
     };
   },
   computed: {
     iconName(): string {
-      return this.collapsed ? 'menu-fold' : 'menu-unfold';
+      return this.$store.state.setting.isSidebarCompact ? 'menu-fold' : 'menu-unfold';
+    },
+    collapsed(): boolean {
+      return this.$store.state.setting.isSidebarCompact;
+    },
+    theme(): string {
+      return this.$store.state.setting.theme;
     },
   },
   methods: {
     changeCollapsed(): void {
-      this.collapsed = !this.collapsed;
+      this.$store.commit('setting/toggleSidebarCompact');
     },
 
     getActiveName(maxLevel = 2): string {
@@ -54,51 +41,18 @@ export default {
         .map((item) => `/${item}`)
         .join('');
     },
-
-    renderNav(list: Array<MenuRoute>, deep = 0, maxLevel = 2): any {
-      return list.map((item) => {
-        if (deep < maxLevel) {
-          if (deep === 0) {
-            return (
-              <t-submenu name={item.path}>
-                {item.icon && <t-icon slot="icon" name={item.icon} />}
-                {item.title && <span slot="title"> {item.title} </span>}
-                {item.children && this.renderNav(item.children, deep + 1)}
-              </t-submenu>
-            );
-          }
-          return (
-            <router-link to={item.path}>
-              <t-menu-item name={item.path}>
-                {item.icon && <t-icon slot="icon" name={item.icon} />}
-                {item.title}
-                {item.children && this.renderNav(item.children, deep + 1)}
-              </t-menu-item>
-            </router-link>
-          );
-        }
-        return '';
-      });
-    },
   },
   render(): any {
-    const navs = this.renderNav(this.list);
     const active = this.getActiveName();
 
     return (
       <div>
-        <t-menu
-          width="232px"
-          class={`${this.prefix}-sidenav`}
-          theme={this.theme}
-          active={active}
-          collapsed={this.collapsed}
-        >
+        <t-menu width="232px" class={`${this.prefix}-sidenav`} theme="light" active={active} collapsed={this.collapsed}>
           <span slot="logo" class={`${this.prefix}-sidenav-logo-wrapper`}>
             <img src="https://oteam-tdesign-1258344706.cos.ap-guangzhou.myqcloud.com/pro-template/logo-blue.png" />
             {!this.collapsed && <span class={`${this.prefix}-sidenav-logo-normal`}> TDesign pro</span>}
           </span>
-          {navs}
+          <pro-sub-menu navData={menuRoutes}></pro-sub-menu>
           <div slot="options" onClick={this.changeCollapsed}>
             <t-icon name={this.iconName} />
           </div>
