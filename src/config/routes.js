@@ -35,6 +35,11 @@ export default [
         path: 'advanced',
         component: () => import('@/pages/detail-advanced/index.vue'),
       },
+      {
+        title: '部署配置',
+        path: 'deploy',
+        component: () => import('@/pages/detail-deploy/index.vue'),
+      },
     ],
   },
   {
