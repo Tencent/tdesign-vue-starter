@@ -20,7 +20,7 @@ const routes = [
   ...getMenuRoutes(routeConfig),
   {
     path: '*',
-    redirect: '/detail/base',
+    redirect: '/dashboard/base',
   },
 ];
 

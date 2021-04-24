@@ -1,7 +1,25 @@
 export default [
   {
-    path: '/detail',
+    path: '/dashboard',
     icon: 'chart-pie',
+    title: '仪表盘',
+    component: () => import('@/layouts/td-layout.vue'),
+    children: [
+      {
+        title: '基础仪表盘',
+        path: 'base',
+        component: () => import('@/pages/dashboard-base/index.vue'),
+      },
+      {
+        title: '详情仪表盘',
+        path: 'detail',
+        component: () => import('@/pages/dashboard-detail/index.vue'),
+      },
+    ],
+  },
+  {
+    path: '/detail',
+    icon: 'layers',
     title: '详情页',
     component: () => import('@/layouts/td-layout.vue'),
     children: [
@@ -57,26 +75,6 @@ export default [
         title: '分步表单页',
         path: 'step',
         component: () => import('@/pages/form-step/index.vue'),
-      },
-    ],
-  },
-  {
-    path: '/dashboard',
-    icon: 'chart-pie',
-    title: '仪表板',
-    component: () => import('@/layouts/td-layout.vue'),
-    children: [
-      {
-        title: '基础仪表盘',
-        path: 'base',
-        component: () => import('@/pages/demo.vue'),
-        children: [
-          {
-            title: '基础仪表盘',
-            path: 'base',
-            component: () => import('@/pages/demo.vue'),
-          },
-        ],
       },
     ],
   },
