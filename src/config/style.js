@@ -5,5 +5,5 @@ export default {
   isSidebarCompact: false,
   showBreadcrumb: true,
   theme: 'light',
-  layout: 'top',
+  layout: 'side',
 };

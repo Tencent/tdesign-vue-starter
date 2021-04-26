@@ -12,8 +12,8 @@ export default [
           'list|1-100': [
             {
               'index|+1': 1,
-              name: '@ctitle(2,4)',
-              updateTime: '@date("HH:mm:ss")',
+              name: '@region()' + '片区'+ '节点存算引擎'  + '@natural(1000, 9999)'  ,
+              updateTime: '2020-05-30 ' + '@date("HH:mm:ss")',
               adminName: '@cname',
             },
           ],
