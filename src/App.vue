@@ -2,6 +2,4 @@
   <router-view />
 </template>
 
-<script>
-
-</script>
+<script></script>

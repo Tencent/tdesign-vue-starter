@@ -1,5 +1,7 @@
 @import "./common.less";
 @import "./variables.less";
+@import "./rewrite.less";
+@import "./font-family.less";
 
 body {
     color: @text-level-2-color;
@@ -9,7 +11,6 @@ body {
     -webkit-font-smoothing: antialiased;
     padding: 0;
   }
-  
   pre {
     font-family: @font-family;
   }
@@ -39,4 +40,85 @@ body {
   
   * {
     box-sizing: border-box;
+  }
+  
+  .@{prefix}-text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .@{prefix}-text-tip {
+    font-size: 12px;
+    color: @text-level-3-color;
+  }
+  
+  .@{prefix}-pic {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+  
+  .@{prefix}-main-link {
+    color: @text-level-1-color;
+    text-decoration: none;
+    cursor: pointer;
+  
+    &:hover {
+      color: @text-level-1-color;
+    }
+  
+    &:active {
+      color: @text-level-1-color;
+    }
+  
+    &--active {
+      color: #000;
+    }
+  
+    &:focus {
+      text-decoration: none;
+    }
+  }
+  
+  .@{prefix}-link {
+    // color: @text-level-2-color;
+    color: @primary-color;
+
+    text-decoration: none;
+    margin-right: @spacer-3;
+
+    cursor: pointer;
+    
+    &:hover {
+      color: @primary-color;
+    }
+  
+    &:active {
+      color: @primary-color;
+    }
+  
+    &--active {
+      color: @primary-color;
+    }
+  
+    &:focus {
+      text-decoration: none;
+    }
+  }
+  
+  // 布局元素调整
+  .@{prefix}-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .@{prefix}-content-layout {
+    margin: @spacer-3;
+  }
+
+  .@{prefix}-footer-layout {
+    padding: 0;
+    margin-bottom: @spacer-2;
   }
