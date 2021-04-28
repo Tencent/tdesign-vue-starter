@@ -1,6 +1,11 @@
 import routeConfig from '@/config/routes.js';
 import VueRouter from 'vue-router';
 
+const layoutModules = import.meta.glob('../layouts/*.vue');
+const pagesModules = import.meta.glob('../pages/**/*.vue');
+const fristPagesModules = import.meta.glob('../pages/*.vue');
+
+const modules = Object.assign({}, layoutModules, fristPagesModules, pagesModules);
 const getMenuRoutes = (list) => {
   if (!list) {
     return [];
@@ -9,7 +14,7 @@ const getMenuRoutes = (list) => {
     const { path = '', component, meta = { title: item.title } } = item;
     return {
       path,
-      component,
+      component: modules[component],
       children: getMenuRoutes(item.children, item),
       meta,
     };
