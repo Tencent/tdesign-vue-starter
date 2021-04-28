@@ -1,7 +1,7 @@
 export default {
   showHeader: true,
-  showSidebar: false,
-  showFooter: false,
+  showSidebar: true,
+  showFooter: true,
   isSidebarCompact: false,
   showBreadcrumb: true,
   theme: 'light',
