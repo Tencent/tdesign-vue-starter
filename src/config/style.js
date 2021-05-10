@@ -6,4 +6,5 @@ export default {
   showBreadcrumb: true,
   theme: 'light',
   layout: 'mix',
+  logoPosition: 'side',
 };

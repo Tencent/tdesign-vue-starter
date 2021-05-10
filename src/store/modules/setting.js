@@ -17,10 +17,18 @@ const mutations = {
     state.theme = payload.theme;
     state.layout = payload.layout;
     state.isSidebarCompact = payload.isSidebarCompact;
+    state.logoPosition = payload.logoPosition;
   },
   toggleSidebarCompact(state) {
     state.isSidebarCompact = !state.isSidebarCompact;
   },
+};
+
+const getters = {
+  showHeader: (state) => state.layout !== 'side',
+  showSidebar: (state) => state.layout !== 'top',
+  showSidebarLogo: (state) => state.layout === 'side' || state.logoPosition === 'side',
+  showHeaderLogo: (state) => state.layout === 'top' || state.logoPosition === 'top',
 };
 
 const actions = {};
@@ -30,4 +38,5 @@ export default {
   state,
   mutations,
   actions,
+  getters,
 };
