@@ -1,10 +1,12 @@
 export default {
-  showHeader: true,
-  showSidebar: true,
   showFooter: true,
   isSidebarCompact: false,
   showBreadcrumb: true,
   theme: 'light',
-  layout: 'mix',
-  logoPosition: 'side',
+  layout: 'side',
+  splitMenu: true,
+  isFooterAside: false,
+  isSidebarFixed: false,
+  isHeaderFixed: true,
+  showHeader: true,
 };

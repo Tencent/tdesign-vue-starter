@@ -36,7 +36,22 @@ export default {
     },
   },
   methods: {
+    isSingleNav(list: Array<MenuRoute>): boolean {
+      console.log(list);
+      return list.filter((item) => !item.children || item.children.length === 0).length === 0;
+    },
     renderNav(list: Array<MenuRoute>, deep = 0, maxLevel = 2): any {
+      if (this.isSingleNav(list)) {
+        return list.map((item) => (
+          <router-link to={item.path}>
+            <t-menu-item name={item.path}>
+              {item.icon && <t-icon slot="icon" name={item.icon} />}
+              {item.title}
+            </t-menu-item>
+          </router-link>
+        ));
+      }
+
       return list.map((item) => {
         if (deep < maxLevel) {
           if (deep === 0) {

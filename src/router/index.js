@@ -15,14 +15,14 @@ const getMenuRoutes = (list) => {
     return {
       path,
       component: modules[component],
-      children: getMenuRoutes(item.children, item),
+      children: getMenuRoutes(item.children),
       meta,
     };
   });
 };
 
 const routes = [
-  ...getMenuRoutes(routeConfig),
+  ...getMenuRoutes(routeConfig, true),
   {
     path: '*',
     redirect: '/dashboard/base',
