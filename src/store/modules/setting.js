@@ -18,9 +18,9 @@ const mutations = {
     state.logoPosition = payload.logoPosition;
     state.splitMenu = payload.splitMenu;
     state.isFooterAside = payload.isFooterAside;
-    state.isSidebarFixed = state.isSidebarFixed;
-    state.isHeaderFixed = state.isHeaderFixed;
-    state.showHeader = state.showHeader;
+    state.isSidebarFixed = payload.isSidebarFixed;
+    state.isHeaderFixed = payload.isHeaderFixed;
+    state.showHeader = payload.showHeader;
   },
   toggleSidebarCompact(state) {
     state.isSidebarCompact = !state.isSidebarCompact;
@@ -28,7 +28,7 @@ const mutations = {
 };
 
 const getters = {
-  showHeader: (state) => state.layout !== 'side' || state.showHeader,
+  showHeader: (state) => state.showHeader,
   showSidebar: (state) => state.layout !== 'top',
   showSidebarLogo: (state) => state.layout === 'side',
   showHeaderLogo: (state) => state.layout !== 'side',
@@ -58,9 +58,19 @@ const getters = {
     }
     return MENU_CONFIG;
   },
-  showAsideFooter: (state) => state.showFooter && state.isFooterAside,
+  showAsideFooter: (state) => {
+    if (state.layout === 'mix' && !state.isSidebarFixed) {
+      return state.showFooter && state.isAsideFooter;
+    }
+    return state.showFooter;
+  },
 
-  showMainFooter: (state) => state.showFooter && !state.isFooterAside,
+  showMainFooter: (state) => {
+    if (state.layout === 'mix' && !state.isSidebarFixed) {
+      return state.showFooter && !state.isAsideFooter;
+    }
+    return false;
+  },
 };
 
 const actions = {};

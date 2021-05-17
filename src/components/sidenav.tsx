@@ -44,6 +44,7 @@ export default {
         {
           [`${this.prefix}-sidenav-no-logo`]: !this.showLogo,
           [`${this.prefix}-sidenav-no-fixed`]: !this.isFixed,
+          [`${this.prefix}-sidenav-mix-fixed`]: this.layout === 'mix' && this.isFixed,
         },
       ];
     },

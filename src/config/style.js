@@ -3,10 +3,10 @@ export default {
   isSidebarCompact: false,
   showBreadcrumb: true,
   theme: 'light',
-  layout: 'side',
+  layout: 'mix',
   splitMenu: true,
   isFooterAside: false,
   isSidebarFixed: false,
-  isHeaderFixed: true,
+  isHeaderFixed: false,
   showHeader: true,
 };

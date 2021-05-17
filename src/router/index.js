@@ -1,7 +1,7 @@
 import routeConfig from '@/config/routes.js';
 import VueRouter from 'vue-router';
 
-const layoutModules = import.meta.glob('../layouts/*.vue');
+const layoutModules = import.meta.glob('../layouts/*');
 const pagesModules = import.meta.glob('../pages/**/*.vue');
 const fristPagesModules = import.meta.glob('../pages/*.vue');
 

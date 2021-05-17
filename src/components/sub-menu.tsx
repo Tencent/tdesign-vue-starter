@@ -37,8 +37,7 @@ export default {
   },
   methods: {
     isSingleNav(list: Array<MenuRoute>): boolean {
-      console.log(list);
-      return list.filter((item) => !item.children || item.children.length === 0).length === 0;
+      return list.every((item) => !item.children || item.children.length === 0);
     },
     renderNav(list: Array<MenuRoute>, deep = 0, maxLevel = 2): any {
       if (this.isSingleNav(list)) {
