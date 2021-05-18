@@ -2,16 +2,33 @@
 @import './font-family.less';
 
 .@{prefix} {
+    &-sidebar-layout {
+        height: 100%;
+    }
+
+    &-sidebar-layout-side {
+        z-index: 100;
+    }
+
     &-sidenav{
         position: fixed;
         top: 0;
         bottom: 0;
-        z-index: 1000;
+        z-index: 10;
         transition: all .3s;
+        min-height: 100%;
+
+        &-mix {
+            top: 64px;
+        }
+        
+        &-no-fixed {
+            position: relative;
+            z-index: 1;
+        }
 
         &-no-logo {
             z-index: 1;
-            position: absolute;
         }
 
         &-logo-wrapper {

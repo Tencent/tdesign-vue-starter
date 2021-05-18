@@ -1,7 +1,7 @@
 import routeConfig from '@/config/routes.js';
 import VueRouter from 'vue-router';
 
-const layoutModules = import.meta.glob('../layouts/*.vue');
+const layoutModules = import.meta.glob('../layouts/*');
 const pagesModules = import.meta.glob('../pages/**/*.vue');
 const fristPagesModules = import.meta.glob('../pages/*.vue');
 
@@ -15,14 +15,14 @@ const getMenuRoutes = (list) => {
     return {
       path,
       component: modules[component],
-      children: getMenuRoutes(item.children, item),
+      children: getMenuRoutes(item.children),
       meta,
     };
   });
 };
 
 const routes = [
-  ...getMenuRoutes(routeConfig),
+  ...getMenuRoutes(routeConfig, true),
   {
     path: '*',
     redirect: '/dashboard/base',
