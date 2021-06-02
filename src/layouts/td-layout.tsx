@@ -103,7 +103,6 @@ export default {
 
   render(): VNode {
     const { layout } = this.setting;
-
     const header = this.renderHeader();
     const sidebar = this.renderSidebar();
     const content = this.renderContent();
@@ -112,12 +111,12 @@ export default {
     return (
       <div class={`${prefix}-wrapper`}>
         {layout === 'side' ? (
-          <t-layout class={this.mainLayoutCls}>
+          <t-layout class={this.mainLayoutCls} key="side">
             <t-aside>{sidebar}</t-aside>
             <t-layout>{[header, content]}</t-layout>
           </t-layout>
         ) : (
-          <t-layout>
+          <t-layout key="no-side">
             {header}
             <t-layout class={this.mainLayoutCls}>{[sidebar, content]}</t-layout>
             {this.showMainFooter && footer}

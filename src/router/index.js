@@ -11,12 +11,13 @@ const getMenuRoutes = (list) => {
     return [];
   }
   return list.map((item) => {
-    const { path = '', component, meta = { title: item.title } } = item;
+    const { path = '', component, meta = { title: item.title }, redirect = '' } = item;
     return {
       path,
       component: modules[component],
       children: getMenuRoutes(item.children),
       meta,
+      redirect,
     };
   });
 };

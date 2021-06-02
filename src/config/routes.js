@@ -4,6 +4,7 @@ export default [
     icon: 'chart-pie',
     title: '仪表盘',
     component: '../layouts/td-layout.tsx',
+    redirect: 'base',
     children: [
       {
         title: '基础仪表盘',
@@ -22,6 +23,7 @@ export default [
     icon: 'layers',
     title: '详情页',
     component: '../layouts/td-layout.tsx',
+    redirect: 'base',
     children: [
       {
         title: '基础详情页',
@@ -47,6 +49,7 @@ export default [
     icon: 'view-module',
     title: '列表页',
     component: '../layouts/td-layout.tsx',
+    redirect: 'base',
     children: [
       {
         title: '基础列表页',
@@ -70,6 +73,7 @@ export default [
     icon: 'queue',
     title: '表单页',
     component: '../layouts/td-layout.tsx',
+    redirect: 'base',
     children: [
       {
         title: '基础表单页',

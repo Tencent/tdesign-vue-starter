@@ -43,7 +43,7 @@ export default {
       if (this.isSingleNav(list)) {
         return list.map((item) => (
           <router-link to={item.path}>
-            <t-menu-item name={item.path}>
+            <t-menu-item value={item.path}>
               {item.icon && <t-icon slot="icon" name={item.icon} />}
               {item.title}
             </t-menu-item>
@@ -55,7 +55,7 @@ export default {
         if (deep < maxLevel) {
           if (deep === 0) {
             return (
-              <t-submenu name={item.path}>
+              <t-submenu name={item.path} value={item.path}>
                 {item.icon && <t-icon slot="icon" name={item.icon} />}
                 {item.title && <span slot="title"> {item.title} </span>}
                 {item.children && this.renderNav(item.children, deep + 1)}
@@ -64,7 +64,7 @@ export default {
           }
           return (
             <router-link to={item.path}>
-              <t-menu-item name={item.path}>
+              <t-menu-item name={item.path} value={item.path}>
                 {item.icon && <t-icon slot="icon" name={item.icon} />}
                 {item.title}
                 {item.children && this.renderNav(item.children, deep + 1)}
