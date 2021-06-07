@@ -87,6 +87,25 @@ export default [
       },
     ],
   },
+  {
+    path: '/result',
+    icon: 'check-circle',
+    title: '结果页',
+    component: '../layouts/td-layout.tsx',
+    redirect: '403',
+    children: [
+      {
+        title: '403',
+        path: '403',
+        component: '../pages/result-no-find/index.vue',
+      },
+      {
+        title: '分步表单页',
+        path: 'step',
+        component: '../pages/form-step/index.vue',
+      },
+    ],
+  },
   // 自定义登录页面
   // {
   //   path: '/login',
