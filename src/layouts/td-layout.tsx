@@ -79,15 +79,15 @@ export default {
       );
     },
     renderContent(): VNode {
-      const { showBreadCrumb } = this.setting;
+      const { showBreadcrumb } = this.setting;
       const { prefix, showAsideFooter } = this;
       return (
         <t-layout>
           <t-content class={`${prefix}-content-layout`}>
-            {showBreadCrumb && <tdesign-breadcrumb />}
+            {showBreadcrumb && <tdesign-breadcrumb />}
             <router-view class={`${prefix}-default-layout`} />
           </t-content>
-          {showAsideFooter && this.renderFooter(h)}
+          {showAsideFooter && this.renderFooter()}
         </t-layout>
       );
     },
