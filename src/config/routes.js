@@ -95,14 +95,29 @@ export default [
     redirect: '403',
     children: [
       {
-        title: '403',
+        title: '403-无权限',
         path: '403',
-        component: '../pages/result-no-find/index.vue',
+        component: '../pages/result-403/index.vue',
       },
       {
-        title: '分步表单页',
-        path: 'step',
-        component: '../pages/form-step/index.vue',
+        title: '404-页面未找到',
+        path: '404',
+        component: '../pages/result-404/index.vue',
+      },
+      {
+        title: '500-服务器错误',
+        path: '500',
+        component: '../pages/result-500/index.vue',
+      },
+      {
+        title: '其他-浏览器不兼容',
+        path: 'browser-incompatible',
+        component: '../pages/result-browser-incompatible/index.vue',
+      },
+      {
+        title: '其他-网络异常',
+        path: 'network-error',
+        component: '../pages/result-network-error/index.vue',
       },
     ],
   },

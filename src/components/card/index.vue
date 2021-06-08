@@ -17,6 +17,7 @@ export default {
 .card {
   &-container {
     padding: 16px 16px 0;
+    margin-top: 24px;
     margin-bottom: 16px;
     background: #fff;
     border-radius: 3px;

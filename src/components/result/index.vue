@@ -1,16 +1,17 @@
 <template>
-  <div>
-    <t-page-header>{{ pageHeader }}</t-page-header>
+  <card>
     <div class="result-container">
       <img class="result-bg-img" :src="bgUrl" />
-      <div name="tip">{{ tip }}</div>
-      <div name="link">返回首页</div>
+      <div class="result-tip">{{ tip }}</div>
+      <div><router-link class="tdesign-pro-link" to="/">返回首页</router-link></div>
     </div>
-  </div>
+  </card>
 </template>
 <script>
+import Card from '@/components/card/index.vue';
 export default {
   name: 'result',
+  components: { Card },
   props: ['bgUrl', 'tip', 'linkUrl', 'pageHeader'],
 };
 </script>
@@ -18,11 +19,13 @@ export default {
 @import url('@/style/index.less');
 .result {
   &-container {
-    background: #fff;
-    border-radius: 3px;
+    min-height: 400px;
+    height: 75vh;
     display: flex;
     flex-direction: column;
-    align-content: center;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
   }
 
   &-bg-img {
@@ -31,8 +34,10 @@ export default {
   }
 
   &-tip {
+    margin: 16px 0 8px;
     font-size: @font-size-base;
     color: @text-level-2-color;
+    line-height: 22px;
   }
 }
 </style>
