@@ -121,6 +121,20 @@ export default [
       },
     ],
   },
+  {
+    path: '/user',
+    icon: 'queue',
+    title: '表单页',
+    component: '../layouts/td-layout.tsx',
+    redirect: 'index',
+    children: [
+      {
+        title: '个人中心',
+        path: 'index',
+        component: '../pages/user/index.vue',
+      },
+    ],
+  },
   // 自定义登录页面
   // {
   //   path: '/login',
