@@ -14,5 +14,3 @@ export default {
   components: { result },
 };
 </script>
-
-<style></style>
