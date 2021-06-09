@@ -1,25 +1,20 @@
 @import '@/style/index';
 .user-panel {
-  padding: @spacer-3;
-  
   .user-right {
     &-greeting {
-      height: 73px;
       margin-bottom: 16px;
       background: #fff;
-      border-radius: @border-radius-2;
+      border-radius: @border-radius;
     }
     &-trend {
-      height: 209px;
       margin-bottom: 16px;
       background: #fff;
-      border-radius: @border-radius-2;
+      border-radius: @border-radius;
     }
     &-todo {
-      height: 133px;
       margin-bottom: 16px;
       background: #fff;
-      border-radius: @border-radius-2;
+      border-radius: @border-radius;
     }
   }
   .head-bar {
@@ -48,11 +43,11 @@
       padding: 24px;
       margin: 0 16px 16px 0;
       background: #fff;
-      border-radius: @border-radius-2;
+      border-radius: @border-radius;
 
       .acount {
         text-align: center;
-        margin-bottom: 59px;
+        margin-bottom: 48px;
         color: @text-level-1-color;
 
         .img {
@@ -61,7 +56,7 @@
           height: 122px;
           border-radius: @border-radius-50;
           background: #EBEDF1;
-          margin-top: 20px;
+          margin-top: 16px;
           margin-left: 50%;
           transform: translateX(-50%);
         }
@@ -87,7 +82,7 @@
           margin-right: 10px;
         }
         .del {
-          margin: 12px 0;
+          margin: 16px 0;
         }
       }
     }
@@ -95,13 +90,13 @@
       padding: 24px 24px 0 24px;
       margin: 0 16px 16px 0;
       background: #fff;
-      border-radius: @border-radius-2;
+      border-radius: @border-radius;
 
       .t-list-item {
         height: 64px;
         margin: 8px 0 16px 0;
         background: #F3F3F3;
-        border-radius: 6px;
+        border-radius: @border-radius;
         
         .t-list-item__meta-avatar {
           height: 32px;
@@ -134,19 +129,20 @@
   .user-right {
     .user-top {
       .user-right-greeting {
-        padding: 25px 0 20px 24px;
+        padding: 24px;
         line-height: 28px;
         font-family: PingFangSC-Semibold;
         font-size: 20px;
         color: @text-level-1-color;
         text-align: left;
         .regular {
+          vertical-align: bottom;
           font-family: PingFangSC-Regular;
           font-size: 14px;
         }
       }
       .user-right-trend {
-        padding: 24px 24px 0;
+        padding: 24px;
 
         .t-list-item {
           padding: 8px 0;
@@ -172,11 +168,15 @@
             color: @text-level-2-color;
           }
         }
+        .t-list-item:last-child {
+          padding-bottom: 0;
+        }
       }
       .user-right-todo {
         padding: 24px;
 
         .empty-list {
+          margin-top: 18px;
           line-height: 20px;
           font-family: PingFangSC-Regular;
           font-size: 14px;
@@ -184,6 +184,7 @@
           text-align: center;
 
           img {
+            margin-bottom: 2px;
             width: 42px;
           }
         }
@@ -192,12 +193,12 @@
     .user-bottom {
       padding: 24px;
       background: #fff;
-      border-radius: @border-radius-2;
+      border-radius: @border-radius;
 
       .contract {
         width: 340px;
-        height: 90px;
-        border-radius: @border-radius-2;
+        height: 88px;
+        border-radius: @border-radius;
         margin: 8px 0;
         
         &-type {
@@ -224,11 +225,15 @@
           color: @text-level-3-color;
         }
       }
+      .contract:last-child,
+      .contract:nth-last-child(2) {
+        margin-bottom: 0;
+      }
     }
   }
   .user-bottom .user-right{
     height: 447px;
     background: #fff;
-    border-radius: @border-radius-2;
+    border-radius: @border-radius;
   }
 }

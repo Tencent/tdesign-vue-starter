@@ -123,8 +123,8 @@ export default [
   },
   {
     path: '/user',
-    icon: 'queue',
-    title: '表单页',
+    icon: 'user-circle',
+    title: '个人页',
     component: '../layouts/td-layout.tsx',
     redirect: 'index',
     children: [
