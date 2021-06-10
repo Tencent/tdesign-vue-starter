@@ -7,11 +7,11 @@ import TdesignSidenav from '@/components/sidenav';
 import { prefix } from '@/config/global';
 import TdesignSetting from '@/components/setting.vue';
 import { mapGetters } from 'vuex';
-import { className } from 'typescript';
 
 import '@/style/index.less';
 
 const name = `${prefix}-base-layout`;
+
 export default {
   name,
   components: {
@@ -42,7 +42,7 @@ export default {
       return this.$store.state.setting;
     },
     // fixed t-aside 无法被父元素实时监听的 bug
-    mainLayoutCls(): Array<className | { [className: string]: any }> {
+    mainLayoutCls(): Array<ClassName> {
       return [
         {
           't-layout-has-sider': this.showSidebar,

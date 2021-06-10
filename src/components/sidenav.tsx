@@ -1,7 +1,7 @@
 import { prefix } from '@/config/global';
-import '@/style/sidenav.less';
 import proSubMenu from './sub-menu';
-import { className } from 'typescript';
+
+import '@/style/sidenav.less';
 
 export default {
   components: {
@@ -23,7 +23,7 @@ export default {
       default: '64px',
     },
   },
-  data(): any {
+  data() {
     return {
       prefix,
     };
@@ -38,7 +38,7 @@ export default {
     theme(): string {
       return this.$store.state.setting.theme;
     },
-    menuCls(): Array<className | { [className: string]: any }> {
+    menuCls(): Array<ClassName> {
       return [
         `${this.prefix}-sidenav`,
         {
@@ -48,7 +48,7 @@ export default {
         },
       ];
     },
-    layoutCls(): Array<className | { [className: string]: any }> {
+    layoutCls(): Array<ClassName> {
       return [`${this.prefix}-sidenav-${this.layout}`, `${this.prefix}-sidebar-layout`];
     },
   },
@@ -63,12 +63,12 @@ export default {
       }
       return this.$route.path
         .split('/')
-        .filter((item, index) => index <= maxLevel && index > 0)
-        .map((item) => `/${item}`)
+        .filter((_item: string, index: number) => index <= maxLevel && index > 0)
+        .map((item: string) => `/${item}`)
         .join('');
     },
   },
-  render(): any {
+  render() {
     const active = this.getActiveName();
 
     return (

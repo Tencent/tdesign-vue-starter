@@ -6,7 +6,7 @@ interface MenuRoute {
   children: Array<MenuRoute>;
 }
 
-const getMenuList = (list: Array<MenuRoute>, basePath?: string) => {
+const getMenuList = (list: Array<MenuRoute>, basePath?: string): Array<any> => {
   if (!list) {
     return [];
   }
@@ -20,12 +20,13 @@ const getMenuList = (list: Array<MenuRoute>, basePath?: string) => {
     };
   });
 };
+
 export default {
   name: 'proSubMenu',
   props: {
     navData: Array,
   },
-  data(): any {
+  data() {
     return {
       prefix,
     };
@@ -39,7 +40,7 @@ export default {
     isSingleNav(list: Array<MenuRoute>): boolean {
       return list.every((item) => !item.children || item.children.length === 0);
     },
-    renderNav(list: Array<MenuRoute>, deep = 0, maxLevel = 2): any {
+    renderNav(list: Array<MenuRoute>, deep = 0, maxLevel = 2) {
       if (this.isSingleNav(list)) {
         return list.map((item) => (
           <router-link to={item.path}>
