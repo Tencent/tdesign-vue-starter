@@ -1,4 +1,9 @@
 import axios from 'axios';
+import proxy from '../config/proxy';
+
+const env = import.meta.env.MODE || 'development';
+
+const { host } = proxy[env];
 
 const CODE = {
   LOGIN_TIMEOUT: 1000,
@@ -7,7 +12,7 @@ const CODE = {
 };
 
 const instance = axios.create({
-  baseURL: '/api',
+  baseURL: host,
   timeout: 1000,
   withCredentials: true,
 });
