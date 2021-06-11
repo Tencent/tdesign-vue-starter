@@ -141,16 +141,18 @@ export default [
     ],
   },
   // 自定义登录页面
-  // {
-  //   path: '/login',
-  //   title: '登录页面',
-  //   children: [
-  //     {
-  //       title: '登录页面',
-  //       path: 'index',
-  //       meta: { needLogin: false },
-  //       component: () => import('@/pages/login-index/index.vue'),
-  //     },
-  //   ],
-  // },
+  {
+    path: '/login',
+    title: '登录页',
+    component: '../layouts/blank.vue',
+    icon: 'chevron-right-rectangle',
+    children: [
+      {
+        title: '登录中心',
+        path: 'index',
+        meta: { needLogin: false },
+        component: '../pages/login/index.vue',
+      },
+    ],
+  },
 ];
