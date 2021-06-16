@@ -57,6 +57,11 @@ export default [
         component: '../pages/list-base.vue',
       },
       {
+        title: '卡片列表页',
+        path: 'card',
+        component: '../pages/list-card/index.vue',
+      },
+      {
         title: '基础筛选列表页',
         path: 'select',
         component: '../pages/list-select.vue',
