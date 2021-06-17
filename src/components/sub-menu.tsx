@@ -43,12 +43,10 @@ export default {
     renderNav(list: Array<MenuRoute>, deep = 0, maxLevel = 2) {
       if (this.isSingleNav(list)) {
         return list.map((item) => (
-          <router-link to={item.path}>
-            <t-menu-item value={item.path}>
-              {item.icon && <t-icon slot="icon" name={item.icon} />}
-              {item.title}
-            </t-menu-item>
-          </router-link>
+          <t-menu-item key={item.path} value={item.path} to={item.path}>
+            {item.icon && <t-icon slot="icon" name={item.icon} />}
+            {item.title}
+          </t-menu-item>
         ));
       }
 
@@ -64,13 +62,13 @@ export default {
             );
           }
           return (
-            <router-link to={item.path}>
-              <t-menu-item name={item.path} value={item.path}>
-                {item.icon && <t-icon slot="icon" name={item.icon} />}
-                {item.title}
-                {item.children && this.renderNav(item.children, deep + 1)}
-              </t-menu-item>
-            </router-link>
+            // <router-link to={item.path}>
+            <t-menu-item name={item.path} value={item.path} to={item.path}>
+              {item.icon && <t-icon slot="icon" name={item.icon} />}
+              {item.title}
+              {item.children && this.renderNav(item.children, deep + 1)}
+            </t-menu-item>
+            // </router-link>
           );
         }
         return '';
@@ -79,7 +77,6 @@ export default {
   },
   render(): any {
     const navs = this.renderNav(this.list);
-
     return <div>{navs}</div>;
   },
 };

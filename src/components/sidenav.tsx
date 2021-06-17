@@ -2,7 +2,7 @@ import { prefix } from '@/config/global';
 import proSubMenu from './sub-menu';
 
 import '@/style/sidenav.less';
-
+import TLogo from '../assets/t-logo.svg';
 export default {
   components: {
     proSubMenu,
@@ -22,6 +22,14 @@ export default {
       type: String,
       default: '64px',
     },
+    theme: {
+      type: String,
+      default: 'light',
+    },
+    isCompact: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -35,8 +43,13 @@ export default {
     collapsed(): boolean {
       return this.$store.state.setting.isSidebarCompact;
     },
-    theme(): string {
-      return this.$store.state.setting.theme;
+    sidenavCls(): Array<ClassName> {
+      return [
+        `${this.prefix}-sidebar-layout`,
+        {
+          [`${this.prefix}-sidebar-compact`]: this.isCompact,
+        },
+      ];
     },
     menuCls(): Array<ClassName> {
       return [
@@ -72,11 +85,11 @@ export default {
     const active = this.getActiveName();
 
     return (
-      <div class={`${this.prefix}-sidebar-layout`}>
-        <t-menu width="232px" class={this.menuCls} theme="light" active={active} collapsed={this.collapsed}>
+      <div class={this.sidenavCls}>
+        <t-menu width="232px" class={this.menuCls} theme={this.theme} active={active} collapsed={this.collapsed}>
           {this.showLogo && (
             <span slot="logo" class={`${this.prefix}-sidenav-logo-wrapper`}>
-              <img src="https://oteam-tdesign-1258344706.cos.ap-guangzhou.myqcloud.com/pro-template/logo-blue.png" />
+              <img src={TLogo} />
               {!this.collapsed && <span class={`${this.prefix}-sidenav-logo-normal`}> TDesign pro</span>}
             </span>
           )}

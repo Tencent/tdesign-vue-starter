@@ -10,6 +10,9 @@ const { dispatch, state } = store;
 const { user } = state;
 
 router.beforeEach(async (to, from, next) => {
+  // TODO: 登录页面交互优化后，开启登录逻辑
+  next();
+  return;
   // start progress bar
   NProgress.start();
 

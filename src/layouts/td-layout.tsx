@@ -59,6 +59,7 @@ export default {
             layout={this.setting.layout}
             isFixed={this.setting.isSidebarFixed}
             menu={this.sideMenu}
+            theme={this.setting.theme}
             isCompact={this.setting.isSidebarCompact}
           />
         )

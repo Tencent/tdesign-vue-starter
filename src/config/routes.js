@@ -4,7 +4,7 @@ export default [
     icon: 'chart-pie',
     title: '仪表盘',
     component: '../layouts/td-layout.tsx',
-    redirect: 'base',
+    redirect: '/dashboard/base',
     children: [
       {
         title: '基础仪表盘',
@@ -23,7 +23,7 @@ export default [
     icon: 'layers',
     title: '详情页',
     component: '../layouts/td-layout.tsx',
-    redirect: 'base',
+    redirect: '/detail/base',
     children: [
       {
         title: '基础详情页',
@@ -49,7 +49,7 @@ export default [
     icon: 'view-module',
     title: '列表页',
     component: '../layouts/td-layout.tsx',
-    redirect: 'base',
+    redirect: '/list/base',
     children: [
       {
         title: '基础列表页',
@@ -78,7 +78,7 @@ export default [
     icon: 'queue',
     title: '表单页',
     component: '../layouts/td-layout.tsx',
-    redirect: 'base',
+    redirect: '/form/base',
     children: [
       {
         title: '基础表单页',
@@ -97,7 +97,7 @@ export default [
     icon: 'check-circle',
     title: '结果页',
     component: '../layouts/td-layout.tsx',
-    redirect: '403',
+    redirect: '/result/403',
     children: [
       {
         title: '403-无权限',
@@ -131,7 +131,7 @@ export default [
     icon: 'user-circle',
     title: '个人页',
     component: '../layouts/td-layout.tsx',
-    redirect: 'index',
+    redirect: '/user/index',
     children: [
       {
         title: '个人中心',

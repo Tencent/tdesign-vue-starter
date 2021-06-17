@@ -6,6 +6,9 @@
         height: 100%;
     }
 
+    &-sidebar-compact {
+        width: 64px;
+    }
     &-sidebar-layout-side {
         z-index: 100;
     }
@@ -35,11 +38,8 @@
             display: flex;
             align-items: center;
             width: 100%;
-            padding-left: 24px;
+            padding-left: 16px;
 
-            >img {
-                height: 28px;
-            }
         }
         &-logo-normal {
             font-family: TencentSansKoreanW7;
@@ -64,11 +64,6 @@
 
 }
 
-// 重写左边菜单高亮
-.t-menu__item.t-is-active {
-    color: white !important;
-    background-color: #0052D9 !important;
-}
 
 .logo-container {
     cursor: pointer;
