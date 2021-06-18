@@ -19,6 +19,8 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config) => config);
 
+instance.defaults.retry = 3;
+
 instance.interceptors.response.use(
   (response) => {
     if (response.status === 200) {
