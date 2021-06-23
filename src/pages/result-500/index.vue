@@ -1,9 +1,5 @@
 <template>
-  <result
-    pageHeader="500"
-    tip="抱歉，服务器出错啦"
-    bgUrl="https://oteam-tdesign-1258344706.cos.ap-guangzhou.myqcloud.com/pro-template/result-page/500.png"
-  >
+  <result pageHeader="500" tip="抱歉，服务器出错啦" bgUrl="https://tdesign.gtimg.com/pro-template/result-page/500.png">
   </result>
 </template>
 
