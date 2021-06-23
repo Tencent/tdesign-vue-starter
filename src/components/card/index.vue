@@ -1,6 +1,6 @@
 <template>
   <div :class="containerCls">
-    <div class="card-title">
+    <div class="card-title" v-show="title || describe">
       <span>
         {{ title }}
         <span v-if="describe" class="card-describe">{{ describe }}</span>

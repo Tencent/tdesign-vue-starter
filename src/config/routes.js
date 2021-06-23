@@ -97,8 +97,18 @@ export default [
     icon: 'check-circle',
     title: '结果页',
     component: '../layouts/td-layout.tsx',
-    redirect: '/result/403',
+    redirect: '/result/success',
     children: [
+      {
+        title: '成功页',
+        path: 'success',
+        component: '../pages/result-success/index.vue',
+      },
+      {
+        title: '失败页',
+        path: 'fail',
+        component: '../pages/result-fail/index.vue',
+      },
       {
         title: '403-无权限',
         path: '403',
