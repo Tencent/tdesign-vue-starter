@@ -1,11 +1,11 @@
 <template>
   <card>
     <div class="result-success">
-      <t-icon class="result-success-icon" name="check-circle-filled" />
+      <t-icon class="result-success-icon" name="close-circle-filled" />
       <div class="result-success-title">项目创建失败</div>
       <div class="result-success-describe">企业微信联系检查创建者权限，或返回修改</div>
       <div>
-        <t-button>返回修改</t-button>
+        <t-button @click="() => this.$router.push('/form/base')">返回修改</t-button>
       </div>
     </div>
   </card>
