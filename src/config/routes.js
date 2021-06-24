@@ -28,17 +28,17 @@ export default [
       {
         title: '基础详情页',
         path: 'base',
-        component: '../pages/list-base.vue',
+        component: '../pages/detail-base/index.vue',
         // 默认不填，则需要每个页面都会经过登录的校验，若不需要进行登录校验则将needLogin：设为false
         meta: { needLogin: false, title: '基础详情页' },
       },
       {
-        title: '高级详情页',
+        title: '多卡片详情页',
         path: 'advanced',
         component: '../pages/detail-advanced/index.vue',
       },
       {
-        title: '部署配置',
+        title: '部署详情页',
         path: 'deploy',
         component: '../pages/detail-deploy/index.vue',
       },
