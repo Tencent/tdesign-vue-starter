@@ -54,7 +54,7 @@ export default [
       {
         title: '基础列表页',
         path: 'base',
-        component: '../pages/list-base.vue',
+        component: '../pages/list-base/index.vue',
       },
       {
         title: '卡片列表页',
@@ -64,12 +64,12 @@ export default [
       {
         title: '基础筛选列表页',
         path: 'select',
-        component: '../pages/list-select.vue',
+        component: '../pages/list-select/index.vue',
       },
       {
         title: '树状筛选列表页',
         path: 'tree',
-        component: '../pages/list-tree.vue',
+        component: '../pages/list-tree/index.vue',
       },
     ],
   },
