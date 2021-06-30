@@ -42,6 +42,11 @@ export default [
         path: 'deploy',
         component: '../pages/detail-deploy/index.vue',
       },
+      {
+        title: '二级详情页',
+        path: 'secondary',
+        component: '../pages/secondary/index.vue',
+      },
     ],
   },
   {
