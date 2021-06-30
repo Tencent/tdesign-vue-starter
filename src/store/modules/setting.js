@@ -4,7 +4,6 @@ import MENU_CONFIG from '@/config/routes.js';
 // 定义的state初始值
 const state = {
   ...STYLE_CONFIG,
-  msgData: [],
 };
 
 // 定义的state的初始值方法，传入state或者额外的方法，然后利用vuex的双向数据驱动进行值的改变
@@ -25,9 +24,6 @@ const mutations = {
   },
   toggleSidebarCompact(state) {
     state.isSidebarCompact = !state.isSidebarCompact;
-  },
-  setMsgData(state, data) {
-    state.msgData = data;
   },
 };
 
