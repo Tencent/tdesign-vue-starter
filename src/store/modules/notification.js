@@ -52,7 +52,10 @@ const mutations = {
   },
 };
 
-const getters = {};
+const getters = {
+  unreadMsg: (state) => state.msgData.filter((item) => item.status),
+  readMsg: (state) => state.msgData.filter((item) => !item.status),
+};
 
 const actions = {};
 
