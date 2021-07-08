@@ -30,7 +30,7 @@
         }
         .tip2 {
             font-size: 14px;
-            color: #0052D9;
+            color: @brand-color-8;
             cursor: pointer;
         }
     }
@@ -39,6 +39,21 @@
 .login-step1 {
     .input-container {
         margin-top: 64px;
+
+        .t-input {
+            display: block;
+        }
+        .t-popup-reference {
+            margin: 24px 0;
+        }
+    }
+    .check-container {
+        .t-checkbox__label {
+            color: @text-color-secondary;
+            span {
+                color: @brand-color-8;
+            }
+        }
     }
 }
 .login-step3 {
@@ -56,17 +71,21 @@
         .tip2 {
             float: right;
             font-size: 14px;
-            color: #0052D9;
-
+            color: @brand-color-8;
         }
     }
     .button-container {
         margin-top: 16px;
     }
     .check-container {
-        margin-top: 16px;
         font-size: 14px;
         color: rgba(0,0,0,0.60);
+
+        .tip {
+            float: right;
+            font-size: 14px;
+            color: @brand-color-8;
+        }
     }
 }
 
@@ -93,18 +112,93 @@
 }
 .bottom-container {
     margin-top: 66px;
-    .tip1 {
-        margin-right: 14px;       
+    .tip {
         font-size: 14px;
-        color: #0052D9; 
+        color: @brand-color-8; 
         cursor: pointer;
     }
-    .tip2 {
-        margin-left: 14px;
-        font-size: 14px;
-        color: #0052D9;
-
-
+    i {
+        font-style: normal;
+        color: @gray-color-3;
+        margin: 0 14px;
     }
 
+}
+.rex-check {
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: @text-color-placeholder;
+    line-height: 22px;
+}
+.format-correct {
+    color: @text-color-primary;
+    
+    .t-icon {
+        color: @success-color-5;
+    }
+}
+
+.login-step4 {
+    .input-container {
+        margin-top: 64px;
+
+        .t-input {
+            display: block;
+        }
+        .t-popup-reference {
+            margin: 24px 0;
+        }
+        .verification-code {
+            margin-bottom: 24px;
+
+            .t-input {
+                display: inline-block;
+            }
+            button {
+                width: 102px;
+                height: 40px;
+                margin-left: 11px;
+            }
+        }
+    }
+    .bottom-container {
+        margin-top: 66px;
+    }
+    .check-container {
+        .t-checkbox__label {
+            color: @text-color-secondary;
+
+            span {
+                color: @brand-color-8;
+            }
+        }
+    }
+}
+
+.login-step5 {
+    .input-container {
+        margin-top: 64px;
+
+        .t-input {
+            display: block;
+        }
+        .t-popup-reference {
+            margin: 24px 0;
+        }
+        .t-select-popup-reference {
+            margin: 0;
+        }
+    }
+    .bottom-container {
+        margin-top: 66px;
+    }
+    .check-container {
+        .t-checkbox__label {
+            color: @text-color-secondary;
+
+            span {
+                color: @brand-color-8;
+            }
+        }
+    }
 }
