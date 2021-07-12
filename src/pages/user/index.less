@@ -82,8 +82,12 @@
         font-family: PingFangSC-Regular;
         font-size: 14px;
         color: @text-level-1-color;
+        .hiredate, .del, .mail {
+          display: flex;
+        }
         .t-icon {
-          margin-right: 10px;
+          height: 24px;
+          margin-right: 8px;
         }
         .del {
           margin: 16px 0;
@@ -157,14 +161,15 @@
           cursor: pointer;
 
           .text {
+            display: flex;
             line-height: 20px;
             font-family: PingFangSC-Regular;
             font-size: 14px;
             color: @text-level-1-color;
 
             .t-icon {
-              margin-right: 5px;
-              transform: translateY(-2px);
+              margin-right: 8px;
+              height: 20px;
               font-size: 16px;
               color: @text-level-3-color;
             }
