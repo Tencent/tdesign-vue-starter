@@ -12,6 +12,7 @@
     top: 28%;
     left: 12%;
     min-height: 500px;
+    line-height: 22px;
 }
 .title-container {
     .icon {
@@ -72,6 +73,11 @@
             float: right;
             font-size: 14px;
             color: @brand-color-8;
+
+            .t-icon {
+                height: 20px;
+                vertical-align: text-bottom;
+            }
         }
     }
     .button-container {
@@ -187,6 +193,43 @@
         }
         .t-select-popup-reference {
             margin: 0;
+        }
+    }
+    .bottom-container {
+        margin-top: 66px;
+    }
+    .check-container {
+        .t-checkbox__label {
+            color: @text-color-secondary;
+
+            span {
+                color: @brand-color-8;
+            }
+        }
+    }
+}
+
+.login-step6 {
+    .input-container {
+        margin-top: 64px;
+
+        .t-input {
+            display: block;
+        }
+        .t-popup-reference {
+            margin: 24px 0;
+        }
+        .verification-code {
+            margin: 24px 0;
+
+            .t-input {
+                display: inline-block;
+            }
+            button {
+                width: 102px;
+                height: 40px;
+                margin-left: 11px;
+            }
         }
     }
     .bottom-container {
