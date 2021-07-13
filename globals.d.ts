@@ -6,3 +6,8 @@ declare interface ImportMeta {
     MODE: 'mock' | 'development' | 'test' | 'release';
   };
 }
+
+declare module '*.svg' {
+  const content: string;
+  export default content;
+}

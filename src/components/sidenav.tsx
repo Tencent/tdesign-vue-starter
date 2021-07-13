@@ -1,5 +1,9 @@
 import { prefix } from '@/config/global';
 import proSubMenu from './sub-menu';
+import tLogo from '../assets/t-logo.svg';
+import tLogow from '../assets/t-logo-w.svg';
+import tdLogo from '../assets/TDesign-logo.svg';
+import tdLogow from '../assets/TDesign-logo-w.svg';
 
 import '@/style/sidenav.less';
 export default {
@@ -64,10 +68,10 @@ export default {
       return [`${this.prefix}-sidenav-${this.layout}`, `${this.prefix}-sidebar-layout`];
     },
     tLogo(): string {
-      return this.theme === 'dark' ? '/src/assets/t-logo-w.svg' : '/src/assets/t-logo.svg';
+      return this.theme === 'dark' ? tLogow : tLogo;
     },
     tdLogo(): string {
-      return this.theme === 'dark' ? '/src/assets/TDesign-logo-w.svg' : '/src/assets/TDesign-logo.svg';
+      return this.theme === 'dark' ? tdLogow : tdLogo;
     },
   },
   methods: {
