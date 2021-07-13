@@ -2,7 +2,6 @@ import { prefix } from '@/config/global';
 import proSubMenu from './sub-menu';
 
 import '@/style/sidenav.less';
-import TLogo from '../assets/t-logo.svg';
 export default {
   components: {
     proSubMenu,
@@ -64,6 +63,12 @@ export default {
     layoutCls(): Array<ClassName> {
       return [`${this.prefix}-sidenav-${this.layout}`, `${this.prefix}-sidebar-layout`];
     },
+    tLogo(): string {
+      return this.theme === 'dark' ? '/src/assets/t-logo-w.svg' : '/src/assets/t-logo.svg';
+    },
+    tdLogo(): string {
+      return this.theme === 'dark' ? '/src/assets/TDesign-logo-w.svg' : '/src/assets/TDesign-logo.svg';
+    },
   },
   methods: {
     changeCollapsed(): void {
@@ -89,8 +94,8 @@ export default {
         <t-menu width="232px" class={this.menuCls} theme={this.theme} active={active} collapsed={this.collapsed}>
           {this.showLogo && (
             <span slot="logo" class={`${this.prefix}-sidenav-logo-wrapper`}>
-              <img src={TLogo} />
-              {!this.collapsed && <span class={`${this.prefix}-sidenav-logo-normal`}> TDesign pro</span>}
+              <img class={`${this.prefix}-sidenav-logo-t-logo`} src={this.tLogo} />
+              {!this.collapsed && <img class={`${this.prefix}-sidenav-logo-tdesign-logo`} src={this.tdLogo} />}
             </span>
           )}
           <pro-sub-menu navData={this.menu}></pro-sub-menu>
