@@ -5,7 +5,7 @@
     "lib": ["esnext", "dom"],
     "allowJs": true, // 先开 项目有很多之前写的
     "checkJs": false,
-    "noImplicitAny": true,
+    "noImplicitAny": false, // 先不开
     "isolatedModules": false,
     "experimentalDecorators": true,
     "esModuleInterop": true,
