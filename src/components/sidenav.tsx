@@ -95,7 +95,7 @@ export default {
 
     return (
       <div class={this.sidenavCls}>
-        <t-menu width="232px" class={this.menuCls} theme={this.theme} active={active} collapsed={this.collapsed}>
+        <t-menu width="232px" class={this.menuCls} theme={this.theme} value={active} collapsed={this.collapsed}>
           {this.showLogo && (
             <span slot="logo" class={`${this.prefix}-sidenav-logo-wrapper`}>
               <img class={`${this.prefix}-sidenav-logo-t-logo`} src={this.tLogo} />

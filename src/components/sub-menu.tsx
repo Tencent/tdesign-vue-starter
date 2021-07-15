@@ -62,13 +62,11 @@ export default {
             );
           }
           return (
-            // <router-link to={item.path}>
             <t-menu-item name={item.path} value={item.path} to={item.path}>
               {item.icon && <t-icon slot="icon" name={item.icon} />}
               {item.title}
               {item.children && this.renderNav(item.children, deep + 1)}
             </t-menu-item>
-            // </router-link>
           );
         }
         return '';
