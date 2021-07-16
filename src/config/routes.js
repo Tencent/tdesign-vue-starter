@@ -1,7 +1,7 @@
 export default [
   {
     path: '/dashboard',
-    icon: 'chart-pie',
+    icon: 'dashboard',
     title: '仪表盘',
     component: '../layouts/td-layout.tsx',
     redirect: '/dashboard/base',
@@ -38,7 +38,7 @@ export default [
         component: '../pages/detail-advanced/index.vue',
       },
       {
-        title: '部署详情页',
+        title: '数据详情页',
         path: 'deploy',
         component: '../pages/detail-deploy/index.vue',
       },
