@@ -6,6 +6,8 @@ import tdLogo from '../assets/TDesign-logo.svg';
 import tdLogow from '../assets/TDesign-logo-w.svg';
 
 import '@/style/sidenav.less';
+const MIN_POINT = 768;
+
 export default {
   components: {
     proSubMenu,
@@ -37,6 +39,13 @@ export default {
   data() {
     return {
       prefix,
+    };
+  },
+  mounted() {
+    this.autoCollapsed();
+
+    window.onresize = () => {
+      this.autoCollapsed();
     };
   },
   computed: {
@@ -88,6 +97,11 @@ export default {
         .filter((_item: string, index: number) => index <= maxLevel && index > 0)
         .map((item: string) => `/${item}`)
         .join('');
+    },
+    autoCollapsed(): void {
+      if (window.innerWidth <= MIN_POINT) {
+        this.$store.commit('settting/showSidebarCompact');
+      }
     },
   },
   render() {
