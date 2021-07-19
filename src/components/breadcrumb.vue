@@ -1,7 +1,7 @@
 <template>
   <t-breadcrumb :maxItemWidth="'150'" class="tdesign-breadcrumb">
     <template v-for="item in crumbs">
-      <t-breadcrumbItem :key="item.path" :to="item.path">
+      <t-breadcrumbItem :key="item.to" :to="item.to">
         {{ item.title }}
       </t-breadcrumbItem>
     </template>
