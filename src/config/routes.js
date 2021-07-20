@@ -19,37 +19,6 @@ export default [
     ],
   },
   {
-    path: '/detail',
-    icon: 'layers',
-    title: '详情页',
-    component: '../layouts/td-layout.tsx',
-    redirect: '/detail/base',
-    children: [
-      {
-        title: '基础详情页',
-        path: 'base',
-        component: '../pages/detail-base/index.vue',
-        // 默认不填，则需要每个页面都会经过登录的校验，若不需要进行登录校验则将needLogin：设为false
-        meta: { needLogin: false, title: '基础详情页' },
-      },
-      {
-        title: '多卡片详情页',
-        path: 'advanced',
-        component: '../pages/detail-advanced/index.vue',
-      },
-      {
-        title: '数据详情页',
-        path: 'deploy',
-        component: '../pages/detail-deploy/index.vue',
-      },
-      {
-        title: '二级详情页',
-        path: 'secondary',
-        component: '../pages/secondary/index.vue',
-      },
-    ],
-  },
-  {
     path: '/list',
     icon: 'view-module',
     title: '列表页',
@@ -94,6 +63,37 @@ export default [
         title: '分步表单页',
         path: 'step',
         component: '../pages/form-step/index.vue',
+      },
+    ],
+  },
+  {
+    path: '/detail',
+    icon: 'layers',
+    title: '详情页',
+    component: '../layouts/td-layout.tsx',
+    redirect: '/detail/base',
+    children: [
+      {
+        title: '基础详情页',
+        path: 'base',
+        component: '../pages/detail-base/index.vue',
+        // 默认不填，则需要每个页面都会经过登录的校验，若不需要进行登录校验则将needLogin：设为false
+        meta: { needLogin: false, title: '基础详情页' },
+      },
+      {
+        title: '多卡片详情页',
+        path: 'advanced',
+        component: '../pages/detail-advanced/index.vue',
+      },
+      {
+        title: '数据详情页',
+        path: 'deploy',
+        component: '../pages/detail-deploy/index.vue',
+      },
+      {
+        title: '二级详情页',
+        path: 'secondary',
+        component: '../pages/secondary/index.vue',
       },
     ],
   },
