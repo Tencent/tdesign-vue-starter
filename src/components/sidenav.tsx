@@ -6,7 +6,7 @@ import tdLogo from '../assets/TDesign-logo.svg';
 import tdLogow from '../assets/TDesign-logo-w.svg';
 
 import '@/style/sidenav.less';
-const MIN_POINT = 768;
+const MIN_POINT = 992 - 1;
 
 export default {
   components: {
@@ -100,7 +100,7 @@ export default {
     },
     autoCollapsed(): void {
       if (window.innerWidth <= MIN_POINT) {
-        this.$store.commit('settting/showSidebarCompact');
+        this.$store.commit('setting/showSidebarCompact');
       }
     },
   },

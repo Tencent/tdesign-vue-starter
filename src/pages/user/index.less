@@ -1,6 +1,19 @@
 @import '@/style/index';
 .user-panel {
+
+  @media (max-width: @screen-sm-max) {
+    .user-right {
+      min-width: 100%;
+    }
+  }
+
+  @media (min-width: @screen-md-min) {
+    .user-right {
+      min-width: 33.33%;
+    }
+  }
   .user-right {
+    transition: width .3s linear;
     &-greeting {
       margin-bottom: 16px;
       background: #fff;
