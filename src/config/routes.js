@@ -7,12 +7,12 @@ export default [
     redirect: '/dashboard/base',
     children: [
       {
-        title: '基础仪表盘',
+        title: '概览仪表盘',
         path: 'base',
         component: '../pages/dashboard-base/index.vue',
       },
       {
-        title: '详情仪表盘',
+        title: '统计报表',
         path: 'detail',
         component: '../pages/dashboard-detail/index.vue',
       },
@@ -36,7 +36,7 @@ export default [
         component: '../pages/list-card/index.vue',
       },
       {
-        title: '基础筛选列表页',
+        title: '筛选列表页',
         path: 'select',
         component: '../pages/list-select/index.vue',
       },
@@ -115,29 +115,29 @@ export default [
         component: '../pages/result-fail/index.vue',
       },
       {
-        title: '403-无权限',
+        title: '网络异常',
+        path: 'network-error',
+        component: '../pages/result-network-error/index.vue',
+      },
+      {
+        title: '无权限',
         path: '403',
         component: '../pages/result-403/index.vue',
       },
       {
-        title: '404-页面未找到',
+        title: '访问页面不存在页',
         path: '404',
         component: '../pages/result-404/index.vue',
       },
       {
-        title: '500-服务器错误',
+        title: '服务器出错页',
         path: '500',
         component: '../pages/result-500/index.vue',
       },
       {
-        title: '其他-浏览器不兼容',
+        title: '浏览器不兼容页',
         path: 'browser-incompatible',
         component: '../pages/result-browser-incompatible/index.vue',
-      },
-      {
-        title: '其他-网络异常',
-        path: 'network-error',
-        component: '../pages/result-network-error/index.vue',
       },
     ],
   },
