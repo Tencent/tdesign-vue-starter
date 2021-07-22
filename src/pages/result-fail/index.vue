@@ -42,7 +42,7 @@ export default {
   }
 
   &-describe {
-    margin: 16px 0 32px;
+    margin: 8px 0 32px;
     font-size: 14px;
     color: rgba(0, 0, 0, 0.6);
     line-height: 22px;
