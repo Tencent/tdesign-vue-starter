@@ -5,7 +5,7 @@
       <div class="result-success-title">项目已创建成功</div>
       <div class="result-success-describe">可以联系负责人分发应用</div>
       <div>
-        <t-button @click="() => this.$router.push('/detail/advanced')" theme="default">查看进度</t-button>
+        <t-button @click="() => this.$router.push('/detail/advanced')" theme="default"> 查看进度</t-button>
         <t-button @click="() => this.$router.push('/form/base')">再次创建</t-button>
       </div>
     </div>
