@@ -46,11 +46,14 @@
       line-height: 24px;
       font-family: PingFangSC-Regular;
       font-size: 14px;
-      color: @brand-color-8;
+      color: @text-level-1-color;
       cursor: pointer;
 
       .t-icon {
         vertical-align: bottom;
+      }
+      &:hover {
+        color: @brand-color-8;
       }
     }
   }
@@ -115,6 +118,7 @@
 
       .t-list-item {
         height: 64px;
+        min-width: 230px;
         margin: 8px 0 16px 0;
         background: #F3F3F3;
         border-radius: @border-radius;
@@ -254,6 +258,9 @@
           }
         }
         &-title {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
           line-height: 24px;
           margin: 20px 0 6px 0;
           font-family: PingFangSC-Medium;
@@ -261,6 +268,9 @@
           color: @text-level-1-color;
         }
         &-date {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
           line-height: 22px;
           font-family: PingFangSC-Regular;
           font-size: 14px;
