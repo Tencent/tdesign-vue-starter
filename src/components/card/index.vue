@@ -5,7 +5,9 @@
         {{ title }}
         <span v-if="describe" class="card-describe">{{ describe }}</span>
       </span>
-      <slot name="option"></slot>
+      <span class="card-option">
+        <slot name="option"></slot>
+      </span>
     </div>
     <div class="card-content">
       <slot></slot>
@@ -33,6 +35,11 @@ export default {
 <style lang="less" scoped>
 @import url('@/style/index.less');
 .card {
+  &-option {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+  }
   &-container {
     padding: 24px;
     margin: 16px 0;
