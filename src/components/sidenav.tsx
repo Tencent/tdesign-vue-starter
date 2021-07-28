@@ -99,9 +99,8 @@ export default {
         .join('');
     },
     autoCollapsed(): void {
-      if (window.innerWidth <= MIN_POINT) {
-        this.$store.commit('setting/showSidebarCompact');
-      }
+      const isCompact = window.innerWidth <= MIN_POINT;
+      this.$store.commit('setting/showSidebarCompact', isCompact);
     },
   },
   render() {

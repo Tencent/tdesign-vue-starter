@@ -25,8 +25,8 @@ const mutations = {
   toggleSidebarCompact(state) {
     state.isSidebarCompact = !state.isSidebarCompact;
   },
-  showSidebarCompact(state) {
-    state.isSidebarCompact = true;
+  showSidebarCompact(state, payload) {
+    state.isSidebarCompact = payload;
   },
 };
 
