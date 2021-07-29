@@ -52,6 +52,8 @@ export default {
   },
   methods: {
     renderSidebar(): VNode {
+      const theme = this.setting.layout === 'mix' ? 'light' : this.setting.theme;
+
       return (
         this.showSidebar && (
           <tdesign-sidenav
@@ -59,18 +61,19 @@ export default {
             layout={this.setting.layout}
             isFixed={this.setting.isSidebarFixed}
             menu={this.sideMenu}
-            theme={this.setting.theme}
+            theme={theme}
             isCompact={this.setting.isSidebarCompact}
           />
         )
       );
     },
     renderHeader(): VNode {
+      const theme = this.setting.layout === 'side' ? 'light' : this.setting.theme;
       return (
         this.showHeader && (
           <tdesign-header
             showLogo={this.showHeaderLogo}
-            theme={this.setting.theme}
+            theme={theme}
             layout={this.setting.layout}
             isFixed={this.setting.isHeaderFixed}
             menu={this.headerMenu}
