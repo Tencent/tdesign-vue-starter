@@ -1,9 +1,9 @@
 import { prefix } from '@/config/global';
 import proSubMenu from './sub-menu';
-import tLogo from '../assets/t-logo.svg';
-import tLogow from '../assets/t-logo-w.svg';
-import tdLogo from '../assets/TDesign-logo.svg';
-import tdLogow from '../assets/TDesign-logo-w.svg';
+import tLogo from '../assets/t-logo-colorful.svg';
+// import tLogow from '../assets/t-logo-w.svg';
+import tdLogoBlack from '../assets/TDesign-logo-black.svg';
+import tdLogoWhite from '../assets/TDesign-logo-white.svg';
 
 import '@/style/sidenav.less';
 const MIN_POINT = 992 - 1;
@@ -77,10 +77,11 @@ export default {
       return [`${this.prefix}-sidenav-${this.layout}`, `${this.prefix}-sidebar-layout`];
     },
     tLogo(): string {
-      return this.theme === 'dark' ? tLogow : tLogo;
+      // return this.theme === 'dark' ? tLogow : tLogo;
+      return tLogo;
     },
     tdLogo(): string {
-      return this.theme === 'dark' ? tdLogow : tdLogo;
+      return this.theme === 'dark' ? tdLogoWhite : tdLogoBlack;
     },
   },
   methods: {
