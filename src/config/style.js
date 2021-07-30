@@ -4,7 +4,7 @@ export default {
   showBreadcrumb: true,
   theme: 'dark',
   layout: 'side',
-  splitMenu: true,
+  splitMenu: false,
   isFooterAside: false,
   isSidebarFixed: true,
   isHeaderFixed: true,
