@@ -116,7 +116,7 @@ export default {
             </span>
           )}
           <pro-sub-menu navData={this.menu}></pro-sub-menu>
-          <div slot="options" onClick={this.changeCollapsed}>
+          <div slot="operations" onClick={this.changeCollapsed}>
             <t-icon name={this.iconName} />
           </div>
         </t-menu>
