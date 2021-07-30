@@ -2,8 +2,8 @@ import { prefix } from '@/config/global';
 import proSubMenu from './sub-menu';
 import tLogo from '../assets/t-logo-colorful.svg';
 // import tLogow from '../assets/t-logo-w.svg';
-import tdLogoBlack from '../assets/TDesign-logo-black.svg';
-import tdLogoWhite from '../assets/TDesign-logo-white.svg';
+import tdLogoBlack from '../assets/tdesign-logo-black.svg';
+import tdLogoWhite from '../assets/tdesign-logo-white.svg';
 
 import '@/style/sidenav.less';
 const MIN_POINT = 992 - 1;
