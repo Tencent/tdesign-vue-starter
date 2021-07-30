@@ -37,7 +37,7 @@ export default {
 .card {
   &-option {
     position: absolute;
-    top: 24px;
+    top: 20px;
     right: 24px;
   }
   &-container {
