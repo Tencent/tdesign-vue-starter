@@ -161,6 +161,7 @@ export default [
     title: '登录页',
     component: '../layouts/blank.vue',
     icon: 'chevron-right-rectangle',
+    redirect: '/login/index',
     children: [
       {
         title: '登录中心',
