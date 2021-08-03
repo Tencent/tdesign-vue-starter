@@ -1,7 +1,7 @@
 export default {
   showFooter: true,
   isSidebarCompact: false,
-  showBreadcrumb: true,
+  showBreadcrumb: false,
   theme: 'dark',
   layout: 'side',
   splitMenu: false,
