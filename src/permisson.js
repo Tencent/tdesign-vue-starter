@@ -23,9 +23,6 @@ router.beforeEach(async (to, from, next) => {
     return;
   }
 
-  // console.log('当前登录用户');
-  // console.log(user);
-
   if (authenticationMethod === 'smartProxy') {
     // 当登录方式为内网登录，则走智能网关进行OA登录鉴权，并获取用户信息
     if (user.loginName === '') {
