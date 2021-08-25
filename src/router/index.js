@@ -11,7 +11,7 @@ const getMenuRoutes = (list) => {
     return [];
   }
   return list.map((item) => {
-    const { path = '', component, meta = { title: item.title }, redirect = '' } = item;
+    const { path = '', component, meta = { title: item.title, ...item.meta }, redirect = '' } = item;
     return {
       path,
       component: modules[component],
