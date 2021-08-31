@@ -1,5 +1,7 @@
 import STYLE_CONFIG from '@/config/style';
 import MENU_CONFIG from '@/config/routes.js';
+import { replaceStyleVariables } from 'vite-plugin-theme/es/client';
+import { getGreyColor, getBrandColor, getColorList } from '@/config/color';
 
 // 定义的state初始值
 const state = {
@@ -21,6 +23,7 @@ const mutations = {
     state.isSidebarFixed = payload.isSidebarFixed;
     state.isHeaderFixed = payload.isHeaderFixed;
     state.showHeader = payload.showHeader;
+    state.backgroundTheme = payload.backgroundTheme;
   },
   toggleSidebarCompact(state) {
     state.isSidebarCompact = !state.isSidebarCompact;
@@ -76,7 +79,15 @@ const getters = {
   },
 };
 
-const actions = {};
+const actions = {
+  async changeTheme({ commit }, payload) {
+    commit('update', payload);
+    const { backgroundTheme, brandTheme } = payload;
+    return await replaceStyleVariables({
+      colorVariables: getColorList([getGreyColor(backgroundTheme), getBrandColor(brandTheme)]),
+    });
+  },
+};
 
 export default {
   namespaced: true,
