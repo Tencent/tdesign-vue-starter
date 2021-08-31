@@ -1,4 +1,5 @@
 import { prefix } from '@/config/global';
+
 interface MenuRoute {
   path: string;
   title?: string;

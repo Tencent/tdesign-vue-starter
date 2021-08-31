@@ -13,6 +13,7 @@
 
 <script>
 import card from '@/components/card/index.vue';
+
 export default {
   name: 'result-success',
   components: { card },

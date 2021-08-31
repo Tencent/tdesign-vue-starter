@@ -6,6 +6,7 @@ import tdLogoBlack from '../assets/tdesign-logo-black.svg';
 import tdLogoWhite from '../assets/tdesign-logo-white.svg';
 
 import '@/style/sidenav.less';
+
 const MIN_POINT = 992 - 1;
 
 export default {

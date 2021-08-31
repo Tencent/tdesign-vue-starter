@@ -48,6 +48,7 @@ const state = {
 
 const mutations = {
   setMsgData(state, data) {
+    // eslint-disable-next-line no-param-reassign
     state.msgData = data;
   },
 };

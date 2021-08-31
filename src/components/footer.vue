@@ -6,6 +6,7 @@
 
 <script>
 import { prefix } from '@/config/global';
+
 export default {
   name: `${prefix}-footer`,
   data() {

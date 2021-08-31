@@ -5,7 +5,7 @@ const layoutModules = import.meta.glob('../layouts/*');
 const pagesModules = import.meta.glob('../pages/**/*.vue');
 const fristPagesModules = import.meta.glob('../pages/*.vue');
 
-const modules = Object.assign({}, layoutModules, fristPagesModules, pagesModules);
+const modules = { ...layoutModules, ...fristPagesModules, ...pagesModules };
 const getMenuRoutes = (list) => {
   if (!list) {
     return [];

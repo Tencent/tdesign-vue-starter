@@ -1,8 +1,8 @@
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
+import { authenticationMethod } from '@/config/global';
 import router from './router';
 import store from './store';
-import { authenticationMethod } from '@/config/global';
 
 NProgress.configure({ showSpinner: false }); // NProgress 配置
 
@@ -14,6 +14,7 @@ router.beforeEach(async (to, from, next) => {
   next();
   return;
   // start progress bar
+  // eslint-disable-next-line no-unreachable
   NProgress.start();
 
   // 如果不需要登录，那么直接跳过
@@ -48,7 +49,7 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
-  /** * TODO 这里判断页面权限 ***/
+  /** * TODO 这里判断页面权限 ** */
   // 权限没有问题，直接路由下一步
   next();
 });

@@ -13,6 +13,7 @@
 </template>
 <script>
 import Card from '@/components/card/index.vue';
+
 export default {
   name: 'result',
   components: { Card },

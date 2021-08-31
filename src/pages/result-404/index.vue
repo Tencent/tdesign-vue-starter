@@ -9,6 +9,7 @@
 
 <script>
 import result from '@/components/result/index.vue';
+
 export default {
   name: 'result-404',
   components: { result },

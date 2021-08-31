@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import STYLE_CONFIG from '@/config/style';
 import MENU_CONFIG from '@/config/routes.js';
 import { replaceStyleVariables } from 'vite-plugin-theme/es/client';
@@ -12,7 +13,6 @@ const state = {
 // 可通过this.$store.commit(' ')调用，但是触发的是同步事件
 const mutations = {
   update(state, payload) {
-    // eslint-disable-next-line no-param-reassign
     state.showBreadcrumb = payload.showBreadcrumb;
     state.theme = payload.theme;
     state.layout = payload.layout;
