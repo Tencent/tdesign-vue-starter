@@ -83,6 +83,7 @@ const actions = {
   async changeTheme({ commit }, payload) {
     commit('update', payload);
     const { backgroundTheme, brandTheme } = payload;
+    // eslint-disable-next-line no-return-await
     return await replaceStyleVariables({
       colorVariables: getColorList([getGreyColor(backgroundTheme), getBrandColor(brandTheme)]),
     });

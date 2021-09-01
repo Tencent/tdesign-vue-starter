@@ -21,7 +21,7 @@ export default {
 @import '@/style/index';
 
 .@{prefix}-footer {
-  color: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, .3);
   line-height: 20px;
   text-align: center;
 }

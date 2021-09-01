@@ -3,6 +3,7 @@
 </template>
 <script>
 import { getBrandColor } from '@/config/color';
+
 export default {
   name: 'color',
   props: {

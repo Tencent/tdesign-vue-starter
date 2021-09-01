@@ -6,3 +6,5 @@ dist-ssr
 .vscode
 .history
 README.html
+
+.stylelintcache

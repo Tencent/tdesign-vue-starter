@@ -29,6 +29,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 75vh;
+
   &-icon {
     font-size: 64px;
     color: @error-color;

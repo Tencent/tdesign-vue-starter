@@ -1,35 +1,42 @@
 @import '@/style/index';
-.user-panel {
 
+.user-panel {
   @media (max-width: @screen-sm-max) {
+
     .user-right {
       min-width: 100%;
     }
   }
 
   @media (min-width: @screen-md-min) {
+
     .user-right {
       min-width: 33.33%;
     }
   }
+
   .user-right {
     transition: width .3s linear;
+
     &-greeting {
       margin-bottom: 16px;
       background: #fff;
       border-radius: @border-radius;
     }
+
     &-trend {
       margin-bottom: 16px;
       background: #fff;
       border-radius: @border-radius;
     }
+
     &-todo {
       margin-bottom: 16px;
       background: #fff;
       border-radius: @border-radius;
     }
   }
+
   .head-bar {
     display: flex;
     justify-content: space-between;
@@ -42,6 +49,7 @@
       color: @text-level-1-color;
       text-align: left;
     }
+
     .more {
       display: flex;
       align-items: center;
@@ -56,6 +64,7 @@
         vertical-align: bottom;
         font-size: 20px;
       }
+
       &:hover {
         color: @brand-color-8;
       }
@@ -63,6 +72,7 @@
   }
 
   .user-left {
+
     .user-top {
       padding: 24px;
       margin: 0 16px 16px 0;
@@ -79,17 +89,19 @@
           width: 122px;
           height: 122px;
           border-radius: @border-radius-50;
-          background: #EBEDF1;
+          background: #ebedf1;
           margin-top: 16px;
           margin-left: 50%;
           transform: translateX(-50%);
         }
+
         .name {
           line-height: 37px;
           font-family: PingFangSC-Semibold;
           font-size: 26px;
           margin-top: 16px;
         }
+
         .position {
           line-height: 24px;
           font-family: PingFangSC-Regular;
@@ -97,23 +109,30 @@
           margin-top: 8px;
         }
       }
+
       .user-info {
         line-height: 24px;
         font-family: PingFangSC-Regular;
         font-size: 14px;
         color: @text-level-1-color;
-        .hiredate, .del, .mail {
+
+        .hiredate,
+        .del,
+        .mail {
           display: flex;
         }
+
         .t-icon {
           height: 24px;
           margin-right: 8px;
         }
+
         .del {
           margin: 16px 0;
         }
       }
     }
+
     .user-bottom {
       padding: 24px 24px 0 24px;
       margin: 0 16px 16px 0;
@@ -124,7 +143,7 @@
         height: 64px;
         min-width: 230px;
         margin: 8px 0 16px 0;
-        background: #F3F3F3;
+        background: #f3f3f3;
         border-radius: @border-radius;
         
         .t-list-item__meta-avatar {
@@ -132,25 +151,31 @@
           width: 32px;
           margin: auto;
         }
+
         .t-list-item__meta-content {
           line-height: 22px;
           margin-left: 10px;
           padding: 5px 0;
         }
+
         .t-list-item__meta-title {
           display: inline-block;
           margin: 0 7px 0 0;
         }
+
         .t-list-item__meta-description {
           display: inline-block;
           color: @text-color-secondary;
           font-size: 12px;
         }
+
         .t-list-item__action {
+
           li {
             margin-right: 16px;
             cursor: pointer;
           }
+
           .t-icon {
             color: @text-level-1-color;
 
@@ -162,8 +187,11 @@
       }
     }
   }
+
   .user-right {
+
     .user-top {
+
       .user-right-greeting {
         padding: 24px;
         line-height: 28px;
@@ -171,12 +199,14 @@
         font-size: 20px;
         color: @text-level-1-color;
         text-align: left;
+
         .regular {
           vertical-align: bottom;
           font-family: PingFangSC-Regular;
           font-size: 14px;
         }
       }
+
       .user-right-trend {
         padding: 24px;
 
@@ -197,17 +227,21 @@
               font-size: 16px;
               color: @text-level-3-color;
             }
+
             p {
               display: inline-block;
             }
           }
+
           .t-list-item__action {
             line-height: 20px;
             font-family: PingFangSC-Regular;
             font-size: 12px;
             color: @text-level-2-color;
           }
+
           &:hover {
+
             .text {
               color: @brand-color-8;
 
@@ -217,10 +251,12 @@
             }
           }
         }
+
         .t-list-item:last-child {
           padding-bottom: 0;
         }
       }
+
       .user-right-todo {
         padding: 24px;
 
@@ -239,6 +275,7 @@
         }
       }
     }
+
     .user-bottom {
       padding: 24px;
       background: #fff;
@@ -261,6 +298,7 @@
             height: 64px;
           }
         }
+
         &-title {
           white-space: nowrap;
           text-overflow: ellipsis;
@@ -271,6 +309,7 @@
           font-size: 16px;
           color: @text-level-1-color;
         }
+
         &-date {
           white-space: nowrap;
           text-overflow: ellipsis;
@@ -280,17 +319,20 @@
           font-size: 14px;
           color: @text-level-3-color;
         }
+
         &:hover {
           background: #f7f7f7;
         }
       }
+
       .contract:last-child,
       .contract:nth-last-child(2) {
         margin-bottom: 0;
       }
     }
   }
-  .user-bottom .user-right{
+
+  .user-bottom .user-right {
     height: 447px;
     background: #fff;
     border-radius: @border-radius;

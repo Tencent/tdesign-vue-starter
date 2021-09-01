@@ -34,12 +34,15 @@ export default {
 </script>
 <style lang="less" scoped>
 @import url('@/style/index.less');
+
 .card {
+
   &-option {
     position: absolute;
     top: 20px;
     right: 24px;
   }
+
   &-container {
     padding: 24px;
     margin: 16px 0;
@@ -67,7 +70,7 @@ export default {
 
   &-describe {
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, .6);
     line-height: 22px;
   }
 
