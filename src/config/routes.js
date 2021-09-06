@@ -151,7 +151,7 @@ export default [
       {
         title: '个人中心',
         path: 'index',
-        component: '../pages/user/index.vue',
+        component: '../pages/user/newIndex/index.vue',
       },
     ],
   },
