@@ -7,6 +7,7 @@ import { getGreyColor, getBrandColor, getColorList } from '@/config/color';
 // 定义的state初始值
 const state = {
   ...STYLE_CONFIG,
+  showSettingPannel: false,
 };
 
 // 定义的state的初始值方法，传入state或者额外的方法，然后利用vuex的双向数据驱动进行值的改变
@@ -30,6 +31,10 @@ const mutations = {
   },
   showSidebarCompact(state, payload) {
     state.isSidebarCompact = payload;
+  },
+
+  toggleSettingPannel(state, payload) {
+    state.showSettingPannel = payload;
   },
 };
 
@@ -77,14 +82,14 @@ const getters = {
     }
     return false;
   },
+  showSettingBtn: (state) => !state.showHeader,
 };
 
 const actions = {
   async changeTheme({ commit }, payload) {
     commit('update', payload);
     const { backgroundTheme, brandTheme } = payload;
-    // eslint-disable-next-line no-return-await
-    return await replaceStyleVariables({
+    await replaceStyleVariables({
       colorVariables: getColorList([getGreyColor(backgroundTheme), getBrandColor(brandTheme)]),
     });
   },
