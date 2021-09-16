@@ -1,6 +1,6 @@
 <template>
   <div :class="containerCls">
-    <div class="card-title" v-show="title || describe">
+    <div class="card-title">
       <span>
         {{ title }}
         <span v-if="describe" class="card-describe">{{ describe }}</span>
@@ -39,8 +39,8 @@ export default {
 
   &-option {
     position: absolute;
-    top: 20px;
-    right: 24px;
+    top: 30px;
+    right: 32px;
   }
 
   &-container {
@@ -49,6 +49,8 @@ export default {
     background: #fff;
     border-radius: @border-radius;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 
     &-compact {
       padding: 16px 16px 0;
@@ -65,7 +67,7 @@ export default {
     font-family: PingFangSC-Medium;
     margin-bottom: 16px;
     font-weight: 500;
-    color: @text-level-1-color;
+    color: @text-color-primary;
   }
 
   &-describe {
@@ -78,6 +80,7 @@ export default {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    flex: 1;
   }
 }
 </style>

@@ -24,21 +24,22 @@ export default {
 @import url('@/style/index.less');
 
 .result {
+
   &-link {
-    color: @primary-color;
+    color: @brand-color;
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-      color: @primary-color;
+      color: @brand-color;
     }
 
     &:active {
-      color: @primary-color;
+      color: @brand-color;
     }
 
     &--active {
-      color: @primary-color;
+      color: @brand-color;
     }
 
     &:focus {
@@ -64,7 +65,7 @@ export default {
   &-tip {
     margin: 16px 0 8px;
     font-size: @font-size-base;
-    color: @text-level-2-color;
+    color: @text-color-secondary;
     line-height: 22px;
   }
 }
