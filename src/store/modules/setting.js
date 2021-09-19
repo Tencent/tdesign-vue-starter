@@ -25,6 +25,7 @@ const mutations = {
     state.isHeaderFixed = payload.isHeaderFixed;
     state.showHeader = payload.showHeader;
     state.backgroundTheme = payload.backgroundTheme;
+    state.brandTheme = payload.brandTheme;
   },
   toggleSidebarCompact(state) {
     state.isSidebarCompact = !state.isSidebarCompact;
