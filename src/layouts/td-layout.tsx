@@ -69,7 +69,7 @@ export default {
     },
     renderHeader(): VNode {
       const theme = this.setting.layout === 'side' ? 'light' : this.setting.theme;
-      const maxLevel = this.setting.splitMenu ? '1' : '3';
+      const maxLevel = this.setting.splitMenu ? 1 : 3;
       return (
         this.showHeader && (
           <tdesign-header
