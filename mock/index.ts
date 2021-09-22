@@ -81,10 +81,11 @@ export default [
       code: 0,
       data: {
         ...Mock.mock({
-          'list|1-50': [
+          'list|48-50': [
             {
               'index|+1': 1,
               isSetup: '@boolean',
+              'type|1': '@natural(1, 5)',
               'banner|1': [
                 'https://tdesign.gtimg.com/tdesign-pro/cloud-db.jpg',
                 'https://tdesign.gtimg.com/tdesign-pro/cloud-server.jpg',
