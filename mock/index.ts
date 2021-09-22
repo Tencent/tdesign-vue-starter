@@ -9,12 +9,21 @@ export default [
       code: 0,
       data: {
         ...Mock.mock({
-          'list|1-658': [
+          'list|1-100': [
             {
               index: /S20201228115950[0-9][0-9][0-9]/,
-              'pdName|1': ['Macbook', '椅子'],
+              pdName: 'Macbook',
               pdNum: 'p_tmp_60a637cd0d',
-              purchaseNum: '50',
+              'purchaseNum|1-100': 100,
+              adminName: '财务部111',
+              updateTime: '2020-05-20@date("HH:mm:ss")',
+              pdType: '电子产品',
+            },
+            {
+              index: /S20201228115950[0-9][0-9][0-9]/,
+              pdName: 'Macbook',
+              pdNum: 'p_tmp_60a637cd0d',
+              'purchaseNum|1-100': 100,
               adminName: '财务部',
               updateTime: '2020-05-20@date("HH:mm:ss")',
             },
@@ -90,6 +99,32 @@ export default [
                 'SSL证书又叫服务器证书，腾讯云为您提供证书的一站式服务，包括免费、付费证书的申请、管理及部',
                 '腾讯安全云防火墙产品，是腾讯云安全团队结合云原生的优势，自主研发的SaaS化防火墙产品，无需客无需客无需客无需客无需客无需客无需客',
                 '云数据库MySQL为用户提供安全可靠，性能卓越、易于维护的企业级云数据库服务。',
+              ],
+            },
+          ],
+        }),
+      },
+    }),
+  },
+  {
+    url: `/api/get-project-list`,
+    method: 'get',
+    response: () => ({
+      code: 0,
+      data: {
+        ...Mock.mock({
+          'list|1-50': [
+            {
+              'index|+1': 1,
+              adminPhone: '+86 13587609955',
+              updateTime: '2020-05-30 @date("HH:mm:ss")',
+              'adminName|1': ['顾娟	', '常刚', '郑洋'],
+              'name|1': [
+                '沧州市办公用品采购项目',
+                '红河哈尼族彝族自治州办公用品采购项目	',
+                '铜川市办公用品采购项目',
+                '陇南市办公用品采购项目	',
+                '六安市办公用品采购项目	 ',
               ],
             },
           ],
