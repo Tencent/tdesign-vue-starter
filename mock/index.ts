@@ -108,7 +108,7 @@ export default [
     }),
   },
   {
-    url: `/api/get-project-list`,
+    url: '/api/get-project-list',
     method: 'get',
     response: () => ({
       code: 0,
