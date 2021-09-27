@@ -53,6 +53,8 @@ export default {
   methods: {
     renderSidebar(): VNode {
       const theme = this.setting.layout === 'mix' ? 'light' : this.setting.theme;
+      // menu 组件最多支持 3级菜单
+      const maxLevel = this.setting.splitMenu ? 2 : 3;
 
       return (
         this.showSidebar && (
@@ -63,6 +65,7 @@ export default {
             menu={this.sideMenu}
             theme={theme}
             isCompact={this.setting.isSidebarCompact}
+            maxLevel={maxLevel}
           />
         )
       );

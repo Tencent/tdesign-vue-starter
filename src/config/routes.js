@@ -15,6 +15,11 @@ export default [
         title: '统计报表',
         path: 'detail',
         component: '../pages/dashboard-detail/index.vue',
+        meta: {
+          // 开启 true 可在 Menu 中隐藏此项
+          // 若只有一个子节点并且开启了隐藏功能，则父节点展示为普通节点
+          hiddenInMenu: false,
+        },
       },
     ],
   },

@@ -10,6 +10,7 @@ import '@/style/sidenav.less';
 const MIN_POINT = 992 - 1;
 
 export default {
+  name: 'sidenav',
   components: {
     proSubMenu,
   },
@@ -35,6 +36,10 @@ export default {
     isCompact: {
       type: Boolean,
       default: false,
+    },
+    maxLevel: {
+      type: Number,
+      default: 3,
     },
   },
   data() {
@@ -84,21 +89,20 @@ export default {
     tdLogo(): string {
       return this.theme === 'dark' ? tdLogoWhite : tdLogoBlack;
     },
-  },
-  methods: {
-    changeCollapsed(): void {
-      this.$store.commit('setting/toggleSidebarCompact');
-    },
-
-    getActiveName(maxLevel = 2): string {
+    active(): string {
       if (!this.$route.path) {
         return '';
       }
       return this.$route.path
         .split('/')
-        .filter((_item: string, index: number) => index <= maxLevel && index > 0)
+        .filter((_item: string, index: number) => index <= this.maxLevel && index > 0)
         .map((item: string) => `/${item}`)
         .join('');
+    },
+  },
+  methods: {
+    changeCollapsed(): void {
+      this.$store.commit('setting/toggleSidebarCompact');
     },
     autoCollapsed(): void {
       const isCompact = window.innerWidth <= MIN_POINT;
@@ -106,10 +110,9 @@ export default {
     },
   },
   render() {
-    const active = this.getActiveName();
     return (
       <div class={this.sidenavCls}>
-        <t-menu width="232px" class={this.menuCls} theme={this.theme} value={active} collapsed={this.collapsed}>
+        <t-menu width="232px" class={this.menuCls} theme={this.theme} value={this.active} collapsed={this.collapsed}>
           {this.showLogo && (
             <span slot="logo" class={`${this.prefix}-sidenav-logo-wrapper`}>
               <tLogo class={`${this.prefix}-sidenav-logo-t-logo`} />
