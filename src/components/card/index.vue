@@ -1,7 +1,7 @@
 <template>
   <div :class="containerCls">
-    <div class="card-title">
-      <span>
+    <div :class="titleCls">
+      <span :class="titleTextCls">
         {{ title }}
         <span v-if="describe" class="card-describe">{{ describe }}</span>
       </span>
@@ -12,6 +12,7 @@
     <div class="card-content">
       <slot></slot>
     </div>
+    <div v-if="size !== 'small'" class="card-spacer-bottom"></div>
   </div>
 </template>
 <script>
@@ -24,10 +25,31 @@ export default {
       default: false,
     },
     describe: String,
+    size: {
+      type: String,
+      default: 'default',
+    },
   },
   computed: {
     containerCls() {
       return ['card-container', { 'card-container-compact': this.compact }];
+    },
+    titleCls() {
+      return [
+        'card-title',
+        {
+          'card-title-small': this.size === 'small',
+          'card-title-default': this.size !== 'small',
+        },
+      ];
+    },
+    titleTextCls() {
+      return [
+        {
+          'card-title-text-small': this.size === 'small',
+          'card-title-text-default': this.size !== 'small',
+        },
+      ];
     },
   },
 };
@@ -38,13 +60,16 @@ export default {
 .card {
 
   &-option {
-    position: absolute;
-    top: 30px;
-    right: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // position: absolute;
+    // top: 30px;
+    // right: 32px;
   }
 
   &-container {
-    padding: 24px;
+    padding: 24px 32px;
     margin: 16px 0;
     background: #fff;
     border-radius: @border-radius;
@@ -62,12 +87,27 @@ export default {
   &-title {
     display: flex;
     justify-content: space-between;
-    font-size: 16px;
-    line-height: 24px;
-    font-family: PingFangSC-Medium;
-    margin-bottom: 16px;
+    font-size: 20px;
+    line-height: 22px;
+    font-family: PingFangSC-Regular;
     font-weight: 500;
     color: @text-color-primary;
+
+    &-small {
+      margin-bottom: 8px;
+    }
+
+    &-default {
+      margin-bottom: 16px;
+    }
+
+    &-text {
+      display: inline-flex;
+
+      &-default {
+        margin: @spacer 0;
+      }
+    }
   }
 
   &-describe {
@@ -81,6 +121,10 @@ export default {
     justify-content: space-between;
     flex-direction: column;
     flex: 1;
+  }
+
+  &-spacer-bottom {
+    height: @spacer;
   }
 }
 </style>
