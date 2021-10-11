@@ -57,6 +57,10 @@ export default {
 <style lang="less" scoped>
 @import url('@/style/index.less');
 
+.t-col > .card-container {
+  margin: 0;
+}
+
 .card {
 
   &-option {
