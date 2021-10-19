@@ -29,10 +29,14 @@ export default {
       type: String,
       default: 'default',
     },
+    border: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     containerCls() {
-      return ['card-container', { 'card-container-compact': this.compact }];
+      return ['card-container', { 'card-container-compact': this.compact, 'card-container-border': this.border }];
     },
     titleCls() {
       return [
@@ -67,9 +71,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    // position: absolute;
-    // top: 30px;
-    // right: 32px;
   }
 
   &-container {
@@ -86,23 +87,29 @@ export default {
       margin-top: 24px;
       margin-bottom: 16px;
     }
+
+    &-border {
+      border: 1px solid #ebebeb;
+    }
   }
 
   &-title {
     display: flex;
     justify-content: space-between;
-    font-size: 20px;
-    line-height: 22px;
     font-family: PingFangSC-Regular;
     font-weight: 500;
     color: @text-color-primary;
 
     &-small {
+      font-size: 14px;
+      line-height: 22px;
       margin-bottom: 8px;
     }
 
     &-default {
-      margin-bottom: 16px;
+      font-size: 20px;
+      line-height: 28px;
+      margin-bottom: 24px;
     }
 
     &-text {
