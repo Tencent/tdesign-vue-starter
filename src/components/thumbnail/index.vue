@@ -31,6 +31,7 @@ export default {
 @import url('@/style/index.less');
 
 .thumbnail {
+
   &-container {
     display: inline-block;
   }
@@ -40,8 +41,8 @@ export default {
   }
 
   &-layout {
-    width: 120px;
-    height: 70px;
+    width: 88px;
+    height: 48px;
   }
 }
 </style>
