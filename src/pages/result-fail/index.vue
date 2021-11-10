@@ -1,29 +1,25 @@
 <template>
-  <card>
-    <div class="result-success">
-      <t-icon class="result-success-icon" name="close-circle-filled" />
-      <div class="result-success-title">项目创建失败</div>
-      <div class="result-success-describe">企业微信联系检查创建者权限，或返回修改</div>
-      <div>
-        <t-button @click="() => this.$router.push('/form/base')">返回修改</t-button>
-      </div>
+  <div class="result-fail">
+    <t-icon class="result-fail-icon" name="error-circle" />
+    <div class="result-fail-title">创建失败</div>
+    <div class="result-fail-describe">抱歉，您的项目创建失败，企业微信联系检查创建者权限，或返回修改。</div>
+    <div>
+      <t-button theme="default" @click="() => this.$router.push('/form/base')">返回首页</t-button>
+      <t-button @click="() => this.$router.push('/form/base')">返回修改</t-button>
     </div>
-  </card>
+  </div>
 </template>
 
 <script>
-import card from '@/components/card/index.vue';
-
 export default {
-  name: 'result-success',
-  components: { card },
+  name: 'result-fail',
 };
 </script>
 
 <style lang="less" scoped>
 @import '@/style/variables.less';
 
-.result-success {
+.result-fail {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,22 +27,23 @@ export default {
   height: 75vh;
 
   &-icon {
-    font-size: 64px;
-    color: @error-color;
+    font-size: 56px;
+    color: rgba(0, 0, 0, .6);
   }
 
   &-title {
-    margin-top: 16px;
+    margin-top: 28px;
     font-size: 20px;
-    color: rgba(0, 0, 0, 0.9);
+    color: rgba(0, 0, 0, .9);
     text-align: center;
-    line-height: 22px;
+    line-height: 28px;
+    font-weight: 500;
   }
 
   &-describe {
     margin: 8px 0 32px;
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, .6);
     line-height: 22px;
   }
 }
