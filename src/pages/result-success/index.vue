@@ -27,7 +27,7 @@ export default {
   height: 75vh;
 
   &-icon {
-    font-size: 56px;
+    font-size: 72px;
     color: #00a870;
   }
 
