@@ -1,44 +1,25 @@
 export default [
   {
     path: '/dashboard',
-    icon: 'chart-pie',
+    icon: 'dashboard',
     title: '仪表盘',
-    component: () => import('@/layouts/td-layout.vue'),
+    component: '../layouts/td-layout.tsx',
+    redirect: '/dashboard/base',
     children: [
       {
-        title: '基础仪表盘',
+        title: '概览仪表盘',
         path: 'base',
-        component: () => import('@/pages/dashboard-base/index.vue'),
+        component: '../pages/dashboard-base/index.vue',
       },
       {
-        title: '详情仪表盘',
+        title: '统计报表',
         path: 'detail',
-        component: () => import('@/pages/dashboard-detail/index.vue'),
-      },
-    ],
-  },
-  {
-    path: '/detail',
-    icon: 'layers',
-    title: '详情页',
-    component: () => import('@/layouts/td-layout.vue'),
-    children: [
-      {
-        title: '基础详情页',
-        path: 'base',
-        component: () => import('@/pages/detail-base/index.vue'),
-        // 默认不填，则需要每个页面都会经过登录的校验，若不需要进行登录校验则将needLogin：设为false
-        meta: { needLogin: false, title: '基础详情页' },
-      },
-      {
-        title: '高级详情页',
-        path: 'advanced',
-        component: () => import('@/pages/detail-advanced/index.vue'),
-      },
-      {
-        title: '部署配置',
-        path: 'deploy',
-        component: () => import('@/pages/detail-deploy/index.vue'),
+        component: '../pages/dashboard-detail/index.vue',
+        meta: {
+          // 开启 true 可在 Menu 中隐藏此项
+          // 若只有一个子节点并且开启了隐藏功能，则父节点展示为普通节点
+          hiddenInMenu: false,
+        },
       },
     ],
   },
@@ -46,22 +27,28 @@ export default [
     path: '/list',
     icon: 'view-module',
     title: '列表页',
-    component: () => import('@/layouts/td-layout.vue'),
+    component: '../layouts/td-layout.tsx',
+    redirect: '/list/base',
     children: [
       {
         title: '基础列表页',
         path: 'base',
-        component: () => import('@/pages/list-base.vue'),
+        component: '../pages/list-base/index.vue',
       },
       {
-        title: '基础筛选列表页',
+        title: '卡片列表页',
+        path: 'card',
+        component: '../pages/list-card/index.vue',
+      },
+      {
+        title: '筛选列表页',
         path: 'select',
-        component: () => import('@/pages/list-select.vue'),
+        component: '../pages/list-select/index.vue',
       },
       {
         title: '树状筛选列表页',
         path: 'tree',
-        component: () => import('@/pages/list-tree.vue'),
+        component: '../pages/list-tree/index.vue',
       },
     ],
   },
@@ -69,31 +56,124 @@ export default [
     path: '/form',
     icon: 'queue',
     title: '表单页',
-    component: () => import('@/layouts/td-layout.vue'),
+    component: '../layouts/td-layout.tsx',
+    redirect: '/form/base',
     children: [
       {
         title: '基础表单页',
         path: 'base',
-        component: () => import('@/pages/form-base/index.vue'),
+        component: '../pages/form-base/index.vue',
       },
       {
         title: '分步表单页',
         path: 'step',
-        component: () => import('@/pages/form-step/index.vue'),
+        component: '../pages/form-step/index.vue',
+      },
+    ],
+  },
+  {
+    path: '/detail',
+    icon: 'layers',
+    title: '详情页',
+    component: '../layouts/td-layout.tsx',
+    redirect: '/detail/base',
+    children: [
+      {
+        title: '基础详情页',
+        path: 'base',
+        component: '../pages/detail-base/index.vue',
+        // 默认不填，则需要每个页面都会经过登录的校验，若不需要进行登录校验则将needLogin：设为false
+        meta: { needLogin: false, title: '基础详情页' },
+      },
+      {
+        title: '多卡片详情页',
+        path: 'advanced',
+        component: '../pages/detail-advanced/index.vue',
+      },
+      {
+        title: '数据详情页',
+        path: 'deploy',
+        component: '../pages/detail-deploy/index.vue',
+      },
+      {
+        title: '二级详情页',
+        path: 'secondary',
+        component: '../pages/secondary/index.vue',
+      },
+    ],
+  },
+  {
+    path: '/result',
+    icon: 'check-circle',
+    title: '结果页',
+    component: '../layouts/td-layout.tsx',
+    redirect: '/result/success',
+    children: [
+      {
+        title: '成功页',
+        path: 'success',
+        component: '../pages/result-success/index.vue',
+      },
+      {
+        title: '失败页',
+        path: 'fail',
+        component: '../pages/result-fail/index.vue',
+      },
+      {
+        title: '网络异常',
+        path: 'network-error',
+        component: '../pages/result-network-error/index.vue',
+      },
+      {
+        title: '无权限',
+        path: '403',
+        component: '../pages/result-403/index.vue',
+      },
+      {
+        title: '访问页面不存在页',
+        path: '404',
+        component: '../pages/result-404/index.vue',
+      },
+      {
+        title: '服务器出错页',
+        path: '500',
+        component: '../pages/result-500/index.vue',
+      },
+      {
+        title: '浏览器不兼容页',
+        path: 'browser-incompatible',
+        component: '../pages/result-browser-incompatible/index.vue',
+      },
+    ],
+  },
+  {
+    path: '/user',
+    icon: 'user-circle',
+    title: '个人页',
+    component: '../layouts/td-layout.tsx',
+    redirect: '/user/index',
+    children: [
+      {
+        title: '个人中心',
+        path: 'index',
+        component: '../pages/user/newIndex/index.vue',
       },
     ],
   },
   // 自定义登录页面
-  // {
-  //   path: '/login',
-  //   title: '登录页面',
-  //   children: [
-  //     {
-  //       title: '登录页面',
-  //       path: 'index',
-  //       meta: { needLogin: false },
-  //       component: () => import('@/pages/login-index/index.vue'),
-  //     },
-  //   ],
-  // },
+  {
+    path: '/login',
+    title: '登录页',
+    component: '../layouts/blank.vue',
+    icon: 'chevron-right-rectangle',
+    redirect: '/login/index',
+    children: [
+      {
+        title: '登录中心',
+        path: 'index',
+        meta: { needLogin: false },
+        component: '../pages/login/index.vue',
+      },
+    ],
+  },
 ];

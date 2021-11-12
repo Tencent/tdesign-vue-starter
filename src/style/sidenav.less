@@ -1,48 +1,92 @@
 @import './variables.less';
+
 @import './font-family.less';
 
 .@{prefix} {
-    &-sidenav{
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        z-index: 1000;
-        transition: all .3s;
-        &-logo-wrapper {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            padding-left: 24px;
 
-            >img {
-                height: 28px;
-            }
-        }
-        &-logo-normal {
-            font-family: TencentSansKoreanW7;
-            color: @primary-color;
-            font-size: @font-size-l;
-            transition: all .3s;
-        }
+  &-sidebar-layout {
+    height: 100%;
+  }
+
+  &-sidebar-compact {
+    width: 64px;
+  }
+
+  &-sidebar-layout-side {
+    z-index: 100;
+  }
+
+  &-sidenav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    transition: all .3s;
+    min-height: 100%;
+
+    &-mix {
+      top: 64px;
+
+      &-fixed {
+        top: 64px;
+        z-index: 0;
+      }
+    }
+        
+    &-no-fixed {
+      position: relative;
+      z-index: 1;
     }
 
-
-    &-sidenav-placeholder {
-        flex: 1 1 232px;
-        min-width: 232px;
-        transition: all .3s;
-
-        &-hidden {
-            flex: 1 1 72px;
-            min-width: 72px;
-            transition: all .3s;
-        }
+    &-no-logo {
+      z-index: 1;
     }
+
+    &-logo-wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    &-logo-t-logo {
+      width: 32px;
+      margin-left: 16px;
+    }
+
+    &-logo-tdesign-logo {
+      width: 112px;
+    }
+
+    &-logo-normal {
+      font-family: TencentSansKoreanW7;
+      color: @brand-color;
+      font-size: @font-size-l;
+      transition: all .3s;
+    }
+  }
+
+
+  &-sidenav-placeholder {
+    flex: 1 1 232px;
+    min-width: 232px;
+    transition: all .3s;
+
+    &-hidden {
+      flex: 1 1 72px;
+      min-width: 72px;
+      transition: all .3s;
+    }
+  }
 
 }
 
-// 重写左边菜单高亮
-.t-menu__item.t-is-active {
-    color: white !important;
-    background-color: #0052D9 !important;
+.t-menu--dark .t-menu__options:not(:empty) .t-icon-menu-unfold {
+  color: rgba(255, 255, 255, .55)
+}
+
+.logo-container {
+  cursor: pointer;
+  display: inline-flex;
+  height: 64px;
+  margin-left: 24px;
 }

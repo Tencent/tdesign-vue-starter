@@ -1,18 +1,57 @@
-import menuRoutes from '@/config/routes.js';
 import { prefix } from '@/config/global';
-import '@/style/sidenav.less';
 import proSubMenu from './sub-menu';
+import tLogo from '../assets/t-logo-colorful.svg';
+// import tLogow from '../assets/t-logo-w.svg';
+import tdLogoBlack from '../assets/tdesign-logo-black.svg';
+import tdLogoWhite from '../assets/tdesign-logo-white.svg';
+
+import '@/style/sidenav.less';
+
+const MIN_POINT = 992 - 1;
 
 export default {
+  name: 'sidenav',
   components: {
     proSubMenu,
   },
   props: {
-    navData: [],
+    menu: Array,
+    showLogo: {
+      type: Boolean,
+      default: true,
+    },
+    isFixed: {
+      type: Boolean,
+      default: true,
+    },
+    layout: String,
+    headerHeight: {
+      type: String,
+      default: '64px',
+    },
+    theme: {
+      type: String,
+      default: 'light',
+    },
+    isCompact: {
+      type: Boolean,
+      default: false,
+    },
+    maxLevel: {
+      type: Number,
+      default: 3,
+    },
   },
-  data(): any {
+  data() {
     return {
       prefix,
+    };
+  },
+  mounted() {
+    this.autoCollapsed();
+
+    window.onresize = () => {
+      this.autoCollapsed();
     };
   },
   computed: {
@@ -22,38 +61,71 @@ export default {
     collapsed(): boolean {
       return this.$store.state.setting.isSidebarCompact;
     },
-    theme(): string {
-      return this.$store.state.setting.theme;
+    sidenavCls(): Array<ClassName> {
+      return [
+        `${this.prefix}-sidebar-layout`,
+        {
+          [`${this.prefix}-sidebar-compact`]: this.isCompact,
+        },
+      ];
+    },
+    menuCls(): Array<ClassName> {
+      return [
+        `${this.prefix}-sidenav`,
+        {
+          [`${this.prefix}-sidenav-no-logo`]: !this.showLogo,
+          [`${this.prefix}-sidenav-no-fixed`]: !this.isFixed,
+          [`${this.prefix}-sidenav-mix-fixed`]: this.layout === 'mix' && this.isFixed,
+        },
+      ];
+    },
+    layoutCls(): Array<ClassName> {
+      return [`${this.prefix}-sidenav-${this.layout}`, `${this.prefix}-sidebar-layout`];
+    },
+    tLogo(): string {
+      // return this.theme === 'dark' ? tLogow : tLogo;
+      return tLogo;
+    },
+    tdLogo(): string {
+      return this.theme === 'dark' ? tdLogoWhite : tdLogoBlack;
+    },
+    active(): string {
+      if (!this.$route.path) {
+        return '';
+      }
+      return this.$route.path
+        .split('/')
+        .filter((_item: string, index: number) => index <= this.maxLevel && index > 0)
+        .map((item: string) => `/${item}`)
+        .join('');
     },
   },
   methods: {
     changeCollapsed(): void {
       this.$store.commit('setting/toggleSidebarCompact');
     },
-
-    getActiveName(maxLevel = 2): string {
-      if (!this.$route.path) {
-        return '';
-      }
-      return this.$route.path
-        .split('/')
-        .filter((item, index) => index <= maxLevel && index > 0)
-        .map((item) => `/${item}`)
-        .join('');
+    autoCollapsed(): void {
+      const isCompact = window.innerWidth <= MIN_POINT;
+      this.$store.commit('setting/showSidebarCompact', isCompact);
     },
   },
-  render(): any {
-    const active = this.getActiveName();
-
+  render() {
     return (
-      <div>
-        <t-menu width="232px" class={`${this.prefix}-sidenav`} theme="light" active={active} collapsed={this.collapsed}>
-          <span slot="logo" class={`${this.prefix}-sidenav-logo-wrapper`}>
-            <img src="https://oteam-tdesign-1258344706.cos.ap-guangzhou.myqcloud.com/pro-template/logo-blue.png" />
-            {!this.collapsed && <span class={`${this.prefix}-sidenav-logo-normal`}> TDesign pro</span>}
-          </span>
-          <pro-sub-menu navData={menuRoutes}></pro-sub-menu>
-          <div slot="options" onClick={this.changeCollapsed}>
+      <div class={this.sidenavCls}>
+        <t-menu width="232px" class={this.menuCls} theme={this.theme} value={this.active} collapsed={this.collapsed}>
+          {this.showLogo && (
+            <span slot="logo" class={`${this.prefix}-sidenav-logo-wrapper`}>
+              <tLogo class={`${this.prefix}-sidenav-logo-t-logo`} />
+              {!this.collapsed &&
+                (this.theme === 'dark' ? (
+                  <tdLogoWhite class={`${this.prefix}-sidenav-logo-tdesign-logo`} />
+                ) : (
+                  <tdLogoBlack class={`${this.prefix}-sidenav-logo-tdesign-logo`} />
+                ))}
+            </span>
+          )}
+          <pro-sub-menu navData={this.menu}></pro-sub-menu>
+          <div slot="operations" onClick={this.changeCollapsed}>
             <t-icon name={this.iconName} />
           </div>
         </t-menu>

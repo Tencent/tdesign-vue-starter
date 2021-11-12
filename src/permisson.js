@@ -1,8 +1,8 @@
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
+import { authenticationMethod } from '@/config/global';
 import router from './router';
 import store from './store';
-import { authenticationMethod } from '@/config/global';
 
 NProgress.configure({ showSpinner: false }); // NProgress 配置
 
@@ -10,7 +10,11 @@ const { dispatch, state } = store;
 const { user } = state;
 
 router.beforeEach(async (to, from, next) => {
+  // TODO: 登录页面交互优化后，开启登录逻辑
+  next();
+  return;
   // start progress bar
+  // eslint-disable-next-line no-unreachable
   NProgress.start();
 
   // 如果不需要登录，那么直接跳过
@@ -19,9 +23,6 @@ router.beforeEach(async (to, from, next) => {
     next();
     return;
   }
-
-  console.log('当前登录用户');
-  console.log(user);
 
   if (authenticationMethod === 'smartProxy') {
     // 当登录方式为内网登录，则走智能网关进行OA登录鉴权，并获取用户信息
@@ -43,12 +44,12 @@ router.beforeEach(async (to, from, next) => {
     if (user.loginName === '') {
       console.log('重定向到登录页面');
       // 没有用户信息，重定向跳转到登录页面
-      // next({ path: '/login/index' });
-      // return;
+      next({ path: '/login/index' });
+      return;
     }
   }
 
-  /** * TODO 这里判断页面权限 ***/
+  /** * TODO 这里判断页面权限 ** */
   // 权限没有问题，直接路由下一步
   next();
 });

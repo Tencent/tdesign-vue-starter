@@ -1,13 +1,20 @@
 export default {
   development: {
-    // 开发环境接口请求，后用于 proxy 代理配置
+    // 开发环境接口请求
+    host: 'https://service-exndqyuk-1257786608.gz.apigw.tencentcs.com',
+    // 开发环境 cdn 路径
+    cdn: '',
   },
-  stage: {
-    // 测试环境 cdn 路径
+  test: {
     // 测试环境接口地址
+    host: 'https://service-exndqyuk-1257786608.gz.apigw.tencentcs.com',
+    // 测试环境 cdn 路径
+    cdn: '',
   },
   release: {
-    // 正式环境 cdn 路径
     // 正式环境接口地址
+    host: 'https://service-bv448zsw-1257786608.gz.apigw.tencentcs.com',
+    // 正式环境 cdn 路径
+    cdn: '',
   },
 };

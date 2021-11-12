@@ -1,4 +1,9 @@
 import axios from 'axios';
+import proxy from '../config/proxy';
+
+const env = import.meta.env.MODE || 'development';
+
+const host = env === 'mock' ? '/' : proxy[env].host; // 如果是mock模式 就不配置host 会走本地Mock拦截
 
 const CODE = {
   LOGIN_TIMEOUT: 1000,
@@ -7,12 +12,14 @@ const CODE = {
 };
 
 const instance = axios.create({
-  baseURL: '/api',
+  baseURL: host,
   timeout: 1000,
   withCredentials: true,
 });
 
 instance.interceptors.request.use((config) => config);
+
+instance.defaults.retry = 3;
 
 instance.interceptors.response.use(
   (response) => {
