@@ -23,8 +23,9 @@ export default {
 </script>
 <style lang="less" scoped>
 .color-container {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   display: inline-block;
 }
 </style>

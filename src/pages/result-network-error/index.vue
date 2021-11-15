@@ -1,9 +1,13 @@
 <template>
   <result
-    pageHeader="网络异常"
-    tip="网络异常，请稍后再试"
+    title="网络异常"
+    tip="当前网络异常，请稍后再试！"
     bgUrl="https://tdesign.gtimg.com/pro-template/result-page/network-error.png"
   >
+    <div>
+      <t-button @click="() => this.$router.push('/')" theme="default">返回首页</t-button>
+      <t-button @click="() => this.$router.push('/')">重新加载</t-button>
+    </div>
   </result>
 </template>
 

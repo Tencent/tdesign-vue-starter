@@ -1,23 +1,15 @@
 <template>
-  <card>
-    <div class="result-container">
-      <img class="result-bg-img" :src="bgUrl" />
-      <div class="result-tip">{{ tip }}</div>
-      <div>
-        <router-link class="tdesign-pro-main-link" to="/">
-          <t-button theme="primary" variant="text">返回首页</t-button>
-        </router-link>
-      </div>
-    </div>
-  </card>
+  <div class="result-container">
+    <img class="result-bg-img" :src="bgUrl" />
+    <div class="result-title">{{ title }}</div>
+    <div class="result-tip">{{ tip }}</div>
+    <slot />
+  </div>
 </template>
 <script>
-import Card from '@/components/card/index.vue';
-
 export default {
   name: 'result',
-  components: { Card },
-  props: ['bgUrl', 'tip', 'linkUrl', 'pageHeader'],
+  props: ['bgUrl', 'title', 'tip', 'linkUrl'],
 };
 </script>
 <style lang="less" scoped>
@@ -58,15 +50,23 @@ export default {
   }
 
   &-bg-img {
-    width: 256px;
-    height: 256px;
+    width: 240px;
+    height: 240px;
+  }
+
+  &-title {
+    font-style: normal;
+    font-weight: 500;
+    margin-top: 8px;
+    font-size: @font-size-xl;
+    line-height: @text-line-height-xl;
   }
 
   &-tip {
-    margin: 16px 0 8px;
+    margin: 8px 0 32px;
     font-size: @font-size-base;
     color: @text-color-secondary;
-    line-height: 22px;
+    line-height: @text-line-height-base;
   }
 }
 </style>
