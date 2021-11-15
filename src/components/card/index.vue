@@ -82,6 +82,10 @@ export default {
     display: flex;
     flex-direction: column;
 
+    &.main-color {
+      background: @brand-color;
+    }
+
     &-compact {
       padding: 16px 16px 0;
       margin-top: 24px;
