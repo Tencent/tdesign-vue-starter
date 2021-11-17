@@ -34,7 +34,7 @@ export default {
   &-title {
     margin-top: 28px;
     font-size: 20px;
-    color: rgba(0, 0, 0, .9);
+    color: rgba(0, 0, 0, 0.9);
     text-align: center;
     line-height: 28px;
     font-weight: 500;
@@ -43,7 +43,7 @@ export default {
   &-describe {
     margin: 8px 0 32px;
     font-size: 14px;
-    color: rgba(0, 0, 0, .6);
+    color: rgba(0, 0, 0, 0.6);
     line-height: 22px;
   }
 }
