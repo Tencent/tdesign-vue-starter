@@ -58,6 +58,7 @@ export default {
     font-style: normal;
     font-weight: 500;
     margin-top: 8px;
+    color: @text-color-primary;
     font-size: @font-size-xl;
     line-height: @text-line-height-xl;
   }

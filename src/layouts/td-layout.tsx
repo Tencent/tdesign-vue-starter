@@ -51,8 +51,18 @@ export default {
     },
   },
   methods: {
+    getNavTheme(mode, layout, type): string {
+      if (mode === 'dark') {
+        return 'dark';
+      }
+      if (type.includes(layout)) {
+        return 'dark';
+      }
+      return 'light';
+    },
     renderSidebar(): VNode {
-      const theme = this.setting.layout === 'mix' ? 'light' : this.setting.theme;
+      const theme = this.getNavTheme(this.setting.mode, this.setting.layout, ['side']);
+      // const theme = this.setting.mode === 'dark' ? 'dark' : (this.setting.layout === 'mix' ? 'light' : this.setting.theme);
       // menu 组件最多支持 3级菜单
       const maxLevel = this.setting.splitMenu ? 2 : 3;
 
@@ -71,7 +81,9 @@ export default {
       );
     },
     renderHeader(): VNode {
-      const theme = this.setting.layout === 'side' ? 'light' : this.setting.theme;
+      const theme = this.getNavTheme(this.setting.mode, this.setting.layout, ['mix', 'top']);
+
+      // const theme = this.setting.layout === 'side' ? 'light' : this.setting.theme;
       const maxLevel = this.setting.splitMenu ? 1 : 3;
       return (
         this.showHeader && (

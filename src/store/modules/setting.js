@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 import STYLE_CONFIG from '@/config/style';
 import MENU_CONFIG from '@/config/routes.js';
-import { replaceStyleVariables } from 'vite-plugin-theme/es/client';
-import { getGreyColor, getBrandColor, getColorList } from '@/config/color';
+// import { replaceStyleVariables } from 'vite-plugin-theme/es/client';
+// import { getGreyColor, getBrandColor, getColorList } from '@/config/color';
 
 // 定义的state初始值
 const state = {
@@ -15,7 +15,7 @@ const state = {
 const mutations = {
   update(state, payload) {
     state.showBreadcrumb = payload.showBreadcrumb;
-    state.theme = payload.theme;
+    state.mode = payload.mode;
     state.layout = payload.layout;
     state.isSidebarCompact = payload.isSidebarCompact;
     state.logoPosition = payload.logoPosition;
@@ -87,12 +87,28 @@ const getters = {
 };
 
 const actions = {
-  async changeTheme({ commit }, payload) {
+  async changeTheme({ commit, dispatch }, payload) {
+    dispatch('changeMode', payload);
+    dispatch('changeBrandTheme', payload);
     commit('update', payload);
-    const { backgroundTheme, brandTheme } = payload;
-    await replaceStyleVariables({
-      colorVariables: getColorList([getGreyColor(backgroundTheme), getBrandColor(brandTheme)]),
-    });
+
+    // const { backgroundTheme, brandTheme } = payload;
+    // element.style.setProperty("--my-var", jsVar + 4);
+
+    // await replaceStyleVariables({
+    //   colorVariables: getColorList([getGreyColor(backgroundTheme), getBrandColor(brandTheme)]),
+    // });
+  },
+
+  changeMode({ state }, payload) {
+    if (payload.mode !== state.mode) {
+      document.documentElement.setAttribute('theme-mode', payload.mode === 'dark' ? 'dark' : '');
+    }
+  },
+  changeBrandTheme({ state }, payload) {
+    if (payload.brand !== state.brandTheme) {
+      document.documentElement.setAttribute('theme-color', payload.brandTheme);
+    }
   },
 };
 

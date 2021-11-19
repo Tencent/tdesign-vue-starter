@@ -44,10 +44,15 @@
 
     .title {
       line-height: 24px;
-      font-family: PingFangSC-Medium;
-      font-size: 16px;
+      font-family: PingFangSC;
+      font-size: 20px;
       color: @text-color-primary;
       text-align: left;
+    }
+
+    .t-icon {
+      font-size: 16px;
+      color: rgba(0, 0, 0, .9);
     }
 
     .more {
@@ -71,35 +76,34 @@
     }
   }
 
-  .user-left {
+  .user-right-panel {
 
     .user-top {
-      padding: 24px;
-      margin: 0 16px 16px 0;
-      background: #fff;
+      padding: 48px;
+      margin: 0 0 16px 16px;
+      background: @brand-color;
       border-radius: @border-radius;
 
       .account {
-        text-align: center;
-        margin-bottom: 48px;
+        text-align: left;
+        margin-bottom: 0;
         color: @text-color-primary;
 
         .img {
           display: block;
-          width: 122px;
-          height: 122px;
+          width: 90px;
+          height: 90px;
           border-radius: @border-radius-50;
+          border: 1px solid @brand-color;
           background: #ebedf1;
-          margin-top: 16px;
-          margin-left: 50%;
-          transform: translateX(-50%);
         }
 
         .name {
           line-height: 37px;
           font-family: PingFangSC-Semibold;
-          font-size: 26px;
-          margin-top: 16px;
+          font-size: 20px;
+          margin-top: 36px;
+          color: #fff;
         }
 
         .position {
@@ -107,6 +111,7 @@
           font-family: PingFangSC-Regular;
           font-size: 14px;
           margin-top: 8px;
+          color: #fff;
         }
       }
 
@@ -133,208 +138,142 @@
       }
     }
 
-    .user-bottom {
-      padding: 24px 24px 0 24px;
-      margin: 0 16px 16px 0;
-      background: #fff;
+    .user-middle {
+      padding: 28px 32px 5px 32px;
+      margin: 0 0 16px 16px;
+      background: @bg-color-container;
       border-radius: @border-radius;
 
+      .t-list {
+        margin: 20px 0;
+      }
+
       .t-list-item {
-        height: 64px;
-        min-width: 230px;
-        margin: 8px 0 16px 0;
-        background: #f3f3f3;
-        border-radius: @border-radius;
+        padding: 15px 0;
         
         .t-list-item__meta-avatar {
-          height: 32px;
-          width: 32px;
-          margin: auto;
-        }
-
-        .t-list-item__meta-content {
-          line-height: 22px;
-          margin-left: 10px;
-          padding: 5px 0;
-        }
-
-        .t-list-item__meta-title {
-          display: inline-block;
-          margin: 0 7px 0 0;
+          height: 50px;
+          width: 50px;
+          margin: 0 24px 0 0;
         }
 
         .t-list-item__meta-description {
           display: inline-block;
-          color: @text-color-secondary;
-          font-size: 12px;
-        }
-
-        .t-list-item__action {
-
-          li {
-            margin-right: 16px;
-            cursor: pointer;
-          }
-
-          .t-icon {
-            color: @text-color-primary;
-
-            &:hover {
-              color: @brand-color-8;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .user-right {
-
-    .user-top {
-
-      .user-right-greeting {
-        padding: 24px;
-        line-height: 28px;
-        font-family: PingFangSC-Semibold;
-        font-size: 20px;
-        color: @text-color-primary;
-        text-align: left;
-
-        .regular {
-          vertical-align: bottom;
-          font-family: PingFangSC-Regular;
-          font-size: 14px;
-        }
-      }
-
-      .user-right-trend {
-        padding: 24px;
-
-        .t-list-item {
-          padding: 8px 0;
-          cursor: pointer;
-
-          .text {
-            display: flex;
-            line-height: 20px;
-            font-family: PingFangSC-Regular;
-            font-size: 14px;
-            color: @text-color-primary;
-
-            .t-icon {
-              margin-right: 8px;
-              height: 20px;
-              font-size: 16px;
-              color: @text-color-placeholder;
-            }
-
-            p {
-              display: inline-block;
-            }
-          }
-
-          .t-list-item__action {
-            line-height: 20px;
-            font-family: PingFangSC-Regular;
-            font-size: 12px;
-            color: @text-color-secondary
-          }
-
-          &:hover {
-
-            .text {
-              color: @brand-color-8;
-
-              .t-icon {
-                color: @brand-color-8;
-              }
-            }
-          }
-        }
-
-        .t-list-item:last-child {
-          padding-bottom: 0;
-        }
-      }
-
-      .user-right-todo {
-        padding: 24px;
-
-        .empty-list {
-          margin-top: 18px;
-          line-height: 20px;
-          font-family: PingFangSC-Regular;
-          font-size: 14px;
           color: @text-color-placeholder;
-          text-align: center;
-
-          img {
-            margin-bottom: 2px;
-            width: 42px;
-          }
+          font-size: 14px;
         }
       }
     }
 
     .user-bottom {
-      padding: 24px;
-      background: #fff;
+      padding: 24px 24px 5px 24px;
+      margin: 0 0 16px 16px;
+      background: @bg-color-container;
       border-radius: @border-radius;
 
-      .contract {
-        width: 340px;
-        height: 88px;
-        border-radius: @border-radius;
-        margin: 8px 0;
-        cursor: pointer;
-        
-        &-type {
-          position: relative;
-          float: left;
-          margin: 13px 16px;
-
-          img {
-            width: 64px;
-            height: 64px;
-          }
-        }
-
-        &-title {
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          line-height: 24px;
-          margin: 20px 0 6px 0;
-          font-family: PingFangSC-Medium;
-          font-size: 16px;
-          color: @text-color-primary;
-        }
-
-        &-date {
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          line-height: 22px;
-          font-family: PingFangSC-Regular;
-          font-size: 14px;
-          color: @text-color-placeholder;
-        }
-
-        &:hover {
-          background: #f7f7f7;
-        }
+      .content {
+        width: 70%;
+        margin: 24px 0 12px 0;
       }
 
-      .contract:last-child,
-      .contract:nth-last-child(2) {
-        margin-bottom: 0;
+      .user-right-logo {
+        width: 48px;
       }
     }
   }
 
-  .user-bottom .user-right {
-    height: 447px;
-    background: #fff;
-    border-radius: @border-radius;
+  .user-left-panel {
+
+    .user-top {
+
+      .user-left-greeting {
+        padding: 28px 32px;
+        line-height: 28px;
+        font-family: PingFangSC-Semibold;
+        font-size: 20px;
+        
+        color: @text-color-primary;
+        text-align: left;
+        background-color: @bg-color-container;
+        border-radius: @border-radius;
+
+        .regular {
+          margin: 0 0 0 15px;
+          vertical-align: bottom;
+          font-family: PingFangSC-Semibold;
+          font-size: 14px;
+        }
+      }
+
+      .user-left-logo {
+        float: right;
+        width: 180px;
+      }
+
+      .user-right-info {
+        margin: 16px 0;
+        padding: 32px;
+        background-color: @bg-color-container;
+        border-radius: @border-radius;
+
+        .content {
+          width: 90%;
+        }
+        
+        .contract {
+          width: 340px;
+          height: 88px;
+          border-radius: @border-radius;
+          margin: 8px 0;
+  
+          &-title {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            line-height: 24px;
+            margin: 20px 0 6px 0;
+            font-family: PingFangSC-Regular;
+            font-size: 14px;
+            color: @text-color-placeholder;
+          }
+  
+          &-detail {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            line-height: 40px;
+            font-family: PingFangSC-Regular;
+            font-size: 14px;
+            color: @text-color-primary;
+          }
+        }
+  
+        .contract:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .user-bottom {
+      margin: 0 0 16px 0;
+      padding: 28px 32px;
+      background: @bg-color-container;
+      border-radius: @border-radius;
+
+      .user-bottom-container {
+        margin-top: 15px;
+
+        .unit {
+          font-size: 14px;
+          font-family: PingFangSC-Regular;
+          color: @text-color-placeholder;
+        }
+        
+        .time-picker {
+          float: right;
+          width: 250px;
+        }
+      }
+    }
   }
 }
