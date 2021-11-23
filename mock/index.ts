@@ -87,11 +87,11 @@ export default [
               isSetup: '@boolean',
               'type|1': '@natural(1, 5)',
               'banner|1': [
-                'https://tdesign.gtimg.com/tdesign-pro/cloud-db.jpg',
-                'https://tdesign.gtimg.com/tdesign-pro/cloud-server.jpg',
-                'https://tdesign.gtimg.com/tdesign-pro/ssl.jpg',
-                'https://tdesign.gtimg.com/tdesign-pro/t-sec.jpg',
-                'https://tdesign.gtimg.com/tdesign-pro/face-recognition.jpg',
+                'https://tdesign.gtimg.com/starter/cloud-db.jpg',
+                'https://tdesign.gtimg.com/starter/cloud-server.jpg',
+                'https://tdesign.gtimg.com/starter/ssl.jpg',
+                'https://tdesign.gtimg.com/starter/t-sec.jpg',
+                'https://tdesign.gtimg.com/starter/face-recognition.jpg',
               ],
               'name|1': ['人脸识别', 'SSL证书', 'CVM', '云数据库', 'T-Sec 云防火墙'],
               'description|1': [

@@ -1,6 +1,6 @@
 import { prefix } from '@/config/global';
 import proSubMenu from './sub-menu';
-import tLogo from '../assets/t-logo-colorful.svg';
+import tLogo from '../assets/t-logo.svg';
 // import tLogow from '../assets/t-logo-w.svg';
 import tdLogoBlack from '../assets/tdesign-logo-black.svg';
 import tdLogoWhite from '../assets/tdesign-logo-white.svg';
