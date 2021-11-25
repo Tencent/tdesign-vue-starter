@@ -1,0 +1,310 @@
+<template>
+  <div>
+    <t-drawer
+      size="458px"
+      :footer="false"
+      :visible.sync="showSettingPannel"
+      value="medium"
+      header="页面配置"
+      :closeBtn="true"
+      :onCloseBtnClick="handleCloseDrawer"
+      class="setting-drawer-container"
+    >
+      <div>
+        <t-form :data="formData" size="large" ref="form" labelAlign="left" @reset="onReset" @submit="onSubmit">
+          <div class="setting-group-title">主题模式</div>
+          <t-radio-group v-model="formData.mode" defaultVaule="dark">
+            <div v-for="(item, index) in modeOption" :key="index" class="setting-layout-drawer">
+              <t-radio-button :key="index" :value="item"><thumbnail :src="getThumbnailUrl(item)" /></t-radio-button>
+            </div>
+          </t-radio-group>
+          <div class="setting-group-title">主题色</div>
+          <t-radio-group v-model="formData.brandTheme" defaultVaule="default">
+            <div v-for="(item, index) in colorOption" :key="index" class="setting-layout-drawer">
+              <t-radio-button :key="index" :value="item" class="setting-layout-color-group"
+                ><color-container :value="item" />
+              </t-radio-button>
+            </div>
+          </t-radio-group>
+          <div class="setting-group-title">导航布局</div>
+
+          <t-radio-group v-model="formData.layout" defaultVaule="top">
+            <div v-for="(item, index) in layoutOption" :key="index" class="setting-layout-drawer">
+              <t-radio-button :key="index" :value="item"><thumbnail :src="getThumbnailUrl(item)" /></t-radio-button>
+            </div>
+          </t-radio-group>
+
+          <!-- <t-form-item label="导航风格" name="theme" class="setting-route-theme">
+              <t-radio-group v-model="formData.theme" defaultVaule="light" variant="default-filled" size="small">
+                <t-radio-button value="light">明亮</t-radio-button>
+                <t-radio-button value="dark">暗黑</t-radio-button>
+              </t-radio-group>
+            </t-form-item> -->
+
+          <t-form-item v-show="formData.layout === 'mix'" label="分割菜单（混合模式下有效）" name="splitMenu">
+            <t-switch v-model="formData.splitMenu"></t-switch>
+          </t-form-item>
+
+          <t-form-item v-show="formData.layout !== 'side'" label="固定 Header" name="isHeaderFixed">
+            <t-switch v-model="formData.isHeaderFixed"></t-switch>
+          </t-form-item>
+          <t-form-item v-show="formData.layout !== 'top'" label="固定 Sidebar" name="isSidebarFixed">
+            <t-switch v-model="formData.isSidebarFixed"></t-switch>
+          </t-form-item>
+
+          <div class="setting-group-title">元素开关</div>
+          <t-form-item label="显示 Header" name="showHeader" v-show="formData.layout === 'side'">
+            <t-switch v-model="formData.showHeader"></t-switch>
+          </t-form-item>
+          <t-form-item label="显示 Breadcrumbs" name="showBreadcrumb">
+            <t-switch v-model="formData.showBreadcrumb"></t-switch>
+          </t-form-item>
+          <t-form-item label="显示 Footer" name="showFooter">
+            <t-switch v-model="formData.showFooter"></t-switch>
+          </t-form-item>
+          <t-form-item
+            label="footer 内收"
+            name="footerPosition"
+            v-show="formData.showFooter && !formData.isSidebarFixed"
+          >
+            <t-switch v-model="formData.isFooterAside"></t-switch>
+          </t-form-item>
+        </t-form>
+        <div class="setting-info">
+          <p>请复制后手动修改配置文件: /src/config/style.js</p>
+          <t-button theme="primary" variant="text" @click="handleCopy">复制配置项</t-button>
+        </div>
+      </div>
+    </t-drawer>
+    <t-button class="tdesign-setting" shape="circle" theme="primary" @click="handleClick" v-show="showSettingBtn">
+      <t-icon name="setting" size="24px" slot="icon" />
+      <span class="tdesign-setting-text">页面配置</span>
+    </t-button>
+  </div>
+</template>
+<script>
+import { mapGetters } from 'vuex';
+import STYLE_CONFIG from '@/config/style';
+import Thumbnail from '@/components/thumbnail/index.vue';
+import ColorContainer from '@/components/color.vue';
+
+export default {
+  name: 'DefaultLayoutSetting',
+  components: { Thumbnail, ColorContainer },
+  data() {
+    return {
+      modeOption: ['light', 'dark', 'auto'],
+      layoutOption: ['side', 'top', 'mix'],
+      colorOption: ['default', 'purple', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink'],
+      visible: false,
+      formData: { ...STYLE_CONFIG },
+    };
+  },
+  computed: {
+    ...mapGetters('setting', ['showSettingBtn']),
+    showSettingPannel: {
+      get() {
+        return this.$store.state.setting.showSettingPannel;
+      },
+      set(newVal) {
+        this.$store.commit('setting/toggleSettingPannel', newVal);
+      },
+    },
+    iconName() {
+      return this.visible ? 'close' : 'setting';
+    },
+    showOthers() {
+      return (this.formData.showFooter && !this.formData.isSidebarFixed) || !this.formData.splitMenu;
+    },
+  },
+  watch: {
+    formData: {
+      handler(newVal) {
+        this.$store.dispatch('setting/changeTheme', newVal);
+      },
+      deep: true,
+    },
+  },
+  methods: {
+    onReset() {
+      this.formData = {
+        ...STYLE_CONFIG,
+      };
+      this.$message.success('已恢复初始设置');
+    },
+    onSubmit({ result, firstError, e }) {
+      e.preventDefault();
+      if (result === true) {
+        this.visible = false;
+      } else {
+        this.$message.warning(firstError);
+      }
+    },
+    getThumbnailUrl(name) {
+      return `https://tdesign.gtimg.com/starter/setting/${name}.png`;
+    },
+    handleClick() {
+      this.$store.commit('setting/toggleSettingPannel', true);
+      // this.visible = !this.visible;
+    },
+    handleCloseDrawer() {
+      this.$store.commit('setting/toggleSettingPannel', false);
+    },
+    handleCopy() {
+      const text = JSON.stringify(this.formData, null, 4);
+      this.$copyText(text).then(() => {
+        this.$message.closeAll();
+        this.$message.success('复制成功');
+      });
+    },
+  },
+};
+</script>
+<style lang="less">
+@import '@/style/index.less';
+
+.tdesign-setting {
+  z-index: 100;
+  position: fixed;
+  bottom: 200px;
+  right: 0;
+  transition: transform .3s cubic-bezier(.7, .3, .1, 1), visibility .3s cubic-bezier(.7, .3, .1, 1);
+  height: 40px;
+  width: 40px;
+  border-radius: 20px 0 0 20px;
+  transition: all .3s;
+
+  .t-icon {
+    margin-left: 8px;
+  }
+
+  .tdesign-setting-text {
+    font-size: 12px;
+    display: none;
+  }
+
+  &:hover {
+    width: 96px;
+
+    .tdesign-setting-text {
+      display: inline-block;
+    }
+  }
+}
+
+.setting-layout-color-group {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50% !important;
+
+  border: 2px solid transparent !important;
+
+  > .t-radio-button__label {
+    display: inline-flex;
+  }
+}
+
+.tdesign-setting-close {
+  position: fixed;
+  bottom: 200px;
+  right: 300px;
+}
+
+.setting-group-title {
+  font-size: 14px;
+  line-height: 22px;
+  margin: 32px 0 24px 0;
+  text-align: left;
+  font-family: PingFang SC;
+  font-style: normal;
+  font-weight: 500;
+  color: @text-color-primary;
+}
+
+.setting-link {
+  cursor: pointer;
+  color: @brand-color;
+  margin-bottom: 8px;
+}
+
+.setting-info {
+  position: absolute;
+  bottom: 24px;
+  line-height: 20px;
+  font-size: 12px;
+  text-align: center;
+  color: @text-color-placeholder;
+  width: 100%;
+}
+
+.setting-drawer-container {
+
+  .t-radio-group.t-radio-group-medium {
+    min-height: 32px;
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .setting-layout-drawer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+
+    .t-radio-button {
+      display: inline-flex;
+      max-height: 78px;
+      padding: 6px !important;
+      border-radius: @border-radius;
+      border: 2px solid #e3e6eb;
+
+      // &:last-child {
+      //   border-right: 2px solid transparent;
+      // }
+
+      > .t-radio-button__label {
+        display: inline-flex;
+      }
+    }
+
+    .t-is-checked {
+      border: 2px solid @brand-color !important;
+    }
+
+    .t-form__controls--content {
+      justify-content: end;
+    }
+  }
+
+  .t-form__controls--content {
+    justify-content: end;
+  }
+}
+
+.setting-route-theme {
+
+  .t-form__label {
+    min-width: 310px !important;
+    color: @text-color-secondary;
+  }
+}
+
+.setting-color-theme {
+
+  .setting-layout-drawer {
+
+    .t-radio-button {
+      height: 32px;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+</style>
