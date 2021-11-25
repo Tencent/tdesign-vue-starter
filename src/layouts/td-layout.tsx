@@ -62,7 +62,8 @@ export default {
     },
     renderSidebar(): VNode {
       const theme = this.getNavTheme(this.setting.mode, this.setting.layout, ['side']);
-      // const theme = this.setting.mode === 'dark' ? 'dark' : (this.setting.layout === 'mix' ? 'light' : this.setting.theme);
+      // const theme =
+      //   this.setting.mode === 'dark' ? 'dark' : this.setting.layout === 'mix' ? 'light' : this.setting.theme;
       // menu 组件最多支持 3级菜单
       const maxLevel = this.setting.splitMenu ? 2 : 3;
 
