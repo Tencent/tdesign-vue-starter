@@ -1,7 +1,7 @@
 
 <p style="display:flex; justify-content: center">
 
-[![](https://tdesign.gtimg.com/starter/tdesign-pro.svg)](http://tdesgin.tencent.com/starter/vue/#/dashboard/base)
+[![](https://tdesign.gtimg.com/starter/brand-logo.svg)](http://tdesgin.tencent.com/starter/vue/#/dashboard/base)
 
 </p>
 <p align="center">
@@ -9,10 +9,10 @@
   <a href="https://nodejs.org/en/about/releases/"><img src="https://img.shields.io/node/v/vite.svg" alt="node compatility"></a>
 </p>
 
-# TDesign starter template
+# TDesign Starter
 
 ## 项目简介
-TDesign starter template 基于 TDesign UI 组件，旨在提供项目开箱即用的、配置式的并且拥有开发体验和设计感的中后台的项目。
+TDesign Starter 基于 TDesign UI 组件，旨在提供项目开箱即用的、配置式的并且拥有开发体验和设计感的中后台的项目。
 
 - 设计美观
   -  基于 TDesign UI 设计规范
@@ -297,9 +297,3 @@ Vite 运行依赖 Node `12.0.0` 以上版本,  Node 10.5版本之前不支持 Wo
 
 <br/>
 
-## 参与共建
-TDesign pro template 还是一个成长中项目，如遇问题或bug，请向我们反馈，任何的建议都是对我们成长的动力。
-如想参与共建，请联系 phyliszhang 或 uyarnchen
-
-
-<br/>
