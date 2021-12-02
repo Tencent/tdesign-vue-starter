@@ -1,12 +1,12 @@
 import { VNode } from 'vue';
 
+import { mapGetters } from 'vuex';
 import TdesignHeader from '@/components/header.vue';
 import TdesignBreadcrumb from '@/components/breadcrumb.vue';
 import TdesignFooter from '@/components/footer.vue';
 import TdesignSidenav from '@/components/sidenav';
 import { prefix } from '@/config/global';
 import TdesignSetting from '@/components/setting.vue';
-import { mapGetters } from 'vuex';
 
 import '@/style/index.less';
 
