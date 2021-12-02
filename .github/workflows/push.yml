@@ -11,18 +11,29 @@ jobs:
         with:
           node-version: '14'
           cache: 'npm'
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - run: npm install
         shell: bash
       - run: echo '${{ github.ref }} ...  ${{ github.sha }}'
       - name: build-site
         run: npm run build
-      - name: upload surge service
+      - name: upload surge service and generate preview URL
         id: deploy
         run: |
           export GITHUB_SHA=${{ github.sha }}
           export GITHUB_SHA_SUB=${GITHUB_SHA: 0: 7 }
           export DEPLOY_DOMAIN=https://preview-$GITHUB_SHA_SUB-tdesign-vue-starter.surge.sh
           npx surge --project ./dist --domain $DEPLOY_DOMAIN --token ${{ secrets.SURGE_TOKEN }}
-      - run: echo https://preview-$GITHUB_SHA_SUB-tdesign-vue-starter.surge.sh
+          echo the preview URL is $DEPLOY_DOMAIN
         if: ${{ success() }}
       - run: echo "🚀 This job's status is ${{ job.status }}."
