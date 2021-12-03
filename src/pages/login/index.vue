@@ -216,8 +216,6 @@
   </div>
 </template>
 <script>
-// 导入样式
-import './index.less';
 import QrcodeVue from 'qrcode.vue';
 
 /** 高级详情 */
@@ -340,3 +338,6 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+@import './index';
+</style>

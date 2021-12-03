@@ -8,7 +8,7 @@
             <div class="user-left-greeting">
               Hi，Image
               <span class="regular"> 下午好，今天是你加入鹅厂的第 100 天～</span>
-              <img src="@/assets/tencent-logo.png" class="user-left-logo" />
+              <img src="@/assets/assets-tencent-logo.png" class="user-left-logo" />
             </div>
             <div class="user-right-info">
               <div class="head-bar">
@@ -153,8 +153,6 @@
 <script>
 import { prefix } from '@/config/global';
 
-// 导入样式
-import './index.less';
 import { LAST_7_DAYS } from '@/utils/date.ts';
 import * as echarts from 'echarts/core';
 
@@ -206,3 +204,6 @@ export default {
   },
 };
 </script>
+<style lang="less" scoped>
+@import './index';
+</style>
