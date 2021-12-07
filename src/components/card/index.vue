@@ -1,21 +1,21 @@
 <template>
   <div :class="containerCls">
     <div :class="titleCls">
-      <span :class="titleTextCls">
+      <div :class="titleTextCls">
         {{ title }}
         <span v-if="describe" class="card-describe">{{ describe }}</span>
-      </span>
-      <span class="card-option">
+      </div>
+      <div class="card-option">
         <slot name="option"></slot>
-      </span>
+      </div>
     </div>
     <div class="card-content">
       <slot></slot>
     </div>
-    <div v-if="size !== 'small'" class="card-spacer-bottom"></div>
+    <div v-if="size !== 'small'" class="card-spacer__bottom"></div>
   </div>
 </template>
-<script>
+<script lang="ts">
 export default {
   name: 'card',
   props: {
@@ -36,22 +36,22 @@ export default {
   },
   computed: {
     containerCls() {
-      return ['card-container', { 'card-container-compact': this.compact, 'card-container-border': this.border }];
+      return ['card-container', { 'card-container--compact': this.compact, 'card-container--border': this.border }];
     },
     titleCls() {
       return [
         'card-title',
         {
-          'card-title-small': this.size === 'small',
-          'card-title-default': this.size !== 'small',
+          'card-title--small': this.size === 'small',
+          'card-title--default': this.size !== 'small',
         },
       ];
     },
     titleTextCls() {
       return [
         {
-          'card-title-text-small': this.size === 'small',
-          'card-title-text-default': this.size !== 'small',
+          'card-title__text--small': this.size === 'small',
+          'card-title__text--default': this.size !== 'small',
         },
       ];
     },
@@ -68,9 +68,10 @@ export default {
 .card {
 
   &-option {
+    flex: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
   }
 
   &-container {
@@ -86,13 +87,13 @@ export default {
       background: @brand-color;
     }
 
-    &-compact {
+    &--compact {
       padding: 16px 16px 0;
       margin-top: 24px;
       margin-bottom: 16px;
     }
 
-    &-border {
+    &--border {
       border: 1px solid #ebebeb;
     }
   }
@@ -104,22 +105,22 @@ export default {
     font-weight: 500;
     color: @text-color-primary;
 
-    &-small {
+    &--small {
       font-size: 14px;
       line-height: 22px;
       margin-bottom: 8px;
     }
 
-    &-default {
+    &--default {
       font-size: 20px;
       line-height: 28px;
       margin-bottom: 24px;
     }
 
-    &-text {
+    &__text {
       display: inline-flex;
 
-      &-default {
+      &--default {
         margin: @spacer 0;
       }
     }
@@ -127,7 +128,7 @@ export default {
 
   &-describe {
     font-size: 14px;
-    color: @bg-color-container;
+    color: @text-color-secondary;
     line-height: 22px;
   }
 
@@ -138,7 +139,7 @@ export default {
     flex: 1;
   }
 
-  &-spacer-bottom {
+  &-spacer__bottom {
     height: @spacer;
   }
 }

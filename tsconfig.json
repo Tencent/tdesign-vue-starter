@@ -3,13 +3,13 @@
     "target": "es2015",
     "module": "esnext",
     "lib": ["esnext", "dom"],
-    "allowJs": true, // 先开 项目有很多之前写的
+    "allowJs": true,
     "checkJs": false,
-    "noImplicitAny": false, // 先不开
+    "noImplicitAny": false,
     "isolatedModules": false,
     "experimentalDecorators": true,
     "esModuleInterop": true,
-    "noImplicitThis": false, // 先不开 项目有很多之前写的
+    "noImplicitThis": false,
     "strictNullChecks": false,
     "skipLibCheck": true,
     "moduleResolution": "node",
