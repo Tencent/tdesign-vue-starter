@@ -80,7 +80,7 @@
             <span class="tip1">请使用微信扫一扫登录</span>
             <span class="tip2">刷新 <t-icon name="refresh" color="#0052D9" /> </span>
           </div>
-          <qrcode-vue value="https://tencent.tdesign.com/vue/components/quick-start" :size="192" level="H" />
+          <qrcode-vue value="https://tdesign.tencent.com/vue/components/quick-start" :size="192" level="H" />
         </div>
         <div class="bottom-container">
           <span class="tip" @click="toLoginStep('login-step1')">使用账号密码登录</span>
@@ -229,7 +229,7 @@ export default {
         EngName: '',
         DeptNameString: '测试部门',
       },
-      src2: 'https://tencent.tdesign.com/vue/components/quick-start',
+      src2: 'https://tdesign.tencent.com/vue/components/quick-start',
       showPsw: false,
       psw: '',
       check1: false,
