@@ -211,6 +211,16 @@ viteMockServe({
 
 ## 分支规范
 
+## 类、接口命名规范
+
+1.类名全部使用大写驼峰，同时命名跟回文件命名
+<img src="./docs/20211116-223944.png" width="800">
+
+2.接口命名以大写 I 开头，代表 interface
+<img src="./docs/20211117-150316.png" width="800">
+
+## 分支规范
+
 - 主干分支 -- `develop`
 - 功能分支 -- `feature`
 - 修复分支 -- `hotfix`

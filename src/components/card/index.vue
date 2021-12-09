@@ -85,6 +85,10 @@ export default {
 
     &.main-color {
       background: @brand-color;
+
+      .card-describe {
+        color: #fff;
+      }
     }
 
     &--compact {

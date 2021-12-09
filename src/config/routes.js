@@ -98,7 +98,7 @@ export default [
       {
         title: '二级详情页',
         path: 'secondary',
-        component: '../pages/secondary/index.vue',
+        component: '../pages/detail-secondary/index.vue',
       },
     ],
   },

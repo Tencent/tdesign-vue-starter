@@ -125,7 +125,7 @@ export const SALE_COLUMNS: TdBaseTableProps['columns'] = [
     align: 'center',
     colKey: 'index',
     title: '排名',
-    width: 64,
+    width: 80,
   },
   {
     align: 'left',
@@ -165,7 +165,7 @@ export const BUY_COLUMNS: TdBaseTableProps['columns'] = [
     align: 'center',
     colKey: 'index',
     title: '排名',
-    width: 64,
+    width: 80,
   },
   {
     align: 'left',

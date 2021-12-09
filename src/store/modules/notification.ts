@@ -1,5 +1,14 @@
+export interface msgDataItem {
+  id: string;
+  content: string;
+  type: string;
+  status: boolean;
+  collected: boolean;
+  date: string;
+  priorty: string;
+}
 // 定义的state初始值
-const state = {
+const state: { msgData: Array<msgDataItem> } = {
   msgData: [
     {
       id: '123',
