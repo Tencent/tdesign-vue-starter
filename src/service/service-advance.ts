@@ -1,3 +1,18 @@
+type AdvancedColumn = {
+  name: string;
+  value: string;
+  type?: any;
+};
+type TableItem = {
+  width?: string | number;
+  ellipsis?: any;
+  colKey: string;
+  title: string;
+  sorter?: any;
+  align?: string;
+  fixed?: string;
+  className?: string;
+};
 class DetailBase {
   /**
    * 下拉框选项数据
@@ -6,7 +21,7 @@ class DetailBase {
    *
    * @memberOf DetailBase
    */
-  getBaseInfoData() {
+  getBaseInfoData(): Array<AdvancedColumn> {
     return [
       {
         name: '合同名称',
@@ -82,7 +97,7 @@ class DetailBase {
    *
    * @memberOf DetailBase
    */
-  getTableColumns() {
+  getTableColumns(): Array<TableItem> {
     return [
       {
         width: 300,
@@ -140,7 +155,7 @@ class DetailBase {
    *
    * @memberOf DetailBase
    */
-  getPropUpData() {
+  getPropUpData(): any {
     const INITIAL_DATA = {
       name: '',
       warning: '',

@@ -1,3 +1,8 @@
+interface IAdvancedColumn {
+  name: string;
+  value: string;
+  type?: any;
+}
 class DetailBase {
   /**
    * 下拉框选项数据
@@ -6,7 +11,7 @@ class DetailBase {
    *
    * @memberOf DetailBase
    */
-  getBaseInfoData() {
+  getBaseInfoData(): Array<IAdvancedColumn> {
     return [
       {
         name: '合同名称',
