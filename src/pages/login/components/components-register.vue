@@ -106,7 +106,7 @@ export default Vue.extend({
     clearInterval(this.intervalTimer);
   },
   methods: {
-    onSubmit({ validateResult }) {
+    onSubmit({ validateResult }: { validateResult: boolean }) {
       if (validateResult === true) {
         if (!this.formData.checked) {
           this.$message.error('请同意TDesign服务协议和TDesign 隐私声明');
@@ -116,7 +116,7 @@ export default Vue.extend({
         this.$emit('registerSuccess');
       }
     },
-    switchType(val) {
+    switchType(val: 'email' | 'phone') {
       this.$refs.form.reset();
       this.type = val;
     },

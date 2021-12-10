@@ -10,7 +10,7 @@
   </result>
 </template>
 
-<script>
+<script lang="ts">
 import result from '@/components/result/index.vue';
 
 export default {

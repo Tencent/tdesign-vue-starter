@@ -1,4 +1,4 @@
-export const passwordValidator = (val) => {
+export const passwordValidator = (val: string) => {
   if (!/^[a-z0-9_]{1,20}$/.test(val)) {
     return { result: false, message: '需要为1-20个英文或数字字符', type: 'error' };
   }

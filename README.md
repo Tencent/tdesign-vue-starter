@@ -191,33 +191,26 @@ viteMockServe({
 ## 目录命名规范
 
 1.目录名全部使用小写，烧考串形式命名。 2.如果需要有多个单词表达，使用中划线连接。
-<img src="./docs/image2021-3-22_21-2-48.png" width="800">
-
-<br/>
 
 ## 文件命名规范
 
-1.文件名全部使用小写，烧考串形式命名，同时首个单词跟回父目录命名。 2.引导型特殊文件、样式及资源目录文件除外,例如: index.ts, main.ts, index.vue
-<img src="./docs/20211116-223436.png" width="800">
+1.文件名全部使用小写，烧考串形式命名，同时首个单词跟回父目录命名。
+
+2.引导型特殊文件、样式及资源目录文件除外,例如: index.ts, main.ts, index.vue
 
 ## 类、接口命名规范
 
 1.类名全部使用大写驼峰，同时命名跟回文件命名
-<img src="./docs/20211116-223944.png" width="800">
-<br/>
 
 2.接口命名以大写 I 开头，代表 interface
-<img src="./docs/20211117-150316.png" width="800">
 
 ## 分支规范
 
 ## 类、接口命名规范
 
 1.类名全部使用大写驼峰，同时命名跟回文件命名
-<img src="./docs/20211116-223944.png" width="800">
 
 2.接口命名以大写 I 开头，代表 interface
-<img src="./docs/20211117-150316.png" width="800">
 
 ## 分支规范
 
@@ -251,20 +244,3 @@ viteMockServe({
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Safari |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Edge >=16                                                                                                                                                                                                       | Firefox >=60                                                                                                                                                                                                      | Chrome >=61                                                                                                                                                                                                   | Safari >=11                                                                                                                                                                                                   |
-
-<br/>
-
-## Troubleshooting 问题排查
-
-##### 1、Cannot find module ‘worker_threads’
-
-Vite 运行依赖 Node `12.0.0` 以上版本, Node 10.5 版本之前不支持 Worker，请升级 Node 版本即可。
-
-##### 2、 wasm code commit Allocation failed - process out of memory
-
-方法一、启动项目时内存溢出，需要升级 Node 版本至 `15.3.0` [(完整问题)](https://stackoverflow.com/questions/48387040/how-do-i-determine-the-correct-max-old-space-size-for-node-js)
-
-方法二、调整 Node 内存大小使用限制
-`max_old_space_size=4096`[(完整问题)](https://segmentfault.com/a/1190000010437948)
-
-<br/>
