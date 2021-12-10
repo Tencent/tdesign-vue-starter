@@ -1,33 +1,39 @@
 <template>
   <div class="login-wrapper">
+    <login-header />
+
     <div class="login-container">
       <div class="title-container">
-        <img class="icon" src="https://tdesign.gtimg.com/pro-template/logo%402x.png" />
-        <div class="side-title">
-          <p class="tip1">
-            {{ type == 'register' ? '没有账号吗?' : '已有账号?' }}
-          </p>
-          <p class="tip2" @click="switchType(type == 'register' ? 'login' : 'register')">
+        <t-logo class="icon" />
+        <h1 class="title margin-no">登录到</h1>
+        <h1 class="title">TDesign Starter</h1>
+        <div class="sub-title">
+          <p class="tip">{{ type == 'register' ? '已有账号?' : '没有账号吗?' }}</p>
+          <p class="tip" @click="switchType(type == 'register' ? 'login' : 'register')">
             {{ type == 'register' ? '登录' : '注册新账号' }}
           </p>
         </div>
       </div>
+
       <login v-if="type === 'login'" />
-      <register v-else @registerSuccess="switchType('login')" />
+      <register v-else @register-success="switchType('login')" />
     </div>
   </div>
 </template>
-<script lang="ts">
-import Vue from 'vue';
+<script>
 import Login from './components/Login.vue';
 import Register from './components/Register.vue';
+import LoginHeader from './components/Header.vue';
+import TLogo from '@/assets/assets-t-logo.svg';
 
 /** 高级详情 */
-export default Vue.extend({
+export default {
   name: 'LoginIndex',
   components: {
+    LoginHeader,
     Login,
     Register,
+    TLogo,
   },
   data() {
     return {
@@ -39,7 +45,7 @@ export default Vue.extend({
       this.type = val;
     },
   },
-});
+};
 </script>
 <style lang="less">
 @import url('./index.less');

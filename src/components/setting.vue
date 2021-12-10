@@ -10,7 +10,7 @@
       :onCloseBtnClick="handleCloseDrawer"
       class="setting-drawer-container"
     >
-      <div>
+      <div class="setting-container">
         <t-form :data="formData" size="large" ref="form" labelAlign="left" @reset="onReset" @submit="onSubmit">
           <div class="setting-group-title">主题模式</div>
           <t-radio-group v-model="formData.mode" defaultVaule="dark">
@@ -72,14 +72,10 @@
         </t-form>
         <div class="setting-info">
           <p>请复制后手动修改配置文件: /src/config/style.js</p>
-          <t-button theme="primary" variant="text" @click="handleCopy">复制配置项</t-button>
+          <t-button theme="primary" variant="text" @click="handleCopy"> 复制配置项 </t-button>
         </div>
       </div>
     </t-drawer>
-    <t-button class="tdesign-setting" shape="circle" theme="primary" @click="handleClick" v-show="showSettingBtn">
-      <t-icon name="setting" size="24px" slot="icon" />
-      <span class="tdesign-setting-text">页面配置</span>
-    </t-button>
   </div>
 </template>
 <script>
@@ -232,15 +228,22 @@ export default {
 
 .setting-info {
   position: absolute;
-  bottom: 24px;
+  padding: 24px;
+  bottom: 0;
+  left: 0;
   line-height: 20px;
   font-size: 12px;
   text-align: center;
   color: @text-color-placeholder;
   width: 100%;
+  background: @bg-color-container;
 }
 
 .setting-drawer-container {
+
+  .setting-container {
+    padding-bottom: 100px;
+  }
 
   .t-radio-group.t-radio-group-medium {
     min-height: 32px;

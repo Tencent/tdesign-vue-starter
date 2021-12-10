@@ -1,9 +1,9 @@
 import { prefix } from '@/config/global';
 import proSubMenu from './sub-menu';
 import tLogo from '../assets/assets-t-logo.svg';
-// import tLogow from '../assets/t-logo-w.svg';
 import tdLogoBlack from '../assets/assets-tdesign-logo-black.svg';
 import tdLogoWhite from '../assets/assets-tdesign-logo-white.svg';
+import pgk from '../../package.json';
 
 import '@/style/sidenav.less';
 
@@ -125,8 +125,8 @@ export default {
             </span>
           )}
           <pro-sub-menu navData={this.menu}></pro-sub-menu>
-          <div slot="operations" onClick={this.changeCollapsed}>
-            <t-icon name={this.iconName} />
+          <div slot="operations" class="version-container" onClick={this.changeCollapsed}>
+            {!this.collapsed && 'TDesign Starter'} {pgk.version}
           </div>
         </t-menu>
         <div class={`${this.prefix}-sidenav-placeholder${this.collapsed ? '-hidden' : ''}`}></div>

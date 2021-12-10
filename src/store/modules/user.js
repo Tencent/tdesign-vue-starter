@@ -9,7 +9,7 @@ const state = {
 const mutations = {
   SET_USER_INFO(state, userInfo) {
     // eslint-disable-next-line no-param-reassign
-    state.loginName = userInfo.EngName;
+    state.loginName = userInfo.account;
     // eslint-disable-next-line no-param-reassign
     state.deptNameString = userInfo.DeptNameString;
   },
