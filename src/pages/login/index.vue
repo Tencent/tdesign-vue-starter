@@ -21,9 +21,9 @@
   </div>
 </template>
 <script>
-import Login from './components/Login.vue';
-import Register from './components/Register.vue';
-import LoginHeader from './components/Header.vue';
+import Login from './components/components-login.vue';
+import Register from './components/components-register.vue';
+import LoginHeader from './components/components-header.vue';
 import TLogo from '@/assets/assets-t-logo.svg';
 
 /** 高级详情 */

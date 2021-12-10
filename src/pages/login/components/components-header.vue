@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import LogoFullIcon from '@/assets/logo-full.svg';
+import LogoFullIcon from '@/assets/assets-logo-full.svg';
 
 export default {
   components: { LogoFullIcon },
@@ -25,7 +25,7 @@ export default {
       window.open('https://github.com/TDesignOteam/tdesign-vue-starter');
     },
     navToHelper() {
-      window.open('http://tdesign.tencent.com/starter/get-started.html');
+      window.open('https://tdesign.tencent.com/starter/get-started.html');
     },
     toggleSettingPanel() {
       this.$store.commit('setting/toggleSettingPannel', true);
