@@ -1,11 +1,11 @@
 <template>
   <t-form
+    ref="form"
     :class="['item-container', `login-${type}`]"
     :data="formData"
-    ref="form"
     :rules="FORM_RULES"
+    label-width="0"
     @submit="onSubmit"
-    labelWidth="0"
   >
     <template v-if="type == 'password'">
       <t-form-item name="account">
@@ -42,8 +42,8 @@
     <!-- 扫码登陆 -->
     <template v-else-if="type == 'qrcode'">
       <div class="tip-container">
-        <span class="tip1">请使用微信扫一扫登录</span>
-        <span class="tip2 refresh">刷新 <t-icon name="refresh" color="#0052D9" /> </span>
+        <span class="tip">请使用微信扫一扫登录</span>
+        <span class="refresh">刷新 <t-icon name="refresh" color="#0052D9" /> </span>
       </div>
       <qrcode-vue value="" :size="192" level="H" />
     </template>
@@ -66,14 +66,14 @@
       </t-form-item>
     </template>
 
-    <t-form-item v-if="type !== 'qrcode'">
+    <t-form-item v-if="type !== 'qrcode'" class="btn-container">
       <t-button block size="large" type="submit"> 登录 </t-button>
     </t-form-item>
 
     <div class="switch-container">
-      <span class="tip" v-if="type !== 'password'" @click="switchType('password')">使用账号密码登录</span>
-      <span class="tip" v-if="type !== 'qrcode'" @click="switchType('qrcode')">使用微信扫码登录</span>
-      <span class="tip" v-if="type !== 'phone'" @click="switchType('phone')">使用手机号登录</span>
+      <span v-if="type !== 'password'" class="tip" @click="switchType('password')">使用账号密码登录</span>
+      <span v-if="type !== 'qrcode'" class="tip" @click="switchType('qrcode')">使用微信扫码登录</span>
+      <span v-if="type !== 'phone'" class="tip" @click="switchType('phone')">使用手机号登录</span>
     </div>
   </t-form>
 </template>
@@ -122,7 +122,7 @@ export default Vue.extend({
     },
     onSubmit({ validateResult }) {
       if (validateResult === true) {
-        this.$store.commit('user/SET_USER_INFO', this.userInfo);
+        this.$store.commit('user/SET_USER_INFO', this.formData);
 
         this.$message.success('登录成功');
 

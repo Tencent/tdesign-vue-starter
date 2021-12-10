@@ -1,5 +1,15 @@
 <template>
-  <router-view />
+  <router-view :class="[mode]" />
 </template>
 
-<script></script>
+<script>
+import Vue from 'vue';
+
+export default Vue.extend({
+  computed: {
+    mode() {
+      return this.$store.getters['setting/mode'];
+    },
+  },
+});
+</script>

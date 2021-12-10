@@ -52,6 +52,13 @@ export default {
   },
   methods: {
     getNavTheme(mode, layout, type): string {
+      if (this.$store.state.setting.mode === 'auto') {
+        const media = window.matchMedia('(prefers-color-scheme:dark)');
+        if (media.matches) {
+          return 'dark';
+        }
+        return 'light';
+      }
       if (mode === 'dark') {
         return 'dark';
       }
