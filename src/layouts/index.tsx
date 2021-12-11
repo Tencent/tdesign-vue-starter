@@ -1,23 +1,23 @@
-import { VNode } from 'vue';
-
+import Vue, { VNode } from 'vue';
 import { mapGetters } from 'vuex';
-import TdesignHeader from '@/components/header.vue';
-import TdesignBreadcrumb from '@/components/breadcrumb.vue';
-import TdesignFooter from '@/components/footer.vue';
-import TdesignSidenav from '@/components/sidenav';
-import { prefix } from '@/config/global';
-import TdesignSetting from '@/components/setting.vue';
+import TdesignHeader from './header/index.vue';
+import TdesignBreadcrumb from './components/Breadcrumb.vue';
+import TdesignFooter from './components/Footer.vue';
+import TdesignSideNav from './components/SideNav';
 
-import '@/style/index.less';
+import { prefix } from '@/config/global';
+import TdesignSetting from './setting.vue';
+import { ModeType, SettingType, ClassName } from '@/interface';
+import '@/style/layout.less';
 
 const name = `${prefix}-base-layout`;
 
-export default {
+export default Vue.extend({
   name,
   components: {
     TdesignHeader,
     TdesignFooter,
-    TdesignSidenav,
+    TdesignSideNav,
     TdesignSetting,
     TdesignBreadcrumb,
   },
@@ -37,11 +37,11 @@ export default {
       sideMenu: 'setting/sideMenu',
       showAsideFooter: 'setting/showAsideFooter',
       showMainFooter: 'setting/showMainFooter',
+      mode: 'setting/mode',
     }),
-    setting(): any {
+    setting(): SettingType {
       return this.$store.state.setting;
     },
-    // fixed t-aside 无法被父元素实时监听的 bug
     mainLayoutCls(): Array<ClassName> {
       return [
         {
@@ -51,21 +51,14 @@ export default {
     },
   },
   methods: {
-    getNavTheme(mode, layout, type): string {
-      if (this.$store.state.setting.mode === 'auto') {
-        const media = window.matchMedia('(prefers-color-scheme:dark)');
-        if (media.matches) {
-          return 'dark';
-        }
-        return 'light';
-      }
+    getNavTheme(mode: ModeType, layout: string, type: string): string {
       if (mode === 'dark') {
         return 'dark';
       }
       if (type.includes(layout)) {
         return 'dark';
       }
-      return 'light';
+      return this.mode;
     },
     renderSidebar(): VNode {
       const theme = this.getNavTheme(this.setting.mode, this.setting.layout, ['side']);
@@ -76,7 +69,7 @@ export default {
 
       return (
         this.showSidebar && (
-          <tdesign-sidenav
+          <tdesign-side-nav
             showLogo={this.showSidebarLogo}
             layout={this.setting.layout}
             isFixed={this.setting.isSidebarFixed}
@@ -155,4 +148,4 @@ export default {
       </div>
     );
   },
-};
+});

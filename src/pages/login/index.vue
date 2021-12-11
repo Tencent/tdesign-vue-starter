@@ -4,7 +4,6 @@
 
     <div class="login-container">
       <div class="title-container">
-        <t-logo class="icon" />
         <h1 class="title margin-no">登录到</h1>
         <h1 class="title">TDesign Starter</h1>
         <div class="sub-title">
@@ -24,7 +23,6 @@
 import Login from './components/components-login.vue';
 import Register from './components/components-register.vue';
 import LoginHeader from './components/components-header.vue';
-import TLogo from '@/assets/assets-t-logo.svg';
 
 /** 高级详情 */
 export default {
@@ -33,7 +31,6 @@ export default {
     LoginHeader,
     Login,
     Register,
-    TLogo,
   },
   data() {
     return {

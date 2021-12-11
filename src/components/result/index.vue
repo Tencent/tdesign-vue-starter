@@ -6,14 +6,29 @@
     <slot />
   </div>
 </template>
-<script>
-export default {
-  name: 'result',
-  props: ['bgUrl', 'title', 'tip', 'linkUrl'],
-};
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
+  name: 'Result',
+  props: {
+    bgUrl: {
+      type: String,
+      default: '',
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    tip: {
+      type: String,
+      default: '',
+    },
+  },
+});
 </script>
 <style lang="less" scoped>
-@import url('@/style/index.less');
+@import '@/style/variables';
 
 .result {
 
@@ -50,8 +65,7 @@ export default {
   }
 
   &-bg-img {
-    width: 240px;
-    height: 240px;
+    width: 200px;
   }
 
   &-title {

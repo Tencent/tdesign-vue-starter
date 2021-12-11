@@ -1,0 +1,73 @@
+@import '@/style/variables.less';
+
+.secondary-notification {
+  background-color: @bg-color-container;
+  border-radius: @border-radius;
+  padding: @spacer-3 @spacer-4;
+
+  .t-tabs__content {
+    padding-top: 0;
+  }
+}
+
+.secondary-msg-list {
+  height: 70vh;
+
+  .t-list-item {
+    cursor: pointer;
+    padding: 13px 24px 13px 0;
+
+    &:hover {
+      background-color: @bg-color-container-hover;
+
+      .msg-date {
+        display: none;
+      }
+
+      .msg-action {
+        display: flex;
+        align-items: center;
+
+        &-icon {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+
+    .t-tag.t-size-s {
+      margin-right: @spacer-1;
+      margin-left: 0;
+    }
+  }
+
+  .content {
+    font-family: PingFangSC-Medium;
+    font-size: 14px;
+    color: @text-color-placeholder;
+    text-align: left;
+    line-height: 22px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .unread {
+    color: @brand-color-8;
+  }
+
+  .msg-action {
+    display: none;
+
+    .set-read-icon {
+      margin-right: 24px;
+    }
+  }
+
+  &__empty-list {
+    min-height: 443px;
+    padding-top: 170px;
+    text-align: center;
+    color: @text-color-primary;
+  }
+}

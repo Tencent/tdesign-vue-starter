@@ -5,7 +5,7 @@ export interface msgDataItem {
   status: boolean;
   collected: boolean;
   date: string;
-  priorty: string;
+  quality: string;
 }
 // 定义的state初始值
 const state: { msgData: Array<msgDataItem> } = {
@@ -17,7 +17,7 @@ const state: { msgData: Array<msgDataItem> } = {
       status: true,
       collected: false,
       date: '2021-01-01 08:00',
-      priorty: 'high',
+      quality: 'high',
     },
     {
       id: '124',
@@ -26,7 +26,7 @@ const state: { msgData: Array<msgDataItem> } = {
       status: true,
       collected: false,
       date: '2021-01-01 08:00',
-      priorty: 'low',
+      quality: 'low',
     },
     {
       id: '125',
@@ -35,7 +35,7 @@ const state: { msgData: Array<msgDataItem> } = {
       status: true,
       collected: false,
       date: '2021-01-01 08:00',
-      priorty: 'middle',
+      quality: 'middle',
     },
     {
       id: '126',
@@ -44,7 +44,7 @@ const state: { msgData: Array<msgDataItem> } = {
       status: true,
       collected: false,
       date: '2021-01-01 08:00',
-      priorty: 'low',
+      quality: 'low',
     },
     {
       id: '127',
@@ -53,7 +53,7 @@ const state: { msgData: Array<msgDataItem> } = {
       status: true,
       collected: false,
       date: '2021-01-01 08:00',
-      priorty: 'low',
+      quality: 'low',
     },
     {
       id: '128',
@@ -62,7 +62,7 @@ const state: { msgData: Array<msgDataItem> } = {
       status: true,
       collected: false,
       date: '2021-01-01 08:00',
-      priorty: 'low',
+      quality: 'low',
     },
   ],
 };

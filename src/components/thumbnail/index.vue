@@ -1,8 +1,10 @@
 <template>
   <img :class="className" :src="url" />
 </template>
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
   name: 'thumbnail',
   props: {
     url: {
@@ -25,7 +27,7 @@ export default {
       ];
     },
   },
-};
+});
 </script>
 <style lang="less" scoped>
 @import url('@/style/index.less');

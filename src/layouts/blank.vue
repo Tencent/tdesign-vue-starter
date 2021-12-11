@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import TdesignSetting from '@/components/setting.vue';
+import TdesignSetting from './setting.vue';
 
 export default {
   components: {

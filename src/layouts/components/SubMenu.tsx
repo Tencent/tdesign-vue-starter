@@ -1,12 +1,5 @@
 import { prefix } from '@/config/global';
-
-interface MenuRoute {
-  path: string;
-  title?: string;
-  icon?: string;
-  meta?: Record<string, any>;
-  children: Array<MenuRoute>;
-}
+import { MenuRoute } from '@/interface';
 
 const getMenuList = (list: Array<MenuRoute>, basePath?: string): Array<any> => {
   if (!list) {
@@ -79,8 +72,7 @@ export default {
       });
     },
   },
-  render(): any {
-    const navs = this.renderNav(this.list);
-    return <div>{navs}</div>;
+  render() {
+    return <div>{this.renderNav(this.list)}</div>;
   },
 };

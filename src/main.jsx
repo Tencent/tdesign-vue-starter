@@ -6,7 +6,6 @@ import VueClipboard from 'vue-clipboard2';
 import axiosInstance from '@/utils/request';
 import App from './App.vue';
 import router from './router';
-import TDesignPageHeader from './components/page-header.vue';
 
 import '@/style/index.less';
 
@@ -17,7 +16,7 @@ Vue.use(VueRouter);
 Vue.use(TDesign);
 Vue.use(VueClipboard);
 
-Vue.component('t-page-header', TDesignPageHeader);
+Vue.component('t-page-header');
 
 Vue.prototype.$request = axiosInstance;
 

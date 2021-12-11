@@ -5,7 +5,7 @@
 import { getBrandColor } from '@/config/color';
 
 export default {
-  name: 'color',
+  name: 'Color',
   props: {
     value: {
       type: String,
