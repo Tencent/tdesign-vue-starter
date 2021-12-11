@@ -1,18 +1,19 @@
+import Vue from 'vue';
 import { prefix } from '@/config/global';
-import proSubMenu from './sub-menu';
-import tLogo from '../assets/assets-t-logo.svg';
-import tdLogoBlack from '../assets/assets-tdesign-logo-black.svg';
-import tdLogoWhite from '../assets/assets-tdesign-logo-white.svg';
-import pgk from '../../package.json';
 
-import '@/style/sidenav.less';
+import SubMenu from './SubMenu';
+import pgk from '../../../package.json';
+import tLogo from '@/assets/assets-t-logo.svg';
+import tLogoFull from '@/assets/assets-logo-full.svg';
 
 const MIN_POINT = 992 - 1;
 
-export default {
-  name: 'sidenav',
+export default Vue.extend({
+  name: 'sideNav',
   components: {
-    proSubMenu,
+    SubMenu,
+    tLogo,
+    tLogoFull,
   },
   props: {
     menu: Array,
@@ -61,7 +62,7 @@ export default {
     collapsed(): boolean {
       return this.$store.state.setting.isSidebarCompact;
     },
-    sidenavCls(): Array<ClassName> {
+    sideNavCls(): Array<ClassName> {
       return [
         `${this.prefix}-sidebar-layout`,
         {
@@ -71,23 +72,16 @@ export default {
     },
     menuCls(): Array<ClassName> {
       return [
-        `${this.prefix}-sidenav`,
+        `${this.prefix}-side-nav`,
         {
-          [`${this.prefix}-sidenav-no-logo`]: !this.showLogo,
-          [`${this.prefix}-sidenav-no-fixed`]: !this.isFixed,
-          [`${this.prefix}-sidenav-mix-fixed`]: this.layout === 'mix' && this.isFixed,
+          [`${this.prefix}-side-nav-no-logo`]: !this.showLogo,
+          [`${this.prefix}-side-nav-no-fixed`]: !this.isFixed,
+          [`${this.prefix}-side-nav-mix-fixed`]: this.layout === 'mix' && this.isFixed,
         },
       ];
     },
     layoutCls(): Array<ClassName> {
-      return [`${this.prefix}-sidenav-${this.layout}`, `${this.prefix}-sidebar-layout`];
-    },
-    tLogo(): string {
-      // return this.theme === 'dark' ? tLogow : tLogo;
-      return tLogo;
-    },
-    tdLogo(): string {
-      return this.theme === 'dark' ? tdLogoWhite : tdLogoBlack;
+      return [`${this.prefix}-side-nav-${this.layout}`, `${this.prefix}-sidebar-layout`];
     },
     active(): string {
       if (!this.$route.path) {
@@ -111,26 +105,24 @@ export default {
   },
   render() {
     return (
-      <div class={this.sidenavCls}>
+      <div class={this.sideNavCls}>
         <t-menu width="232px" class={this.menuCls} theme={this.theme} value={this.active} collapsed={this.collapsed}>
           {this.showLogo && (
-            <span slot="logo" class={`${this.prefix}-sidenav-logo-wrapper`}>
-              <tLogo class={`${this.prefix}-sidenav-logo-t-logo`} />
-              {!this.collapsed &&
-                (this.theme === 'dark' ? (
-                  <tdLogoWhite class={`${this.prefix}-sidenav-logo-tdesign-logo`} />
-                ) : (
-                  <tdLogoBlack class={`${this.prefix}-sidenav-logo-tdesign-logo`} />
-                ))}
+            <span slot="logo" class={`${prefix}-side-nav-logo-wrapper`}>
+              {this.collapsed ? (
+                <tLogo class={`${prefix}-side-nav-logo-t-logo`} />
+              ) : (
+                <t-logo-full class={`${prefix}-side-nav-logo-tdesign-logo`} />
+              )}
             </span>
           )}
-          <pro-sub-menu navData={this.menu}></pro-sub-menu>
-          <div slot="operations" class="version-container" onClick={this.changeCollapsed}>
+          <sub-menu navData={this.menu}></sub-menu>
+          <span slot="operations" class="version-container" onClick={this.changeCollapsed}>
             {!this.collapsed && 'TDesign Starter'} {pgk.version}
-          </div>
+          </span>
         </t-menu>
-        <div class={`${this.prefix}-sidenav-placeholder${this.collapsed ? '-hidden' : ''}`}></div>
+        <div class={`${prefix}-side-nav-placeholder${this.collapsed ? '-hidden' : ''}`}></div>
       </div>
     );
   },
-};
+});

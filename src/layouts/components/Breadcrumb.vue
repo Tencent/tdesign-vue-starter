@@ -1,16 +1,16 @@
 <template>
-  <t-breadcrumb :maxItemWidth="'150'" class="tdesign-breadcrumb">
-    <template v-for="item in crumbs">
-      <t-breadcrumbItem :key="item.to" :to="item.to">
-        {{ item.title }}
-      </t-breadcrumbItem>
-    </template>
+  <t-breadcrumb :max-item-width="'150'" class="tdesign-breadcrumb">
+    <t-breadcrumbItem v-for="item in crumbs" :key="item.to" :to="item.to">
+      {{ item.title }}
+    </t-breadcrumbItem>
   </t-breadcrumb>
 </template>
 
-<script>
-export default {
-  name: 'Tdesign-breadcrumb',
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
+  name: 'TdesignStarterBreadcrumb',
   props: {
     isVisible: Boolean,
   },
@@ -30,5 +30,10 @@ export default {
       return breadcrumbs;
     },
   },
-};
+});
 </script>
+<style scoped>
+.tdesign-breadcrumb {
+  margin-bottom: 8px;
+}
+</style>

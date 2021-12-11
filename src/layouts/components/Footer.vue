@@ -1,27 +1,25 @@
 <template>
-  <div :class="prefix + '-footer'">
-    <span> Copyright @ 2021-{{ new Date().getFullYear() }} Tencent. All Rights Reserved </span>
-  </div>
+  <div :class="prefix + '-footer'">Copyright @ 2021-{{ new Date().getFullYear() }} Tencent. All Rights Reserved</div>
 </template>
 
-<script>
+<script lang="ts">
 import { prefix } from '@/config/global';
+import Vue from 'vue';
 
-export default {
+export default Vue.extend({
   name: `${prefix}-footer`,
   data() {
     return {
       prefix,
     };
   },
-};
+});
 </script>
-
 <style lang="less" scoped>
-@import '@/style/index';
+@import '@/style/variables';
 
 .@{prefix}-footer {
-  color: rgba(0, 0, 0, .3);
+  color: @text-color-placeholder;
   line-height: 20px;
   text-align: center;
 }

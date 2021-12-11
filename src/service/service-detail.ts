@@ -6,7 +6,7 @@ interface DashboardPannel {
   downTrend?: string;
 }
 
-const PANE_LIST: Array<DashboardPannel> = [
+export const PANE_LIST_DATA: Array<DashboardPannel> = [
   {
     title: '总申请数（次）',
     number: '1126',
@@ -39,5 +39,19 @@ const PANE_LIST: Array<DashboardPannel> = [
     upTrend: '16%',
   },
 ];
-
-export default PANE_LIST;
+export const PRODUCT_LIST = [
+  {
+    description: 'SSL证书又叫服务器证书，腾讯云为您提供证书的一站式服务，包括免费、付费证书的申请、管理及部',
+    index: 1,
+    isSetup: true,
+    name: 'SSL证书',
+    type: 4,
+  },
+  {
+    description: 'SSL证书又叫服务器证书，腾讯云为您提供证书的一站式服务，包括免费、付费证书的申请、管理及部',
+    index: 1,
+    isSetup: true,
+    name: 'SSL证书',
+    type: 4,
+  },
+];

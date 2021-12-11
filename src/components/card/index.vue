@@ -1,25 +1,32 @@
 <template>
   <div :class="containerCls">
-    <div :class="titleCls">
+    <div v-if="title || $slots.title || $slots.option || subtitle || describe" :class="titleCls">
       <div :class="titleTextCls">
         {{ title }}
         <span v-if="describe" class="card-describe">{{ describe }}</span>
+        <span v-if="subtitle" class="card-subtitle">{{ subtitle }}</span>
       </div>
       <div class="card-option">
-        <slot name="option"></slot>
+        <slot name="option" />
       </div>
     </div>
     <div class="card-content">
-      <slot></slot>
+      <slot />
     </div>
     <div v-if="size !== 'small'" class="card-spacer__bottom"></div>
   </div>
 </template>
 <script lang="ts">
-export default {
-  name: 'card',
+import Vue from 'vue';
+
+export default Vue.extend({
+  name: 'Card',
   props: {
     title: String,
+    subtitle: {
+      type: String,
+      default: '',
+    },
     compact: {
       type: Boolean,
       default: false,
@@ -56,68 +63,73 @@ export default {
       ];
     },
   },
-};
+});
 </script>
 <style lang="less" scoped>
-@import url('@/style/index.less');
+@import '@/style/variables';
 
-.t-col > .card-container {
-  margin: 0;
+.main-color {
+  background: @brand-color;
+  color: @text-color-primary;
+
+  .card-subtitle {
+    color: @text-color-anti;
+  }
+
+  .dashboard-item-top span {
+    color: @text-color-anti;
+  }
+
+  .dashboard-item-block {
+    color: @text-color-anti;
+    opacity: .6;
+  }
+
+  .dashboard-item-bottom {
+    color: @text-color-anti;
+  }
 }
 
 .card {
 
   &-option {
-    flex: 1;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   &-container {
     padding: 24px 32px;
-    margin: 16px 0;
     background: @bg-color-container;
     border-radius: @border-radius;
     width: 100%;
     display: flex;
     flex-direction: column;
 
-    &.main-color {
-      background: @brand-color;
-
-      .card-describe {
-        color: #fff;
-      }
-    }
-
-    &--compact {
+    &-compact {
       padding: 16px 16px 0;
       margin-top: 24px;
       margin-bottom: 16px;
     }
 
     &--border {
-      border: 1px solid #ebebeb;
+      border: solid 1px @component-border;
     }
   }
 
   &-title {
     display: flex;
     justify-content: space-between;
-    font-family: PingFangSC-Regular;
+    font-size: 20px;
+    line-height: 24px;
     font-weight: 500;
     color: @text-color-primary;
 
     &--small {
-      font-size: 14px;
-      line-height: 22px;
       margin-bottom: 8px;
     }
 
     &--default {
-      font-size: 20px;
-      line-height: 28px;
       margin-bottom: 24px;
     }
 
@@ -126,14 +138,30 @@ export default {
 
       &--default {
         margin: @spacer 0;
+        color: @text-color-primary;
       }
+    }
+
+    &-text-small {
+      display: inline-block;
+      width: 100%;
     }
   }
 
   &-describe {
     font-size: 14px;
+    color: @brand-color;
+    color: @text-color-placeholder;
+    line-height: 22px;
+    margin-left: 4px;
+  }
+
+  &-subtitle {
+    font-size: 14px;
+    color: @brand-color;
     color: @text-color-secondary;
     line-height: 22px;
+    margin-left: 4px;
   }
 
   &-content {
@@ -143,7 +171,7 @@ export default {
     flex: 1;
   }
 
-  &-spacer__bottom {
+  &-spacer-bottom {
     height: @spacer;
   }
 }

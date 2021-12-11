@@ -1,0 +1,50 @@
+@import '@/style/variables.less';
+
+.form-basic-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: @bg-color-container;
+  padding-bottom: 134px;
+
+  .form-basic-item {
+    width: 676px;
+
+    .form-basic-container-title {
+      font-size: 20px;
+      line-height: 24px;
+      color: @text-color-primary;
+      margin: 64px 0 32px;
+    }
+  }
+}
+
+.form-submit-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 30px;
+  padding-bottom: 28px;
+  background-color: @bg-color-component;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+
+  .form-submit-sub {
+    width: 676px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .form-submit-left {
+
+      .form-submit-upload-span {
+        font-size: 14px;
+        line-height: 22px;
+        color: @text-color-placeholder;
+        padding-top: 8px;
+        display: inline-block;
+      }
+    }
+  }
+}

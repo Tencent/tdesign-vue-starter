@@ -2,7 +2,7 @@
   <span :class="containerCls">
     <span :class="iconCls">
       <svg
-        v-if="type === 'up'"
+        v-if="type === 'down'"
         width="16"
         height="16"
         viewBox="0 0 16 16"
@@ -21,8 +21,10 @@
   </span>
 </template>
 <script>
-export default {
-  name: 'trend',
+import Vue from 'vue';
+
+export default Vue.extend({
+  name: 'Trend',
 
   props: {
     type: String,
@@ -44,40 +46,42 @@ export default {
       return ['trend-icon-container'];
     },
   },
-};
+});
 </script>
 
 <style lang="less" scoped>
 @import '@/style/variables.less';
 
 .trend {
+
   &-container {
+
     &__up {
-      color: #e34d59 !important;
+      color: @error-color;
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
       .trend-icon-container {
-        background: #f9d7d9;
+        background: @error-color-2;
         margin-right: 8px;
       }
     }
 
     &__down {
-      color: #00a870 !important;
+      color: @success-color;
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
       .trend-icon-container {
-        background: #bcebdc;
+        background: @success-color-2;
         margin-right: 8px;
       }
     }
 
     &__reverse {
-      color: #ffffff !important;
+      color: #ffffff;
       display: inline-flex;
       align-items: center;
       justify-content: center;

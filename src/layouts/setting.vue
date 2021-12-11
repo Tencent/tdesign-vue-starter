@@ -82,7 +82,7 @@
 import { mapGetters } from 'vuex';
 import STYLE_CONFIG from '@/config/style';
 import Thumbnail from '@/components/thumbnail/index.vue';
-import ColorContainer from '@/components/color.vue';
+import ColorContainer from '@/components/color/index.vue';
 
 export default {
   name: 'DefaultLayoutSetting',
@@ -157,18 +157,18 @@ export default {
 };
 </script>
 <style lang="less">
-@import '@/style/index.less';
+@import '@/style/variables.less';
 
 .tdesign-setting {
   z-index: 100;
   position: fixed;
   bottom: 200px;
   right: 0;
-  transition: transform .3s cubic-bezier(.7, .3, .1, 1), visibility .3s cubic-bezier(.7, .3, .1, 1);
+  transition: transform 0.3s cubic-bezier(0.7, 0.3, 0.1, 1), visibility 0.3s cubic-bezier(0.7, 0.3, 0.1, 1);
   height: 40px;
   width: 40px;
   border-radius: 20px 0 0 20px;
-  transition: all .3s;
+  transition: all 0.3s;
 
   .t-icon {
     margin-left: 8px;
@@ -240,7 +240,6 @@ export default {
 }
 
 .setting-drawer-container {
-
   .setting-container {
     padding-bottom: 100px;
   }
@@ -290,7 +289,6 @@ export default {
 }
 
 .setting-route-theme {
-
   .t-form__label {
     min-width: 310px !important;
     color: @text-color-secondary;
@@ -298,9 +296,7 @@ export default {
 }
 
 .setting-color-theme {
-
   .setting-layout-drawer {
-
     .t-radio-button {
       height: 32px;
     }
