@@ -29,7 +29,7 @@
         </card>
 
         <card class="content-container">
-          <t-tabs value="second">
+          <t-tabs default-value="second">
             <t-tab-panel value="first" label="内容列表">
               <p>内容列表</p>
             </t-tab-panel>
@@ -37,7 +37,7 @@
               <card class="card-padding-no" title="主页访问数据" describe="（次）">
                 <template #options>
                   <t-date-picker
-                    class="card-date-picker-container"
+                    class="time-picker"
                     :default-value="LAST_7_DAYS"
                     theme="primary"
                     mode="date"
@@ -96,12 +96,11 @@ import { prefix } from '@/config/global';
 
 import { LAST_7_DAYS } from '@/utils/date.ts';
 import * as echarts from 'echarts/core';
-import { mapState } from 'vuex';
 
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
-import { changeChartsTheme, getFolderLineDataSet } from '@/pages/dashboard/base/index';
+import { getFolderlineDataSet } from '@/pages/dashboard/base/index';
 
 import { USER_INFO_LIST, TEAM_MEMBERS, PRODUCT_LIST } from '@/service/service-user';
 
@@ -125,15 +124,6 @@ export default {
       PRODUCT_LIST,
     };
   },
-  computed: {
-    ...mapState('setting', ['brandTheme']),
-  },
-  watch: {
-    brandTheme() {
-      console.log(123);
-      changeChartsTheme([this.lineChart]);
-    },
-  },
   mounted() {
     if (!this.lineContainer) {
       this.lineContainer = document.getElementById('lineContainer');
@@ -146,7 +136,7 @@ export default {
         x2: 10, // 默认80px
         y2: 30, // 默认60px
       },
-      ...getFolderLineDataSet(),
+      ...getFolderlineDataSet(),
     });
 
     window.addEventListener('resize', this.updateContainer, false);
@@ -154,7 +144,7 @@ export default {
   methods: {
     /** 图表选择 */
     onLineChange(value) {
-      this.lineChart.setOption(getFolderLineDataSet(value));
+      this.lineChart.setOption(getFolderlineDataSet(value));
     },
     updateContainer() {
       this.lineChart.resize({

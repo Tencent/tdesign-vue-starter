@@ -88,8 +88,8 @@ export function getRandomArray(num = 100): number {
   return resultNum;
 }
 
-/** 首页 dashboard 折线图 */
-export function constructInitDashboardDataset(type: string) {
+/** 首页 dashbord 折线图 */
+export function constructInitDashbordDataset(type: string) {
   const dateArray: Array<string> = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
   const datasetAxis = {
     xAxis: {
@@ -366,7 +366,7 @@ export function getSmoothLineDataSet(dateTime: any = []): any {
 }
 
 /** 折线图数据 */
-export function getFolderLineDataSet(dateTime: any = []): any {
+export function getFolderlineDataSet(dateTime: any = []): any {
   let dateArray: Array<string> = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
   if (dateTime.length > 0) {
     const devideNum = 7;
@@ -658,7 +658,7 @@ export function getSelftItemList(productName: string, devideNum: number): string
  * @export
  * @returns {any[]}
  */
-export function getScatterDataSet(dateTime: Array<string> = []): any {
+export function getScattlerDataSet(dateTime: Array<string> = []): any {
   const divideNum = 10;
   const timeArray = [];
   const inArray = [];
