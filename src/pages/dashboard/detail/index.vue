@@ -72,7 +72,7 @@ import { LAST_7_DAYS } from '@/utils/date';
 
 import ProductCard from '@/pages/list/card/components/compoonent-card.vue';
 import { PANE_LIST_DATA, PRODUCT_LIST } from '@/service/service-detail';
-import { changeChartsTheme, getFolderLineDataSet, getScatterDataSet } from '../base';
+import { changeChartsTheme, getFolderlineDataSet, getScattlerDataSet } from '../base';
 
 echarts.use([GridComponent, LegendComponent, TooltipComponent, LineChart, ScatterChart, CanvasRenderer]);
 
@@ -113,7 +113,7 @@ export default {
       this.lineContainer = document.getElementById('lineContainer');
     }
     this.lineChart = echarts.init(this.lineContainer);
-    this.lineChart.setOption(getFolderLineDataSet());
+    this.lineChart.setOption(getFolderlineDataSet());
 
     window.addEventListener('resize', this.updateContainer, false);
 
@@ -121,16 +121,16 @@ export default {
       this.scatterContainer = document.getElementById('scatterContainer');
     }
     this.scatterChart = echarts.init(this.scatterContainer);
-    this.scatterChart.setOption(getScatterDataSet());
+    this.scatterChart.setOption(getScattlerDataSet());
   },
   methods: {
     /** 采购商品满意度选择 */
     onHappinesChange(value) {
-      this.scatterChart.setOption(getScatterDataSet(value));
+      this.scatterChart.setOption(getScattlerDataSet(value));
     },
     /** 采购商品申请趋势选择 */
     onMaterialChange(value) {
-      this.lineChart.setOption(getFolderLineDataSet(value));
+      this.lineChart.setOption(getFolderlineDataSet(value));
     },
     updateContainer() {
       this.lineChart.resize({

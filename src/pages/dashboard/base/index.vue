@@ -217,7 +217,7 @@ import {
   constructInitDataset,
   getPieChartDataSet,
   getLineChartDataSet,
-  constructInitDashboardDataset,
+  constructInitDashbordDataset,
 } from './index';
 import { PANE_LIST, SALE_TEND_LIST, BUY_TEND_LIST, SALE_COLUMNS, BUY_COLUMNS } from '@/service/service-base';
 
@@ -262,14 +262,14 @@ export default {
       this.moneyContainer = document.getElementById('moneyContainer');
     }
     this.moneyCharts = echarts.init(this.moneyContainer);
-    this.moneyCharts.setOption(constructInitDashboardDataset('line'));
+    this.moneyCharts.setOption(constructInitDashbordDataset('line'));
 
     // 退款图
     if (!this.incomeContainer) {
       this.incomeContainer = document.getElementById('refundContainer');
     }
     this.incomeCharts = echarts.init(this.incomeContainer);
-    this.incomeCharts.setOption(constructInitDashboardDataset('bar'));
+    this.incomeCharts.setOption(constructInitDashbordDataset('bar'));
 
     // 出入库概览
     if (!this.dataContainer) {
@@ -399,7 +399,7 @@ export default {
 
   .dashboard-item-block {
     color: @text-color-anti;
-    opacity: .6;
+    opacity: 0.6;
   }
 
   .dashboard-item-bottom {
