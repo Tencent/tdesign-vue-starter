@@ -157,7 +157,7 @@ export default Vue.extend({
       this.$router.push(url);
     },
     navToGitHub() {
-      window.open('https://github.com/TDesignOteam/tdesign-vue-starter');
+      window.open('https://github.com/Tencent/tdesign-vue-starter');
     },
     navToHelper() {
       window.open('http://tdesign.tencent.com/starter/get-started.html');
