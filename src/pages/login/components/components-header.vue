@@ -22,7 +22,7 @@ export default {
   components: { LogoFullIcon },
   methods: {
     navToGitHub() {
-      window.open('https://github.com/TDesignOteam/tdesign-vue-starter');
+      window.open('https://github.com/Tencent/tdesign-vue-starter');
     },
     navToHelper() {
       window.open('https://tdesign.tencent.com/starter/get-started.html');
