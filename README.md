@@ -14,29 +14,6 @@
 
 TDesign Starter 基于 TDesign UI 组件，旨在提供项目开箱即用的、配置式的并且拥有开发体验和设计感的中后台的项目。
 
-- 设计美学
-  - 基于 TDesign UI 设计规范
-  - 提供 Figma、 Sketch、 Adobe XD、 Axure 等多种类型的设计资源
-  - 在开源体系上打造具有自身品牌特色且好用的产品
-    <br/>
-- 完备路由
-  - 同时支持配置式路由和自定义路由
-  - 对于配置型路由，提供导航类组件的深度定制（“菜单 Menu”、“面包屑 Breadcrumb”），无需手动处理路由映射关系。
-    <br/>
-- 动态布局:
-  - 内置“左右布局”、“上左右布局”、“上下布局”等中后台常用布局，
-  - 页面内容基于 24 栅格布局设计，内置“常规型”和“紧凑型”两种间距模式
-    <br/>
-- 极速 HRM:
-  - 采用 `Vite` 构建
-  - 开发环境下体验浏览器 esmodule bundless, 达到极速更新，无需等待漫长的 bundle 过程
-    <br/>
-- 开发理念:
-  - 统一规范会减少沟通成本，提高开发和维护的体验；
-  - 提交规范采用 `Angular commit 规范`
-  - 同时推荐采用 `vscode` 开发
-    <br/>
-
 ## 快速开始
 
 通过 `tdesign-starter-cli `初始化项目仓库
@@ -49,7 +26,7 @@ npm i tdesign-starter-cli@latest -g
 td-starter init
 ```
 
-<img src="./docs/td.jpg" width="800">
+<img src="./docs/docs-startup.png" width="800">
 
 <br/>
 
@@ -84,7 +61,7 @@ npm run lint:fix
 
 ## 目录结构
 
-<img src="./docs/20210627-114325.png" width="800">
+<img src="./docs/docs-structure.png" width="800">
 <br/>
 
 ```bash
@@ -206,14 +183,6 @@ viteMockServe({
 
 ## 分支规范
 
-## 类、接口命名规范
-
-1.类名全部使用大写驼峰，同时命名跟回文件命名
-
-2.接口命名以大写 I 开头，代表 interface
-
-## 分支规范
-
 - 主干分支 -- `develop`
 - 功能分支 -- `feature`
 - 修复分支 -- `hotfix`
@@ -230,14 +199,6 @@ viteMockServe({
 ## 开发联调
 
 前端本地与后台开发联调，详见[文档](./PROXY.md)
-
-## 社区插件
-
-| 名称                                                      | 简介                |
-| --------------------------------------------------------- | ------------------- |
-| [qrcode.vue](https://github.com/scopewu/qrcode.vue)       | vue2 二维码预览工具 |
-| [vue-clipboard2](https://github.com/Inndy/vue-clipboard2) | 剪切板功能          |
-| [nprogress](https://github.com/rstacruz/nprogress)        | 应用加载进度条      |
 
 ## 兼容性
 
