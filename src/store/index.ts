@@ -7,7 +7,7 @@ import notification from './modules/notification';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  strict: import.meta.env !== 'production',
+  strict: import.meta.env.MODE === 'release',
   modules: {
     user,
     setting,

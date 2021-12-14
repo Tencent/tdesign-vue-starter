@@ -33,7 +33,6 @@ export default Vue.extend({
 @import url('@/style/index.less');
 
 .thumbnail {
-
   &-container {
     display: inline-block;
   }

@@ -1,9 +1,9 @@
 <template>
   <div>
     <t-drawer
-      size="458px"
+      size="408px"
       :footer="false"
-      :visible.sync="showSettingPannel"
+      :visible.sync="showSettingPanel"
       value="medium"
       header="页面配置"
       :closeBtn="true"
@@ -13,29 +13,37 @@
       <div class="setting-container">
         <t-form :data="formData" size="large" ref="form" labelAlign="left" @reset="onReset" @submit="onSubmit">
           <div class="setting-group-title">主题模式</div>
-          <t-radio-group v-model="formData.mode" defaultVaule="dark">
+          <t-radio-group v-model="formData.mode">
             <div v-for="(item, index) in modeOption" :key="index" class="setting-layout-drawer">
-              <t-radio-button :key="index" :value="item"><thumbnail :src="getThumbnailUrl(item)" /></t-radio-button>
+              <div>
+                <t-radio-button :key="index" :value="item.type"
+                  ><thumbnail :src="getThumbnailUrl(item.type)"
+                /></t-radio-button>
+                <p :style="{ textAlign: 'center', marginTop: '8px' }">{{ item.text }}</p>
+              </div>
             </div>
           </t-radio-group>
           <div class="setting-group-title">主题色</div>
-          <t-radio-group v-model="formData.brandTheme" defaultVaule="default">
+          <t-radio-group v-model="formData.brandTheme">
             <div v-for="(item, index) in colorOption" :key="index" class="setting-layout-drawer">
               <t-radio-button :key="index" :value="item" class="setting-layout-color-group"
                 ><color-container :value="item" />
               </t-radio-button>
             </div>
           </t-radio-group>
+          <div class="setting-group-color">
+            <color-picker v-model="colors" v-if="formData.brandTheme === 'dynamic'"></color-picker>
+          </div>
           <div class="setting-group-title">导航布局</div>
 
-          <t-radio-group v-model="formData.layout" defaultVaule="top">
+          <t-radio-group v-model="formData.layout">
             <div v-for="(item, index) in layoutOption" :key="index" class="setting-layout-drawer">
               <t-radio-button :key="index" :value="item"><thumbnail :src="getThumbnailUrl(item)" /></t-radio-button>
             </div>
           </t-radio-group>
 
           <!-- <t-form-item label="导航风格" name="theme" class="setting-route-theme">
-              <t-radio-group v-model="formData.theme" defaultVaule="light" variant="default-filled" size="small">
+              <t-radio-group v-model="formData.theme" defaultValue="light" variant="default-filled" size="small">
                 <t-radio-button value="light">明亮</t-radio-button>
                 <t-radio-button value="dark">暗黑</t-radio-button>
               </t-radio-group>
@@ -78,32 +86,43 @@
     </t-drawer>
   </div>
 </template>
-<script>
+<script lang="ts">
 import { mapGetters } from 'vuex';
+import { Color } from 'tvision-color';
+import { Sketch } from 'vue-color';
+
 import STYLE_CONFIG from '@/config/style';
+import { insertThemeStylesheet } from '@/config/color';
 import Thumbnail from '@/components/thumbnail/index.vue';
 import ColorContainer from '@/components/color/index.vue';
 
 export default {
   name: 'DefaultLayoutSetting',
-  components: { Thumbnail, ColorContainer },
+  components: { Thumbnail, ColorContainer, 'color-picker': Sketch },
   data() {
     return {
-      modeOption: ['light', 'dark', 'auto'],
+      colors: {
+        hex: null,
+      },
+      modeOption: [
+        { type: 'light', text: '明亮' },
+        { type: 'dark', text: '暗黑' },
+        { type: 'auto', text: '跟随系统' },
+      ],
       layoutOption: ['side', 'top', 'mix'],
-      colorOption: ['default', 'purple', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink'],
+      colorOption: ['default', 'purple', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'dynamic'],
       visible: false,
       formData: { ...STYLE_CONFIG },
     };
   },
   computed: {
     ...mapGetters('setting', ['showSettingBtn']),
-    showSettingPannel: {
+    showSettingPanel: {
       get() {
-        return this.$store.state.setting.showSettingPannel;
+        return this.$store.state.setting.showSettingPanel;
       },
       set(newVal) {
-        this.$store.commit('setting/toggleSettingPannel', newVal);
+        this.$store.commit('setting/toggleSettingPanel', newVal);
       },
     },
     iconName() {
@@ -120,15 +139,46 @@ export default {
       },
       deep: true,
     },
+    colors: {
+      handler(newColor) {
+        const { hex } = newColor;
+        // hex 主题色
+        const newPalette = Color.getPaletteByGradation({
+          colors: [hex],
+          step: 10,
+        })[0];
+        const hexIdx = newPalette.indexOf(hex);
+        const colorMap = {
+          '@brand-color': hex, // 主题色
+          '@brand-color-1': newPalette[0], // light
+          '@brand-color-2': newPalette[1], // focus
+          '@brand-color-3': newPalette[2], // disabled
+          '@brand-color-4': newPalette[3],
+          '@brand-color-5': newPalette[4],
+          '@brand-color-6': newPalette[5],
+          '@brand-color-7': hexIdx > 0 ? newPalette[hexIdx - 1] : hex, // hover
+          '@brand-color-8': hex, // 主题色
+          '@brand-color-9': hexIdx > 8 ? hex : newPalette[hexIdx + 1], // click
+          '@brand-color-10': newPalette[9],
+        };
+        console.log(colorMap, 'colorMap');
+        if (!this.$store.state.setting.colorList?.[hex]) {
+          this.$store.commit('setting/addColor', { [hex]: colorMap });
+        }
+        insertThemeStylesheet(hex, colorMap);
+
+        this.$store.dispatch('setting/changeTheme', { ...this.formData, brandTheme: hex });
+      },
+    },
   },
   methods: {
-    onReset() {
+    onReset(): void {
       this.formData = {
         ...STYLE_CONFIG,
       };
       this.$message.success('已恢复初始设置');
     },
-    onSubmit({ result, firstError, e }) {
+    onSubmit({ result, firstError, e }): void {
       e.preventDefault();
       if (result === true) {
         this.visible = false;
@@ -136,17 +186,17 @@ export default {
         this.$message.warning(firstError);
       }
     },
-    getThumbnailUrl(name) {
+    getThumbnailUrl(name: string) {
       return `https://tdesign.gtimg.com/starter/setting/${name}.png`;
     },
-    handleClick() {
-      this.$store.commit('setting/toggleSettingPannel', true);
+    handleClick(): void {
+      this.$store.commit('setting/toggleSettingPanel', true);
       // this.visible = !this.visible;
     },
-    handleCloseDrawer() {
-      this.$store.commit('setting/toggleSettingPannel', false);
+    handleCloseDrawer(): void {
+      this.$store.commit('setting/toggleSettingPanel', false);
     },
-    handleCopy() {
+    handleCopy(): void {
       const text = JSON.stringify(this.formData, null, 4);
       this.$copyText(text).then(() => {
         this.$message.closeAll();
@@ -190,12 +240,12 @@ export default {
 
 .setting-layout-color-group {
   display: inline-flex;
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   justify-content: center;
   align-items: center;
   border-radius: 50% !important;
-
+  padding: 6px !important;
   border: 2px solid transparent !important;
 
   > .t-radio-button__label {
@@ -218,6 +268,16 @@ export default {
   font-style: normal;
   font-weight: 500;
   color: @text-color-primary;
+}
+
+.setting-group-color {
+  position: relative;
+
+  > div {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+  }
 }
 
 .setting-link {
@@ -261,7 +321,7 @@ export default {
     .t-radio-button {
       display: inline-flex;
       max-height: 78px;
-      padding: 6px !important;
+      padding: 6px;
       border-radius: @border-radius;
       border: 2px solid #e3e6eb;
 

@@ -1,11 +1,12 @@
-import routeConfig from '@/config/routes.js';
 import VueRouter from 'vue-router';
+import routeConfig from '@/config/routes.js';
 
 const layoutModules = import.meta.glob('../layouts/*');
 const pagesModules = import.meta.glob('../pages/**/*.vue');
 const fristPagesModules = import.meta.glob('../pages/*.vue');
 
 const modules = { ...layoutModules, ...fristPagesModules, ...pagesModules };
+
 const getMenuRoutes = (list) => {
   if (!list) {
     return [];

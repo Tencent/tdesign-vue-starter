@@ -28,8 +28,44 @@ export default {
       window.open('https://tdesign.tencent.com/starter/get-started.html');
     },
     toggleSettingPanel() {
-      this.$store.commit('setting/toggleSettingPannel', true);
+      this.$store.commit('setting/toggleSettingPanel', true);
     },
   },
 };
 </script>
+<style lang="less" scoped>
+@import '@/style/variables.less';
+.login-header {
+  height: 64px;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  color: @text-color-primary;
+
+  .logo {
+    width: 188px;
+    height: 64px;
+  }
+
+  .operations-container {
+    display: flex;
+    align-items: center;
+    .t-button {
+      margin-left: 16px;
+    }
+
+    .icon {
+      height: 20px;
+      width: 20px;
+      padding: 6px;
+      box-sizing: content-box;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+</style>

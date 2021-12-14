@@ -36,7 +36,7 @@
         <template #adminName="{ row }">
           <span>
             {{ row.adminName }}
-            <t-tag v-if="row.adminPhone" size="small" style="color: rgba(0, 0, 0, .4)">{{ row.adminPhone }}</t-tag>
+            <t-tag v-if="row.adminPhone" size="small" style="color: rgba(0, 0, 0, 0.4)">{{ row.adminPhone }}</t-tag>
           </span>
         </template>
         <template #op="slotProps">
@@ -121,8 +121,6 @@ export default {
   watch: {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     brandTheme(val): void {
-      // console.log('brand change', val);
-      // changeChartsTheme([this.areaChart, this.columnChart], val);
       this.areaChart.setOption(getSmoothLineDataSet());
       this.columnChart.setOption(get2ColBarChartDataSet());
     },

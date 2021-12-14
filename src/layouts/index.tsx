@@ -1,9 +1,10 @@
 import Vue, { VNode } from 'vue';
 import { mapGetters } from 'vuex';
-import TdesignHeader from './header/index.vue';
+import TdesignHeader from './components/Header.vue';
 import TdesignBreadcrumb from './components/Breadcrumb.vue';
 import TdesignFooter from './components/Footer.vue';
 import TdesignSideNav from './components/SideNav';
+import TdesignContent from './components/Content.vue';
 
 import { prefix } from '@/config/global';
 import TdesignSetting from './setting.vue';
@@ -104,10 +105,10 @@ export default Vue.extend({
       const { showBreadcrumb } = this.setting;
       const { prefix, showAsideFooter } = this;
       return (
-        <t-layout>
+        <t-layout class={[`${prefix}-layout`, 'narrow-scrollbar']}>
           <t-content class={`${prefix}-content-layout`}>
             {showBreadcrumb && <tdesign-breadcrumb />}
-            <router-view class={`${prefix}-default-layout`} />
+            <TdesignContent />
           </t-content>
           {showAsideFooter && this.renderFooter()}
         </t-layout>

@@ -133,7 +133,7 @@ export default {
       color: @brand-color;
 
       &__disabled {
-        color: @text-color-disabled;
+        color: @brand-color-3;
       }
     }
 

@@ -1,18 +1,8 @@
 <template>
   <div class="tdesign-wrapper">
     <router-view />
-    <tdesign-setting />
   </div>
 </template>
-<script>
-import TdesignSetting from './setting.vue';
-
-export default {
-  components: {
-    TdesignSetting,
-  },
-};
-</script>
 <style lang="less" scoped>
 .tdesign-wrapper {
   height: 100vh;

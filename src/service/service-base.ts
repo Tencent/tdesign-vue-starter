@@ -1,6 +1,6 @@
 import { TdBaseTableProps } from 'tdesign-vue';
 
-interface DashboardPannel {
+interface DashboardPanel {
   title: string;
   number: string | number;
   leftType: string;
@@ -15,7 +15,7 @@ interface TendItem {
   date: string;
 }
 
-export const PANE_LIST: Array<DashboardPannel> = [
+export const PANE_LIST: Array<DashboardPanel> = [
   {
     title: '总收入',
     number: '¥ 28,425.00',
@@ -126,13 +126,14 @@ export const SALE_COLUMNS: TdBaseTableProps['columns'] = [
     colKey: 'index',
     title: '排名',
     width: 80,
+    fixed: 'left',
   },
   {
     align: 'left',
     ellipsis: true,
     colKey: 'productName',
     title: '客户名称',
-    width: 276,
+    minWidth: 200,
   },
   {
     align: 'center',
@@ -149,14 +150,15 @@ export const SALE_COLUMNS: TdBaseTableProps['columns'] = [
   {
     align: 'center',
     colKey: 'date',
-    width: 132,
+    width: 140,
     title: '合同签订日期',
   },
   {
     align: 'center',
     colKey: 'operation',
     title: '操作',
-    width: 76,
+    width: 80,
+    fixed: 'right',
   },
 ];
 
@@ -166,13 +168,14 @@ export const BUY_COLUMNS: TdBaseTableProps['columns'] = [
     colKey: 'index',
     title: '排名',
     width: 80,
+    fixed: 'left',
   },
   {
     align: 'left',
     ellipsis: true,
     colKey: 'productName',
     title: '供应商名称',
-    width: 276,
+    minWidth: 200,
   },
   {
     align: 'center',
@@ -184,18 +187,19 @@ export const BUY_COLUMNS: TdBaseTableProps['columns'] = [
     align: 'center',
     colKey: 'count',
     title: '订单量',
-    width: '100',
+    width: 100,
   },
   {
     align: 'center',
     colKey: 'date',
-    width: 132,
+    width: 140,
     title: '合同签订日期',
   },
   {
     align: 'center',
     colKey: 'operation',
     title: '操作',
-    width: 76,
+    width: 80,
+    fixed: 'right',
   },
 ];

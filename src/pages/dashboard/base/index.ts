@@ -9,21 +9,21 @@ const { state } = store;
  *
  * @export
  * @param {string} theme
- * @returns {any[]}
+ * @returns {string[]}
  */
-export function getColorFromTheme(theme: string): any[] {
-  const themeColor: any = getBrandColor(theme);
-  const themeColorList: Array<any> = [];
+export function getColorFromTheme(theme: string): Array<string> {
+  const { setting } = state;
+  const themeColor = getBrandColor(theme, setting.colorList);
+  const themeColorList: Array<string> = [];
 
   // eslint-disable-next-line no-restricted-syntax
   for (const key in themeColor) {
     if (Object.prototype.hasOwnProperty.call(themeColor, key)) {
-      const elementColor: any = themeColor[key];
+      const elementColor: string = themeColor[key];
 
       themeColorList.push(elementColor);
     }
   }
-
   return themeColorList;
 }
 
@@ -31,8 +31,8 @@ export function getColorFromTheme(theme: string): any[] {
 function chartListColor(): Array<string> {
   const colorList: Array<string> = ['#0052D9', '#BCC4D0', '#7D46BD', '#0594FA', '#ED7B2F'];
   const { setting } = state;
-
-  return getColorFromTheme(setting.brandTheme) || colorList;
+  const res = getColorFromTheme(setting.brandTheme) || colorList;
+  return res;
 }
 
 /**
@@ -202,9 +202,6 @@ export function constructInitDataset(dateTime: Array<string> = []) {
     inArray.push(getRandomArray().toString());
     outArray.push(getRandomArray().toString());
   }
-
-  // console.log('timeArray..', timeArray);
-
   const dataset = {
     color: chartListColor(),
     tooltip: {
@@ -259,11 +256,6 @@ export function constructInitDataset(dateTime: Array<string> = []) {
         name: '上月',
         data: inArray,
         type: 'bar',
-        itemStyle: {
-          normal: {
-            color: chartListColor()[1],
-          },
-        },
       },
     ],
   };
@@ -339,7 +331,7 @@ export function getSmoothLineDataSet(dateTime: any = []): any {
         symbolSize: 8,
         areaStyle: {
           normal: {
-            color: '#0053D92F',
+            opacity: 0.1,
           },
         },
       },
@@ -372,7 +364,6 @@ export function getFolderLineDataSet(dateTime: any = []): any {
     const devideNum = 7;
     dateArray = getDateArray(dateTime, devideNum);
   }
-
   return {
     color: chartListColor(),
     grid: {
@@ -515,14 +506,11 @@ export function getFolderLineDataSet(dateTime: any = []): any {
  * @returns {*}
  */
 export function getLineChartDataSet(dateTime: Array<string> = []): any {
-  // console.log('dateTime...', dateTime);
-  // const dataset: Array<Array<string>> = [['时间'], ['入库'], ['出库']];
   const divideNum = 10;
   const timeArray = [];
   const inArray = [];
   const outArray = [];
   for (let i = 0; i < divideNum; i++) {
-    // const [timeArray, inArray, outArray] = dataset;
     if (dateTime.length > 0) {
       const dateAbsTime: number = (new Date(dateTime[1]).getTime() - new Date(dateTime[0]).getTime()) / divideNum;
       const enhandTime: number = new Date(dateTime[0]).getTime() + dateAbsTime * i;
@@ -596,14 +584,10 @@ export function getLineChartDataSet(dateTime: Array<string> = []): any {
             borderColor: '#ffffff',
             borderWidth: 1,
           },
-          // hover color
-          // emphasis: {
-          //   color: '#000000'
-          // }
         },
         areaStyle: {
           normal: {
-            color: '#0053D92F',
+            opacity: 0.1,
           },
         },
       },
@@ -618,21 +602,12 @@ export function getLineChartDataSet(dateTime: Array<string> = []): any {
         itemStyle: {
           normal: {
             borderColor: '#ffffff',
-            color: '#BCC4D0',
-            lineStyle: {
-              color: '#BCC4D0',
-            },
             borderWidth: 1,
           },
-          // hover color
-          // emphasis: {
-          //   color: '#000000'
-          // }
         },
       },
     ],
   };
-  // console.log('getLineChartDataSet..', dataSet);
   return dataSet;
 }
 
@@ -1127,7 +1102,6 @@ export function getPieChartDataSet(radius = 42) {
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function changeChartsTheme(chartsList: Array<any>, theme: string): void {
-  // console.log('change color list', chartsList, theme);
   if (chartsList && chartsList.length) {
     const chartChangeColor = chartListColor();
 
@@ -1139,8 +1113,7 @@ export function changeChartsTheme(chartsList: Array<any>, theme: string): void {
 
         // 更改主题颜色
         optionVal.color = chartChangeColor;
-
-        elementChart.setOption(optionVal);
+        elementChart.setOption(optionVal, true);
       }
     }
   }
