@@ -96,9 +96,11 @@
               </t-radio-group>
             </div>
             <t-table :data="saleTendList" :columns="saleColumns" rowKey="productName" :style="{ overflow: 'scroll' }">
-              <span slot="index" :class="getRankClass(rowIndex)" slot-scope="{ rowIndex }">
-                {{ rowIndex + 1 }}
-              </span>
+              <template #index="{ rowIndex }">
+                <span :class="getRankClass(rowIndex)">
+                  {{ rowIndex + 1 }}
+                </span>
+              </template>
               <span slot="growUp" slot-scope="{ row }">
                 <trend :type="row.growUp > 0 ? 'up' : 'down'" :describe="Math.abs(row.growUp)" />
               </span>
@@ -117,9 +119,11 @@
               </t-radio-group>
             </div>
             <t-table :data="buyTendList" :columns="buyColumns" rowKey="productName" :style="{ overflow: 'scroll' }">
-              <span slot="index" :class="getRankClass(rowIndex)" slot-scope="{ rowIndex }">
-                {{ Number(rowIndex) + 1 }}
-              </span>
+              <template #index="{ rowIndex }">
+                <span :class="getRankClass(rowIndex)">
+                  {{ rowIndex + 1 }}
+                </span>
+              </template>
               <span slot="growUp" slot-scope="{ row }">
                 <trend :type="row.growUp > 0 ? 'up' : 'down'" :describe="Math.abs(row.growUp)" />
               </span>
@@ -143,7 +147,7 @@
                   mode="date"
                   range
                   :default-value="LAST_7_DAYS"
-                  @change="onWharehouseChange"
+                  @change="onWarehouseChange"
                 />
               </template>
               <div
@@ -256,6 +260,7 @@ export default {
     this.$nextTick(() => {
       this.updateContainer();
     });
+
     window.addEventListener('resize', this.updateContainer, false);
     // 收入汇总图
     if (!this.moneyContainer) {
@@ -324,7 +329,7 @@ export default {
       this.lineChartItem.setOption(getLineChartDataSet(checkedValues));
     },
     /** 出入库概览日期更新 */
-    onWharehouseChange(checkedValues) {
+    onWarehouseChange(checkedValues) {
       this.charts.setOption(constructInitDataset(checkedValues));
     },
     go(link) {
@@ -373,7 +378,7 @@ export default {
     },
 
     getRankClass(index) {
-      return ['dashbord-rank', { 'dashbord-rank__top': index < 3 }];
+      return ['dashboard-rank', { 'dashboard-rank__top': index < 3 }];
     },
   },
 };
@@ -399,7 +404,7 @@ export default {
 
   .dashboard-item-block {
     color: @text-color-anti;
-    opacity: .6;
+    opacity: 0.6;
   }
 
   .dashboard-item-bottom {

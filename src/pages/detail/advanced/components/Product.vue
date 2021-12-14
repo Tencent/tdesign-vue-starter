@@ -69,7 +69,7 @@ export default Vue.extend({
     height: 256px;
 
     .operater-title-icon {
-      background: #ecf2fe;
+      background: @brand-color-1;
       color: @brand-color;
       font-size: 56px;
       padding: 14px;

@@ -1,4 +1,4 @@
-interface DashboardPannel {
+interface DashboardPanel {
   title: string;
   number: string | number;
   leftType?: string;
@@ -6,7 +6,7 @@ interface DashboardPannel {
   downTrend?: string;
 }
 
-export const PANE_LIST_DATA: Array<DashboardPannel> = [
+export const PANE_LIST_DATA: Array<DashboardPanel> = [
   {
     title: '总申请数（次）',
     number: '1126',

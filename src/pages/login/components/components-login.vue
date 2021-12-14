@@ -9,7 +9,7 @@
   >
     <template v-if="type == 'password'">
       <t-form-item name="account">
-        <t-input v-model="formData.account" size="large" placeholder="请输入您的邮箱/手机号">
+        <t-input v-model="formData.account" size="large" placeholder="请输入您的账号">
           <template #prefix-icon>
             <t-icon name="user" />
           </template>
