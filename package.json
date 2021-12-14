@@ -17,7 +17,7 @@
   "dependencies": {
     "@vitejs/plugin-legacy": "^1.5.3",
     "dayjs": "^1.10.6",
-    "echarts": "~5.1.2",
+    "echarts": "~5.2.2",
     "nprogress": "^0.2.0",
     "qrcode.vue": "^1.7.0",
     "tdesign-icons-vue": "0.0.4",
