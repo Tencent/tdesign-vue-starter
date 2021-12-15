@@ -84,5 +84,8 @@
       "npm run stylelint:fix",
       "git add ."
     ]
+  },
+  "engines": {
+    "node": ">=16.13.1"
   }
 }
