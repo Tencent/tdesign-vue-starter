@@ -16,7 +16,7 @@
 
 ### 项目简介
 
-TDesign Vue Starter 是一个基于 TDesign。使用 `Vue2`、`Vite2`、开发，可进行个性化主题配置，旨在提供项目开箱即用的、配置式的中后台项目。
+TDesign Vue Starter 是一个基于 TDesign。使用 `Vue2`、`Vite2`开发，可进行个性化主题配置，旨在提供项目开箱即用的、配置式的中后台项目。
 
 <p>
   <a href="http://tdesign.tencent.com/starter/vue/">在线预览</a>
