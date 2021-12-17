@@ -136,7 +136,7 @@
       </t-row>
 
       <!-- 出入库概览 -->
-      <div class="overview-panel">
+      <div class="overview-panel row-container">
         <t-row>
           <t-col :xs="12" :xl="9">
             <card title="出入库概览" describe="(件)">

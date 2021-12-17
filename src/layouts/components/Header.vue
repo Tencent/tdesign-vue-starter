@@ -2,18 +2,17 @@
   <div :class="layoutCls">
     <t-head-menu :class="menuCls" :theme="theme" expandType="popup" :value="active">
       <template #logo>
-        <span class="header-logo-container" @click="goHome" v-if="showLogo">
+        <span v-if="showLogo" class="header-logo-container" @click="handleNav('/dashboard/base')">
           <tLogoFull class="t-logo" />
         </span>
         <div v-else class="header-operate-left">
           <t-button theme="default" shape="square" variant="text" @click="changeCollapsed">
-            <t-icon v-show="isSidebarCompact" class="collapsed-icon" name="menu-fold" />
-            <t-icon v-show="!isSidebarCompact" class="collapsed-icon" name="menu-unfold" />
+            <t-icon class="collapsed-icon" name="view-list" />
           </t-button>
           <search :layout="layout" />
         </div>
       </template>
-      <sub-menu v-show="layout !== 'side'" class="header-menu" :navData="menu" />
+      <menu-content v-show="layout !== 'side'" class="header-menu" :navData="menu" />
       <div slot="operations" class="operations-container">
         <!-- 搜索框 -->
         <search v-if="layout !== 'side'" :layout="layout" />
@@ -24,7 +23,7 @@
               <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
                 <t-icon name="user-circle"></t-icon>个人中心
               </t-dropdown-item>
-              <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/login/index')">
+              <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
                 <t-icon name="poweroff"></t-icon>退出登录
               </t-dropdown-item>
             </t-dropdown-menu>
@@ -70,11 +69,11 @@ import tLogoFull from '@/assets/assets-logo-full.svg';
 
 import Notice from './Notice.vue';
 import Search from './Search.vue';
-import SubMenu from './SubMenu';
+import MenuContent from './MenuContent';
 
 export default Vue.extend({
   components: {
-    SubMenu,
+    MenuContent,
     tLogoFull,
     Notice,
     Search,
@@ -113,9 +112,6 @@ export default Vue.extend({
     };
   },
   computed: {
-    isSidebarCompact() {
-      return this.$store.state.setting.isSidebarCompact;
-    },
     active() {
       if (!this.$route.path) {
         return '';
@@ -147,8 +143,8 @@ export default Vue.extend({
     toggleSettingPanel() {
       this.$store.commit('setting/toggleSettingPanel', true);
     },
-    goHome() {
-      this.$router.push('/');
+    handleLogout() {
+      this.$router.push(`/login?redirect=${this.$router.history.current.fullPath}`);
     },
     changeCollapsed() {
       this.$store.commit('setting/toggleSidebarCompact');
@@ -196,14 +192,6 @@ export default Vue.extend({
     display: inline-flex;
     height: 64px;
   }
-
-  .t-logo {
-    width: 32px;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
 }
 
 .header-menu {
@@ -224,7 +212,6 @@ export default Vue.extend({
 
   .t-button {
     margin: 0 8px;
-
     &.header-user-btn {
       margin: 0;
     }
@@ -232,7 +219,6 @@ export default Vue.extend({
 
   .t-icon {
     font-size: 20px;
-
     &.general {
       margin-right: 16px;
     }
@@ -250,8 +236,17 @@ export default Vue.extend({
 }
 
 .header-logo-container {
+  width: 166px;
   display: flex;
-  margin-left: 16px;
+  margin-left: 24px;
+
+  .t-logo {
+    width: 100%;
+    height: 100%;
+    &:hover {
+      cursor: pointer;
+    }
+  }
 
   &:hover {
     cursor: pointer;
@@ -262,11 +257,14 @@ export default Vue.extend({
   display: inline-flex;
   align-items: center;
   color: @text-color-primary;
-
   .t-icon {
     margin-left: 4px;
     font-size: 16px;
   }
+}
+
+.t-head-menu__inner {
+  border-bottom: 1px solid @border-level-1-color;
 }
 
 .t-menu--light {
@@ -274,15 +272,15 @@ export default Vue.extend({
     color: @text-color-primary;
   }
 }
-
 .t-menu--dark {
+  .t-head-menu__inner {
+    border-bottom: 1px solid var(--td-gray-color-10);
+  }
   .header-user-account {
     color: rgba(255, 255, 255, 0.55);
   }
-
   .t-button {
     --ripple-color: var(--td-gray-color-10) !important;
-
     &:hover {
       background: var(--td-gray-color-12) !important;
     }
@@ -303,7 +301,6 @@ export default Vue.extend({
       display: flex;
       justify-content: center;
     }
-
     .t-dropdown__item__content__text {
       display: flex;
       align-items: center;
@@ -315,7 +312,6 @@ export default Vue.extend({
     width: 100%;
     margin-bottom: 0px;
   }
-
   &:last-child {
     .t-dropdown__item {
       margin-bottom: 8px;

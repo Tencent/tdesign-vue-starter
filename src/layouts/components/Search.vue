@@ -12,7 +12,7 @@
     </t-input>
   </div>
 
-  <div v-else>
+  <div v-else class="header-menu-search-left">
     <t-button
       :class="{ 'search-icon-hide': isSearchFocus }"
       theme="default"
@@ -55,7 +55,7 @@ export default Vue.extend({
   methods: {
     changeSearchFocus(value: boolean) {
       if (!value) {
-        this.searchData.value = '';
+        this.searchData = '';
       }
       this.isSearchFocus = value;
     },
@@ -68,10 +68,12 @@ export default Vue.extend({
 .header-menu-search {
   display: flex;
   margin-left: 16px;
-
   .hover-active {
     .t-input__inner {
       background: @bg-color-secondarycontainer;
+    }
+    .t-icon {
+      color: @brand-color !important;
     }
   }
 
@@ -79,13 +81,11 @@ export default Vue.extend({
     font-size: 20px !important;
     color: @text-color-primary !important;
   }
-
   .t-input__inner {
-    border: 0;
-    outline: 0;
-    box-shadow: 0;
+    border: none;
+    outline: none;
+    box-shadow: none;
     transform: background @anim-duration-base linear;
-
     &:hover {
       background: @bg-color-secondarycontainer;
     }
@@ -95,27 +95,26 @@ export default Vue.extend({
 .header-search {
   width: 200px;
   transition: width @anim-duration-base @anim-time-fn-easing;
-
   .t-input__inner {
     border: 0;
     padding-left: 40px;
-
     &:focus {
       box-shadow: none;
     }
   }
-
   &.width-zero {
     width: 0;
     opacity: 0;
   }
 }
-
 .t-button {
   transition: opacity @anim-duration-base @anim-time-fn-easing;
 }
-
 .search-icon-hide {
   opacity: 0;
+}
+.header-menu-search-left {
+  display: flex;
+  align-items: center;
 }
 </style>

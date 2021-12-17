@@ -44,6 +44,7 @@
         "allowForLoopAfterthoughts": true
       }
     ],
+    "no-param-reassign": 0,
     "func-style": 0,
     "prefer-default-export": 0,
     "max-len": 0,

@@ -1,11 +1,7 @@
 <template>
-  <result
-    title="浏览器版本低"
-    tip="抱歉，您正在使用的浏览器版本过低，无法打开当前网页。"
-    bgUrl="https://tdesign.gtimg.com/starter/result-page/browser-incompatible.png"
-  >
+  <result title="浏览器版本低" tip="抱歉，您正在使用的浏览器版本过低，无法打开当前网页。" type="ie">
     <div class="result-slot-container">
-      <t-button class="result-button" @click="() => this.$router.push('/')">返回首页</t-button>
+      <t-button class="result-button" @click="() => $router.push('/')">返回首页</t-button>
       <div class="recommend-container">
         <div>TDesign Starter 推荐以下主流浏览器</div>
         <div class="recommend-browser">
@@ -53,8 +49,8 @@ export default {
   top: 175px;
   padding: 24px 48px;
   width: 640px;
-  background: #ffffff;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  background: @bg-color-container;
+  box-shadow: 0px 1px 2px @shadow-1;
   border-radius: 3px;
 }
 

@@ -1,33 +1,91 @@
-// 定义的state初始值
-const state = {
-  loginName: '',
-  deptNameString: '',
+import { TOKEN_NAME } from '@/config/global';
+
+const InitUserInfo = {
+  roles: [],
 };
 
-// 定义的state的初始值方法，传入state或者额外的方法，然后利用vuex的双向数据驱动进行值的改变
-// 可通过this.$store.commit(' ')调用，但是触发的是同步事件
+// 定义的state初始值
+const state = {
+  token: localStorage.getItem(TOKEN_NAME) || 'main_token', // 默认token不走权限
+  userInfo: InitUserInfo,
+};
+
 const mutations = {
-  SET_USER_INFO(state, userInfo) {
-    // eslint-disable-next-line no-param-reassign
-    state.loginName = userInfo.account;
-    // eslint-disable-next-line no-param-reassign
-    state.deptNameString = userInfo.DeptNameString;
+  setToken(state, token) {
+    localStorage.setItem(TOKEN_NAME, token);
+    state.token = token;
+  },
+  removeToken(state) {
+    localStorage.removeItem(TOKEN_NAME);
+    state.token = '';
+  },
+  setUserInfo(state, userInfo) {
+    state.userInfo = userInfo;
   },
 };
 
-// 使用actions的好处在于不会触发同步时间，而是异步事件
-// actions里面自定义的函数接收一个context参数和要变化的形参，context与store实例具有相同的方法和属性，所以它可以执行context.commit(' ')
+const getters = {
+  token: (state) => state.token,
+  roles: (state) => state.userInfo?.roles,
+};
+
 const actions = {
-  // 获取用户信息
-  async getUserInfo() {
-    try {
-      console.log('当前编译环境');
-      console.log(process.env.NODE_ENV);
-    } catch (err) {
-      // 弹框提示错误信息
-      console.log(`智能网关获取用户信息错误：${err.message}`);
-      //   Message.error({ message: `获取用户信息错误：${err.message}`, closeBtn: true });
+  async login({ commit }, userInfo) {
+    const mockLogin = async (userInfo) => {
+      // 登录请求流程
+      console.log(userInfo);
+      // const { account, password } = userInfo;
+      // if (account !== 'td') {
+      //   return {
+      //     code: 401,
+      //     message: '账号不存在',
+      //   };
+      // }
+      // if (['main_', 'dev_'].indexOf(password) === -1) {
+      //   return {
+      //     code: 401,
+      //     message: '密码错误',
+      //   };
+      // }
+      // const token = {
+      //   main_: 'main_token',
+      //   dev_: 'dev_token',
+      // }[password];
+      return {
+        code: 200,
+        message: '登陆成功',
+        data: 'main_token',
+      };
+    };
+
+    const res = await mockLogin(userInfo);
+    if (res.code === 200) {
+      commit('setToken', res.data);
+    } else {
+      throw res;
     }
+  },
+  async getUserInfo({ commit, state }) {
+    const mockRemoteUserInfo = async (token) => {
+      if (token === 'main_token') {
+        return {
+          name: 'td_main',
+          roles: ['ALL_ROUTERS'],
+        };
+      }
+      return {
+        name: 'td_dev',
+        roles: ['userIndex', 'dashboardBase', 'login'],
+      };
+    };
+
+    const res = await mockRemoteUserInfo(state.token);
+
+    commit('setUserInfo', res);
+  },
+  async logout({ commit }) {
+    commit('removeToken');
+    commit('setUserInfo', InitUserInfo);
   },
 };
 
@@ -36,4 +94,5 @@ export default {
   state,
   mutations,
   actions,
+  getters,
 };

@@ -71,7 +71,6 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import { passwordValidator } from '../helper';
 
 const INITIAL_DATA = {
   phone: '',
@@ -84,7 +83,7 @@ const INITIAL_DATA = {
 const FORM_RULES = {
   phone: [{ required: true, message: '手机号必填', type: 'error' }],
   email: [{ required: true, email: true, message: '邮箱必填', type: 'error' }],
-  password: [{ required: true, message: '密码必填', type: 'error' }, { validator: passwordValidator }],
+  password: [{ required: true, message: '密码必填', type: 'error' }],
   verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
 };
 

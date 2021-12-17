@@ -8,7 +8,12 @@ export interface ResDataType {
 export interface MenuRoute {
   path: string;
   title?: string;
-  icon?: string;
+  icon?:
+    | string
+    | {
+        render: () => void;
+      };
+  redirect?: string;
   children: MenuRoute[];
   meta: any;
 }

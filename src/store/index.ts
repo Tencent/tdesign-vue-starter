@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import user from './modules/user';
-import setting from './modules/setting';
 import notification from './modules/notification';
+import setting from './modules/setting';
+import permission from './modules/permission';
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
     user,
     setting,
     notification,
+    permission,
   },
 });
 
