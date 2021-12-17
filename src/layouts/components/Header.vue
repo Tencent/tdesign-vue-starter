@@ -160,7 +160,7 @@ export default Vue.extend({
       window.open('https://github.com/Tencent/tdesign-vue-starter');
     },
     navToHelper() {
-      window.open('http://tdesign.tencent.com/starter/get-started.html');
+      window.open('http://tdesign.tencent.com/starter/docs/get-started');
     },
   },
 });
