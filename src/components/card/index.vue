@@ -67,31 +67,7 @@ export default Vue.extend({
 </script>
 <style lang="less" scoped>
 @import '@/style/variables';
-
-.main-color {
-  background: @brand-color;
-  color: @text-color-primary;
-
-  .card-subtitle {
-    color: @text-color-anti;
-  }
-
-  .dashboard-item-top span {
-    color: @text-color-anti;
-  }
-
-  .dashboard-item-block {
-    color: @text-color-anti;
-    opacity: .6;
-  }
-
-  .dashboard-item-bottom {
-    color: @text-color-anti;
-  }
-}
-
 .card {
-
   &-option {
     display: flex;
     align-items: center;
