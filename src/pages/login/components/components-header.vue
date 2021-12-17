@@ -25,7 +25,7 @@ export default {
       window.open('https://github.com/Tencent/tdesign-vue-starter');
     },
     navToHelper() {
-      window.open('https://tdesign.tencent.com/starter/get-started.html');
+      window.open('https://tdesign.tencent.com/starter/docs/get-started');
     },
     toggleSettingPanel() {
       this.$store.commit('setting/toggleSettingPanel', true);
