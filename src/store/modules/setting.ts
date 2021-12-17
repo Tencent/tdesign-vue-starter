@@ -111,7 +111,6 @@ const actions = {
     dispatch('changeBrandTheme', payload);
     commit('update', payload);
   },
-
   changeMode({ state }, payload) {
     let theme = payload.mode;
     if (payload.mode === 'auto') {

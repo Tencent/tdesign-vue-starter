@@ -34,11 +34,12 @@ export default Vue.extend({
       showHeader: 'setting/showHeader',
       showHeaderLogo: 'setting/showHeaderLogo',
       showSidebarLogo: 'setting/showSidebarLogo',
-      headerMenu: 'setting/headerMenu',
-      sideMenu: 'setting/sideMenu',
+      // headerMenu: 'setting/headerMenu',
+      // sideMenu: 'setting/sideMenu',
       showAsideFooter: 'setting/showAsideFooter',
       showMainFooter: 'setting/showMainFooter',
       mode: 'setting/mode',
+      menuRouters: 'permission/routers',
     }),
     setting(): SettingType {
       return this.$store.state.setting;
@@ -49,6 +50,34 @@ export default Vue.extend({
           't-layout-has-sider': this.showSidebar,
         },
       ];
+    },
+    headerMenu() {
+      const { layout, splitMenu } = this.$store.state.setting;
+      const { menuRouters } = this;
+      if (layout === 'mix') {
+        if (splitMenu) {
+          return menuRouters.map((menu) => ({
+            ...menu,
+            children: [],
+          }));
+        }
+        return [];
+      }
+      return menuRouters;
+    },
+    sideMenu() {
+      const { layout, splitMenu } = this.$store.state.setting;
+      const { menuRouters } = this;
+      if (layout === 'mix' && splitMenu) {
+        let index;
+        for (index = 0; index < menuRouters.length; index++) {
+          const item = menuRouters[index];
+          if (item.children && item.children.length > 0) {
+            return item.children.map((menuRouter) => ({ ...menuRouter, path: `${item.path}/${menuRouter.path}` }));
+          }
+        }
+      }
+      return menuRouters;
     },
   },
   methods: {

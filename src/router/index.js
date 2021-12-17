@@ -1,41 +1,39 @@
 import VueRouter from 'vue-router';
-import routeConfig from '@/config/routes.js';
 
-const layoutModules = import.meta.glob('../layouts/*');
-const pagesModules = import.meta.glob('../pages/**/*.vue');
-const firstPagesModules = import.meta.glob('../pages/*.vue');
+import baseRouters from './modules/base';
+import componentsRouters from './modules/components';
+import othersRouters from './modules/others';
 
-const modules = { ...layoutModules, ...firstPagesModules, ...pagesModules };
+// 存放动态路由
+export const asyncRouterList = [...baseRouters, ...componentsRouters, ...othersRouters];
 
-const getMenuRoutes = (list) => {
-  if (!list) {
-    return [];
-  }
-  return list.map((item) => {
-    const { path = '', component, meta = { title: item.title, ...item.meta }, redirect = '' } = item;
-    return {
-      path,
-      component: modules[component],
-      children: getMenuRoutes(item.children),
-      meta,
-      redirect,
-    };
-  });
-};
-
-const routes = [
-  ...getMenuRoutes(routeConfig, true),
+// 存放固定的路由
+const defaultRouterList = [
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/pages/login/index.vue'),
+  },
   {
     path: '*',
     redirect: '/dashboard/base',
   },
+  ...asyncRouterList,
 ];
 
-const route = new VueRouter({
-  routes,
-  scrollBehavior() {
-    return { x: 0, y: 0 };
-  },
-});
+const createRouter = () =>
+  new VueRouter({
+    routes: defaultRouterList,
+    scrollBehavior() {
+      return { x: 0, y: 0 };
+    },
+  });
 
-export default route;
+const router = createRouter();
+
+export function resetRouter() {
+  const newRouter = createRouter();
+  router.matcher = newRouter.matcher; // reset router
+}
+
+export default router;

@@ -1,6 +1,8 @@
 <template>
   <div class="result-container">
-    <img class="result-bg-img" :src="bgUrl" />
+    <div class="result-bg-img">
+      <component :is="dynamicComponent"></component>
+    </div>
     <div class="result-title">{{ title }}</div>
     <div class="result-tip">{{ tip }}</div>
     <slot />
@@ -8,6 +10,12 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
+
+import Result403Icon from '@/assets/assets-result-403.svg';
+import Result404Icon from '@/assets/assets-result-404.svg';
+import Result500Icon from '@/assets/assets-result-500.svg';
+import ResultIeIcon from '@/assets/assets-result-ie.svg';
+import ResultWifiIcon from '@/assets/assets-result-wifi.svg';
 
 export default Vue.extend({
   name: 'Result',
@@ -24,6 +32,28 @@ export default Vue.extend({
       type: String,
       default: '',
     },
+    type: {
+      type: String,
+      default: '',
+    },
+  },
+  computed: {
+    dynamicComponent() {
+      switch (this.type) {
+      case '403':
+        return Result403Icon;
+      case '404':
+        return Result404Icon;
+      case '500':
+        return Result500Icon;
+      case 'ie':
+        return ResultIeIcon;
+      case 'wifi':
+        return ResultWifiIcon;
+      default:
+        return Result403Icon;
+      }
+    },
   },
 });
 </script>
@@ -31,7 +61,6 @@ export default Vue.extend({
 @import '@/style/variables';
 
 .result {
-
   &-link {
     color: @brand-color;
     text-decoration: none;
@@ -66,6 +95,7 @@ export default Vue.extend({
 
   &-bg-img {
     width: 200px;
+    color: @brand-color;
   }
 
   &-title {

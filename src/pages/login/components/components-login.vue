@@ -80,7 +80,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import QrcodeVue from 'qrcode.vue';
-import { passwordValidator } from '../helper';
 
 const INITIAL_DATA = {
   phone: '',
@@ -93,7 +92,7 @@ const INITIAL_DATA = {
 const FORM_RULES = {
   phone: [{ required: true, message: '手机号必填', type: 'error' }],
   account: [{ required: true, message: '账号必填', type: 'error' }],
-  password: [{ required: true, message: '密码必填', type: 'error' }, { validator: passwordValidator }],
+  password: [{ required: true, message: '密码必填', type: 'error' }],
   verifyCode: [{ required: true, message: '验证码必填', type: 'error' }],
 };
 /** 高级详情 */
@@ -120,15 +119,12 @@ export default Vue.extend({
       this.type = val;
       this.$refs.form.reset();
     },
-    onSubmit({ validateResult }) {
+    async onSubmit({ validateResult }) {
       if (validateResult === true) {
-        this.$store.commit('user/SET_USER_INFO', this.formData);
+        await this.$store.dispatch('user/login', this.formData);
 
         this.$message.success('登录成功');
-
-        this.$router.push({
-          path: '/',
-        });
+        this.$router.replace('/').catch(() => '');
       }
     },
     handleCounter() {

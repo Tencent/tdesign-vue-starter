@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { prefix } from '@/config/global';
 
-import SubMenu from './SubMenu';
+import MenuContent from './MenuContent';
 import pgk from '../../../package.json';
 import tLogo from '@/assets/assets-t-logo.svg';
 import tLogoFull from '@/assets/assets-logo-full.svg';
@@ -11,7 +11,7 @@ const MIN_POINT = 992 - 1;
 export default Vue.extend({
   name: 'sideNav',
   components: {
-    SubMenu,
+    MenuContent,
     tLogo,
     tLogoFull,
   },
@@ -116,7 +116,7 @@ export default Vue.extend({
               )}
             </span>
           )}
-          <sub-menu navData={this.menu}></sub-menu>
+          <menu-content navData={this.menu}></menu-content>
           <span slot="operations" class="version-container" onClick={this.changeCollapsed}>
             {!this.collapsed && 'TDesign Starter'} {pgk.version}
           </span>

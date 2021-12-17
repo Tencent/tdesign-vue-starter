@@ -16,6 +16,8 @@
 
       <login v-if="type === 'login'" />
       <register v-else @register-success="switchType('login')" />
+
+      <tdesign-setting />
     </div>
   </div>
 </template>
@@ -23,6 +25,7 @@
 import Login from './components/components-login.vue';
 import Register from './components/components-register.vue';
 import LoginHeader from './components/components-header.vue';
+import TdesignSetting from '@/layouts/setting.vue';
 
 /** 高级详情 */
 export default {
@@ -31,6 +34,7 @@ export default {
     LoginHeader,
     Login,
     Register,
+    TdesignSetting,
   },
   data() {
     return {

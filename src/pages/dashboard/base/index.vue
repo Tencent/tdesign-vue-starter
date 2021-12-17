@@ -136,7 +136,7 @@
       </t-row>
 
       <!-- 出入库概览 -->
-      <div class="overview-panel">
+      <div class="overview-panel row-container">
         <t-row>
           <t-col :xs="12" :xl="9">
             <card title="出入库概览" describe="(件)">
@@ -387,6 +387,7 @@ export default {
 <style lang="less" scoped>
 @import './index.less';
 </style>
+
 <style lang="less">
 @import '@/style/variables.less';
 
@@ -394,6 +395,9 @@ export default {
   background: @brand-color;
   color: @text-color-primary;
 
+  .card-subtitle {
+    color: @text-color-anti;
+  }
   .card-describe {
     color: @text-color-anti;
   }

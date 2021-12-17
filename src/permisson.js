@@ -1,57 +1,54 @@
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
-import { authenticationMethod } from '@/config/global';
-import router from './router';
-import store from './store';
 
-NProgress.configure({ showSpinner: false }); // NProgress 配置
+import store from '@/store';
+import router from '@/router';
 
-const { dispatch, state } = store;
-const { user } = state;
+NProgress.configure({ showSpinner: false });
+
+const whiteListRouters = store.getters['permission/whiteListRouters'];
 
 router.beforeEach(async (to, from, next) => {
-  // TODO: 登录页面交互优化后，开启登录逻辑
-  next();
-  return;
-  // start progress bar
-  // eslint-disable-next-line no-unreachable
   NProgress.start();
 
-  // 如果不需要登录，那么直接跳过
-  const notNeedLogin = to.matched.some((route) => route.meta && route.meta.needLogin === false);
-  if (notNeedLogin) {
-    next();
-    return;
-  }
+  const token = store.getters['user/token'];
 
-  if (authenticationMethod === 'smartProxy') {
-    // 当登录方式为内网登录，则走智能网关进行OA登录鉴权，并获取用户信息
-    if (user.loginName === '') {
-      // 没有用户信息的话需要重新拉取用户信息，
-      try {
-        await dispatch('user/getUserInfo');
-        NProgress.done();
-      } catch (error) {
-        console.log(`获取用户信息错误：${error.message}`);
-        //   Message.error({ message: `获取用户信息错误：${error.message}`, closeBtn: true });
-        NProgress.done();
-        return;
-      }
-    }
-  } else if (authenticationMethod === 'customize') {
-    console.log('自定义');
-    // 当登录方式选择自定义登录时，若无登录，则重定向跳转到登录页面
-    if (user.loginName === '') {
-      console.log('重定向到登录页面');
-      // 没有用户信息，重定向跳转到登录页面
-      next({ path: '/login/index' });
+  if (token) {
+    if (to.path === '/login') {
+      setTimeout(() => {
+        store.dispatch('user/logout');
+        store.dispatch('permission/restore');
+      });
+      next();
       return;
     }
-  }
 
-  /** * TODO 这里判断页面权限 ** */
-  // 权限没有问题，直接路由下一步
-  next();
+    const roles = store.getters['user/roles'];
+
+    if (roles && roles.length > 0) {
+      next();
+    } else {
+      try {
+        await store.dispatch('user/getUserInfo');
+
+        await store.dispatch('permission/initRoutes', store.getters['user/roles']);
+
+        next({ ...to });
+      } catch (error) {
+        await store.commit('user/removeToken');
+        next(`/login?redirect=${to.path}`);
+        NProgress.done();
+      }
+    }
+  } else {
+    /* white list router */
+    if (whiteListRouters.indexOf(to.path) !== -1) {
+      next();
+    } else {
+      next(`/login?redirect=${to.path}`);
+    }
+    NProgress.done();
+  }
 });
 
 router.afterEach(() => {
