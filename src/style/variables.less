@@ -73,19 +73,18 @@
 @font-gray-3: var(--td-font-gray-3);
 @font-gray-4: var(--td-font-gray-4);
 
-/* 基础颜色 */ 
+/* 基础颜色 */
 @brand-color: var(--td-brand-color); // 色彩-品牌-可操作
 @warning-color: var(--td-warning-color); // 色彩-功能-警告
 @error-color: var(--td-error-color); // 色彩-功能-失败
 @success-color: var(--td-success-color); // 色彩-功能-成功
 
-
 // 基础颜色的扩展 用于 hover / 聚焦 / 禁用 / 点击 等状态
-@brand-color-hover: var(--td-brand-color-hover);     // hover态
-@brand-color-focus: var(--td-brand-color-focus);     // focus态，包括鼠标和键盘
-@brand-color-active: var(--td-brand-color-active);    // 点击态
-@brand-color-disabled: var(--td-brand-color-disabled);  // 禁用态
-@brand-color-light: var(--td-brand-color-light);     // 浅色的选中态
+@brand-color-hover: var(--td-brand-color-hover); // hover态
+@brand-color-focus: var(--td-brand-color-focus); // focus态，包括鼠标和键盘
+@brand-color-active: var(--td-brand-color-active); // 点击态
+@brand-color-disabled: var(--td-brand-color-disabled); // 禁用态
+@brand-color-light: var(--td-brand-color-light); // 浅色的选中态
 
 // 警告色扩展
 @warning-color-hover: var(--td-warning-color-hover);
@@ -113,33 +112,33 @@
 @mask-disabled: var(--td-mask-disabled); // 遮罩-禁用
 
 // 背景色
-@bg-color-page: var(--td-bg-color-page);                                            // 色彩 - page
-@bg-color-container: var(--td-bg-color-container);                                  // 色彩 - 容器             
-@bg-color-container-hover: var(--td-bg-color-container-hover);                      // 色彩 - 容器 - hover
-@bg-color-container-active: var(--td-bg-color-container-active);                    // 色彩 - 容器 - active
-@bg-color-container-select: var(--td-bg-color-container-select);                    // 色彩 - 容器 - select
+@bg-color-page: var(--td-bg-color-page); // 色彩 - page
+@bg-color-container: var(--td-bg-color-container); // 色彩 - 容器
+@bg-color-container-hover: var(--td-bg-color-container-hover); // 色彩 - 容器 - hover
+@bg-color-container-active: var(--td-bg-color-container-active); // 色彩 - 容器 - active
+@bg-color-container-select: var(--td-bg-color-container-select); // 色彩 - 容器 - select
 
-@bg-color-secondarycontainer: var(--td-bg-color-secondarycontainer);                // 色彩 - 次级容器
-@bg-color-secondarycontainer-hover: var(--td-bg-color-secondarycontainer-hover);    // 色彩 - 次级容器 - hover
-@bg-color-secondarycontainer-active: var(--td-bg-color-secondarycontainer-active);  // 色彩 - 次级容器 - active
+@bg-color-secondarycontainer: var(--td-bg-color-secondarycontainer); // 色彩 - 次级容器
+@bg-color-secondarycontainer-hover: var(--td-bg-color-secondarycontainer-hover); // 色彩 - 次级容器 - hover
+@bg-color-secondarycontainer-active: var(--td-bg-color-secondarycontainer-active); // 色彩 - 次级容器 - active
 
-@bg-color-component: var(--td-bg-color-component);                   // 色彩  - 组件
-@bg-color-component-hover: var(--td-bg-color-component-hover);            // 色彩 - 组件 - hover
-@bg-color-component-active: var(--td-bg-color-component-active);            // 色彩 - 组件 - active
-@bg-color-component-disabled: var(--td-bg-color-component-disabled);          // 色彩 - 组件 - disabled
+@bg-color-component: var(--td-bg-color-component); // 色彩  - 组件
+@bg-color-component-hover: var(--td-bg-color-component-hover); // 色彩 - 组件 - hover
+@bg-color-component-active: var(--td-bg-color-component-active); // 色彩 - 组件 - active
+@bg-color-component-disabled: var(--td-bg-color-component-disabled); // 色彩 - 组件 - disabled
 
 // TODO: 考虑是否在组件内部做判断，不增加额外变量
 // 特殊组件背景色，目前只用于 button、input 组件多主题场景，浅色主题下固定为白色，深色主题下为 transparent 适配背景颜色
 @bg-color-specialcomponent: var(--td-bg-color-specialcomponent);
 
 // 文本颜色
-@text-color-primary: var(--td-text-color-primary);      // 色彩-文字-主要
-@text-color-secondary: var(--td-text-color-secondary);    // 色彩-文字-次要
-@text-color-placeholder: var(--td-text-color-placeholder);  // 色彩-文字-占位符/说明
-@text-color-disabled: var(--td-text-color-disabled);    // 色彩-文字-禁用
-@text-color-anti: var(--td-text-color-anti);                      // 色彩-文字-反色
-@text-color-brand: var(--td-text-color-brand);           // 色彩-文字-品牌
-@text-color-link: var(--td-text-color-link);            // 色彩-文字-链接
+@text-color-primary: var(--td-text-color-primary); // 色彩-文字-主要
+@text-color-secondary: var(--td-text-color-secondary); // 色彩-文字-次要
+@text-color-placeholder: var(--td-text-color-placeholder); // 色彩-文字-占位符/说明
+@text-color-disabled: var(--td-text-color-disabled); // 色彩-文字-禁用
+@text-color-anti: var(--td-text-color-anti); // 色彩-文字-反色
+@text-color-brand: var(--td-text-color-brand); // 色彩-文字-品牌
+@text-color-link: var(--td-text-color-link); // 色彩-文字-链接
 
 // 分割线
 @border-level-1-color: var(--td-border-level-1-color);
@@ -153,7 +152,7 @@
 // 基础/下层 投影 hover 使用的组件包括：表格 /
 @shadow-1: var(--td-shadow-1);
 // 中层投影 下拉 使用的组件包括：下拉菜单 / 气泡确认框 / 选择器 /
-@shadow-2:  var(--td-shadow-2);
+@shadow-2: var(--td-shadow-2);
 // 上层投影（警示/弹窗）使用的组件包括：全局提示 / 消息通知
 @shadow-3: var(--td-shadow-3);
 
@@ -170,7 +169,7 @@
 
 // Spacer
 @spacer: 8px;
-@spacer-s: @spacer * .5; // 间距-4
+@spacer-s: @spacer * 0.5; // 间距-4
 @spacer-l: @spacer * 1.5; // 间距-12
 @spacer-1: @spacer; // 间距-8
 @spacer-2: @spacer * 2; // 间距-16
@@ -194,7 +193,7 @@
 // Line Height
 @text-line-height: 1.5; // 行高-常规
 @text-line-height-s: 20px; // 行高-对应五级文字
-@text-line-height-base: 22px;  // 行高-对应四级文字
+@text-line-height-base: 22px; // 行高-对应四级文字
 @text-line-height-l: 24px; // 行高-对应三级文字
 @text-line-height-xl: 28px; // 行高-对应二级文字
 @text-line-height-xxl: 44px; //行高-对应一级文字
@@ -231,14 +230,13 @@
 @screen-sm-max: (@screen-md-min - 1px);
 @screen-md-max: (@screen-lg-min - 1px);
 
-
 // 动画
-@anim-time-fn-easing: cubic-bezier(.38, 0, .24, 1);
-@anim-time-fn-ease-out: cubic-bezier(0, 0, .15, 1);
-@anim-time-fn-ease-in: cubic-bezier(.82, 0, 1, .9);
-@anim-duration-base: .2s;
-@anim-duration-moderate: .24s;
-@anim-duration-slow: .28s;
+@anim-time-fn-easing: cubic-bezier(0.38, 0, 0.24, 1);
+@anim-time-fn-ease-out: cubic-bezier(0, 0, 0.15, 1);
+@anim-time-fn-ease-in: cubic-bezier(0.82, 0, 1, 0.9);
+@anim-duration-base: 0.2s;
+@anim-duration-moderate: 0.24s;
+@anim-duration-slow: 0.28s;
 
 // 统一管理各组件层级关系
 @z-index-affix: 500;
@@ -248,5 +246,3 @@
 @z-index-message: 5000;
 @z-index-Popup: 5500;
 @z-index-Notification: 6000;
-
-

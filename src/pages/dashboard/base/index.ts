@@ -32,6 +32,7 @@ function chartListColor(): Array<string> {
   const colorList: Array<string> = ['#0052D9', '#BCC4D0', '#7D46BD', '#0594FA', '#ED7B2F'];
   const { setting } = state;
   const res = getColorFromTheme(setting.brandTheme) || colorList;
+  console.log(res, 'res');
   return res;
 }
 
@@ -1050,7 +1051,7 @@ export function getPieChartDataSet(radius = 42) {
           formatter: ['{value|{d}%}', '{name|{b}渠道占比}'].join('\n'),
           rich: {
             value: {
-              color: '#303133',
+              color: 'var(--td-brand-color)',
               fontSize: 28,
               fontWeight: 'normal',
               lineHeight: 46,

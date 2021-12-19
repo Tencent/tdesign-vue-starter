@@ -1,3 +1,5 @@
+import hexToHsl from 'hex-to-hsl';
+/* eslint-disable indent */
 export type ColorToken = Record<string, string>;
 export type ColorSeries = Record<string, ColorToken>;
 
@@ -162,6 +164,113 @@ export const COLOR_TOKEN: ColorSeries = {
   },
 };
 
+export const DARK_COLOR_TOKEN: ColorSeries = {
+  DEFAULT: {
+    '@brand-color-1': '#1B2F51',
+    '@brand-color-2': '#173463',
+    '@brand-color-3': '#143975',
+    '@brand-color-4': '#103D88',
+    '@brand-color-5': '#0D429A',
+    '@brand-color-6': '#054BBE',
+    '@brand-color-7': '#2667D4',
+    '@brand-color-8': '#4582E6',
+    '@brand-color-9': '#699EF5',
+    '@brand-color-10': '#96BBF8',
+  },
+
+  CYAN: {
+    '@brand-color': '#29a4fb',
+    '@brand-color-1': '#01409b',
+    '@brand-color-2': '#0152b3',
+    '@brand-color-3': '#0264ca',
+    '@brand-color-4': '#0378df',
+    '@brand-color-5': '#0594fa',
+    '@brand-color-6': '#29a4fb',
+    '@brand-color-7': '#0594fa',
+    '@brand-color-8': '#29a4fb',
+    '@brand-color-9': '#58b8fc',
+    '@brand-color-10': '#d7eefe',
+  },
+  GREEN: {
+    '@brand-color': '#04d790',
+    '@brand-color-1': '#024b15',
+    '@brand-color-2': '#03965c',
+    '@brand-color-3': '#03a56f',
+    '@brand-color-4': '#04c383',
+    '@brand-color-5': '#03965c',
+    '@brand-color-6': '#03a56f',
+    '@brand-color-7': '#04c383',
+    '@brand-color-8': '#04d790',
+    '@brand-color-9': '#05eb9f',
+    '@brand-color-10': '#91fdd9',
+  },
+  ORANGE: {
+    '@brand-color': '#e75510',
+    '@brand-color-1': '#7f0a02',
+    '@brand-color-2': '#9b1804',
+    '@brand-color-3': '#b62a07',
+    '@brand-color-4': '#d03e0b',
+    '@brand-color-5': '#e75510',
+    '@brand-color-6': '#ed7b2f',
+    '@brand-color-7': '#d03e0b',
+    '@brand-color-8': '#e75510',
+    '@brand-color-9': '#ed7b2f',
+    '@brand-color-10': '#fce5d7',
+  },
+  RED: {
+    '@brand-color': '#ea7b84',
+    '@brand-color-1': '#8d0309',
+    '@brand-color-2': '#ac0911',
+    '@brand-color-3': '#cc111c',
+    '@brand-color-4': '#e42c3a',
+    '@brand-color-5': '#e34d59',
+    '@brand-color-6': '#ea7b84',
+    '@brand-color-7': '#e34d59',
+    '@brand-color-8': '#ea7b84',
+    '@brand-color-9': '#ef989f',
+    '@brand-color-10': '#fbe5e7',
+  },
+  PINK: {
+    '@brand-color': '#f172c5',
+    '@brand-color-1': '#8f025e',
+    '@brand-color-2': '#ac0572',
+    '@brand-color-3': '#ca0987',
+    '@brand-color-4': '#e80f9d',
+    '@brand-color-5': '#ed49b4',
+    '@brand-color-6': '#f172c5',
+    '@brand-color-7': '#ed49b4',
+    '@brand-color-8': '#f172c5',
+    '@brand-color-9': '#f491d2',
+    '@brand-color-10': '#fce5f4',
+  },
+  PURPLE: {
+    '@brand-color': '#bb9ede',
+    '@brand-color-1': '#4c1397',
+    '@brand-color-2': '#6325b0',
+    '@brand-color-3': '#783ac3',
+    '@brand-color-4': '#834ec2',
+    '@brand-color-5': '#9a6fce',
+    '@brand-color-6': '#ab87d5',
+    '@brand-color-7': '#ab87d5',
+    '@brand-color-8': '#bb9ede',
+    '@brand-color-9': '#ccb6e6',
+    '@brand-color-10': '#eee6f7',
+  },
+  YELLOW: {
+    '@brand-color': '#8c5201',
+    '@brand-color-1': '#603100',
+    '@brand-color-2': '#764101',
+    '@brand-color-3': '#8c5201',
+    '@brand-color-4': '#a16502',
+    '@brand-color-5': '#b67803',
+    '@brand-color-6': '#ca8d03',
+    '@brand-color-7': '#764101',
+    '@brand-color-8': '#8c5201',
+    '@brand-color-9': '#a16502',
+    '@brand-color-10': '#fde9ab',
+  },
+};
+
 function toUnderline(name: string): string {
   return name.replace(/([A-Z])/g, '_$1').toUpperCase();
 }
@@ -182,12 +291,56 @@ export function getColorList(colorArray: Array<ColorToken>): Array<string> {
 
   return pureColorList;
 }
+// inspired by https://stackoverflow.com/questions/36721830/convert-hsl-to-rgb-and-hex
+export function hslToHex(h: number, s: number, l: number) {
+  l /= 100;
+  const a = (s * Math.min(l, 1 - l)) / 100;
+  const f = (n: number) => {
+    const k = (n + h / 30) % 12;
+    const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+    return Math.round(255 * color)
+      .toString(16)
+      .padStart(2, '0');
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
+}
 
-export function insertThemeStylesheet(theme: string, colorMap: ColorToken) {
+export function generateColorMap(theme: string, colorPalette: Array<string>, mode: 'light' | 'dark') {
+  const isDarkMode = mode === 'dark';
+  let brandColorIdx = colorPalette.indexOf(theme);
+
+  if (isDarkMode) {
+    // eslint-disable-next-line no-use-before-define
+    colorPalette.reverse().map((color) => {
+      const [h, s, l] = hexToHsl(color);
+      return hslToHex(h, s - 4, l);
+    });
+    brandColorIdx = 5;
+    colorPalette[0] = `${colorPalette[brandColorIdx]}20`;
+  }
+
+  const colorMap = {
+    '@brand-color': colorPalette[brandColorIdx], // 主题色
+    '@brand-color-1': colorPalette[0], // light
+    '@brand-color-2': colorPalette[1], // focus
+    '@brand-color-3': colorPalette[2], // disabled
+    '@brand-color-4': colorPalette[3],
+    '@brand-color-5': colorPalette[4],
+    '@brand-color-6': colorPalette[5],
+    '@brand-color-7': brandColorIdx > 0 ? colorPalette[brandColorIdx - 1] : theme, // hover
+    '@brand-color-8': colorPalette[brandColorIdx], // 主题色
+    '@brand-color-9': brandColorIdx > 8 ? theme : colorPalette[brandColorIdx + 1], // click
+    '@brand-color-10': colorPalette[9],
+  };
+  return colorMap;
+}
+export function insertThemeStylesheet(theme: string, colorMap: ColorToken, mode: 'light' | 'dark') {
+  const isDarkMode = mode === 'dark';
+  const root = !isDarkMode ? `:root[theme-color='${theme}']` : `:root[theme-color='${theme}'][theme-mode='dark']`;
+
   const styleSheet = document.createElement('style');
   styleSheet.type = 'text/css';
-  styleSheet.innerText = `:root[theme-color='${theme}'],
-  :root[theme-color='${theme}'][theme-mode='dark']{
+  styleSheet.innerText = `${root}{
     --td-brand-color: ${colorMap['@brand-color']};
     --td-brand-color-1: ${colorMap['@brand-color-1']};
     --td-brand-color-2: ${colorMap['@brand-color-2']};

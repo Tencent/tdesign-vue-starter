@@ -36,7 +36,9 @@
         <template #adminName="{ row }">
           <span>
             {{ row.adminName }}
-            <t-tag v-if="row.adminPhone" size="small" style="color: rgba(0, 0, 0, 0.4)">{{ row.adminPhone }}</t-tag>
+            <t-tag v-if="row.adminPhone" size="small" style="color: var(--td-text-color-placeholder)">{{
+              row.adminPhone
+            }}</t-tag>
           </span>
         </template>
         <template #op="slotProps">

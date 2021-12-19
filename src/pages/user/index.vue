@@ -130,7 +130,6 @@ export default {
   },
   watch: {
     brandTheme() {
-      console.log(123);
       changeChartsTheme([this.lineChart]);
     },
   },

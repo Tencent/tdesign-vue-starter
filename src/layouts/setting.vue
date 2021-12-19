@@ -92,7 +92,7 @@ import { Color } from 'tvision-color';
 import { Sketch } from 'vue-color';
 
 import STYLE_CONFIG from '@/config/style';
-import { insertThemeStylesheet } from '@/config/color';
+import { insertThemeStylesheet, generateColorMap } from '@/config/color';
 import Thumbnail from '@/components/thumbnail/index.vue';
 import ColorContainer from '@/components/color/index.vue';
 
@@ -147,25 +147,12 @@ export default {
           colors: [hex],
           step: 10,
         })[0];
-        const hexIdx = newPalette.indexOf(hex);
-        const colorMap = {
-          '@brand-color': hex, // 主题色
-          '@brand-color-1': newPalette[0], // light
-          '@brand-color-2': newPalette[1], // focus
-          '@brand-color-3': newPalette[2], // disabled
-          '@brand-color-4': newPalette[3],
-          '@brand-color-5': newPalette[4],
-          '@brand-color-6': newPalette[5],
-          '@brand-color-7': hexIdx > 0 ? newPalette[hexIdx - 1] : hex, // hover
-          '@brand-color-8': hex, // 主题色
-          '@brand-color-9': hexIdx > 8 ? hex : newPalette[hexIdx + 1], // click
-          '@brand-color-10': newPalette[9],
-        };
-        console.log(colorMap, 'colorMap');
-        if (!this.$store.state.setting.colorList?.[hex]) {
-          this.$store.commit('setting/addColor', { [hex]: colorMap });
-        }
-        insertThemeStylesheet(hex, colorMap);
+        const { mode } = this.$store.state.setting;
+        const colorMap = generateColorMap(hex, newPalette, mode);
+
+        this.$store.commit('setting/addColor', { [hex]: colorMap });
+
+        insertThemeStylesheet(hex, colorMap, mode);
 
         this.$store.dispatch('setting/changeTheme', { ...this.formData, brandTheme: hex });
       },
