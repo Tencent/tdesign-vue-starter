@@ -118,13 +118,16 @@ export default {
     };
   },
   computed: {
-    ...mapState('setting', ['brandTheme']),
+    ...mapState('setting', ['brandTheme', 'mode']),
   },
   watch: {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     brandTheme(val): void {
-      this.areaChart.setOption(getSmoothLineDataSet());
-      this.columnChart.setOption(get2ColBarChartDataSet());
+      this.areaChart.setOption(getSmoothLineDataSet({}));
+      this.columnChart.setOption(get2ColBarChartDataSet({}));
+    },
+    mode() {
+      this.renderCharts();
     },
   },
   beforeDestroy(): void {
@@ -149,29 +152,16 @@ export default {
       });
 
     window.addEventListener('resize', this.updateContainer, false);
-    // this.updateContainer();
-    // 动态监测
-    if (!this.monitorContainer) {
-      this.monitorContainer = document.getElementById('monitorContainer');
-    }
-    this.areaChart = echarts.init(this.monitorContainer);
-    this.areaChart.setOption(getSmoothLineDataSet());
 
-    // 定时动态效果
-    this.timer = setInterval(() => {
-      this.areaChart.setOption(getSmoothLineDataSet());
-    }, 3000);
-
-    if (!this.dataContainer) {
-      this.dataContainer = document.getElementById('dataContainer');
-    }
-    this.columnChart = echarts.init(this.dataContainer);
-    this.columnChart.setOption(get2ColBarChartDataSet());
+    this.renderCharts();
   },
   methods: {
     onAlertChange(val: string): void {
       // console.log(val);
-      this.columnChart.setOption(get2ColBarChartDataSet(val === 'monthVal'));
+      const isMonth = val === 'monthVal';
+      const { chartColors } = this.$store.state.setting;
+
+      this.columnChart.setOption(get2ColBarChartDataSet({ isMonth, ...chartColors }));
     },
     updateContainer(): void {
       this.areaChart.resize({
@@ -198,6 +188,26 @@ export default {
     },
     onConfirm(): void {
       this.visible = false;
+    },
+    renderCharts(): void {
+      const { chartColors } = this.$store.state.setting;
+
+      if (!this.monitorContainer) {
+        this.monitorContainer = document.getElementById('monitorContainer');
+      }
+      this.areaChart = echarts.init(this.monitorContainer);
+      this.areaChart.setOption(getSmoothLineDataSet({ ...chartColors }));
+
+      // 定时动态效果
+      this.timer = setInterval(() => {
+        this.areaChart.setOption(getSmoothLineDataSet({ ...chartColors }));
+      }, 3000);
+
+      if (!this.dataContainer) {
+        this.dataContainer = document.getElementById('dataContainer');
+      }
+      this.columnChart = echarts.init(this.dataContainer);
+      this.columnChart.setOption(get2ColBarChartDataSet({ ...chartColors }));
     },
   },
 };

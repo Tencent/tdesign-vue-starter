@@ -126,39 +126,45 @@ export default {
     };
   },
   computed: {
-    ...mapState('setting', ['brandTheme']),
+    ...mapState('setting', ['brandTheme', 'mode']),
   },
   watch: {
     brandTheme() {
       changeChartsTheme([this.lineChart]);
     },
+    mode() {
+      this.renderCharts();
+    },
   },
   mounted() {
-    if (!this.lineContainer) {
-      this.lineContainer = document.getElementById('lineContainer');
-    }
-    this.lineChart = echarts.init(this.lineContainer);
-    this.lineChart.setOption({
-      grid: {
-        x: 30, // 默认是80px
-        y: 30, // 默认是60px
-        x2: 10, // 默认80px
-        y2: 30, // 默认60px
-      },
-      ...getFolderLineDataSet(),
-    });
-
     window.addEventListener('resize', this.updateContainer, false);
+    this.renderCharts();
   },
   methods: {
     /** 图表选择 */
     onLineChange(value) {
-      this.lineChart.setOption(getFolderLineDataSet(value));
+      this.lineChart.setOption(getFolderLineDataSet({ dateTime: value }));
     },
     updateContainer() {
       this.lineChart.resize({
         width: this.lineContainer.clientWidth,
         height: this.lineContainer.clientHeight,
+      });
+    },
+    renderCharts() {
+      const { chartColors } = this.$store.state.setting;
+      if (!this.lineContainer) {
+        this.lineContainer = document.getElementById('lineContainer');
+      }
+      this.lineChart = echarts.init(this.lineContainer);
+      this.lineChart.setOption({
+        grid: {
+          x: 30, // 默认是80px
+          y: 30, // 默认是60px
+          x2: 10, // 默认80px
+          y2: 30, // 默认60px
+        },
+        ...getFolderLineDataSet({ ...chartColors }),
       });
     },
   },

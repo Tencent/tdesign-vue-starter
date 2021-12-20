@@ -32,7 +32,11 @@
             </div>
           </t-radio-group>
           <div class="setting-group-color">
-            <color-picker v-model="colors" v-if="formData.brandTheme === 'dynamic'"></color-picker>
+            <color-picker
+              v-model="colors"
+              v-if="formData.brandTheme === 'dynamic' && isColorPickerDisplay"
+              @blur="handleColorPickerBlur"
+            ></color-picker>
           </div>
           <div class="setting-group-title">导航布局</div>
 
@@ -93,6 +97,7 @@ import { Sketch } from 'vue-color';
 
 import STYLE_CONFIG from '@/config/style';
 import { insertThemeStylesheet, generateColorMap } from '@/config/color';
+
 import Thumbnail from '@/components/thumbnail/index.vue';
 import ColorContainer from '@/components/color/index.vue';
 
@@ -113,6 +118,7 @@ export default {
       colorOption: ['default', 'purple', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'dynamic'],
       visible: false,
       formData: { ...STYLE_CONFIG },
+      isColorPickerDisplay: false,
     };
   },
   computed: {
@@ -136,6 +142,9 @@ export default {
     formData: {
       handler(newVal) {
         this.$store.dispatch('setting/changeTheme', newVal);
+        if (newVal.brandTheme === 'dynamic') {
+          this.isColorPickerDisplay = true;
+        }
       },
       deep: true,
     },
@@ -158,6 +167,7 @@ export default {
       },
     },
   },
+
   methods: {
     onReset(): void {
       this.formData = {

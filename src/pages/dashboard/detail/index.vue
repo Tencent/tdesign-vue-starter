@@ -49,7 +49,7 @@
           theme="primary"
           mode="date"
           range
-          @change="onHappinesChange"
+          @change="onHappinessChange"
         ></t-date-picker>
         <t-button class="card-date-button">导出数据</t-button>
       </template>
@@ -101,36 +101,27 @@ export default {
     };
   },
   computed: {
-    ...mapState('setting', ['brandTheme']),
+    ...mapState('setting', ['brandTheme', 'mode']),
   },
   watch: {
     brandTheme(val) {
       changeChartsTheme([this.lineChart, this.scatterChart], val);
     },
+    mode() {
+      this.renderCharts();
+    },
   },
   mounted() {
-    if (!this.lineContainer) {
-      this.lineContainer = document.getElementById('lineContainer');
-    }
-    this.lineChart = echarts.init(this.lineContainer);
-    this.lineChart.setOption(getFolderLineDataSet());
-
-    window.addEventListener('resize', this.updateContainer, false);
-
-    if (!this.scatterContainer) {
-      this.scatterContainer = document.getElementById('scatterContainer');
-    }
-    this.scatterChart = echarts.init(this.scatterContainer);
-    this.scatterChart.setOption(getScatterDataSet());
+    this.renderCharts();
   },
   methods: {
     /** 采购商品满意度选择 */
-    onHappinesChange(value) {
-      this.scatterChart.setOption(getScatterDataSet(value));
+    onHappinessChange(value) {
+      this.scatterChart.setOption(getScatterDataSet({ dateTime: value }));
     },
     /** 采购商品申请趋势选择 */
     onMaterialChange(value) {
-      this.lineChart.setOption(getFolderLineDataSet(value));
+      this.lineChart.setOption(getFolderLineDataSet({ dateTime: value }));
     },
     updateContainer() {
       this.lineChart.resize({
@@ -141,6 +132,23 @@ export default {
         width: this.scatterContainer.clientWidth,
         height: this.scatterContainer.clientHeight,
       });
+    },
+    renderCharts() {
+      const { chartColors } = this.$store.state.setting;
+
+      if (!this.lineContainer) {
+        this.lineContainer = document.getElementById('lineContainer');
+      }
+      this.lineChart = echarts.init(this.lineContainer);
+      this.lineChart.setOption(getFolderLineDataSet({ ...chartColors }));
+
+      window.addEventListener('resize', this.updateContainer, false);
+
+      if (!this.scatterContainer) {
+        this.scatterContainer = document.getElementById('scatterContainer');
+      }
+      this.scatterChart = echarts.init(this.scatterContainer);
+      this.scatterChart.setOption(getScatterDataSet({ ...chartColors }));
     },
   },
 };
