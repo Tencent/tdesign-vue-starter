@@ -78,7 +78,7 @@
             <div
               id="countContainer"
               ref="countContainer"
-              :style="{ width: `${resizeTime * 326}px`, height: `${resizeTime * 326}px` }"
+              :style="{ width: `${resizeTime * 326}px`, height: `${resizeTime * 326}px`, margin: '0 auto' }"
               class="dashboard-chart-container"
             ></div>
           </card>
