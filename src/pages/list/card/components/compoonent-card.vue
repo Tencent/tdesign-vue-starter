@@ -169,20 +169,6 @@ export default {
         }
       }
 
-      &__disabled {
-        > div:first-child {
-          > button:first-child {
-            background-color: @gray-color-6;
-            color: @text-color-anti;
-          }
-
-          > button:last-child {
-            background-color: @gray-color-2;
-            color: @text-color-disabled;
-          }
-        }
-      }
-
       .t-icon-more {
         font-size: 24px;
         color: @text-color-primary;
@@ -193,7 +179,7 @@ export default {
   &__disabled {
     color: @text-color-disabled;
 
-    s .list-card-item_detail--name {
+    .list-card-item_detail--name {
       color: @text-color-disabled;
     }
 

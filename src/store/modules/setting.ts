@@ -1,13 +1,14 @@
 /* eslint-disable no-param-reassign */
 import STYLE_CONFIG from '@/config/style';
 import MENU_CONFIG from '@/config/routes.js';
-import { COLOR_TOKEN, ColorSeries } from '@/config/color';
+import { COLOR_TOKEN, ColorSeries, ColorToken, LIGHT_CHART_COLORS, DARK_CHART_COLORS } from '@/config/color';
 
 // 定义的state初始值
 const state = {
   ...STYLE_CONFIG,
   showSettingPanel: false,
   colorList: COLOR_TOKEN,
+  chartColors: LIGHT_CHART_COLORS,
 };
 
 type IInitStateType = typeof state;
@@ -45,6 +46,9 @@ const mutations = {
   },
   addColor(state: IStateType, payload: ColorSeries) {
     state.colorList = { ...state.colorList, ...payload };
+  },
+  changeChartColor(state: IStateType, payload: ColorToken) {
+    state.chartColors = { ...payload };
   },
 };
 
@@ -92,8 +96,8 @@ const getters = {
     }
     return false;
   },
-  showSettingBtn: (state) => !state.showHeader,
-  mode: (state) => {
+  showSettingBtn: (state: IStateType) => !state.showHeader,
+  mode: (state: IStateType) => {
     if (state.mode === 'auto') {
       const media = window.matchMedia('(prefers-color-scheme:dark)');
       if (media.matches) {
@@ -108,11 +112,13 @@ const getters = {
 const actions = {
   async changeTheme({ commit, dispatch }, payload: IStateType) {
     dispatch('changeMode', payload);
+
     dispatch('changeBrandTheme', payload);
     commit('update', payload);
   },
-  changeMode({ state }, payload) {
+  async changeMode({ commit, state }, payload: IStateType) {
     let theme = payload.mode;
+    const isDarkMode = theme === 'dark';
     if (payload.mode === 'auto') {
       const media = window.matchMedia('(prefers-color-scheme:dark)');
       if (media.matches) {
@@ -122,12 +128,17 @@ const actions = {
       }
     }
     if (theme !== state.mode) {
-      document.documentElement.setAttribute('theme-mode', theme === 'dark' ? 'dark' : '');
+      document.documentElement.setAttribute('theme-mode', isDarkMode ? 'dark' : '');
     }
+    commit('changeChartColor', isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS);
   },
   changeBrandTheme({ state }: { state: IStateType }, payload: IStateType) {
-    if (payload.brandTheme !== state.brandTheme) {
-      document.documentElement.setAttribute('theme-color', payload.brandTheme);
+    const { brandTheme, mode } = payload;
+    if (brandTheme !== state.brandTheme) {
+      document.documentElement.setAttribute(
+        'theme-color',
+        /^#([a-fA-F\d]{6}|[a-fA-F\d]{3})$/.test(brandTheme) && mode === 'dark' ? `${brandTheme}` : brandTheme,
+      );
     }
   },
 };

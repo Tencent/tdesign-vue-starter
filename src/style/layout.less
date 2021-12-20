@@ -1,7 +1,6 @@
 @import './variables.less';
 @import './font-family.less';
 
-
 // layout rewrite
 
 .t-layout--sider {
@@ -13,7 +12,6 @@
 }
 
 .t-layout.t-layout-has-sider {
-
   > .t-layout {
     flex: 1;
     min-width: 760px;
@@ -21,7 +19,7 @@
 }
 
 .t-menu--dark .t-menu__operations .t-icon {
-  color: rgba(255, 255, 255, .55);
+  color: rgba(255, 255, 255, 0.55);
   &:hover {
     cursor: pointer;
   }
@@ -37,16 +35,26 @@
   }
 }
 
-.@{prefix} {
+// TO BE FIX
+.t-select {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 
+.t-alert--info {
+  background-color: var(--td-brand-color-1);
+}
+
+.@{prefix} {
   // 布局元素调整
   &-wrapper {
     height: 100vh;
     display: flex;
     flex-direction: column;
   }
-  
-  &-main-wrapper{
+
+  &-main-wrapper {
     height: 500px;
     overflow: scroll;
   }
@@ -57,7 +65,7 @@
     }
   }
 
-  &-layout{
+  &-layout {
     height: calc(100vh - 64px);
     overflow-y: scroll;
   }
@@ -152,7 +160,6 @@
   }
 }
 
-
 .logo-container {
   cursor: pointer;
   display: inline-flex;
@@ -164,4 +171,3 @@
   color: @text-color-primary;
   opacity: 0.4;
 }
-

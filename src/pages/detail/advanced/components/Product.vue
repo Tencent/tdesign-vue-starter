@@ -61,7 +61,7 @@ export default Vue.extend({
 .operater-block {
   position: relative;
   background-color: @bg-color-container;
-  border: 1px solid #e3e6eb;
+  border: 1px solid @component-border;
   border-radius: 3px;
 
   .operater-content {

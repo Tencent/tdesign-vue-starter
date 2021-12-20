@@ -52,7 +52,7 @@
       <!-- 中部图表  -->
       <t-row :gutter="[16, 16]" class="row-container">
         <t-col :xs="12" :xl="9">
-          <card title="统计数据" :describe="`(万元)${currentMonth}`">
+          <card title="统计数据" describe="(万元)">
             <template #option>
               <div class="dashboard-chart-title-container">
                 <t-date-picker
@@ -249,11 +249,15 @@ export default {
     };
   },
   computed: {
-    ...mapState('setting', ['brandTheme']),
+    ...mapState('setting', ['brandTheme', 'mode']),
   },
   watch: {
     brandTheme(val) {
       changeChartsTheme([this.incomeCharts, this.charts, this.lineChartItem, this.pieChart], val);
+    },
+    mode(val) {
+      changeChartsTheme([this.incomeCharts, this.charts, this.lineChartItem, this.pieChart], val);
+      this.renderCharts();
     },
   },
   mounted() {
@@ -262,48 +266,7 @@ export default {
     });
 
     window.addEventListener('resize', this.updateContainer, false);
-    // 收入汇总图
-    if (!this.moneyContainer) {
-      this.moneyContainer = document.getElementById('moneyContainer');
-    }
-    this.moneyCharts = echarts.init(this.moneyContainer);
-    this.moneyCharts.setOption(constructInitDashboardDataset('line'));
-
-    // 退款图
-    if (!this.incomeContainer) {
-      this.incomeContainer = document.getElementById('refundContainer');
-    }
-    this.incomeCharts = echarts.init(this.incomeContainer);
-    this.incomeCharts.setOption(constructInitDashboardDataset('bar'));
-
-    // 出入库概览
-    if (!this.dataContainer) {
-      this.dataContainer = document.getElementById('dataContainer');
-    }
-    this.charts = echarts.init(this.dataContainer);
-    this.charts.setOption(constructInitDataset(LAST_7_DAYS));
-
-    // 资金走势
-    if (!this.monitorContainer) {
-      this.monitorContainer = document.getElementById('monitorContainer');
-    }
-    this.lineChartItem = echarts.init(this.monitorContainer);
-    this.lineChartItem.setOption(getLineChartDataSet());
-
-    // 销售合同占比
-    if (!this.countContainer) {
-      this.countContainer = document.getElementById('countContainer');
-    }
-    this.pieChart = echarts.init(this.countContainer);
-    const option = getPieChartDataSet();
-    this.pieChart.setOption(option);
-
-    // 定时动态效果
-    // this.timer = setInterval(() => {
-    //   this.x += 5;
-    //   this.y = Math.floor(Math.sin((this.x / 60) * 2 * Math.PI) * 30) + 30;
-    //   this.pieChart.setOption(getPieChartDataSet(this.y));
-    // }, 1000);
+    this.renderCharts();
   },
 
   beforeDestroy() {
@@ -326,11 +289,11 @@ export default {
     /** 资金走趋选择 */
     onCurrencyChange(checkedValues) {
       this.currentMonth = this.getThisMonth(checkedValues);
-      this.lineChartItem.setOption(getLineChartDataSet(checkedValues));
+      this.lineChartItem.setOption(getLineChartDataSet({ dateTime: checkedValues }));
     },
     /** 出入库概览日期更新 */
     onWarehouseChange(checkedValues) {
-      this.charts.setOption(constructInitDataset(checkedValues));
+      this.charts.setOption(constructInitDataset({ dateTime: checkedValues }));
     },
     go(link) {
       if (link) {
@@ -379,6 +342,46 @@ export default {
 
     getRankClass(index) {
       return ['dashboard-rank', { 'dashboard-rank__top': index < 3 }];
+    },
+    renderCharts() {
+      const { chartColors } = this.$store.state.setting;
+
+      // 收入汇总图
+      if (!this.moneyContainer) {
+        this.moneyContainer = document.getElementById('moneyContainer');
+      }
+      this.moneyCharts = echarts.init(this.moneyContainer);
+      this.moneyCharts.setOption(constructInitDashboardDataset('line'));
+
+      // 退款图
+      if (!this.incomeContainer) {
+        this.incomeContainer = document.getElementById('refundContainer');
+      }
+      this.incomeCharts = echarts.init(this.incomeContainer);
+      this.incomeCharts.setOption(constructInitDashboardDataset('bar', chartColors));
+
+      // 出入库概览
+      if (!this.dataContainer) {
+        this.dataContainer = document.getElementById('dataContainer');
+      }
+      this.charts = echarts.init(this.dataContainer);
+      this.charts.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...chartColors }));
+
+      // 资金走势
+      if (!this.monitorContainer) {
+        this.monitorContainer = document.getElementById('monitorContainer');
+      }
+      this.lineChartItem = echarts.init(this.monitorContainer);
+      this.lineChartItem.setOption(getLineChartDataSet({ ...chartColors }));
+
+      // 销售合同占比
+      if (!this.countContainer) {
+        this.countContainer = document.getElementById('countContainer');
+      }
+      this.pieChart = echarts.init(this.countContainer);
+
+      const option = getPieChartDataSet(chartColors);
+      this.pieChart.setOption(option);
     },
   },
 };
