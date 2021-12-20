@@ -1,6 +1,6 @@
 @import './variables.less';
-
 @import './font-family.less';
+
 
 // layout rewrite
 
@@ -16,7 +16,24 @@
 
   > .t-layout {
     flex: 1;
-    min-width: 760px; // 992 - 232
+    min-width: 760px;
+  }
+}
+
+.t-menu--dark .t-menu__operations .t-icon {
+  color: rgba(255, 255, 255, .55);
+  &:hover {
+    cursor: pointer;
+  }
+}
+.t-default-menu.t-menu--dark {
+  background: var(--td-gray-color-13);
+}
+.t-default-menu:not(.t-menu--dark) .t-menu__item.t-is-active:not(.t-is-opened) {
+  background-color: @brand-color-1;
+  color: @brand-color;
+  .t-icon {
+    color: @brand-color;
   }
 }
 
@@ -28,9 +45,13 @@
     display: flex;
     flex-direction: column;
   }
+  
+  &-main-wrapper{
+    height: 500px;
+    overflow: scroll;
+  }
 
   &-side-nav-layout {
-
     &-relative {
       height: 100%;
     }
@@ -40,7 +61,7 @@
     height: calc(100vh - 64px);
     overflow-y: scroll;
   }
-  
+
   &-content-layout {
     padding: @spacer-3;
   }
@@ -68,7 +89,7 @@
     top: 0;
     bottom: 0;
     z-index: 10;
-    transition: all .3s;
+    transition: all 0.3s;
     min-height: 100%;
 
     &-mix {
@@ -94,7 +115,6 @@
       align-items: center;
       justify-content: center;
       width: 100%;
-
       &:hover {
         cursor: pointer;
       }
@@ -109,39 +129,29 @@
       padding: 0 24px;
       height: 32px;
       width: 100%;
-      color: @text-color-anti;
+      color: @text-color-primary;
     }
 
     &-logo-normal {
-      font-family: TencentSansKoreanW7;
       color: @brand-color;
       font-size: @font-size-l;
-      transition: all .3s;
+      transition: all 0.3s;
     }
   }
 
   &-side-nav-placeholder {
     flex: 1 1 232px;
     min-width: 232px;
-    transition: all .3s;
+    transition: all 0.3s;
 
     &-hidden {
       flex: 1 1 72px;
       min-width: 72px;
-      transition: all .3s;
+      transition: all 0.3s;
     }
   }
 }
 
-.t-menu--dark .t-menu__operations .t-icon {
-  color: rgba(255, 255, 255, .55);
-  &:hover {
-    cursor: pointer;
-  }
-}
-.t-default-menu.t-menu--dark {
-  background: var(--td-gray-color-13);
-}
 
 .logo-container {
   cursor: pointer;
@@ -150,14 +160,8 @@
   margin-left: 24px;
 }
 
-
 .version-container {
-  color: @text-color-anti;
+  color: @text-color-primary;
   opacity: 0.4;
 }
-.t-default-menu__inner .t-menu-group-title {
-  color: @text-color-anti;
-  opacity: 0.3;
-};
-
 
