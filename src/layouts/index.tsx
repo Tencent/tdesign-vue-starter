@@ -8,7 +8,7 @@ import TdesignContent from './components/Content.vue';
 
 import { prefix } from '@/config/global';
 import TdesignSetting from './setting.vue';
-import { ModeType, SettingType, ClassName } from '@/interface';
+import { SettingType, ClassName } from '@/interface';
 import '@/style/layout.less';
 
 const name = `${prefix}-base-layout`;
@@ -21,12 +21,6 @@ export default Vue.extend({
     TdesignSideNav,
     TdesignSetting,
     TdesignBreadcrumb,
-  },
-  data(): any {
-    return {
-      prefix,
-      headerHeight: '64px',
-    };
   },
   computed: {
     ...mapGetters({
@@ -67,31 +61,19 @@ export default Vue.extend({
     },
     sideMenu() {
       const { layout, splitMenu } = this.$store.state.setting;
-      const { menuRouters } = this;
+      let { menuRouters } = this;
       if (layout === 'mix' && splitMenu) {
-        let index;
-        for (index = 0; index < menuRouters.length; index++) {
-          const item = menuRouters[index];
-          if (item.children && item.children.length > 0) {
-            return item.children.map((menuRouter) => ({ ...menuRouter, path: `${item.path}/${menuRouter.path}` }));
+        menuRouters.forEach((menu) => {
+          if (this.$route.path.indexOf(menu.path) === 0) {
+            menuRouters = menu.children.map((subMenu) => ({ ...subMenu, path: `${menu.path}/${subMenu.path}` }));
           }
-        }
+        });
       }
       return menuRouters;
     },
   },
   methods: {
-    getNavTheme(mode: ModeType, layout: string, type: string): string {
-      if (mode === 'dark') {
-        return 'dark';
-      }
-      if (type.includes(layout)) {
-        return 'dark';
-      }
-      return this.mode;
-    },
     renderSidebar(): VNode {
-      const theme = this.getNavTheme(this.setting.mode, this.setting.layout, ['side']);
       // const theme =
       //   this.setting.mode === 'dark' ? 'dark' : this.setting.layout === 'mix' ? 'light' : this.setting.theme;
       // menu 组件最多支持 3级菜单
@@ -104,7 +86,7 @@ export default Vue.extend({
             layout={this.setting.layout}
             isFixed={this.setting.isSidebarFixed}
             menu={this.sideMenu}
-            theme={theme}
+            theme={this.mode}
             isCompact={this.setting.isSidebarCompact}
             maxLevel={maxLevel}
           />
@@ -112,16 +94,13 @@ export default Vue.extend({
       );
     },
     renderHeader(): VNode {
-      const theme = this.getNavTheme(this.setting.mode, this.setting.layout, ['mix', 'top']);
-
-      // const theme = this.setting.layout === 'side' ? 'light' : this.setting.theme;
       const maxLevel = this.setting.splitMenu ? 1 : 3;
       return (
         this.showHeader && (
           <tdesign-header
             showLogo={this.showHeaderLogo}
             maxLevel={maxLevel}
-            theme={theme}
+            theme={this.mode}
             layout={this.setting.layout}
             isFixed={this.setting.isHeaderFixed}
             menu={this.headerMenu}
@@ -132,9 +111,9 @@ export default Vue.extend({
     },
     renderContent(): VNode {
       const { showBreadcrumb } = this.setting;
-      const { prefix, showAsideFooter } = this;
+      const { showAsideFooter } = this;
       return (
-        <t-layout class={[`${prefix}-layout`, 'narrow-scrollbar']}>
+        <t-layout class={[`${prefix}-layout`]}>
           <t-content class={`${prefix}-content-layout`}>
             {showBreadcrumb && <tdesign-breadcrumb />}
             <TdesignContent />
