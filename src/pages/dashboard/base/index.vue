@@ -91,8 +91,8 @@
           <card title="销售订单排名">
             <div slot="option">
               <t-radio-group default-value="dateVal">
-                <t-radio-button value="dateVal">月份</t-radio-button>
-                <t-radio-button value="monthVal">季度</t-radio-button>
+                <t-radio-button value="dateVal">本周</t-radio-button>
+                <t-radio-button value="monthVal">近三个月</t-radio-button>
               </t-radio-group>
             </div>
             <t-table :data="saleTendList" :columns="saleColumns" rowKey="productName" :style="{ overflow: 'scroll' }">
@@ -105,7 +105,7 @@
                 <trend :type="row.growUp > 0 ? 'up' : 'down'" :describe="Math.abs(row.growUp)" />
               </span>
               <template #operation="slotProps">
-                <a class="link" @click="rehandleClickOp(slotProps)">操作</a>
+                <a class="link" @click="rehandleClickOp(slotProps)">详情</a>
               </template>
             </t-table>
           </card>
@@ -114,8 +114,8 @@
           <card title="采购订单排名">
             <div slot="option">
               <t-radio-group default-value="dateVal">
-                <t-radio-button value="dateVal">月份</t-radio-button>
-                <t-radio-button value="monthVal">季度</t-radio-button>
+                <t-radio-button value="dateVal">本周</t-radio-button>
+                <t-radio-button value="monthVal">近三个月</t-radio-button>
               </t-radio-group>
             </div>
             <t-table :data="buyTendList" :columns="buyColumns" rowKey="productName" :style="{ overflow: 'scroll' }">
@@ -128,7 +128,7 @@
                 <trend :type="row.growUp > 0 ? 'up' : 'down'" :describe="Math.abs(row.growUp)" />
               </span>
               <template #operation="slotProps">
-                <a class="link" @click="rehandleClickOp(slotProps)">操作</a>
+                <a class="link" @click="rehandleClickOp(slotProps)">详情</a>
               </template>
             </t-table>
           </card>
@@ -288,12 +288,16 @@ export default {
     },
     /** 资金走趋选择 */
     onCurrencyChange(checkedValues) {
+      const { chartColors } = this.$store.state.setting;
+
       this.currentMonth = this.getThisMonth(checkedValues);
-      this.lineChartItem.setOption(getLineChartDataSet({ dateTime: checkedValues }));
+      this.lineChartItem.setOption(getLineChartDataSet({ dateTime: checkedValues, ...chartColors }));
     },
     /** 出入库概览日期更新 */
     onWarehouseChange(checkedValues) {
-      this.charts.setOption(constructInitDataset({ dateTime: checkedValues }));
+      const { chartColors } = this.$store.state.setting;
+
+      this.charts.setOption(constructInitDataset({ dateTime: checkedValues, ...chartColors }));
     },
     go(link) {
       if (link) {
@@ -306,6 +310,8 @@ export default {
     updateContainer() {
       if (document.documentElement.clientWidth >= 1400 && document.documentElement.clientWidth < 1920) {
         this.resizeTime = (document.documentElement.clientWidth / 2080).toFixed(2);
+      } else if (document.documentElement.clientWidth < 1080) {
+        this.resizeTime = (document.documentElement.clientWidth / 1080).toFixed(2);
       } else {
         this.resizeTime = 1;
       }

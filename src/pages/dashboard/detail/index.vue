@@ -104,8 +104,8 @@ export default {
     ...mapState('setting', ['brandTheme', 'mode']),
   },
   watch: {
-    brandTheme(val) {
-      changeChartsTheme([this.lineChart, this.scatterChart], val);
+    brandTheme() {
+      changeChartsTheme([this.lineChart, this.scatterChart]);
     },
     mode() {
       this.renderCharts();
@@ -117,11 +117,15 @@ export default {
   methods: {
     /** 采购商品满意度选择 */
     onHappinessChange(value) {
-      this.scatterChart.setOption(getScatterDataSet({ dateTime: value }));
+      const { chartColors } = this.$store.state.setting;
+
+      this.scatterChart.setOption(getScatterDataSet({ dateTime: value, ...chartColors }));
     },
     /** 采购商品申请趋势选择 */
     onMaterialChange(value) {
-      this.lineChart.setOption(getFolderLineDataSet({ dateTime: value }));
+      const { chartColors } = this.$store.state.setting;
+
+      this.lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors }));
     },
     updateContainer() {
       this.lineChart.resize({

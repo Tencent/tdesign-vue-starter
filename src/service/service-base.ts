@@ -35,7 +35,7 @@ export const PANE_LIST: Array<DashboardPanel> = [
     leftType: 'icon-usergroup',
   },
   {
-    title: '产生订单（个）',
+    title: '订单数量（个）',
     number: 527,
     downTrend: '20.5%',
     leftType: 'icon-file-paste',

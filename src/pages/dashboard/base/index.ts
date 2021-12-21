@@ -684,7 +684,7 @@ export function getScatterDataSet({
   placeholderColor,
   borderColor,
 }: { dateTime?: Array<string> } & Record<string, string>): any {
-  const divideNum = 10;
+  const divideNum = 40;
   const timeArray = [];
   const inArray = [];
   const outArray = [];

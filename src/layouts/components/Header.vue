@@ -17,6 +17,19 @@
         <!-- 搜索框 -->
         <search v-if="layout !== 'side'" :layout="layout" />
 
+        <!-- 全局通知 -->
+        <notice />
+
+        <t-tooltip placement="bottom" content="代码仓库">
+          <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
+            <t-icon name="logo-github" />
+          </t-button>
+        </t-tooltip>
+        <t-tooltip placement="bottom" content="帮助文档">
+          <t-button theme="default" shape="square" variant="text" @click="navToHelper">
+            <t-icon name="help-circle" />
+          </t-button>
+        </t-tooltip>
         <t-dropdown :min-column-width="125" trigger="click">
           <template #dropdown>
             <t-dropdown-menu>
@@ -38,20 +51,6 @@
             </div>
           </t-button>
         </t-dropdown>
-
-        <!-- 全局通知 -->
-        <notice />
-
-        <t-tooltip placement="bottom" content="代码仓库">
-          <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
-            <t-icon name="logo-github" />
-          </t-button>
-        </t-tooltip>
-        <t-tooltip placement="bottom" content="帮助文档">
-          <t-button theme="default" shape="square" variant="text" @click="navToHelper">
-            <t-icon name="help-circle" />
-          </t-button>
-        </t-tooltip>
         <t-tooltip placement="bottom" content="系统设置">
           <t-button theme="default" shape="square" variant="text" @click="toggleSettingPanel">
             <t-icon name="setting" />

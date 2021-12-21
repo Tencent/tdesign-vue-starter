@@ -9,7 +9,7 @@
   >
     <template v-if="type == 'password'">
       <t-form-item name="account">
-        <t-input v-model="formData.account" size="large" placeholder="请输入您的账号">
+        <t-input v-model="formData.account" size="large" placeholder="请输入账号：admin">
           <template #prefix-icon>
             <t-icon name="user" />
           </template>
@@ -22,7 +22,7 @@
           size="large"
           :type="showPsw ? 'text' : 'password'"
           clearable
-          placeholder="请输入登录密码"
+          placeholder="请输入登录密码：admin"
         >
           <template #prefix-icon>
             <t-icon name="lock-on" />
@@ -83,8 +83,8 @@ import QrcodeVue from 'qrcode.vue';
 
 const INITIAL_DATA = {
   phone: '',
-  account: '',
-  password: '',
+  account: 'admin',
+  password: 'admin',
   verifyCode: '',
   checked: false,
 };

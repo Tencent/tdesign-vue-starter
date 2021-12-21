@@ -35,7 +35,6 @@
             <color-picker
               v-model="colors"
               v-if="formData.brandTheme === 'dynamic' && isColorPickerDisplay"
-              @blur="handleColorPickerBlur"
             ></color-picker>
           </div>
           <div class="setting-group-title">导航布局</div>
@@ -188,7 +187,6 @@ export default {
     },
     handleClick(): void {
       this.$store.commit('setting/toggleSettingPanel', true);
-      // this.visible = !this.visible;
     },
     handleCloseDrawer(): void {
       this.$store.commit('setting/toggleSettingPanel', false);
