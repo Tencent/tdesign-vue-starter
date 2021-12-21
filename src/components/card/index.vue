@@ -67,6 +67,15 @@ export default Vue.extend({
 </script>
 <style lang="less">
 @import '@/style/variables';
+
+.t-col-lg-6 + .t-col-lg-6 {
+  @media (max-width: @screen-md-max) {
+    .card-container {
+      margin-top: 16px;
+    }
+  }
+}
+
 .card {
   &-option {
     display: flex;

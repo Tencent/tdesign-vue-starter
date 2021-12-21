@@ -137,6 +137,7 @@ export default {
     },
   },
   mounted() {
+    this.updateContainer();
     window.addEventListener('resize', this.updateContainer, false);
     this.renderCharts();
   },

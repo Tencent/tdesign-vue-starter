@@ -40,8 +40,8 @@
         </t-radio-group>
       </template>
 
-      <t-row class="product-block-container">
-        <t-col :flex="1">
+      <t-row :gutter="16" class="product-block-container">
+        <t-col :xl="4">
           <div class="product-add">
             <div class="product-sub">
               <t-icon name="add" class="product-sub-icon" />
@@ -49,7 +49,7 @@
             </div>
           </div>
         </t-col>
-        <t-col v-for="(item, index) in PRODUCT_LIST" :key="index" :flex="1">
+        <t-col v-for="(item, index) in PRODUCT_LIST" :key="index" :xl="4">
           <product :data="item" />
         </t-col>
       </t-row>
