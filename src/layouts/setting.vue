@@ -14,7 +14,7 @@
         <t-form :data="formData" size="large" ref="form" labelAlign="left" @reset="onReset" @submit="onSubmit">
           <div class="setting-group-title">主题模式</div>
           <t-radio-group v-model="formData.mode">
-            <div v-for="(item, index) in modeOption" :key="index" class="setting-layout-drawer">
+            <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
               <div>
                 <t-radio-button :key="index" :value="item.type"
                   ><component :is="getModeIcon(item.type)"
@@ -26,7 +26,7 @@
           <div class="setting-group-title">主题色</div>
           <t-radio-group v-model="formData.brandTheme">
             <div
-              v-for="(item, index) in colorOption.slice(0, colorOption.length - 1)"
+              v-for="(item, index) in COLOR_OPTIONS.slice(0, COLOR_OPTIONS.length - 1)"
               :key="index"
               class="setting-layout-drawer"
             >
@@ -46,10 +46,10 @@
               >
                 <template #content><color-picker v-model="colors" /></template>
                 <t-radio-button
-                  :value="colorOption[colorOption.length - 1]"
+                  :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]"
                   class="setting-layout-color-group dynamic-color-btn"
                 >
-                  <color-container :value="colorOption[colorOption.length - 1]" />
+                  <color-container :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]" />
                 </t-radio-button>
               </t-popup>
             </div>
@@ -57,7 +57,7 @@
           <div class="setting-group-title">导航布局</div>
 
           <t-radio-group v-model="formData.layout">
-            <div v-for="(item, index) in layoutOption" :key="index" class="setting-layout-drawer">
+            <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
               <t-radio-button :key="index" :value="item"><thumbnail :src="getThumbnailUrl(item)" /></t-radio-button>
             </div>
           </t-radio-group>
@@ -115,6 +115,14 @@ import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
 import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 
+const LAYOUT_OPTION = ['side', 'top', 'mix'];
+const COLOR_OPTIONS = ['default', 'purple', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'dynamic'];
+const MODE_OPTIONS = [
+  { type: 'light', text: '明亮' },
+  { type: 'dark', text: '暗黑' },
+  { type: 'auto', text: '跟随系统' },
+];
+
 export default {
   name: 'DefaultLayoutSetting',
   components: { Thumbnail, ColorContainer, 'color-picker': Sketch },
@@ -123,13 +131,9 @@ export default {
       colors: {
         hex: null,
       },
-      modeOption: [
-        { type: 'light', text: '明亮' },
-        { type: 'dark', text: '暗黑' },
-        { type: 'auto', text: '跟随系统' },
-      ],
-      layoutOption: ['side', 'top', 'mix'],
-      colorOption: ['default', 'purple', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'dynamic'],
+      MODE_OPTIONS,
+      LAYOUT_OPTION,
+      COLOR_OPTIONS,
       visible: false,
       formData: { ...STYLE_CONFIG },
       isColoPickerDisplay: false,

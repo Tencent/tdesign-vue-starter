@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import STYLE_CONFIG from '@/config/style';
-import MENU_CONFIG from '@/config/routes.js';
 import { COLOR_TOKEN, ColorSeries, ColorToken, LIGHT_CHART_COLORS, DARK_CHART_COLORS } from '@/config/color';
 
 // 定义的state初始值
@@ -57,46 +56,7 @@ const getters = {
   showSidebar: (state: IStateType) => state.layout !== 'top',
   showSidebarLogo: (state: IStateType) => state.layout === 'side',
   showHeaderLogo: (state: IStateType) => state.layout !== 'side',
-  headerMenu: (state: IStateType) => {
-    if (state.layout === 'mix') {
-      if (state.splitMenu) {
-        return MENU_CONFIG.map((menu) => ({
-          ...menu,
-          children: [],
-        }));
-      }
-      return [];
-    }
-    return MENU_CONFIG;
-  },
-  sideMenu: (state: IStateType, _, rootState) => {
-    if (state.layout === 'mix' && state.splitMenu) {
-      let index: number;
-      for (index = 0; index < MENU_CONFIG.length; index++) {
-        const item = MENU_CONFIG[index];
-        if (item.children && item.children.length > 0) {
-          if (rootState.route.path.indexOf(item.path) === 0) {
-            return item.children.map((menuRouter) => ({ ...menuRouter, path: `${item.path}/${menuRouter.path}` }));
-          }
-        }
-      }
-    }
-    return MENU_CONFIG;
-  },
-  showAsideFooter: (state: IStateType) => {
-    if (state.layout === 'mix' && !state.isSidebarFixed) {
-      return state.showFooter && state.isAsideFooter;
-    }
-    return state.showFooter;
-  },
-
-  showMainFooter: (state: IStateType) => {
-    if (state.layout === 'mix' && !state.isSidebarFixed) {
-      return state.showFooter && !state.isAsideFooter;
-    }
-    return false;
-  },
-  showSettingBtn: (state: IStateType) => !state.showHeader,
+  showFooter: (state: IStateType) => state.showFooter,
   mode: (state: IStateType) => {
     if (state.mode === 'auto') {
       const media = window.matchMedia('(prefers-color-scheme:dark)');
@@ -112,7 +72,6 @@ const getters = {
 const actions = {
   async changeTheme({ commit, dispatch }, payload: IStateType) {
     dispatch('changeMode', payload);
-
     dispatch('changeBrandTheme', payload);
     commit('update', payload);
   },
