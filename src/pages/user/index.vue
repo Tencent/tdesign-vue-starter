@@ -137,20 +137,6 @@ export default {
     },
   },
   mounted() {
-    if (!this.lineContainer) {
-      this.lineContainer = document.getElementById('lineContainer');
-    }
-    this.lineChart = echarts.init(this.lineContainer);
-    this.lineChart.setOption({
-      grid: {
-        x: 30, // 默认是80px
-        y: 30, // 默认是60px
-        x2: 10, // 默认80px
-        y2: 30, // 默认60px
-      },
-      ...getFolderLineDataSet(),
-    });
-
     this.updateContainer();
     window.addEventListener('resize', this.updateContainer, false);
     this.renderCharts();
