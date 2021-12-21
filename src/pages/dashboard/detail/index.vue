@@ -128,11 +128,11 @@ export default {
       this.lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors }));
     },
     updateContainer() {
-      this.lineChart.resize({
+      this.lineChart.resize?.({
         width: this.lineContainer.clientWidth,
         height: this.lineContainer.clientHeight,
       });
-      this.scatterChart.resize({
+      this.scatterChart.resize?.({
         width: this.scatterContainer.clientWidth,
         height: this.scatterContainer.clientHeight,
       });

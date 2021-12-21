@@ -163,7 +163,7 @@ export default {
       this.lineChart.setOption(getFolderLineDataSet({ dateTime: value }));
     },
     updateContainer() {
-      this.lineChart.resize({
+      this.lineChart.resize?.({
         width: this.lineContainer.clientWidth,
         height: this.lineContainer.clientHeight,
       });

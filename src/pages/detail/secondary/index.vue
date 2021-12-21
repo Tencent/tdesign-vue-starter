@@ -101,7 +101,7 @@ export default {
       const changeMsg = this.msgData;
       changeMsg.forEach((e) => {
         if (e.id === item.id) {
-          e.status = !e.status;
+          if (e.status) e.status = false;
         }
       });
       this.$store.commit('notification/setMsgData', changeMsg);

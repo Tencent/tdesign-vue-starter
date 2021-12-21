@@ -176,6 +176,7 @@ const INITIAL_DATA = {
   endDate: '',
   payment: '',
   amount: 0,
+  comment: '',
 };
 
 export default {

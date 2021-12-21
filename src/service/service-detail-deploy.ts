@@ -120,13 +120,19 @@ class DetailBase {
         sorter: (a, b) => a.name.substr(10) - b.name.substr(10),
       },
       {
-        width: '448',
+        width: '224',
         ellipsis: true,
         colKey: 'adminName',
         title: '管理员',
       },
       {
-        width: '448',
+        width: '224',
+        ellipsis: true,
+        colKey: 'adminPhone',
+        title: '联系方式',
+      },
+      {
+        width: '224',
         className: 'test',
         ellipsis: true,
         colKey: 'updateTime',
