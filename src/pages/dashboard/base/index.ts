@@ -28,19 +28,13 @@ export function getColorFromTheme(theme: string): Array<string> {
 
     themeColor = generateColorMap(theme, newPalette, mode);
   }
-  // theme = themeColor?.['@brand-color'];
-  const themeColorList: Array<string> = [];
+  theme = themeColor?.['@brand-color'];
 
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key in themeColor) {
-    if (Object.prototype.hasOwnProperty.call(themeColor, key)) {
-      const elementColor: string = themeColor[key];
-
-      themeColorList.push(elementColor);
-    }
-  }
-  // console.log(themeColorList, 'themeColorList');
-  // console.log(theme, 'theme');
+  const themeColorList = Color.getRandomPalette({
+    color: theme,
+    colorGamut: 'bright',
+    number: 8,
+  });
 
   return themeColorList;
 }
