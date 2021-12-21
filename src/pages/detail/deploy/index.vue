@@ -1,14 +1,14 @@
 <template>
   <div>
-    <t-row :gutter="16">
-      <t-col :span="6">
+    <t-row :gutter="12">
+      <t-col :lg="6" :xs="12">
         <card title="部署趋势">
           <div class="deploy-panel-left">
             <div id="monitorContainer" style="width: 100%; height: 265px" />
           </div>
         </card>
       </t-col>
-      <t-col :span="6">
+      <t-col :lg="6" :xs="12">
         <card title="告警情况">
           <template #option>
             <t-radio-group default-value="dateVal" @change="onAlertChange">

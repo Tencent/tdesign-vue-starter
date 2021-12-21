@@ -67,6 +67,37 @@ export default Vue.extend({
 </script>
 <style lang="less">
 @import '@/style/variables';
+
+.main-color {
+  background: @brand-color;
+  color: @text-color-primary;
+
+  .card-subtitle {
+    color: @text-color-anti;
+  }
+
+  .dashboard-item-top span {
+    color: @text-color-anti;
+  }
+
+  .dashboard-item-block {
+    color: @text-color-anti;
+    opacity: 0.6;
+  }
+
+  .dashboard-item-bottom {
+    color: @text-color-anti;
+  }
+}
+
+.t-col-lg-6 + .t-col-lg-6 {
+  @media (max-width: @screen-md-max) {
+    .card-container {
+      margin-top: 16px;
+    }
+  }
+}
+
 .card {
   &-option {
     display: flex;
