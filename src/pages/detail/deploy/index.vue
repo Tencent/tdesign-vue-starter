@@ -33,14 +33,6 @@
         @sort-change="sortChange"
         @change="rehandleChange"
       >
-        <template #adminName="{ row }">
-          <span>
-            {{ row.adminName }}
-            <t-tag v-if="row.adminPhone" size="small" style="color: var(--td-text-color-placeholder)">{{
-              row.adminPhone
-            }}</t-tag>
-          </span>
-        </template>
         <template #op="slotProps">
           <a class="t-button-link" @click="listClick(slotProps)">管理</a>
           <a class="t-button-link" @click="deleteClickOp(slotProps)">删除</a>

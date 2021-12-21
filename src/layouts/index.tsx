@@ -133,7 +133,7 @@ export default Vue.extend({
   },
 
   render(): VNode {
-    const { layout } = this.setting;
+    const { layout, showMainFooter } = this.setting;
     const header = this.renderHeader();
     const sidebar = this.renderSidebar();
     const content = this.renderContent();
@@ -150,7 +150,7 @@ export default Vue.extend({
           <t-layout key="no-side">
             {header}
             <t-layout class={this.mainLayoutCls}>{[sidebar, content]}</t-layout>
-            {this.showMainFooter && footer}
+            {showMainFooter && footer}
           </t-layout>
         )}
         <tdesign-setting />

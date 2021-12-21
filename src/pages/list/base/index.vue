@@ -101,6 +101,7 @@ export default Vue.extend({
           ellipsis: true,
           width: 300,
           colKey: 'name',
+          fixed: 'left',
         },
         { title: '合同状态', colKey: 'status', width: 200, cell: { col: 'status' } },
         {

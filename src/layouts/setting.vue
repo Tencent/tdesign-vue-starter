@@ -17,7 +17,7 @@
             <div v-for="(item, index) in modeOption" :key="index" class="setting-layout-drawer">
               <div>
                 <t-radio-button :key="index" :value="item.type"
-                  ><thumbnail :src="getThumbnailUrl(item.type)"
+                  ><component :is="getModeIcon(item.type)"
                 /></t-radio-button>
                 <p :style="{ textAlign: 'center', marginTop: '8px' }">{{ item.text }}</p>
               </div>
@@ -25,19 +25,35 @@
           </t-radio-group>
           <div class="setting-group-title">主题色</div>
           <t-radio-group v-model="formData.brandTheme">
-            <div v-for="(item, index) in colorOption" :key="index" class="setting-layout-drawer">
-              <t-radio-button :key="index" :value="item" class="setting-layout-color-group"
-                ><color-container :value="item" />
+            <div
+              v-for="(item, index) in colorOption.slice(0, colorOption.length - 1)"
+              :key="index"
+              class="setting-layout-drawer"
+            >
+              <t-radio-button :key="index" :value="item" class="setting-layout-color-group">
+                <color-container :value="item" />
               </t-radio-button>
             </div>
+            <div class="setting-layout-drawer">
+              <t-popup
+                destroy-on-close
+                expand-animation
+                placement="bottom-right"
+                trigger="click"
+                :visible="isColoPickerDisplay"
+                @visible-change="onPopupVisibleChange"
+                :overlayStyle="{ padding: 0 }"
+              >
+                <template #content><color-picker v-model="colors" /></template>
+                <t-radio-button
+                  :value="colorOption[colorOption.length - 1]"
+                  class="setting-layout-color-group dynamic-color-btn"
+                >
+                  <color-container :value="colorOption[colorOption.length - 1]" />
+                </t-radio-button>
+              </t-popup>
+            </div>
           </t-radio-group>
-          <div class="setting-group-color">
-            <color-picker
-              v-model="colors"
-              v-if="formData.brandTheme === 'dynamic' && isColorPickerDisplay"
-              @blur="handleColorPickerBlur"
-            ></color-picker>
-          </div>
           <div class="setting-group-title">导航布局</div>
 
           <t-radio-group v-model="formData.layout">
@@ -45,13 +61,6 @@
               <t-radio-button :key="index" :value="item"><thumbnail :src="getThumbnailUrl(item)" /></t-radio-button>
             </div>
           </t-radio-group>
-
-          <!-- <t-form-item label="导航风格" name="theme" class="setting-route-theme">
-              <t-radio-group v-model="formData.theme" defaultValue="light" variant="default-filled" size="small">
-                <t-radio-button value="light">明亮</t-radio-button>
-                <t-radio-button value="dark">暗黑</t-radio-button>
-              </t-radio-group>
-            </t-form-item> -->
 
           <t-form-item v-show="formData.layout === 'mix'" label="分割菜单（混合模式下有效）" name="splitMenu">
             <t-switch v-model="formData.splitMenu"></t-switch>
@@ -94,12 +103,17 @@
 import { mapGetters } from 'vuex';
 import { Color } from 'tvision-color';
 import { Sketch } from 'vue-color';
+import { PopupVisibleChangeContext } from 'tdesign-vue';
 
 import STYLE_CONFIG from '@/config/style';
 import { insertThemeStylesheet, generateColorMap } from '@/config/color';
 
 import Thumbnail from '@/components/thumbnail/index.vue';
 import ColorContainer from '@/components/color/index.vue';
+
+import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
+import SettingLightIcon from '@/assets/assets-setting-light.svg';
+import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 
 export default {
   name: 'DefaultLayoutSetting',
@@ -118,7 +132,7 @@ export default {
       colorOption: ['default', 'purple', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'dynamic'],
       visible: false,
       formData: { ...STYLE_CONFIG },
-      isColorPickerDisplay: false,
+      isColoPickerDisplay: false,
     };
   },
   computed: {
@@ -141,16 +155,17 @@ export default {
   watch: {
     formData: {
       handler(newVal) {
-        this.$store.dispatch('setting/changeTheme', newVal);
-        if (newVal.brandTheme === 'dynamic') {
-          this.isColorPickerDisplay = true;
-        }
+        // 没有在formData中 需要从store中同步过来
+        const { isSidebarCompact } = this.$store.state.setting;
+        this.$store.dispatch('setting/changeTheme', { ...newVal, isSidebarCompact });
       },
       deep: true,
     },
     colors: {
       handler(newColor) {
         const { hex } = newColor;
+        const { setting } = this.$store.state;
+
         // hex 主题色
         const newPalette = Color.getPaletteByGradation({
           colors: [hex],
@@ -163,12 +178,19 @@ export default {
 
         insertThemeStylesheet(hex, colorMap, mode);
 
-        this.$store.dispatch('setting/changeTheme', { ...this.formData, brandTheme: hex });
+        this.$store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
       },
     },
   },
-
+  mounted() {
+    document.querySelector('.dynamic-color-btn').addEventListener('click', () => {
+      this.isColoPickerDisplay = true;
+    });
+  },
   methods: {
+    onPopupVisibleChange(visible: boolean, context: PopupVisibleChangeContext) {
+      if (!visible && context.trigger === 'document') this.isColoPickerDisplay = visible;
+    },
     onReset(): void {
       this.formData = {
         ...STYLE_CONFIG,
@@ -183,12 +205,20 @@ export default {
         this.$message.warning(firstError);
       }
     },
+    getModeIcon(mode: string) {
+      if (mode === 'light') {
+        return SettingLightIcon;
+      }
+      if (mode === 'dark') {
+        return SettingDarkIcon;
+      }
+      return SettingAutoIcon;
+    },
     getThumbnailUrl(name: string) {
       return `https://tdesign.gtimg.com/starter/setting/${name}.png`;
     },
     handleClick(): void {
       this.$store.commit('setting/toggleSettingPanel', true);
-      // this.visible = !this.visible;
     },
     handleCloseDrawer(): void {
       this.$store.commit('setting/toggleSettingPanel', false);
@@ -318,7 +348,7 @@ export default {
     .t-radio-button {
       display: inline-flex;
       max-height: 78px;
-      padding: 6px;
+      padding: 8px;
       border-radius: @border-radius;
       border: 2px solid #e3e6eb;
 

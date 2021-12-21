@@ -1,5 +1,11 @@
 <template>
-  <t-popup expand-animation placement="bottom-right" trigger="click">
+  <t-popup
+    expand-animation
+    placement="bottom-right"
+    trigger="click"
+    :visible="isNoticeVisible"
+    @visible-change="onPopupVisibleChange"
+  >
     <template #content>
       <div class="header-msg">
         <div class="header-msg-top">
@@ -38,7 +44,7 @@
       </div>
     </template>
     <t-badge :count="unreadMsg.length" :offset="[15, 21]">
-      <t-button theme="default" shape="square" variant="text">
+      <t-button theme="default" shape="square" variant="text" @click="isNoticeVisible = true">
         <t-icon name="mail" />
       </t-button>
     </t-badge>
@@ -51,13 +57,26 @@ import { mapState, mapGetters } from 'vuex';
 import { NotificationItem } from '@/interface';
 
 export default Vue.extend({
+  data() {
+    return {
+      isNoticeVisible: false,
+    };
+  },
   computed: {
     ...mapState('notification', ['msgData']),
     ...mapGetters('notification', ['unreadMsg']),
   },
   methods: {
+    onPopupVisibleChange(visible: boolean, context) {
+      if (context.trigger === 'trigger-element-click') {
+        this.isNoticeVisible = true;
+        return;
+      }
+      this.isNoticeVisible = visible;
+    },
     goDetail() {
       this.$router.push('/detail/secondary');
+      this.isNoticeVisible = false;
     },
     setRead(type: string, item?: NotificationItem) {
       const changeMsg = this.msgData;

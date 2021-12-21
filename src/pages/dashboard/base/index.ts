@@ -27,6 +27,7 @@ export function getColorFromTheme(theme: string): Array<string> {
 
     themeColor = generateColorMap(theme, newPalette, mode);
   }
+  // theme = themeColor?.['@brand-color'];
   const themeColorList: Array<string> = [];
 
   // eslint-disable-next-line no-restricted-syntax
@@ -37,6 +38,9 @@ export function getColorFromTheme(theme: string): Array<string> {
       themeColorList.push(elementColor);
     }
   }
+  // console.log(themeColorList, 'themeColorList');
+  // console.log(theme, 'theme');
+
   return themeColorList;
 }
 
@@ -684,7 +688,7 @@ export function getScatterDataSet({
   placeholderColor,
   borderColor,
 }: { dateTime?: Array<string> } & Record<string, string>): any {
-  const divideNum = 10;
+  const divideNum = 40;
   const timeArray = [];
   const inArray = [];
   const outArray = [];
@@ -693,7 +697,6 @@ export function getScatterDataSet({
     if (dateTime.length > 0) {
       const dateAbsTime: number = (new Date(dateTime[1]).getTime() - new Date(dateTime[0]).getTime()) / divideNum;
       const enhandTime: number = new Date(dateTime[0]).getTime() + dateAbsTime * i;
-      // console.log('dateAbsTime..', dateAbsTime, enhandTime);
       timeArray.push(dayjs(enhandTime).format('MM-DD'));
     } else {
       timeArray.push(

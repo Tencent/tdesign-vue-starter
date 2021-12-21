@@ -17,6 +17,11 @@ const instance = axios.create({
   withCredentials: true,
 });
 
+// eslint-disable-next-line
+// @ts-ignore
+// axios的retry ts类型有问题
+instance.interceptors.retry = 3;
+
 instance.interceptors.request.use((config) => config);
 
 instance.interceptors.response.use(

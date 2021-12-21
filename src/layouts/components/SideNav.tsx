@@ -102,13 +102,20 @@ export default Vue.extend({
       const isCompact = window.innerWidth <= MIN_POINT;
       this.$store.commit('setting/showSidebarCompact', isCompact);
     },
+    handleNav(url) {
+      this.$router.push(url);
+    },
   },
   render() {
     return (
       <div class={this.sideNavCls}>
         <t-menu width="232px" class={this.menuCls} theme={this.theme} value={this.active} collapsed={this.collapsed}>
           {this.showLogo && (
-            <span slot="logo" class={`${prefix}-side-nav-logo-wrapper`}>
+            <span
+              slot="logo"
+              class={`${prefix}-side-nav-logo-wrapper`}
+              onClick={() => this.handleNav('/dashboard/base')}
+            >
               {this.collapsed ? (
                 <tLogo class={`${prefix}-side-nav-logo-t-logo`} />
               ) : (
@@ -117,7 +124,7 @@ export default Vue.extend({
             </span>
           )}
           <menu-content navData={this.menu}></menu-content>
-          <span slot="operations" class="version-container" onClick={this.changeCollapsed}>
+          <span slot="operations" class="version-container">
             {!this.collapsed && 'TDesign Starter'} {pgk.version}
           </span>
         </t-menu>
