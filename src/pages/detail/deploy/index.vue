@@ -115,8 +115,10 @@ export default {
   watch: {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     brandTheme(val): void {
-      this.areaChart.setOption(getSmoothLineDataSet({}));
-      this.columnChart.setOption(get2ColBarChartDataSet({}));
+      const { chartColors } = this.$store.state.setting;
+
+      this.areaChart.setOption(getSmoothLineDataSet({ ...chartColors }));
+      this.columnChart.setOption(get2ColBarChartDataSet({ ...chartColors }));
     },
     mode() {
       this.renderCharts();
