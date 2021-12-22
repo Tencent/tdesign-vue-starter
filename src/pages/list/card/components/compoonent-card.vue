@@ -185,6 +185,10 @@ export default {
     .t-icon-more {
       color: @text-color-disabled;
     }
+
+    .t-button--theme-primary {
+      color: @text-color-disabled;
+    }
   }
 }
 </style>

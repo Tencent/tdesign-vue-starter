@@ -26,11 +26,7 @@ export function getColorFromTheme(theme: string): Array<string> {
     const defaultGradients = !isDarkMode ? defaultLightColor : defaultDarkColor;
 
     const spliceThemeList = defaultGradients.slice(0, themIdx);
-    const lastIdx = defaultGradients.length - 1;
-    themeColorList =
-      themIdx === lastIdx
-        ? [defaultGradients[lastIdx]].concat(spliceThemeList)
-        : defaultGradients.slice(themIdx, defaultGradients.length - 1).concat(spliceThemeList);
+    themeColorList = defaultGradients.slice(themIdx, defaultGradients.length).concat(spliceThemeList);
   } else {
     theme = themeColor?.['@brand-color'];
     themeColorList = Color.getRandomPalette({

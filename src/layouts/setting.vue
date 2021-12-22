@@ -354,7 +354,7 @@ export default {
       max-height: 78px;
       padding: 8px;
       border-radius: @border-radius;
-      border: 2px solid #e3e6eb;
+      border: 2px solid @component-border;
 
       // &:last-child {
       //   border-right: 2px solid transparent;

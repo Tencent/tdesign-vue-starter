@@ -12,7 +12,7 @@ const state = {
 
 type IInitStateType = typeof state;
 
-interface IStateType extends IInitStateType {
+export interface IStateType extends IInitStateType {
   isAsideFooter: boolean;
   showSettingPanel: boolean;
 }

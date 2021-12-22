@@ -166,7 +166,7 @@ export default {
 }
 
 .list-tree-content {
-  border-left: 1px solid @border-level-1-color;
+  border-left: 1px solid @component-border;
   overflow: auto;
 }
 </style>
