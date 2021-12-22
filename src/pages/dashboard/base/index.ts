@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import * as echarts from 'echarts/core';
 import { Color } from 'tvision-color';
-import { getBrandColor, generateColorMap } from '@/config/color';
+import { getBrandColor, defaultLightColor, defaultDarkColor } from '@/config/color';
 import store from '@/store';
 
 const { state } = store;
@@ -16,31 +16,25 @@ const { state } = store;
 export function getColorFromTheme(theme: string): Array<string> {
   const { setting } = state;
   const { colorList, mode } = setting;
-  let themeColor = getBrandColor(theme, colorList);
+  const isDarkMode = mode === 'dark';
+  let themeColorList = [];
+  const themeColor = getBrandColor(theme, colorList);
 
-  if (theme === 'dynamic' || (!/^#[A-F\d]{6}$/i.test(theme) && mode === 'dark')) {
-    theme = themeColor?.['@brand-color-1'] || '#0052D9';
+  if (!/^#[A-F\d]{6}$/i.test(theme)) {
+    theme = themeColor?.['@brand-color'] || '#0052D9';
+    const themIdx = defaultLightColor.indexOf(theme.toLocaleLowerCase());
+    const defaultGradients = !isDarkMode ? defaultLightColor : defaultDarkColor;
 
-    const newPalette = Color.getPaletteByGradation({
-      colors: [theme],
-      step: 10,
-    })[0];
-
-    themeColor = generateColorMap(theme, newPalette, mode);
+    const spliceThemeList = defaultGradients.slice(0, themIdx);
+    themeColorList = defaultGradients.slice(themIdx, defaultGradients.length).concat(spliceThemeList);
+  } else {
+    theme = themeColor?.['@brand-color'];
+    themeColorList = Color.getRandomPalette({
+      color: theme,
+      colorGamut: 'bright',
+      number: 8,
+    });
   }
-  // theme = themeColor?.['@brand-color'];
-  const themeColorList: Array<string> = [];
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key in themeColor) {
-    if (Object.prototype.hasOwnProperty.call(themeColor, key)) {
-      const elementColor: string = themeColor[key];
-
-      themeColorList.push(elementColor);
-    }
-  }
-  // console.log(themeColorList, 'themeColorList');
-  // console.log(theme, 'theme');
 
   return themeColorList;
 }
@@ -220,7 +214,7 @@ export function constructInitDataset({
       },
       axisLine: {
         lineStyle: {
-          color: chartListColor()[1],
+          color: borderColor,
           width: 1,
         },
       },
@@ -547,7 +541,6 @@ export function getLineChartDataSet({
     if (dateTime.length > 0) {
       const dateAbsTime: number = (new Date(dateTime[1]).getTime() - new Date(dateTime[0]).getTime()) / divideNum;
       const enhandTime: number = new Date(dateTime[0]).getTime() + dateAbsTime * i;
-      // console.log('dateAbsTime..', dateAbsTime, enhandTime);
       timeArray.push(dayjs(enhandTime).format('MM-DD'));
     } else {
       timeArray.push(
@@ -1042,23 +1035,12 @@ export function get2ColBarChartDataSet({
         type: 'bar',
         barWidth: '30%',
         data: lastYearListCopy,
-        itemStyle: {
-          color: '#BCC4D0',
-        },
       },
       {
         name: '今年',
         type: 'bar',
         barWidth: '30%',
         data: thisYearListCopy,
-        itemStyle: {
-          color: (params: { value: number }) => {
-            if (params.value >= 200) {
-              return chartListColor()[1];
-            }
-            return chartListColor()[0];
-          },
-        },
       },
     ],
   };
@@ -1068,6 +1050,7 @@ export function getPieChartDataSet({
   radius = 42,
   textColor,
   placeholderColor,
+  containerColor,
 }: { radius: number } & Record<string, string>) {
   return {
     color: chartListColor(),
@@ -1101,6 +1084,10 @@ export function getPieChartDataSet({
         selectedMode: true,
         hoverAnimation: true,
         silent: true,
+        itemStyle: {
+          borderColor: containerColor,
+          borderWidth: 1,
+        },
         label: {
           show: true,
           position: 'center',

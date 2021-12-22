@@ -237,7 +237,7 @@ export default Vue.extend({
 }
 
 .left-operation-container {
-  padding: 6px 0;
+  padding: 0 0 6px 0;
   margin-bottom: 16px;
 
   .selected-count {

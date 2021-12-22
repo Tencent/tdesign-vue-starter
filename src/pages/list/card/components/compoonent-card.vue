@@ -165,7 +165,6 @@ export default {
           left: 18px;
           background-color: @brand-color-2;
           --ripple-color: @brand-color-2;
-          color: @brand-color;
         }
       }
 
@@ -184,6 +183,10 @@ export default {
     }
 
     .t-icon-more {
+      color: @text-color-disabled;
+    }
+
+    .t-button--theme-primary {
       color: @text-color-disabled;
     }
   }

@@ -116,7 +116,7 @@ import SettingLightIcon from '@/assets/assets-setting-light.svg';
 import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
-const COLOR_OPTIONS = ['default', 'purple', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'dynamic'];
+const COLOR_OPTIONS = ['default', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'purple', 'dynamic'];
 const MODE_OPTIONS = [
   { type: 'light', text: '明亮' },
   { type: 'dark', text: '暗黑' },
@@ -354,7 +354,7 @@ export default {
       max-height: 78px;
       padding: 8px;
       border-radius: @border-radius;
-      border: 2px solid #e3e6eb;
+      border: 2px solid @component-border;
 
       // &:last-child {
       //   border-right: 2px solid transparent;
