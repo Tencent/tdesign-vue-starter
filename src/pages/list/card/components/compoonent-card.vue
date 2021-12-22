@@ -165,7 +165,6 @@ export default {
           left: 18px;
           background-color: @brand-color-2;
           --ripple-color: @brand-color-2;
-          color: @brand-color;
         }
       }
 

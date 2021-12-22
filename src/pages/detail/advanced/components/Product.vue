@@ -21,7 +21,7 @@
       </div>
       <div class="operater-item">
         <span class="operater-item-info">{{ data.info }}</span>
-        <t-icon class="operater-item-icon" name="chevron-right" size="small" style="color: rgba(0, 0, 0, 0.26)" />
+        <t-icon class="operater-item-icon" name="chevron-right" size="small" />
       </div>
     </div>
     <div class="operater-footer">
@@ -32,7 +32,7 @@
         :percentage="(data.use / data.stock) * 100"
         :label="false"
         :color="data.use / data.stock < 0.5 ? '#E24D59' : ''"
-        :track-color="data.use / data.stock < 0.5 ? '#FCD4D4' : '#D4E3FC'"
+        :track-color="data.use / data.stock < 0.5 ? 'var(--td-error-color-1)' : 'var(--td-brand-color-1)'"
       />
     </div>
   </div>
@@ -136,6 +136,7 @@ export default Vue.extend({
         position: absolute;
         bottom: 8px;
         right: 0;
+        color: @text-color-disabled;
       }
     }
   }

@@ -545,7 +545,6 @@ export function getLineChartDataSet({
     if (dateTime.length > 0) {
       const dateAbsTime: number = (new Date(dateTime[1]).getTime() - new Date(dateTime[0]).getTime()) / divideNum;
       const enhandTime: number = new Date(dateTime[0]).getTime() + dateAbsTime * i;
-      // console.log('dateAbsTime..', dateAbsTime, enhandTime);
       timeArray.push(dayjs(enhandTime).format('MM-DD'));
     } else {
       timeArray.push(
@@ -1040,23 +1039,12 @@ export function get2ColBarChartDataSet({
         type: 'bar',
         barWidth: '30%',
         data: lastYearListCopy,
-        itemStyle: {
-          color: '#BCC4D0',
-        },
       },
       {
         name: '今年',
         type: 'bar',
         barWidth: '30%',
         data: thisYearListCopy,
-        itemStyle: {
-          color: (params: { value: number }) => {
-            if (params.value >= 200) {
-              return chartListColor()[1];
-            }
-            return chartListColor()[0];
-          },
-        },
       },
     ],
   };
