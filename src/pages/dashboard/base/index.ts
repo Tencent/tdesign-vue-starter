@@ -1066,6 +1066,7 @@ export function getPieChartDataSet({
   radius = 42,
   textColor,
   placeholderColor,
+  containerColor,
 }: { radius: number } & Record<string, string>) {
   return {
     color: chartListColor(),
@@ -1100,7 +1101,7 @@ export function getPieChartDataSet({
         hoverAnimation: true,
         silent: true,
         itemStyle: {
-          borderColor: '#fff',
+          borderColor: containerColor,
           borderWidth: 1,
         },
         label: {
