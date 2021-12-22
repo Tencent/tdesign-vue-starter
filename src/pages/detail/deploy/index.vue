@@ -28,7 +28,6 @@
         :data="data"
         :pagination="pagination"
         :hover="hover"
-        size="large"
         rowKey="index"
         @sort-change="sortChange"
         @change="rehandleChange"
