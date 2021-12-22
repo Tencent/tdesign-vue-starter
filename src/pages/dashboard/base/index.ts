@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import * as echarts from 'echarts/core';
 import { Color } from 'tvision-color';
 import { getBrandColor, generateColorMap } from '@/config/color';
 import store from '@/store';
@@ -71,20 +72,6 @@ export function getDateArray(dateTime: string[] = [], divideNum = 10): string[] 
   }
 
   return timeArray;
-}
-export class DashboardBase {
-  /** 更新容器尺寸 */
-  setContainerSize(containerCopyValue: HTMLElement, absWidth = 0, absHeight = 0): void {
-    const container = containerCopyValue;
-    try {
-      if (container && container.style && container.parentElement) {
-        container.style.width = `${container.parentElement.clientWidth - absWidth}px`;
-        container.style.height = `${container.parentElement.clientHeight - absHeight}px`;
-      }
-    } catch (error) {
-      // hook
-    }
-  }
 }
 
 /**
@@ -793,8 +780,7 @@ export function getScatterDataSet({
  * @export
  * @returns {any[]}
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function getAreaChartDataSet(text = ''): any {
+export function getAreaChartDataSet(): any {
   const xAxisData = [];
   const data1 = [];
   const data2 = [];
@@ -1174,8 +1160,7 @@ export function getPieChartDataSet({
  * @param {Array<any>} chartsList
  * @param {string} theme
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function changeChartsTheme(chartsList: Array<any>): void {
+export function changeChartsTheme(chartsList: echarts.EChartsType[]): void {
   if (chartsList && chartsList.length) {
     const chartChangeColor = chartListColor();
 

@@ -174,7 +174,7 @@ const INITIAL_DATA = {
   signDate: '',
   startDate: '',
   endDate: '',
-  payment: '',
+  payment: '1',
   amount: 0,
   comment: '',
 };

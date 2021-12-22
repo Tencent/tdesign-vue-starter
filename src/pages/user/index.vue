@@ -110,7 +110,7 @@ import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { changeChartsTheme, getFolderLineDataSet } from '@/pages/dashboard/base/index';
 
-import { USER_INFO_LIST, TEAM_MEMBERS } from '@/service/service-user';
+import { USER_INFO_LIST, TEAM_MEMBERS, PRODUCT_LIST } from '@/service/service-user';
 import ProductAIcon from '@/assets/assets-product-1.svg';
 import ProductBIcon from '@/assets/assets-product-2.svg';
 import ProductCIcon from '@/assets/assets-product-3.svg';
@@ -123,10 +123,6 @@ echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendC
 export default {
   components: {
     Card,
-    ProductAIcon,
-    ProductBIcon,
-    ProductCIcon,
-    ProductDIcon,
   },
   data() {
     return {
@@ -137,6 +133,7 @@ export default {
       LAST_7_DAYS,
       USER_INFO_LIST,
       TEAM_MEMBERS,
+      PRODUCT_LIST,
     };
   },
   computed: {
@@ -181,6 +178,20 @@ export default {
         },
         ...getFolderLineDataSet({ ...chartColors }),
       });
+    },
+    getIcon(type) {
+      switch (type) {
+      case 'a':
+        return ProductAIcon;
+      case 'b':
+        return ProductBIcon;
+      case 'c':
+        return ProductCIcon;
+      case 'd':
+        return ProductDIcon;
+      default:
+        return ProductAIcon;
+      }
     },
   },
 };

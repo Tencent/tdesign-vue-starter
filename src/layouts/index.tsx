@@ -28,10 +28,7 @@ export default Vue.extend({
       showHeader: 'setting/showHeader',
       showHeaderLogo: 'setting/showHeaderLogo',
       showSidebarLogo: 'setting/showSidebarLogo',
-      // headerMenu: 'setting/headerMenu',
-      // sideMenu: 'setting/sideMenu',
-      showAsideFooter: 'setting/showAsideFooter',
-      showMainFooter: 'setting/showMainFooter',
+      showFooter: 'setting/showFooter',
       mode: 'setting/mode',
       menuRouters: 'permission/routers',
     }),
@@ -111,19 +108,19 @@ export default Vue.extend({
     },
     renderContent(): VNode {
       const { showBreadcrumb } = this.setting;
-      const { showAsideFooter } = this;
+      const { showFooter } = this;
       return (
         <t-layout class={[`${prefix}-layout`]}>
           <t-content class={`${prefix}-content-layout`}>
             {showBreadcrumb && <tdesign-breadcrumb />}
             <TdesignContent />
           </t-content>
-          {showAsideFooter && this.renderFooter()}
+          {showFooter && this.renderFooter()}
         </t-layout>
       );
     },
 
-    renderFooter(prefix = 'tdesign'): VNode {
+    renderFooter(): VNode {
       return (
         <t-footer class={`${prefix}-footer-layout`}>
           <tdesign-footer />
@@ -133,11 +130,10 @@ export default Vue.extend({
   },
 
   render(): VNode {
-    const { layout, showMainFooter } = this.setting;
+    const { layout } = this.setting;
     const header = this.renderHeader();
     const sidebar = this.renderSidebar();
     const content = this.renderContent();
-    const footer = this.renderFooter();
 
     return (
       <div class={`${prefix}-wrapper`}>
@@ -150,7 +146,6 @@ export default Vue.extend({
           <t-layout key="no-side">
             {header}
             <t-layout class={this.mainLayoutCls}>{[sidebar, content]}</t-layout>
-            {showMainFooter && footer}
           </t-layout>
         )}
         <tdesign-setting />
