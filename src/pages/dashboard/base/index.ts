@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import * as echarts from 'echarts/core';
 import { Color } from 'tvision-color';
-import { getBrandColor, generateColorMap } from '@/config/color';
+import { getBrandColor, defaultLightColor, defaultDarkColor } from '@/config/color';
 import store from '@/store';
 
 const { state } = store;
@@ -17,29 +17,22 @@ export function getColorFromTheme(theme: string): Array<string> {
   const { setting } = state;
   const { colorList, mode } = setting;
   const isDarkMode = mode === 'dark';
-  let themeColor = getBrandColor(theme, colorList);
-
-  if (theme === 'dynamic' || (!/^#[A-F\d]{6}$/i.test(theme) && isDarkMode)) {
-    theme = themeColor?.['@brand-color-1'] || '#0052D9';
-
-    const newPalette = Color.getPaletteByGradation({
-      colors: [theme],
-      step: 10,
-    })[0];
-
-    themeColor = generateColorMap(theme, newPalette, mode);
-  }
-  theme = themeColor?.['@brand-color'];
   let themeColorList = [];
-  const defaultGradients = !isDarkMode
-    ? ['#0052d9', '#0594fa', '#00a870', '#ebb105', '#ed7b2f', '#e34d59', '#ed49b4', '#834ec2']
-    : ['#4582e6', '#29a4fb', '#03a56f', '#ca8d03', '#ed7b2f', '#ea7b84', '#f172c5', '#ab87d5'];
-  const themIdx = defaultGradients.indexOf(theme.toLocaleLowerCase());
+  const themeColor = getBrandColor(theme, colorList);
 
-  if (themIdx !== -1) {
+  if (!/^#[A-F\d]{6}$/i.test(theme)) {
+    theme = themeColor?.['@brand-color'] || '#0052D9';
+    const themIdx = defaultLightColor.indexOf(theme.toLocaleLowerCase());
+    const defaultGradients = !isDarkMode ? defaultLightColor : defaultDarkColor;
+
     const spliceThemeList = defaultGradients.slice(0, themIdx);
-    themeColorList = defaultGradients.slice(themIdx, defaultGradients.length - 1).concat(spliceThemeList);
+    const lastIdx = defaultGradients.length - 1;
+    themeColorList =
+      themIdx === lastIdx
+        ? [defaultGradients[lastIdx]].concat(spliceThemeList)
+        : defaultGradients.slice(themIdx, defaultGradients.length - 1).concat(spliceThemeList);
   } else {
+    theme = themeColor?.['@brand-color'];
     themeColorList = Color.getRandomPalette({
       color: theme,
       colorGamut: 'bright',
@@ -1106,6 +1099,10 @@ export function getPieChartDataSet({
         selectedMode: true,
         hoverAnimation: true,
         silent: true,
+        itemStyle: {
+          borderColor: '#fff',
+          borderWidth: 1,
+        },
         label: {
           show: true,
           position: 'center',
