@@ -16,9 +16,10 @@ const { state } = store;
 export function getColorFromTheme(theme: string): Array<string> {
   const { setting } = state;
   const { colorList, mode } = setting;
+  const isDarkMode = mode === 'dark';
   let themeColor = getBrandColor(theme, colorList);
 
-  if (theme === 'dynamic' || (!/^#[A-F\d]{6}$/i.test(theme) && mode === 'dark')) {
+  if (theme === 'dynamic' || (!/^#[A-F\d]{6}$/i.test(theme) && isDarkMode)) {
     theme = themeColor?.['@brand-color-1'] || '#0052D9';
 
     const newPalette = Color.getPaletteByGradation({
@@ -29,12 +30,21 @@ export function getColorFromTheme(theme: string): Array<string> {
     themeColor = generateColorMap(theme, newPalette, mode);
   }
   theme = themeColor?.['@brand-color'];
-
-  const themeColorList = Color.getRandomPalette({
-    color: theme,
-    colorGamut: 'bright',
-    number: 8,
-  });
+  let themeColorList = [];
+  const defaultGradients = !isDarkMode
+    ? ['#0052D9', '#0594fa', '#00a870', '#ebb105', '#ed7b2f', '#e34d59', '#ed49b4', '#834ec2']
+    : ['#4582e6', '#29a4fb', '#03a56f', '#ca8d03', '#ed7b2f', '#ea7b84', '#f172c5', '#ab87d5'];
+  const themIdx = defaultGradients.indexOf(theme.toLocaleLowerCase());
+  if (themIdx !== -1) {
+    const spliceThemeList = defaultGradients.splice(0, themIdx);
+    themeColorList = defaultGradients.concat(spliceThemeList);
+  } else {
+    themeColorList = Color.getRandomPalette({
+      color: theme,
+      colorGamut: 'bright',
+      number: 8,
+    });
+  }
 
   return themeColorList;
 }
