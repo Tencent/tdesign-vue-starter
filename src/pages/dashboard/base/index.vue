@@ -95,13 +95,7 @@
                 <t-radio-button value="monthVal">近三个月</t-radio-button>
               </t-radio-group>
             </div>
-            <t-table
-              class="narrow-scrollbar"
-              :data="saleTendList"
-              :columns="saleColumns"
-              rowKey="productName"
-              :style="{ overflow: 'scroll' }"
-            >
+            <t-table :data="saleTendList" :columns="saleColumns" rowKey="productName">
               <template #index="{ rowIndex }">
                 <span :class="getRankClass(rowIndex)">
                   {{ rowIndex + 1 }}
@@ -124,13 +118,7 @@
                 <t-radio-button value="monthVal">近三个月</t-radio-button>
               </t-radio-group>
             </div>
-            <t-table
-              class="narrow-scrollbar"
-              :data="buyTendList"
-              :columns="buyColumns"
-              rowKey="productName"
-              :style="{ overflow: 'scroll' }"
-            >
+            <t-table :data="buyTendList" :columns="buyColumns" rowKey="productName">
               <template #index="{ rowIndex }">
                 <span :class="getRankClass(rowIndex)">
                   {{ rowIndex + 1 }}
