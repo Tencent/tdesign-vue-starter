@@ -1,5 +1,5 @@
 <template>
-  <t-row :gutter="[24, 24]">
+  <t-row :gutter="[16, 16]">
     <t-col :flex="3">
       <div class="user-left-greeting">
         <div>
@@ -123,6 +123,10 @@ echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendC
 export default {
   components: {
     Card,
+    ProductAIcon,
+    ProductBIcon,
+    ProductCIcon,
+    ProductDIcon,
   },
   data() {
     return {
@@ -146,11 +150,16 @@ export default {
     mode() {
       this.renderCharts();
     },
+    lineChart() {
+      this.updateContainer();
+    },
   },
   mounted() {
-    this.updateContainer();
     window.addEventListener('resize', this.updateContainer, false);
     this.renderCharts();
+    this.$nextTick(() => {
+      this.updateContainer();
+    });
   },
   methods: {
     /** 图表选择 */

@@ -297,8 +297,10 @@ export default {
       }
       date = new Date(checkedValues[0]);
       const date2 = new Date(checkedValues[1]);
+      const startMonth = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
+      const endMonth = date2.getMonth() + 1 > 9 ? date2.getMonth() + 1 : `0${date2.getMonth() + 1}`;
 
-      return `${date.getFullYear()}-${date.getMonth() + 1}  至  ${date2.getFullYear()}-${date2.getMonth() + 1}`;
+      return `${date.getFullYear()}-${startMonth}  至  ${date2.getFullYear()}-${endMonth}`;
     },
     /** 资金走趋选择 */
     onCurrencyChange(checkedValues) {
