@@ -77,7 +77,6 @@ const actions = {
   },
   async changeMode({ commit, state }, payload: IStateType) {
     let theme = payload.mode;
-    const isDarkMode = theme === 'dark';
     if (payload.mode === 'auto') {
       const media = window.matchMedia('(prefers-color-scheme:dark)');
       if (media.matches) {
@@ -86,6 +85,8 @@ const actions = {
         theme = 'light';
       }
     }
+    const isDarkMode = theme === 'dark';
+
     if (theme !== state.mode) {
       document.documentElement.setAttribute('theme-mode', isDarkMode ? 'dark' : '');
     }
