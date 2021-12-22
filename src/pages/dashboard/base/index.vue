@@ -252,11 +252,13 @@ export default {
     ...mapState('setting', ['brandTheme', 'mode']),
   },
   watch: {
-    brandTheme(val) {
-      changeChartsTheme([this.refundChart, this.countChart, this.monitorChart, this.stokeChart], val);
+    brandTheme() {
+      changeChartsTheme([this.refundChart, this.countChart, this.monitorChart, this.stokeChart]);
     },
-    mode(val) {
-      changeChartsTheme([this.moneyCharts, this.refundChart, this.countChart, this.monitorChart, this.stokeChart], val);
+    mode() {
+      [this.moneyCharts, this.refundChart, this.countChart, this.monitorChart, this.stokeChart].forEach((item) => {
+        item.dispose();
+      });
       this.renderCharts();
     },
   },
