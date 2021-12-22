@@ -49,7 +49,7 @@
           theme="primary"
           mode="date"
           range
-          @change="onHappinessChange"
+          @change="onSatisfyChange"
         ></t-date-picker>
         <t-button class="card-date-button">导出数据</t-button>
       </template>
@@ -116,7 +116,7 @@ export default {
   },
   methods: {
     /** 采购商品满意度选择 */
-    onHappinessChange(value) {
+    onSatisfyChange(value) {
       const { chartColors } = this.$store.state.setting;
 
       this.scatterChart.setOption(getScatterDataSet({ dateTime: value, ...chartColors }));

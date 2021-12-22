@@ -98,7 +98,6 @@ export default Vue.extend({
         {
           title: '合同名称',
           align: 'left',
-          ellipsis: true,
           width: 300,
           colKey: 'name',
           fixed: 'left',

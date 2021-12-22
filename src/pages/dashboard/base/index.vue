@@ -147,13 +147,13 @@
                   mode="date"
                   range
                   :default-value="LAST_7_DAYS"
-                  @change="onWarehouseChange"
+                  @change="onStokeDataChange"
                 />
               </template>
               <div
-                id="dataContainer"
+                id="stokeContainer"
                 style="width: 100%; height: 351px"
-                ref="dataContainer"
+                ref="stokeContainer"
                 class="dashboard-chart-container"
               ></div>
             </card>
@@ -253,10 +253,10 @@ export default {
   },
   watch: {
     brandTheme(val) {
-      changeChartsTheme([this.incomeCharts, this.charts, this.lineChartItem, this.pieChart], val);
+      changeChartsTheme([this.refundChart, this.charts, this.monitorChart, this.pieChart], val);
     },
     mode(val) {
-      changeChartsTheme([this.incomeCharts, this.charts, this.lineChartItem, this.pieChart], val);
+      changeChartsTheme([this.refundChart, this.charts, this.monitorChart, this.pieChart], val);
       this.renderCharts();
     },
   },
@@ -291,13 +291,13 @@ export default {
       const { chartColors } = this.$store.state.setting;
 
       this.currentMonth = this.getThisMonth(checkedValues);
-      this.lineChartItem.setOption(getLineChartDataSet({ dateTime: checkedValues, ...chartColors }));
+      this.monitorChart.setOption(getLineChartDataSet({ dateTime: checkedValues, ...chartColors }));
     },
     /** 出入库概览日期更新 */
-    onWarehouseChange(checkedValues) {
+    onStokeDataChange(checkedValues) {
       const { chartColors } = this.$store.state.setting;
 
-      this.charts.setOption(constructInitDataset({ dateTime: checkedValues, ...chartColors }));
+      this.stokeChart.setOption(constructInitDataset({ dateTime: checkedValues, ...chartColors }));
     },
     go(link) {
       if (link) {
@@ -321,28 +321,28 @@ export default {
         height: `${this.resizeTime * 66}px`,
       });
 
-      this.incomeCharts.resize({
+      this.refundChart.resize({
         // 根据父容器的大小设置大小
         width: `${this.resizeTime * 120}px`,
         height: `${this.resizeTime * 42}px`,
       });
 
-      this.pieChart.resize({
+      this.countChart.resize({
         // 根据父容器的大小设置大小
         width: `${this.resizeTime * 326}px`,
         height: `${this.resizeTime * 326}px`,
       });
 
-      this.lineChartItem.resize({
+      this.monitorChart.resize({
         // 根据父容器的大小设置大小
         width: this.monitorContainer.clientWidth,
         height: `${this.resizeTime * 326}px`,
       });
 
-      this.charts.resize({
+      this.stokeChart.resize({
         // 根据父容器的大小设置大小
-        width: this.dataContainer.clientWidth,
-        height: this.dataContainer.clientHeight,
+        width: this.stokeContainer.clientWidth,
+        height: this.stokeContainer.clientHeight,
       });
     },
 
@@ -360,34 +360,34 @@ export default {
       this.moneyCharts.setOption(constructInitDashboardDataset('line'));
 
       // 退款图
-      if (!this.incomeContainer) {
-        this.incomeContainer = document.getElementById('refundContainer');
+      if (!this.refundContainer) {
+        this.refundContainer = document.getElementById('refundContainer');
       }
-      this.incomeCharts = echarts.init(this.incomeContainer);
-      this.incomeCharts.setOption(constructInitDashboardDataset('bar', chartColors));
+      this.refundChart = echarts.init(this.refundContainer);
+      this.refundChart.setOption(constructInitDashboardDataset('bar', chartColors));
 
       // 出入库概览
-      if (!this.dataContainer) {
-        this.dataContainer = document.getElementById('dataContainer');
+      if (!this.stokeContainer) {
+        this.stokeContainer = document.getElementById('stokeContainer');
       }
-      this.charts = echarts.init(this.dataContainer);
-      this.charts.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...chartColors }));
+      this.stokeChart = echarts.init(this.stokeContainer);
+      this.stokeChart.setOption(constructInitDataset({ dateTime: LAST_7_DAYS, ...chartColors }));
 
       // 资金走势
       if (!this.monitorContainer) {
         this.monitorContainer = document.getElementById('monitorContainer');
       }
-      this.lineChartItem = echarts.init(this.monitorContainer);
-      this.lineChartItem.setOption(getLineChartDataSet({ ...chartColors }));
+      this.monitorChart = echarts.init(this.monitorContainer);
+      this.monitorChart.setOption(getLineChartDataSet({ ...chartColors }));
 
       // 销售合同占比
       if (!this.countContainer) {
         this.countContainer = document.getElementById('countContainer');
       }
-      this.pieChart = echarts.init(this.countContainer);
+      this.countChart = echarts.init(this.countContainer);
 
       const option = getPieChartDataSet(chartColors);
-      this.pieChart.setOption(option);
+      this.countChart.setOption(option);
     },
   },
 };
