@@ -112,6 +112,21 @@
                 />
               </t-form-item>
             </t-col>
+            <t-col :span="6">
+              <t-form-item label="" name="files">
+                <t-upload
+                  v-model="formData.files"
+                  action="https://service-bv448zsw-1257786608.gz.apigw.tencentcs.com/api/upload-demo"
+                  tips="请上传pdf文件，大小在60M以内"
+                  :sizeLimit="{ size: 60, unit: 'MB' }"
+                  :format-response="formatResponse"
+                  :before-upload="beforeUpload"
+                  @fail="handleFail"
+                >
+                  <t-button class="form-submit-upload-btn" variant="outline"> 上传合同文件 </t-button>
+                </t-upload>
+              </t-form-item>
+            </t-col>
           </t-row>
         </t-form>
 
@@ -143,21 +158,8 @@
     <div class="form-submit-container">
       <div class="form-submit-sub">
         <div class="form-submit-left">
-          <t-upload
-            v-model="files"
-            action=""
-            placeholder="支持批量上传文件，文 件格式不限，最多只能上传 10 份文件"
-            :format-response="formatResponse"
-            :before-upload="beforeUpload"
-            @fail="handleFail"
-          >
-            <t-button class="form-submit-upload-btn" variant="outline"> 上传合同文件 </t-button>
-          </t-upload>
-          <span class="form-submit-upload-span">请上传pdf文件，大小在60M以内</span>
-        </div>
-        <div class="form-submit-right">
-          <t-button type="reset" class="form-submit-cancel" theme="default" variant="base"> 取消 </t-button>
           <t-button theme="primary" class="form-submit-confirm" type="submit"> 提交 </t-button>
+          <t-button type="reset" class="form-submit-cancel" theme="default" variant="base"> 取消 </t-button>
         </div>
       </div>
     </div>
@@ -177,6 +179,7 @@ const INITIAL_DATA = {
   payment: '1',
   amount: 0,
   comment: '',
+  files: [],
 };
 
 export default {
@@ -200,7 +203,6 @@ export default {
         { label: '公司B', value: '2' },
         { label: '公司C', value: '3' },
       ],
-      files: [],
       textareaValue: '',
       rules: {
         name: [{ required: true, message: '请输入合同名称', type: 'error' }],
@@ -222,10 +224,6 @@ export default {
     beforeUpload(file) {
       if (!/\.(pdf)$/.test(file.name)) {
         this.$message.warning('请上传pdf文件');
-        return false;
-      }
-      if (file.size > 60 * 1024 * 1024) {
-        this.$message.warning('上传文件不能大于60M');
         return false;
       }
       return true;

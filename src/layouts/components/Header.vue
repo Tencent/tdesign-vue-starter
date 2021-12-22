@@ -237,7 +237,8 @@ export default Vue.extend({
 }
 
 .header-logo-container {
-  width: 166px;
+  width: 184px;
+  height: 26px;
   display: flex;
   margin-left: 24px;
   color: @text-color-primary;

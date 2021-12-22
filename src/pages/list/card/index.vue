@@ -84,7 +84,7 @@
       <t-loading text="加载中..."></t-loading>
     </div>
     <t-dialog
-      header="是否确认删除产品"
+      header="确认删除所选产品？"
       :body="confirmBody"
       :visible.sync="confirmVisible"
       @confirm="onConfirmDelete"
@@ -144,7 +144,7 @@ export default {
   computed: {
     confirmBody(): string {
       const { deleteProduct } = this;
-      return deleteProduct ? `产品名称:${deleteProduct.name}, 产品描述: ${deleteProduct?.description}` : '';
+      return deleteProduct ? `确认删除后${deleteProduct.name}的所有产品信息将被清空, 且无法恢复` : '';
     },
   },
   mounted() {

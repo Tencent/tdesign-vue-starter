@@ -57,7 +57,7 @@
       </div>
     </card>
     <t-dialog
-      header="是否确认删除"
+      header="确认删除当前所选合同？"
       :body="confirmBody"
       :visible.sync="confirmVisible"
       @confirm="onConfirmDelete"
@@ -154,8 +154,8 @@ export default Vue.extend({
   computed: {
     confirmBody() {
       if (this.deleteIdx > -1) {
-        const { no, name } = this.data?.[this.deleteIdx];
-        return `产品编号:${no}, 产品名称: ${name}`;
+        const { name } = this.data?.[this.deleteIdx];
+        return `删除后，${name}的所有合同信息将被清空，且无法恢复`;
       }
       return '';
     },
