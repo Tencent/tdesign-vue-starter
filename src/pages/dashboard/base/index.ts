@@ -218,7 +218,7 @@ export function constructInitDataset({
       },
       axisLine: {
         lineStyle: {
-          color: chartListColor()[1],
+          color: borderColor,
           width: 1,
         },
       },
