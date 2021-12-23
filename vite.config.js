@@ -11,7 +11,7 @@ import proxy from './src/config/proxy';
 // import.meta.env.VITE_SOME_KEY
 
 export default defineConfig({
-  base: './',
+  base: '/starter/vue/',
   resolve: {
     alias: {
       '~': path.resolve(__dirname, './'),
