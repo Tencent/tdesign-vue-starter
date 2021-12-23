@@ -92,7 +92,7 @@
         </template>
       </t-table>
       <t-dialog
-        header="是否确认删除该产品"
+        header="确认删除当前所选合同？"
         :body="confirmBody"
         :visible.sync="confirmVisible"
         @confirm="onConfirmDelete"
@@ -196,8 +196,8 @@ export default {
   computed: {
     confirmBody() {
       if (this.deleteIdx > -1) {
-        const { no, name } = this.data?.[this.deleteIdx];
-        return `产品编号:${no}, 产品名称: ${name}`;
+        const { name } = this.data?.[this.deleteIdx];
+        return `删除后，${name}的所有合同信息将被清空，且无法恢复`;
       }
       return '';
     },
@@ -239,13 +239,13 @@ export default {
     rehandleClickOp({ text, row }) {
       console.log(text, row);
     },
-    handleClickDelete({ row }) {
-      this.deleteIdx = row.index;
+    handleClickDelete(row) {
+      this.deleteIdx = row.rowIndex;
       this.confirmVisible = true;
     },
     onConfirmDelete() {
       // 真实业务请发起请求
-      this.data.splice(this.deleteIdx - 1, 1);
+      this.data.splice(this.deleteIdx, 1);
       this.pagination.total = this.data.length;
       this.confirmVisible = false;
       this.$message.success('删除成功');
