@@ -165,36 +165,6 @@ export default Vue.extend({
 <style lang="less">
 @import '@/style/variables.less';
 
-.@{prefix}-header {
-  &-layout {
-    height: 64px;
-  }
-
-  &-menu-fixed {
-    position: fixed;
-    top: 0;
-    z-index: 10;
-
-    &-side {
-      left: 232px;
-      right: 0;
-      z-index: 10;
-      width: auto;
-      transition: all 0.3s;
-
-      &-compact {
-        left: 64px;
-      }
-    }
-  }
-
-  &-logo-container {
-    cursor: pointer;
-    display: inline-flex;
-    height: 64px;
-  }
-}
-
 .header-menu {
   flex: 1 1 1;
   display: inline-flex;
@@ -205,7 +175,7 @@ export default Vue.extend({
   align-items: center;
   margin-right: 12px;
 
-  .t-popup-reference {
+  .t-popup__reference {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -229,7 +199,8 @@ export default Vue.extend({
 .header-operate-left {
   display: flex;
   margin-left: 20px;
-  align-items: center;
+  align-items: normal;
+  line-height: 0;
 
   .collapsed-icon {
     font-size: 20px;
