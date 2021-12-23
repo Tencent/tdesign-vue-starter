@@ -197,13 +197,13 @@ export default Vue.extend({
     handleSetupContract() {
       this.$router.push('/form/base');
     },
-    handleClickDelete({ row }) {
-      this.deleteIdx = row.index;
+    handleClickDelete(row: { rowIndex: any }) {
+      this.deleteIdx = row.rowIndex;
       this.confirmVisible = true;
     },
     onConfirmDelete() {
       // 真实业务请发起请求
-      this.data.splice(this.deleteIdx - 1, 1);
+      this.data.splice(this.deleteIdx, 1);
       this.pagination.total = this.data.length;
       const selectedIdx = this.selectedRowKeys.indexOf(this.deleteIdx);
       if (selectedIdx > -1) {

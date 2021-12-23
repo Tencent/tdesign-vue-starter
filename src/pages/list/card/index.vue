@@ -144,7 +144,7 @@ export default {
   computed: {
     confirmBody(): string {
       const { deleteProduct } = this;
-      return deleteProduct ? `确认删除后${deleteProduct.name}的所有产品信息将被清空, 且无法恢复` : '';
+      return deleteProduct ? `删除后，${deleteProduct.name}的所有产品信息将被清空, 且无法恢复` : '';
     },
   },
   mounted() {

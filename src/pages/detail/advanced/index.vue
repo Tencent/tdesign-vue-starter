@@ -206,7 +206,7 @@ export default {
     },
     deleteClickOp(e: any): void {
       console.log(e, 'e');
-      this.data.splice(e.index, 1);
+      this.data.splice(e.rowIndex, 1);
     },
     onConfirm(): void {
       this.visible = false;

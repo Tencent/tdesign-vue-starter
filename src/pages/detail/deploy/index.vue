@@ -177,7 +177,7 @@ export default {
       this.visible = true;
     },
     deleteClickOp(e): void {
-      this.data.splice(e.index, 1);
+      this.data.splice(e.rowIndex, 1);
     },
     onConfirm(): void {
       this.visible = false;
