@@ -4,7 +4,6 @@
       size="408px"
       :footer="false"
       :visible.sync="showSettingPanel"
-      value="medium"
       header="页面配置"
       :closeBtn="true"
       :onCloseBtnClick="handleCloseDrawer"
@@ -335,7 +334,7 @@ export default {
     padding-bottom: 100px;
   }
 
-  .t-radio-group.t-radio-group-medium {
+  .t-radio-group.t-size-m {
     min-height: 32px;
     width: 100%;
     height: auto;
@@ -369,12 +368,12 @@ export default {
       border: 2px solid @brand-color !important;
     }
 
-    .t-form__controls--content {
+    .t-form__controls-content {
       justify-content: end;
     }
   }
 
-  .t-form__controls--content {
+  .t-form__controls-content {
     justify-content: end;
   }
 }

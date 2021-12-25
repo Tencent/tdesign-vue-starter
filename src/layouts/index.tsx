@@ -8,7 +8,7 @@ import TdesignContent from './components/Content.vue';
 
 import { prefix } from '@/config/global';
 import TdesignSetting from './setting.vue';
-import { SettingType, ClassName } from '@/interface';
+import { SettingType } from '@/interface';
 import '@/style/layout.less';
 
 const name = `${prefix}-base-layout`;
@@ -34,13 +34,6 @@ export default Vue.extend({
     }),
     setting(): SettingType {
       return this.$store.state.setting;
-    },
-    mainLayoutCls(): Array<ClassName> {
-      return [
-        {
-          't-layout-has-sider': this.showSidebar,
-        },
-      ];
     },
     headerMenu() {
       const { layout, splitMenu } = this.$store.state.setting;
@@ -134,20 +127,39 @@ export default Vue.extend({
     const header = this.renderHeader();
     const sidebar = this.renderSidebar();
     const content = this.renderContent();
+    let renderLayout;
+    if (layout === 'side') {
+      renderLayout = (
+        <t-layout key="side">
+          <t-aside>{sidebar}</t-aside>
+          <t-layout>
+            <t-header>{header}</t-header>
+            <t-content>{content}</t-content>
+          </t-layout>
+        </t-layout>
+      );
+    } else if (layout === 'top') {
+      renderLayout = (
+        <t-layout key="top">
+          <t-header> {header}</t-header>
+          <t-content>{content}</t-content>
+        </t-layout>
+      );
+    } else {
+      renderLayout = (
+        <t-layout key="mix">
+          <t-header>{header}</t-header>
+          <t-layout>
+            <t-aside>{sidebar}</t-aside>
+            <t-content>{content}</t-content>
+          </t-layout>
+        </t-layout>
+      );
+    }
 
     return (
-      <div class={`${prefix}-wrapper`}>
-        {layout === 'side' ? (
-          <t-layout class={this.mainLayoutCls} key="side">
-            <t-aside>{sidebar}</t-aside>
-            <t-layout>{[header, content]}</t-layout>
-          </t-layout>
-        ) : (
-          <t-layout key="no-side">
-            {header}
-            <t-layout class={this.mainLayoutCls}>{[sidebar, content]}</t-layout>
-          </t-layout>
-        )}
+      <div>
+        {renderLayout}
         <tdesign-setting />
       </div>
     );
