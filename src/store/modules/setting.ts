@@ -70,12 +70,12 @@ const getters = {
 };
 
 const actions = {
-  async changeTheme({ commit, dispatch }, payload: IStateType) {
+  changeTheme({ commit, dispatch }, payload: IStateType) {
     dispatch('changeMode', payload);
     dispatch('changeBrandTheme', payload);
     commit('update', payload);
   },
-  async changeMode({ commit, state }, payload: IStateType) {
+  changeMode({ commit }, payload: IStateType) {
     let theme = payload.mode;
     if (payload.mode === 'auto') {
       const media = window.matchMedia('(prefers-color-scheme:dark)');
@@ -87,19 +87,14 @@ const actions = {
     }
     const isDarkMode = theme === 'dark';
 
-    if (theme !== state.mode) {
-      document.documentElement.setAttribute('theme-mode', isDarkMode ? 'dark' : '');
-    }
+    document.documentElement.setAttribute('theme-mode', isDarkMode ? 'dark' : '');
+
     commit('changeChartColor', isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS);
   },
-  changeBrandTheme({ state }: { state: IStateType }, payload: IStateType) {
-    const { brandTheme, mode } = payload;
-    if (brandTheme !== state.brandTheme) {
-      document.documentElement.setAttribute(
-        'theme-color',
-        /^#([a-fA-F\d]{6}|[a-fA-F\d]{3})$/.test(brandTheme) && mode === 'dark' ? `${brandTheme}` : brandTheme,
-      );
-    }
+  changeBrandTheme(_: { state: IStateType }, payload: IStateType) {
+    const { brandTheme } = payload;
+
+    document.documentElement.setAttribute('theme-color', brandTheme);
   },
 };
 
