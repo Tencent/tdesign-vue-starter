@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
-    "@commitlint/config-conventional": "^12.0.1",
+    "@commitlint/config-conventional": "^16.0.0",
     "@rollup/plugin-dynamic-import-vars": "^1.1.1",
     "@types/vue-color": "^2.4.3",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
