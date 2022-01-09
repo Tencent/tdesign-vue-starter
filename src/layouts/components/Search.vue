@@ -69,7 +69,7 @@ export default Vue.extend({
   display: flex;
   margin-left: 16px;
   .hover-active {
-    .t-input__inner {
+    .t-input {
       background: @bg-color-secondarycontainer;
     }
     .t-icon {
@@ -81,7 +81,7 @@ export default Vue.extend({
     font-size: 20px !important;
     color: @text-color-primary !important;
   }
-  .t-input__inner {
+  .t-input {
     border: none;
     outline: none;
     box-shadow: none;
@@ -95,7 +95,7 @@ export default Vue.extend({
 .header-search {
   width: 200px;
   transition: width @anim-duration-base @anim-time-fn-easing;
-  .t-input__inner {
+  .t-input {
     border: 0;
     padding-left: 40px;
     &:focus {
