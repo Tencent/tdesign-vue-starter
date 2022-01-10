@@ -1,6 +1,6 @@
 {
-  "name": "tdesign-vue2-starter",
-  "version": "0.0.1",
+  "name": "tdesign-vue-starter",
+  "version": "0.1.0",
   "scripts": {
     "dev:mock": "vite --open --mode mock",
     "dev": "vite --open --mode development",
