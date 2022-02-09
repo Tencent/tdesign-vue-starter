@@ -21,7 +21,7 @@
     "hex-to-hsl": "^1.0.2",
     "nprogress": "^0.2.0",
     "qrcode.vue": "^1.7.0",
-    "tdesign-icons-vue": "~0.0.6",
+    "tdesign-icons-vue": "~0.0.8",
     "tdesign-vue": "~0.33.0",
     "tvision-color": "~1.3.0",
     "typescript": "^4.2.4",
