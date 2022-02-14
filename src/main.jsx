@@ -20,6 +20,16 @@ Vue.component('t-page-header');
 
 Vue.prototype.$request = axiosInstance;
 
+const originPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originPush.call(this, location).catch((err) => err);
+};
+
+const originReplace = VueRouter.prototype.replace;
+VueRouter.prototype.replace = function replace(location) {
+  return originReplace.call(this, location).catch((err) => err);
+};
+
 Vue.config.productionTip = false;
 sync(store, router);
 new Vue({
