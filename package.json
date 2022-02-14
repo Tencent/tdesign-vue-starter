@@ -7,14 +7,14 @@
     "dev:linux": "vite --mode developmenet",
     "build:test": "vite build --mode test",
     "build": "vite build --mode release",
-    "site:preview": "npm run build",
+    "site:preview": "npm run build && cp -r dist _site",
     "preview": "vite preview",
     "lint": "eslint --ext .vue,.js,.jsx,.ts,.tsx ./ --max-warnings 0",
     "lint:fix": "eslint --ext .vue,.js,jsx,.ts,.tsx ./ --max-warnings 0 --fix",
     "stylelint": "stylelint src/**/*.{html,vue,sass,less}",
     "stylelint:fix": "stylelint --cache --fix src/**/*.{html,vue,vss,sass,less}",
     "prepare": "husky install",
-    "test": "echo \"no test specified,work in process\" && exit 1"
+    "test": "echo \"no test specified,work in process\""
   },
   "dependencies": {
     "@vitejs/plugin-legacy": "^1.5.3",
