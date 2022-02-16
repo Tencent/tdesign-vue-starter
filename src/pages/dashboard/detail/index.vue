@@ -70,7 +70,7 @@ import { prefix } from '@/config/global';
 
 import { LAST_7_DAYS } from '@/utils/date';
 
-import ProductCard from '@/pages/list/card/components/compoonent-card.vue';
+import ProductCard from '@/components/card/component-card.vue';
 import { PANE_LIST_DATA, PRODUCT_LIST } from '@/service/service-detail';
 import { changeChartsTheme, getFolderLineDataSet, getScatterDataSet } from '../base';
 

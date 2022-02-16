@@ -96,7 +96,7 @@
 <script lang="ts">
 import { prefix } from '@/config/global';
 import { SearchIcon } from 'tdesign-icons-vue';
-import Card from './components/compoonent-card.vue';
+import Card from '@/components/card/component-card.vue';
 
 const INITIAL_DATA = {
   name: '',
