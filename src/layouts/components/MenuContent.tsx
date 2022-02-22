@@ -1,22 +1,23 @@
 import { prefix } from '@/config/global';
 import { MenuRoute } from '@/interface';
 
-const getMenuList = (list: Array<MenuRoute>, basePath?: string): Array<any> => {
+const getMenuList = (list: MenuRoute[], basePath?: string): MenuRoute[] => {
   if (!list) {
     return [];
   }
-  return list.map((item) => {
-    const path = basePath ? `${basePath}/${item.path}` : item.path;
-
-    return {
-      path,
-      title: item.meta?.title,
-      icon: item.meta?.icon || '',
-      children: getMenuList(item.children, path),
-      meta: item.meta,
-      redirect: item.redirect,
-    };
-  });
+  return list
+    .map((item) => {
+      const path = basePath ? `${basePath}/${item.path}` : item.path;
+      return {
+        path,
+        title: item.meta?.title,
+        icon: item.meta?.icon || '',
+        children: getMenuList(item.children, path),
+        meta: item.meta,
+        redirect: item.redirect,
+      };
+    })
+    .filter((item) => item.meta && item.meta.hidden !== true);
 };
 
 export default {
