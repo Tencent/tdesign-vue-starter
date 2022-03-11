@@ -43,7 +43,8 @@ export default defineConfig({
   },
 
   server: {
-    port: 3001,
+    host: '0.0.0.0',
+    port: 3003,
     proxy: {
       '/api': {
         // 用于开发环境下的转发请求
