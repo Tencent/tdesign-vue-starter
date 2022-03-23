@@ -141,7 +141,7 @@ const PRODUCT_LIST = [
 
 /** 高级详情 */
 export default {
-  name: 'detail-base',
+  name: 'DetailAdvanced',
   components: { Card, Product },
   data() {
     return {

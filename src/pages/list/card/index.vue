@@ -107,7 +107,7 @@ const INITIAL_DATA = {
   amount: 0,
 };
 export default {
-  name: 'list-card',
+  name: 'ListCard',
   components: {
     SearchIcon,
     Card,

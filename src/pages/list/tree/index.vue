@@ -18,7 +18,7 @@ import { SearchIcon } from 'tdesign-icons-vue';
 import CommonTable from '../components/CommonTable.vue';
 
 export default {
-  name: 'list-base',
+  name: 'ListTree',
   components: {
     SearchIcon,
     CommonTable,

@@ -228,6 +228,7 @@ import { PANE_LIST, SALE_TEND_LIST, BUY_TEND_LIST, SALE_COLUMNS, BUY_COLUMNS } f
 echarts.use([TooltipComponent, LegendComponent, PieChart, GridComponent, LineChart, BarChart, CanvasRenderer]);
 
 export default {
+  name: 'DashboardBase',
   components: {
     Card,
     Trend,

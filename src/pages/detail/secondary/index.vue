@@ -70,7 +70,7 @@ const TAB_LIST = [
 ];
 
 export default {
-  name: 'list-base',
+  name: 'DetailSecondary',
   data() {
     return {
       NOTIFICATION_TYPES,

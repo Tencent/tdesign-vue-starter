@@ -24,7 +24,7 @@ import Result from '@/components/result/index.vue';
 import Thumbnail from '@/components/thumbnail/index.vue';
 
 export default {
-  name: 'result-browser-incompatible',
+  name: 'ResultBrowserIncompatible',
   components: { Result, Thumbnail },
 };
 </script>

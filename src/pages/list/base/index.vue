@@ -76,7 +76,7 @@ import { prefix } from '@/config/global';
 import { CONTRACT_STATUS, CONTRACT_STATUS_OPTIONS, CONTRACT_TYPES, CONTRACT_PAYMENT_TYPES } from '@/constants';
 
 export default Vue.extend({
-  name: 'list-base',
+  name: 'ListBase',
   components: {
     SearchIcon,
     Trend,

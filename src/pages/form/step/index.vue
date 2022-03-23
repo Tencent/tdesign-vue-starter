@@ -168,6 +168,7 @@ const INITIAL_DATA3 = {
 };
 
 export default {
+  name: 'FormStep',
   components: { Card },
   data() {
     return {

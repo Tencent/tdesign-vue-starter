@@ -77,6 +77,7 @@ import { changeChartsTheme, getFolderLineDataSet, getScatterDataSet } from '../b
 echarts.use([GridComponent, LegendComponent, TooltipComponent, LineChart, ScatterChart, CanvasRenderer]);
 
 export default {
+  name: 'DashboardDetail',
   components: { Trend, Card, ProductCard },
   data() {
     return {

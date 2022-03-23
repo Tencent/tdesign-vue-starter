@@ -7,7 +7,7 @@
 import CommonTable from '../components/CommonTable.vue';
 
 export default {
-  name: 'list-base',
+  name: 'ListFilter',
   components: {
     CommonTable,
   },

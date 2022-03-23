@@ -2,9 +2,10 @@ import Vue from 'vue';
 import { prefix } from '@/config/global';
 
 import MenuContent from './MenuContent';
+import Logo from '@/assets/assets-t-logo.svg';
+import LogoFull from '@/assets/assets-logo-full.svg';
+
 import pgk from '../../../package.json';
-import tLogo from '@/assets/assets-t-logo.svg';
-import tLogoFull from '@/assets/assets-logo-full.svg';
 
 const MIN_POINT = 992 - 1;
 
@@ -12,8 +13,6 @@ export default Vue.extend({
   name: 'sideNav',
   components: {
     MenuContent,
-    tLogo,
-    tLogoFull,
   },
   props: {
     menu: Array,
@@ -102,7 +101,7 @@ export default Vue.extend({
       const isCompact = window.innerWidth <= MIN_POINT;
       this.$store.commit('setting/showSidebarCompact', isCompact);
     },
-    handleNav(url) {
+    handleNav(url: string) {
       this.$router.push(url);
     },
   },
@@ -117,9 +116,9 @@ export default Vue.extend({
               onClick={() => this.handleNav('/dashboard/base')}
             >
               {this.collapsed ? (
-                <tLogo class={`${prefix}-side-nav-logo-t-logo`} />
+                <Logo class={`${prefix}-side-nav-logo-t-logo`} />
               ) : (
-                <t-logo-full class={`${prefix}-side-nav-logo-tdesign-logo`} />
+                <LogoFull class={`${prefix}-side-nav-logo-tdesign-logo`} />
               )}
             </span>
           )}
