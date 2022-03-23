@@ -153,55 +153,56 @@ export default Vue.extend({
       const { showFooter } = this;
       return (
         <t-layout class={[`${prefix}-layout`]}>
+          <t-tabs
+            theme="card"
+            class={`${prefix}-layout-tabs-nav`}
+            value={this.$route.path}
+            onChange={this.handleChangeCurrentTab}
+            style={{ maxWidth: '100%', position: 'fixed', overflow: 'visible' }}
+          >
+            {this.tabRouterList.map((route: { path: string; title: string }, idx: number) => (
+              <t-tab-panel
+                value={route.path}
+                key={`${route.path}_${idx}`}
+                label={() => (
+                  <t-dropdown
+                    trigger="context-menu"
+                    minColumnWidth={128}
+                    popupProps={{ overlayClassName: 'route-tabs-dropdown' }}
+                  >
+                    {route.title}
+                    {this.$route.path === route.path && (
+                      <t-dropdown-menu slot="dropdown">
+                        <t-dropdown-item onClick={() => this.handleRefresh(route.path, idx)}>
+                          <t-icon name="refresh" />
+                          刷新
+                        </t-dropdown-item>
+                        {idx > 0 && (
+                          <t-dropdown-item onClick={() => this.handleCloseAhead(route.path, idx)}>
+                            <t-icon name="arrow-left" />
+                            关闭左侧
+                          </t-dropdown-item>
+                        )}
+                        {idx < this.tabRouterList.length - 1 && (
+                          <t-dropdown-item onClick={() => this.handleCloseBehind(route.path, idx)}>
+                            <t-icon name="arrow-right" />
+                            关闭右侧
+                          </t-dropdown-item>
+                        )}
+                        <t-dropdown-item onClick={() => this.handleCloseOther(route.path, idx)}>
+                          <t-icon name="close-circle" />
+                          关闭其它
+                        </t-dropdown-item>
+                      </t-dropdown-menu>
+                    )}
+                  </t-dropdown>
+                )}
+                removable={this.tabRouterList.length > 1}
+                onRemove={() => this.handleRemove(route.path, idx)}
+              ></t-tab-panel>
+            ))}
+          </t-tabs>
           <t-content class={`${prefix}-content-layout`}>
-            <t-tabs
-              theme="card"
-              value={this.$route.path}
-              onChange={this.handleChangeCurrentTab}
-              style={{ maxWidth: '100%' }}
-            >
-              {this.tabRouterList.map((route: { path: string; title: string }, idx: number) => (
-                <t-tab-panel
-                  value={route.path}
-                  key={`${route.path}_${idx}`}
-                  label={() => (
-                    <t-dropdown
-                      trigger="context-menu"
-                      minColumnWidth={128}
-                      popupProps={{ overlayClassName: 'route-tabs-dropdown' }}
-                    >
-                      {route.title}
-                      {this.$route.path === route.path && (
-                        <t-dropdown-menu slot="dropdown">
-                          <t-dropdown-item onClick={() => this.handleRefresh(route.path, idx)}>
-                            <t-icon name="refresh" />
-                            刷新
-                          </t-dropdown-item>
-                          {idx > 0 && (
-                            <t-dropdown-item onClick={() => this.handleCloseAhead(route.path, idx)}>
-                              <t-icon name="arrow-left" />
-                              关闭左侧
-                            </t-dropdown-item>
-                          )}
-                          {idx < this.tabRouterList.length - 1 && (
-                            <t-dropdown-item onClick={() => this.handleCloseBehind(route.path, idx)}>
-                              <t-icon name="arrow-right" />
-                              关闭右侧
-                            </t-dropdown-item>
-                          )}
-                          <t-dropdown-item onClick={() => this.handleCloseOther(route.path, idx)}>
-                            <t-icon name="close-circle" />
-                            关闭其它
-                          </t-dropdown-item>
-                        </t-dropdown-menu>
-                      )}
-                    </t-dropdown>
-                  )}
-                  removable={this.tabRouterList.length > 1}
-                  onRemove={() => this.handleRemove(route.path, idx)}
-                ></t-tab-panel>
-              ))}
-            </t-tabs>
             {showBreadcrumb && <layout-breadcrumb />}
             <layout-content />
           </t-content>
