@@ -162,7 +162,7 @@ export default Vue.extend({
             style={{ maxWidth: '100%', position: 'fixed', overflow: 'visible' }}
           >
             {this.isUseTabsRouter &&
-              this.tabRouterList.map((route: { path: string; title: string }, idx: number) => (
+              this.tabRouterList.map((route: { path: string; title: string; isHome: boolean }, idx: number) => (
                 <t-tab-panel
                   value={route.path}
                   key={`${route.path}_${idx}`}
@@ -172,7 +172,7 @@ export default Vue.extend({
                       minColumnWidth={128}
                       popupProps={{ overlayClassName: 'route-tabs-dropdown' }}
                     >
-                      {route.title}
+                      {!route.isHome ? route.title : <t-icon name="home" />}
                       {this.$route.path === route.path && (
                         <t-dropdown-menu slot="dropdown">
                           <t-dropdown-item onClick={() => this.handleRefresh(route.path, idx)}>
@@ -199,7 +199,7 @@ export default Vue.extend({
                       )}
                     </t-dropdown>
                   )}
-                  removable={this.tabRouterList.length > 1}
+                  removable={!route.isHome}
                   onRemove={() => this.handleRemove(route.path, idx)}
                 ></t-tab-panel>
               ))}

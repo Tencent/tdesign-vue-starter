@@ -3,6 +3,7 @@ export type TRouterInfo = {
   routeIdx: number;
   name?: string;
   isAlive?: boolean;
+  isHome?: boolean;
 };
 
 export type TTabRouterType = {
@@ -11,7 +12,7 @@ export type TTabRouterType = {
 };
 
 const state: TTabRouterType = {
-  tabRouterList: [],
+  tabRouterList: [{ path: '/dashboard/base', routeIdx: 0, name: '仪表盘', isHome: true }],
   isRefreshing: false,
 };
 
