@@ -154,15 +154,15 @@ export default Vue.extend({
       const { showFooter } = this;
       return (
         <t-layout class={[`${prefix}-layout`]}>
-          <t-tabs
-            theme="card"
-            class={`${prefix}-layout-tabs-nav`}
-            value={this.$route.path}
-            onChange={this.handleChangeCurrentTab}
-            style={{ maxWidth: '100%', position: 'fixed', overflow: 'visible' }}
-          >
-            {this.isUseTabsRouter &&
-              this.tabRouterList.map((route: { path: string; title: string; isHome: boolean }, idx: number) => (
+          {this.isUseTabsRouter && (
+            <t-tabs
+              theme="card"
+              class={`${prefix}-layout-tabs-nav`}
+              value={this.$route.path}
+              onChange={this.handleChangeCurrentTab}
+              style={{ maxWidth: '100%', position: 'fixed', overflow: 'visible' }}
+            >
+              {this.tabRouterList.map((route: { path: string; title: string; isHome: boolean }, idx: number) => (
                 <t-tab-panel
                   value={route.path}
                   key={`${route.path}_${idx}`}
@@ -203,7 +203,8 @@ export default Vue.extend({
                   onRemove={() => this.handleRemove(route.path, idx)}
                 ></t-tab-panel>
               ))}
-          </t-tabs>
+            </t-tabs>
+          )}
           <t-content class={`${prefix}-content-layout`}>
             {showBreadcrumb && <layout-breadcrumb />}
             <layout-content />
