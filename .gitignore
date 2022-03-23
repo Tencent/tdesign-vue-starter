@@ -10,3 +10,4 @@ README.html
 .stylelintcache
 .idea
 yarn.lock
+package-lock.json
