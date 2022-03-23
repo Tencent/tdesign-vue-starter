@@ -13,6 +13,7 @@ export default {
     ...mapGetters({
       tabRouterList: 'tabRouter/tabRouterList',
       isRefreshing: 'tabRouter/isRefreshing',
+      isUseTabsRouter: 'setting/isUseTabsRouter',
     }),
     aliveViews() {
       return this.tabRouterList.filter((route) => route.isAlive).map((route) => route.name);

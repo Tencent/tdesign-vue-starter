@@ -32,14 +32,17 @@ const mutations = {
     state.showHeader = payload.showHeader;
     state.backgroundTheme = payload.backgroundTheme;
     state.brandTheme = payload.brandTheme;
+    state.isUseTabsRouter = payload.isUseTabsRouter;
   },
   toggleSidebarCompact(state: IStateType) {
     state.isSidebarCompact = !state.isSidebarCompact;
   },
+  toggleUseTabsRouter(state: IStateType) {
+    state.isUseTabsRouter = !state.isUseTabsRouter;
+  },
   showSidebarCompact(state: IStateType, payload: boolean) {
     state.isSidebarCompact = payload;
   },
-
   toggleSettingPanel(state: IStateType, payload: boolean) {
     state.showSettingPanel = payload;
   },
@@ -57,6 +60,7 @@ const getters = {
   showSidebarLogo: (state: IStateType) => state.layout === 'side',
   showHeaderLogo: (state: IStateType) => state.layout !== 'side',
   showFooter: (state: IStateType) => state.showFooter,
+  isUseTabsRouter: (state: IStateType) => state.isUseTabsRouter,
   mode: (state: IStateType) => {
     if (state.mode === 'auto') {
       const media = window.matchMedia('(prefers-color-scheme:dark)');
