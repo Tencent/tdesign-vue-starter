@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'result-fail',
+  name: 'ResultFail',
 };
 </script>
 

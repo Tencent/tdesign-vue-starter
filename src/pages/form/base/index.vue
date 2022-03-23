@@ -30,7 +30,7 @@
                 class="demo-select-base"
                 clearable
               >
-                <t-option v-for="(item, index) in TYPE_OPTIONS" :key="index" :value="item.value" :label="item.label">
+                <t-option v-for="(item, index) in typeOptions" :key="index" :value="item.value" :label="item.label">
                   {{ item.label }}
                 </t-option>
               </t-select>
@@ -58,7 +58,7 @@
                 placeholder="请选择类型"
                 clearable
               >
-                <t-option v-for="(item, index) in PARTY_A_OPTIONS" :key="index" :value="item.value" :label="item.label">
+                <t-option v-for="(item, index) in partyAOptions" :key="index" :value="item.value" :label="item.label">
                   {{ item.label }}
                 </t-option>
               </t-select>
@@ -73,7 +73,7 @@
                 class="demo-select-base"
                 clearable
               >
-                <t-option v-for="(item, index) in PARTY_B_OPTIONS" :key="index" :value="item.value" :label="item.label">
+                <t-option v-for="(item, index) in partyBOptions" :key="index" :value="item.value" :label="item.label">
                   {{ item.label }}
                 </t-option>
               </t-select>
@@ -183,6 +183,7 @@ const FORM_RULES = {
 };
 
 export default {
+  name: 'FormBase',
   data() {
     return {
       prefix,

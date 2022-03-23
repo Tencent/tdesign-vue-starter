@@ -82,7 +82,7 @@ echarts.use([
 
 /** 部署配置 */
 export default {
-  name: 'detail-deploy',
+  name: 'DetailDeploy',
   components: { Card },
   data() {
     return {

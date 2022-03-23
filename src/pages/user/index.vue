@@ -121,6 +121,8 @@ import Card from '@/components/card/index.vue';
 echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendComponent]);
 
 export default {
+  name: 'UserIndex',
+
   components: {
     Card,
     ProductAIcon,

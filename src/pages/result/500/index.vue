@@ -8,7 +8,7 @@
 import result from '@/components/result/index.vue';
 
 export default {
-  name: 'result-500',
+  name: 'Result500',
   components: { result },
 };
 </script>

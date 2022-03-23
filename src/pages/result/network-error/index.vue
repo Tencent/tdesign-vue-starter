@@ -11,7 +11,7 @@
 import result from '@/components/result/index.vue';
 
 export default {
-  name: 'result-network-error',
+  name: 'ResultNetworkError',
   components: { result },
 };
 </script>

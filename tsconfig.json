@@ -13,6 +13,7 @@
     "strictNullChecks": false,
     "skipLibCheck": true,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "jsx": "preserve",
     "noEmit": true,
     "baseUrl": "./",

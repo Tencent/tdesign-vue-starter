@@ -32,7 +32,7 @@ import model from '@/service/service-detail-base';
 import Card from '@/components/card/index.vue';
 
 export default {
-  name: 'list-base',
+  name: 'DetailBase',
   components: { Card },
   data() {
     return {

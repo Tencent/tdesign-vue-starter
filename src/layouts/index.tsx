@@ -1,14 +1,15 @@
 import Vue, { VNode } from 'vue';
 import { mapGetters } from 'vuex';
-import TdesignHeader from './components/Header.vue';
-import TdesignBreadcrumb from './components/Breadcrumb.vue';
-import TdesignFooter from './components/Footer.vue';
-import TdesignSideNav from './components/SideNav';
-import TdesignContent from './components/Content.vue';
+import LayoutHeader from './components/Header.vue';
+import LayoutBreadcrumb from './components/Breadcrumb.vue';
+import LayoutFooter from './components/Footer.vue';
+import LayoutSideNav from './components/SideNav';
+import LayoutContent from './components/Content.vue';
+import Setting from './setting.vue';
 
 import { prefix } from '@/config/global';
-import TdesignSetting from './setting.vue';
 import { SettingType } from '@/interface';
+
 import '@/style/layout.less';
 
 const name = `${prefix}-base-layout`;
@@ -16,11 +17,12 @@ const name = `${prefix}-base-layout`;
 export default Vue.extend({
   name,
   components: {
-    TdesignHeader,
-    TdesignFooter,
-    TdesignSideNav,
-    TdesignSetting,
-    TdesignBreadcrumb,
+    LayoutHeader,
+    LayoutContent,
+    LayoutFooter,
+    LayoutSideNav,
+    LayoutBreadcrumb,
+    Setting,
   },
   computed: {
     ...mapGetters({
@@ -30,7 +32,9 @@ export default Vue.extend({
       showSidebarLogo: 'setting/showSidebarLogo',
       showFooter: 'setting/showFooter',
       mode: 'setting/mode',
+      isUseTabsRouter: 'setting/isUseTabsRouter',
       menuRouters: 'permission/routers',
+      tabRouterList: 'tabRouter/tabRouterList',
     }),
     setting(): SettingType {
       return this.$store.state.setting;
@@ -62,7 +66,53 @@ export default Vue.extend({
       return menuRouters;
     },
   },
+  watch: {
+    $route(newRoute) {
+      // 监听路由变化往多标签新增
+      const {
+        path,
+        meta: { title },
+        name,
+      } = newRoute;
+      this.$store.commit('tabRouter/appendTabRouterList', { path, title, name, isAlive: true });
+    },
+  },
+  mounted() {
+    const {
+      path,
+      meta: { title },
+      name,
+    } = this.$route;
+    this.$store.commit('tabRouter/appendTabRouterList', { path, title, name, isAlive: true });
+  },
   methods: {
+    handleRemove(path: string, routeIdx: number) {
+      const nextRouter = this.tabRouterList[routeIdx + 1] || this.tabRouterList[routeIdx - 1];
+
+      this.$store.commit('tabRouter/subtractCurrentTabRouter', { path, routeIdx });
+      if (path === this.$router.history?.current?.path) {
+        this.$router.push(nextRouter.path);
+      }
+    },
+    handleChangeCurrentTab(path: string) {
+      this.$router.push(path);
+    },
+    handleRefresh(currentPath: string, routeIdx: number) {
+      this.$store.commit('tabRouter/toggleTabRouterAlive', routeIdx);
+      this.$nextTick(() => {
+        this.$store.commit('tabRouter/toggleTabRouterAlive', routeIdx);
+        this.$router.replace({ path: currentPath });
+      });
+    },
+    handleCloseAhead(path: string, routeIdx: number) {
+      this.$store.commit('tabRouter/subtractTabRouterAhead', { path, routeIdx });
+    },
+    handleCloseBehind(path: string, routeIdx: number) {
+      this.$store.commit('tabRouter/subtractTabRouterBehind', { path, routeIdx });
+    },
+    handleCloseOther(path: string, routeIdx: number) {
+      this.$store.commit('tabRouter/subtractTabRouterOther', { path, routeIdx });
+    },
     renderSidebar(): VNode {
       // const theme =
       //   this.setting.mode === 'dark' ? 'dark' : this.setting.layout === 'mix' ? 'light' : this.setting.theme;
@@ -71,7 +121,7 @@ export default Vue.extend({
 
       return (
         this.showSidebar && (
-          <tdesign-side-nav
+          <layout-side-nav
             showLogo={this.showSidebarLogo}
             layout={this.setting.layout}
             isFixed={this.setting.isSidebarFixed}
@@ -87,7 +137,7 @@ export default Vue.extend({
       const maxLevel = this.setting.splitMenu ? 1 : 3;
       return (
         this.showHeader && (
-          <tdesign-header
+          <layout-header
             showLogo={this.showHeaderLogo}
             maxLevel={maxLevel}
             theme={this.mode}
@@ -104,9 +154,59 @@ export default Vue.extend({
       const { showFooter } = this;
       return (
         <t-layout class={[`${prefix}-layout`]}>
+          <t-tabs
+            theme="card"
+            class={`${prefix}-layout-tabs-nav`}
+            value={this.$route.path}
+            onChange={this.handleChangeCurrentTab}
+            style={{ maxWidth: '100%', position: 'fixed', overflow: 'visible' }}
+          >
+            {this.isUseTabsRouter &&
+              this.tabRouterList.map((route: { path: string; title: string; isHome: boolean }, idx: number) => (
+                <t-tab-panel
+                  value={route.path}
+                  key={`${route.path}_${idx}`}
+                  label={() => (
+                    <t-dropdown
+                      trigger="context-menu"
+                      minColumnWidth={128}
+                      popupProps={{ overlayClassName: 'route-tabs-dropdown' }}
+                    >
+                      {!route.isHome ? route.title : <t-icon name="home" />}
+                      {this.$route.path === route.path && (
+                        <t-dropdown-menu slot="dropdown">
+                          <t-dropdown-item onClick={() => this.handleRefresh(route.path, idx)}>
+                            <t-icon name="refresh" />
+                            刷新
+                          </t-dropdown-item>
+                          {idx > 0 && (
+                            <t-dropdown-item onClick={() => this.handleCloseAhead(route.path, idx)}>
+                              <t-icon name="arrow-left" />
+                              关闭左侧
+                            </t-dropdown-item>
+                          )}
+                          {idx < this.tabRouterList.length - 1 && (
+                            <t-dropdown-item onClick={() => this.handleCloseBehind(route.path, idx)}>
+                              <t-icon name="arrow-right" />
+                              关闭右侧
+                            </t-dropdown-item>
+                          )}
+                          <t-dropdown-item onClick={() => this.handleCloseOther(route.path, idx)}>
+                            <t-icon name="close-circle" />
+                            关闭其它
+                          </t-dropdown-item>
+                        </t-dropdown-menu>
+                      )}
+                    </t-dropdown>
+                  )}
+                  removable={!route.isHome}
+                  onRemove={() => this.handleRemove(route.path, idx)}
+                ></t-tab-panel>
+              ))}
+          </t-tabs>
           <t-content class={`${prefix}-content-layout`}>
-            {showBreadcrumb && <tdesign-breadcrumb />}
-            <TdesignContent />
+            {showBreadcrumb && <layout-breadcrumb />}
+            <layout-content />
           </t-content>
           {showFooter && this.renderFooter()}
         </t-layout>
@@ -116,7 +216,7 @@ export default Vue.extend({
     renderFooter(): VNode {
       return (
         <t-footer class={`${prefix}-footer-layout`}>
-          <tdesign-footer />
+          <layout-footer />
         </t-footer>
       );
     },
@@ -127,7 +227,7 @@ export default Vue.extend({
     const header = this.renderHeader();
     const sidebar = this.renderSidebar();
     const content = this.renderContent();
-    let renderLayout;
+    let renderLayout: VNode;
     if (layout === 'side') {
       renderLayout = (
         <t-layout key="side">
@@ -160,7 +260,7 @@ export default Vue.extend({
     return (
       <div>
         {renderLayout}
-        <tdesign-setting />
+        <setting />
       </div>
     );
   },

@@ -8,7 +8,7 @@
 import result from '@/components/result/index.vue';
 
 export default {
-  name: 'result-403',
+  name: 'Result403',
   components: { result },
 };
 </script>
