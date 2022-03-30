@@ -49,7 +49,7 @@
     </template>
 
     <!-- 手机号登陆 -->
-    <template v-else>
+    <template v-if="type == 'phone'">
       <t-form-item name="phone">
         <t-input v-model="formData.phone" size="large" placeholder="请输入您的手机号">
           <template #prefix-icon>
