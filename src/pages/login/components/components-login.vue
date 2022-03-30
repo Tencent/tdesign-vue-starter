@@ -22,6 +22,7 @@
           size="large"
           :type="showPsw ? 'text' : 'password'"
           clearable
+          key="password"
           placeholder="请输入登录密码：admin"
         >
           <template #prefix-icon>
@@ -49,7 +50,7 @@
     </template>
 
     <!-- 手机号登陆 -->
-    <template v-if="type == 'phone'">
+    <template v-else>
       <t-form-item name="phone">
         <t-input v-model="formData.phone" size="large" placeholder="请输入您的手机号">
           <template #prefix-icon>
@@ -59,7 +60,7 @@
       </t-form-item>
 
       <t-form-item class="verification-code" name="verifyCode">
-        <t-input v-model="formData.verifyCode" size="large" placeholder="请输入验证码" />
+        <t-input v-model="formData.verifyCode" size="large" placeholder="请输入验证码" key="verifyCode" />
         <t-button variant="outline" :disabled="countDown > 0" @click="handleCounter">
           {{ countDown == 0 ? '发送验证码' : `${countDown}秒后可重发` }}
         </t-button>
