@@ -19,7 +19,7 @@
   "dependencies": {
     "@vitejs/plugin-legacy": "^1.5.3",
     "dayjs": "^1.10.8",
-    "echarts": "~5.1.2",
+    "echarts": "~5.3.2",
     "hex-to-hsl": "^1.0.2",
     "nprogress": "^0.2.0",
     "qrcode.vue": "^1.7.0",
