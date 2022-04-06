@@ -4,7 +4,7 @@
   "scripts": {
     "dev:mock": "vite --open --mode mock",
     "dev": "vite --open --mode development",
-    "dev:linux": "vite --mode developmenet",
+    "dev:linux": "vite --mode development",
     "build:test": "vite build --mode test",
     "build": "vite build --mode release",
     "site:preview": "npm run build && cp -r dist _site",
