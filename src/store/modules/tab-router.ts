@@ -46,6 +46,9 @@ const mutations = {
   removeTabRouterList() {
     state.tabRouterList = [];
   },
+  initTabRouterList(state: TTabRouterType, newRoute: TRouterInfo[]) {
+    state.tabRouterList = newRoute;
+  },
 };
 
 const getters = {

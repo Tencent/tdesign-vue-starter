@@ -77,12 +77,21 @@ export default Vue.extend({
       this.$store.commit('tabRouter/appendTabRouterList', { path, title, name, isAlive: true });
     },
   },
+  // 如果不需要持久化标签页可以注释掉created和destroyed的内容
+  created() {
+    window.addEventListener('beforeunload', this.setTabRouterListCache);
+  },
+  destroyed() {
+    window.removeEventListener('beforeunload', this.setTabRouterListCache);
+  },
   mounted() {
     const {
       path,
       meta: { title },
       name,
     } = this.$route;
+
+    if (localStorage.getItem('tabRouterList')) this.getTabRouterListCache();
     this.$store.commit('tabRouter/appendTabRouterList', { path, title, name, isAlive: true });
   },
   methods: {
@@ -112,6 +121,12 @@ export default Vue.extend({
     },
     handleCloseOther(path: string, routeIdx: number) {
       this.$store.commit('tabRouter/subtractTabRouterOther', { path, routeIdx });
+    },
+    getTabRouterListCache() {
+      this.$store.commit('tabRouter/initTabRouterList', JSON.parse(localStorage.getItem('tabRouterList')));
+    },
+    setTabRouterListCache() {
+      localStorage.setItem('tabRouterList', JSON.stringify(this.tabRouterList));
     },
     renderSidebar(): VNode {
       // const theme =
@@ -160,7 +175,7 @@ export default Vue.extend({
               class={`${prefix}-layout-tabs-nav`}
               value={this.$route.path}
               onChange={this.handleChangeCurrentTab}
-              style={{ maxWidth: '100%', position: 'fixed', overflow: 'visible' }}
+              style={{ position: 'sticky', top: 0, width: '100%' }}
             >
               {this.tabRouterList.map((route: { path: string; title: string; isHome: boolean }, idx: number) => (
                 <t-tab-panel
