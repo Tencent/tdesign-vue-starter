@@ -8,7 +8,9 @@
           </t-input>
           <t-tree :data="items" hover expand-on-click-node :default-expanded="expanded" :filter="filterByText" />
         </div>
-        <div class="list-tree-content"><common-table /></div>
+        <div class="list-tree-content">
+          <common-table />
+        </div>
       </div>
     </div>
   </div>
@@ -38,7 +40,7 @@ export default {
           value: '2',
         },
       ],
-      value: 'frist',
+      value: 'first',
       expanded: ['0', '0-0', '0-1', '0-2', '0-3', '0-4'],
       items: [
         {

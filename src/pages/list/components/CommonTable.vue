@@ -80,10 +80,12 @@
         </template>
         <template #paymentType="{ row }">
           <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
-            付款<trend class="dashboard-item-trend" type="up" />
+            付款
+            <trend class="dashboard-item-trend" type="up" />
           </p>
           <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECIPT" class="payment-col">
-            收款<trend class="dashboard-item-trend" type="down" />
+            收款
+            <trend class="dashboard-item-trend" type="down" />
           </p>
         </template>
         <template #op="slotProps">
@@ -134,7 +136,7 @@ export default {
       },
       data: [],
       dataLoading: false,
-      value: 'frist',
+      value: 'first',
       columns: [
         {
           title: '合同名称',
