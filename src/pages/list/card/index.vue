@@ -33,12 +33,8 @@
             </t-select>
           </t-form-item>
           <t-form-item label="备注" name="mark">
-            <t-textarea
-              :style="{ width: '480px' }"
-              v-model="textareaValue"
-              placeholder="请输入内容"
-              name="description"
-            ></t-textarea>
+            <t-textarea :style="{ width: '480px' }" v-model="textareaValue" placeholder="请输入内容" name="description">
+            </t-textarea>
           </t-form-item>
           <t-form-item style="float: right">
             <t-button variant="outline" @click="onClickCloseBtn">取消</t-button>
@@ -117,7 +113,7 @@ export default {
       pagination: { current: 1, pageSize: 12, total: 0 },
       prefix,
       productList: [],
-      value: 'frist',
+      value: 'first',
       rowKey: 'index',
       tableLayout: 'auto',
       verticalAlign: 'top',

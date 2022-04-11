@@ -19,7 +19,7 @@
 
     <!-- 发票进度 -->
     <card title="发票进度" class="container-base-margin-top">
-      <t-row :class="prefix + '-operater-row row-padding'" justify="space-between">
+      <t-row :class="prefix + '-operator-row row-padding'" justify="space-between">
         <template>
           <t-steps :current="updateCurrent">
             <t-step-item title="申请提交" content="已于12月21日提交"></t-step-item>

@@ -42,10 +42,12 @@
           </template>
           <template #paymentType="{ row }">
             <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.PAYMENT" class="payment-col">
-              付款<trend class="dashboard-item-trend" type="up" />
+              付款
+              <trend class="dashboard-item-trend" type="up" />
             </p>
             <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECIPT" class="payment-col">
-              收款<trend class="dashboard-item-trend" type="down" />
+              收款
+              <trend class="dashboard-item-trend" type="down" />
             </p>
           </template>
 
@@ -92,7 +94,7 @@ export default Vue.extend({
       dataLoading: false,
       data: [],
       selectedRowKeys: [1, 2],
-      value: 'frist',
+      value: 'first',
       columns: [
         { colKey: 'row-select', type: 'multiple', width: 64, fixed: 'left' },
         {
