@@ -9,7 +9,7 @@
         <img src="@/assets/assets-tencent-logo.png" class="logo" />
       </div>
 
-      <card class="user-info-list" size="small" title="个人信息">
+      <t-card class="user-info-list" size="small" title="个人信息">
         <template #option>
           <t-button theme="default" shape="square" variant="text">
             <t-icon name="edit" size="18" />
@@ -25,15 +25,15 @@
             </div>
           </t-col>
         </t-row>
-      </card>
+      </t-card>
 
-      <card class="content-container">
+      <t-card class="content-container">
         <t-tabs value="second">
           <t-tab-panel value="first" label="内容列表">
             <p>内容列表</p>
           </t-tab-panel>
           <t-tab-panel value="second" label="内容列表">
-            <card class="card-padding-no" title="主页访问数据" describe="（次）">
+            <t-card class="card-padding-no" title="主页访问数据" describe="（次）">
               <template #options>
                 <t-date-picker
                   class="card-date-picker-container"
@@ -45,23 +45,23 @@
                 />
               </template>
               <div id="lineContainer" style="width: 100%; height: 330px" />
-            </card>
+            </t-card>
           </t-tab-panel>
           <t-tab-panel value="third" label="内容列表">
             <p>内容列表</p>
           </t-tab-panel>
         </t-tabs>
-      </card>
+      </t-card>
     </t-col>
 
     <t-col :flex="1">
-      <card class="user-intro">
+      <t-card class="user-intro">
         <t-avatar size="90px">T</t-avatar>
         <div class="name">My Account</div>
         <div class="position">XXG 港澳业务拓展组员工 直客销售</div>
-      </card>
+      </t-card>
 
-      <card title="团队成员" class="user-team" size="small">
+      <t-card title="团队成员" class="user-team" size="small">
         <template #option>
           <t-button theme="default" shape="square" variant="text">
             <t-icon name="edit" size="18" />
@@ -72,9 +72,9 @@
             <t-list-item-meta :image="item.avatar" :title="item.title" :description="item.description" />
           </t-list-item>
         </t-list>
-      </card>
+      </t-card>
 
-      <card title="服务产品" class="product-container" size="small">
+      <t-card title="服务产品" class="product-container" size="small">
         <template #option>
           <t-button theme="default" shape="square" variant="text">
             <t-icon name="edit" size="18" />
@@ -94,21 +94,21 @@
             <product-d-icon />
           </t-col>
         </t-row>
-      </card>
+      </t-card>
     </t-col>
   </t-row>
 </template>
 <script>
-import { prefix } from '@/config/global';
-
-import { LAST_7_DAYS } from '@/utils/date.ts';
-import * as echarts from 'echarts/core';
-import { mapState } from 'vuex';
-
 import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
-import { changeChartsTheme, getFolderLineDataSet } from '@/pages/dashboard/base/index';
+import * as echarts from 'echarts/core';
+
+import { mapState } from 'vuex';
+
+import { getFolderLineDataSet } from './index';
+import { changeChartsTheme } from '@/utils/color';
+import { LAST_7_DAYS } from '@/utils/date';
 
 import { USER_INFO_LIST, TEAM_MEMBERS, PRODUCT_LIST } from '@/service/service-user';
 import ProductAIcon from '@/assets/assets-product-1.svg';
@@ -116,15 +116,12 @@ import ProductBIcon from '@/assets/assets-product-2.svg';
 import ProductCIcon from '@/assets/assets-product-3.svg';
 import ProductDIcon from '@/assets/assets-product-4.svg';
 
-import Card from '@/components/card/index.vue';
-
 echarts.use([GridComponent, TooltipComponent, LineChart, CanvasRenderer, LegendComponent]);
 
 export default {
   name: 'UserIndex',
 
   components: {
-    Card,
     ProductAIcon,
     ProductBIcon,
     ProductCIcon,
@@ -132,7 +129,6 @@ export default {
   },
   data() {
     return {
-      prefix,
       dashboardBase: '',
       lineContainer: '',
       lineChart: '',

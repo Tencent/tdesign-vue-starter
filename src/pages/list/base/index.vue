@@ -1,6 +1,6 @@
 <template>
   <div>
-    <card class="list-card-container">
+    <t-card class="list-card-container">
       <t-row justify="space-between">
         <div class="left-operation-container">
           <t-button @click="handleSetupContract"> 新建合同 </t-button>
@@ -57,7 +57,7 @@
           </template>
         </t-table>
       </div>
-    </card>
+    </t-card>
     <t-dialog
       header="确认删除当前所选合同？"
       :body="confirmBody"
@@ -72,7 +72,6 @@
 import Vue from 'vue';
 import { SearchIcon } from 'tdesign-icons-vue';
 import Trend from '@/components/trend/index.vue';
-import Card from '@/components/card/index.vue';
 
 import { prefix } from '@/config/global';
 import { CONTRACT_STATUS, CONTRACT_STATUS_OPTIONS, CONTRACT_TYPES, CONTRACT_PAYMENT_TYPES } from '@/constants';
@@ -82,7 +81,6 @@ export default Vue.extend({
   components: {
     SearchIcon,
     Trend,
-    Card,
   },
   data() {
     return {
