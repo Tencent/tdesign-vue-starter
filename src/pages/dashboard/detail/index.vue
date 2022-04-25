@@ -1,9 +1,9 @@
 <template>
   <div class="dashboard-detail">
-    <t-card title="本月采购申请情况">
+    <t-card title="本月采购申请情况" class="dashboard-detail-card">
       <t-row :gutter="[16, 16]">
         <t-col v-for="(item, index) in PANE_LIST_DATA" :key="index" :xs="6" :xl="3">
-          <t-card :class="{ 'dashboard-list-card': true, 'dashboard-detail-card': true }" :description="item.title">
+          <t-card :class="['dashboard-list-card']" :description="item.title">
             <div class="dashboard-list-card__number">{{ item.number }}</div>
             <div class="dashboard-list-card__text">
               <div class="dashboard-list-card__text-left">
@@ -20,7 +20,14 @@
       <t-col :xs="12" :xl="9">
         <t-card :class="{ 'dashboard-detail-card': true }" title="采购商品申请趋势" subtitle="(件)">
           <template #actions>
-            <t-date-picker :default-value="LAST_7_DAYS" theme="primary" mode="date" range @change="onMaterialChange" />
+            <t-date-picker
+              style="width: 240px"
+              :default-value="LAST_7_DAYS"
+              theme="primary"
+              mode="date"
+              range
+              @change="onMaterialChange"
+            />
           </template>
           <div id="lineContainer" ref="lineContainer" style="width: 100%; height: 410px"></div>
         </t-card>
@@ -37,7 +44,7 @@
     <t-card :class="{ 'dashboard-detail-card': true }" title="采购商品满意度分布" class="row-margin">
       <template #actions>
         <t-date-picker
-          style="display: inline-block; margin-right: 8px"
+          style="display: inline-block; margin-right: 8px; width: 240px"
           :defaultValue="LAST_7_DAYS"
           theme="primary"
           mode="date"

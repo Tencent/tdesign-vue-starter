@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="detail-deploy">
     <t-row :gutter="12">
       <t-col :lg="6" :xs="12">
         <t-card title="部署趋势">
@@ -203,5 +203,14 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-@import '../base/index.less';
+.detail-deploy {
+  /deep/ .t-card {
+    padding: 8px;
+  }
+
+  /deep/ .t-card__title {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="tableContainer">
     <t-card class="list-card-container">
       <t-row justify="space-between">
         <div class="left-operation-container">
@@ -14,7 +14,7 @@
         </t-input>
       </t-row>
 
-      <div class="table-container">
+      <div class="table-container" ref="tableContainer">
         <t-table
           :columns="columns"
           :data="data"
@@ -27,6 +27,8 @@
           @page-change="rehandlePageChange"
           @change="rehandleChange"
           @select-change="rehandleSelectChange"
+          :headerAffixedTop="true"
+          :headerAffixProps="{ offsetTop: 0, container: getContainer }"
         >
           <template #status="{ row }">
             <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">审核失败</t-tag>
@@ -98,7 +100,8 @@ export default Vue.extend({
         {
           title: '合同名称',
           align: 'left',
-          width: 300,
+          width: 250,
+          ellipsis: true,
           colKey: 'name',
           fixed: 'left',
         },
@@ -218,6 +221,9 @@ export default Vue.extend({
     },
     resetIdx() {
       this.deleteIdx = -1;
+    },
+    getContainer() {
+      return this.$refs?.tableContainer;
     },
   },
 });

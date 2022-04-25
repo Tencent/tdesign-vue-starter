@@ -2,7 +2,7 @@
   <div>
     <div class="form-step-container">
       <!-- 简单步骤条 -->
-      <t-card>
+      <t-card :bordered="false">
         <t-steps :defaultCurrent="1" :current="activeForm" status="process">
           <t-step-item title="申请提交" content="已于12月21日提交"></t-step-item>
           <t-step-item title="电子发票" content="预计1～3个工作日"></t-step-item>

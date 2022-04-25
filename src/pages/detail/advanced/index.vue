@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="detail-advanced">
     <t-card title="基本信息" class="advanced-card">
       <div class="info-block">
         <div v-for="(item, index) in baseInfoData" :key="index" class="info-item">
@@ -215,12 +215,4 @@ export default {
 </script>
 <style lang="less" scoped>
 @import './index';
-
-.advanced-card {
-  margin-top: 0 !important;
-
-  .card-title-default {
-    margin-bottom: 12px;
-  }
-}
 </style>

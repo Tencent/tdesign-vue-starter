@@ -1,5 +1,6 @@
 import Vue, { VNode } from 'vue';
 import { mapGetters } from 'vuex';
+import { RefreshIcon, ArrowLeftIcon, ArrowRightIcon, HomeIcon, CloseCircleIcon } from 'tdesign-icons-vue';
 import LayoutHeader from './components/Header.vue';
 import LayoutBreadcrumb from './components/Breadcrumb.vue';
 import LayoutFooter from './components/Footer.vue';
@@ -23,6 +24,11 @@ export default Vue.extend({
     LayoutSideNav,
     LayoutBreadcrumb,
     Setting,
+    RefreshIcon,
+    ArrowLeftIcon,
+    ArrowRightIcon,
+    HomeIcon,
+    CloseCircleIcon,
   },
   computed: {
     ...mapGetters({
@@ -187,27 +193,27 @@ export default Vue.extend({
                       minColumnWidth={128}
                       popupProps={{ overlayClassName: 'route-tabs-dropdown' }}
                     >
-                      {!route.isHome ? route.title : <t-icon name="home" />}
+                      {!route.isHome ? route.title : <home-icon />}
                       {this.$route.path === route.path && (
                         <t-dropdown-menu slot="dropdown">
                           <t-dropdown-item onClick={() => this.handleRefresh(route.path, idx)}>
-                            <t-icon name="refresh" />
+                            <refresh-icon />
                             刷新
                           </t-dropdown-item>
                           {idx > 0 && (
                             <t-dropdown-item onClick={() => this.handleCloseAhead(route.path, idx)}>
-                              <t-icon name="arrow-left" />
+                              <arrow-left-icon />
                               关闭左侧
                             </t-dropdown-item>
                           )}
                           {idx < this.tabRouterList.length - 1 && (
                             <t-dropdown-item onClick={() => this.handleCloseBehind(route.path, idx)}>
-                              <t-icon name="arrow-right" />
+                              <arrow-right-icon />
                               关闭右侧
                             </t-dropdown-item>
                           )}
                           <t-dropdown-item onClick={() => this.handleCloseOther(route.path, idx)}>
-                            <t-icon name="close-circle" />
+                            <close-circle-icon />
                             关闭其它
                           </t-dropdown-item>
                         </t-dropdown-menu>

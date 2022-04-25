@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="detail-base">
     <t-card title="基本信息">
       <div class="info-block">
         <div v-for="(item, index) in baseInfoData" :key="index" class="info-item">

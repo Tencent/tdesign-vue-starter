@@ -9,10 +9,10 @@
         <img src="@/assets/assets-tencent-logo.png" class="logo" />
       </div>
 
-      <t-card class="user-info-list" size="small" title="个人信息">
+      <t-card class="user-info-list" title="个人信息">
         <template #option>
           <t-button theme="default" shape="square" variant="text">
-            <t-icon name="edit" size="18" />
+            <edit-icon size="18" />
           </t-button>
         </template>
         <t-row class="content" justify="space-between">
@@ -33,7 +33,7 @@
             <p>内容列表</p>
           </t-tab-panel>
           <t-tab-panel value="second" label="内容列表">
-            <t-card class="card-padding-no" title="主页访问数据" describe="（次）">
+            <t-card :bordered="false" title="主页访问数据" subtitle="（次）">
               <template #options>
                 <t-date-picker
                   class="card-date-picker-container"
@@ -61,10 +61,10 @@
         <div class="position">XXG 港澳业务拓展组员工 直客销售</div>
       </t-card>
 
-      <t-card title="团队成员" class="user-team" size="small">
+      <t-card title="团队成员" class="user-team">
         <template #option>
           <t-button theme="default" shape="square" variant="text">
-            <t-icon name="edit" size="18" />
+            <edit-icon size="18" />
           </t-button>
         </template>
         <t-list :split="false">
@@ -74,10 +74,10 @@
         </t-list>
       </t-card>
 
-      <t-card title="服务产品" class="product-container" size="small">
+      <t-card title="服务产品" class="product-container">
         <template #option>
           <t-button theme="default" shape="square" variant="text">
-            <t-icon name="edit" size="18" />
+            <edit-icon size="18" />
           </t-button>
         </template>
         <t-row class="content" :getters="16">
@@ -103,6 +103,7 @@ import { GridComponent, TooltipComponent, LegendComponent } from 'echarts/compon
 import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import * as echarts from 'echarts/core';
+import { EditIcon } from 'tdesign-icons-vue';
 
 import { mapState } from 'vuex';
 
@@ -126,6 +127,7 @@ export default {
     ProductBIcon,
     ProductCIcon,
     ProductDIcon,
+    EditIcon,
   },
   data() {
     return {
@@ -187,18 +189,13 @@ export default {
       });
     },
     getIcon(type) {
-      switch (type) {
-      case 'a':
-        return ProductAIcon;
-      case 'b':
-        return ProductBIcon;
-      case 'c':
-        return ProductCIcon;
-      case 'd':
-        return ProductDIcon;
-      default:
-        return ProductAIcon;
-      }
+      const typeMap = {
+        a: ProductAIcon,
+        b: ProductBIcon,
+        c: ProductCIcon,
+        d: ProductDIcon,
+      };
+      return typeMap[type || 'a'];
     },
   },
 };
