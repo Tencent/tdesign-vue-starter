@@ -65,7 +65,7 @@ import { BarChart, LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { mapState } from 'vuex';
 
-import { getSmoothLineDataSet, get2ColBarChartDataSet } from '../../dashboard/base/index';
+import { getSmoothLineDataSet, get2ColBarChartDataSet } from './index';
 import model from '@/service/service-detail-deploy';
 
 echarts.use([
@@ -125,6 +125,10 @@ export default {
   },
 
   async mounted() {
+    this.$nextTick(() => {
+      this.updateContainer();
+    });
+
     this.$request
       .get('/api/get-project-list')
       .then((res) => {
