@@ -75,7 +75,7 @@ const actions = {
       }
       return {
         name: 'td_dev',
-        roles: ['userIndex', 'dashboardBase', 'login'],
+        roles: ['UserIndex', 'DashboardBase', 'login'],
       };
     };
 
