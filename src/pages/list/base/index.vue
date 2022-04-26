@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <card class="list-card-container">
+  <div ref="tableContainer">
+    <t-card class="list-card-container">
       <t-row justify="space-between">
         <div class="left-operation-container">
           <t-button @click="handleSetupContract"> 新建合同 </t-button>
@@ -14,7 +14,7 @@
         </t-input>
       </t-row>
 
-      <div class="table-container">
+      <div class="table-container" ref="tableContainer">
         <t-table
           :columns="columns"
           :data="data"
@@ -27,6 +27,8 @@
           @page-change="rehandlePageChange"
           @change="rehandleChange"
           @select-change="rehandleSelectChange"
+          :headerAffixedTop="true"
+          :headerAffixProps="{ offsetTop: 0, container: getContainer }"
         >
           <template #status="{ row }">
             <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">审核失败</t-tag>
@@ -57,7 +59,7 @@
           </template>
         </t-table>
       </div>
-    </card>
+    </t-card>
     <t-dialog
       header="确认删除当前所选合同？"
       :body="confirmBody"
@@ -72,7 +74,6 @@
 import Vue from 'vue';
 import { SearchIcon } from 'tdesign-icons-vue';
 import Trend from '@/components/trend/index.vue';
-import Card from '@/components/card/index.vue';
 
 import { prefix } from '@/config/global';
 import { CONTRACT_STATUS, CONTRACT_STATUS_OPTIONS, CONTRACT_TYPES, CONTRACT_PAYMENT_TYPES } from '@/constants';
@@ -82,7 +83,6 @@ export default Vue.extend({
   components: {
     SearchIcon,
     Trend,
-    Card,
   },
   data() {
     return {
@@ -100,7 +100,8 @@ export default Vue.extend({
         {
           title: '合同名称',
           align: 'left',
-          width: 300,
+          width: 250,
+          ellipsis: true,
           colKey: 'name',
           fixed: 'left',
         },
@@ -220,6 +221,9 @@ export default Vue.extend({
     },
     resetIdx() {
       this.deleteIdx = -1;
+    },
+    getContainer() {
+      return this.$refs?.tableContainer;
     },
   },
 });

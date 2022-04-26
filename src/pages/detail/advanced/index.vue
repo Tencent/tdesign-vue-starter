@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <card title="基本信息" class="advanced-card">
+  <div class="detail-advanced">
+    <t-card title="基本信息" class="advanced-card">
       <div class="info-block">
         <div v-for="(item, index) in baseInfoData" :key="index" class="info-item">
           <h1>{{ item.name }}</h1>
@@ -15,10 +15,10 @@
           </span>
         </div>
       </div>
-    </card>
+    </t-card>
 
     <!-- 发票进度 -->
-    <card title="发票进度" class="container-base-margin-top">
+    <t-card title="发票进度" class="container-base-margin-top">
       <t-row :class="prefix + '-operator-row row-padding'" justify="space-between">
         <template>
           <t-steps :current="updateCurrent">
@@ -29,10 +29,10 @@
           </t-steps>
         </template>
       </t-row>
-    </card>
+    </t-card>
 
     <!-- 产品目录 -->
-    <card title="产品目录" class="container-base-margin-top">
+    <t-card title="产品目录" class="container-base-margin-top">
       <template slot="option">
         <t-radio-group default-value="dateVal" @change="onAlertChange">
           <t-radio-button value="dateVal">季度</t-radio-button>
@@ -53,10 +53,10 @@
           <product :data="item" />
         </t-col>
       </t-row>
-    </card>
+    </t-card>
 
     <!-- 产品采购明细 -->
-    <card title="产品采购明细" class="container-base-margin-top">
+    <t-card title="产品采购明细" class="container-base-margin-top">
       <t-table
         :columns="columns"
         :data="data"
@@ -87,7 +87,7 @@
         </template>
         <t-icon slot="op-column" name="descending-order" />
       </t-table>
-    </card>
+    </t-card>
 
     <t-dialog header="基本信息" :visible.sync="visible" @confirm="onConfirm">
       <div slot="body">
@@ -111,7 +111,6 @@
 </template>
 <script lang="ts">
 import { prefix } from '@/config/global';
-import Card from '@/components/card/index.vue';
 import model from '@/service/service-advance';
 import Product from './components/Product.vue';
 import { TableChangeContext, TableChangeData, TableSort } from 'tdesign-vue';
@@ -142,7 +141,7 @@ const PRODUCT_LIST = [
 /** 高级详情 */
 export default {
   name: 'DetailAdvanced',
-  components: { Card, Product },
+  components: { Product },
   data() {
     return {
       data: [],
@@ -216,12 +215,4 @@ export default {
 </script>
 <style lang="less" scoped>
 @import './index';
-
-.advanced-card {
-  margin-top: 0 !important;
-
-  .card-title-default {
-    margin-bottom: 12px;
-  }
-}
 </style>

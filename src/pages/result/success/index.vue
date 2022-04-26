@@ -1,6 +1,6 @@
 <template>
   <div class="result-success">
-    <t-icon class="result-success-icon" name="check-circle" />
+    <check-circle-icon class="result-success-icon" />
     <div class="result-success-title">项目已创建成功</div>
     <div class="result-success-describe">可以联系负责人分发应用</div>
     <div>
@@ -11,8 +11,13 @@
 </template>
 
 <script>
+import { CheckCircleIcon } from 'tdesign-icons-vue';
+
 export default {
   name: 'ResultSuccess',
+  components: {
+    CheckCircleIcon,
+  },
 };
 </script>
 

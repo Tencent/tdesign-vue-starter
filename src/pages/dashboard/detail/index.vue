@@ -1,27 +1,27 @@
 <template>
-  <div class="dashboard-panel-detail">
-    <card title="本月采购申请情况">
+  <div class="dashboard-detail">
+    <t-card title="本月采购申请情况" class="dashboard-detail-card">
       <t-row :gutter="[16, 16]">
         <t-col v-for="(item, index) in PANE_LIST_DATA" :key="index" :xs="6" :xl="3">
-          <card border class="dashboard-detail-container-item" size="small" :describe="item.title">
-            <div class="number">{{ item.number }}</div>
-            <div class="dashboard-detail-container-item-text">
-              <div class="dashboard-detail-container-item-text-left">
+          <t-card :class="['dashboard-list-card']" :description="item.title">
+            <div class="dashboard-list-card__number">{{ item.number }}</div>
+            <div class="dashboard-list-card__text">
+              <div class="dashboard-list-card__text-left">
                 环比
                 <trend class="icon" :type="item.upTrend ? 'up' : 'down'" :describe="item.upTrend || item.downTrend" />
               </div>
               <t-icon name="chevron-right" />
             </div>
-          </card>
+          </t-card>
         </t-col>
       </t-row>
-    </card>
-    <t-row :gutter="[16, 16]" class="card-container-margin">
+    </t-card>
+    <t-row :gutter="[16, 16]" class="row-margin">
       <t-col :xs="12" :xl="9">
-        <card title="采购商品申请趋势" describe="(件)">
-          <template #option>
+        <t-card :class="{ 'dashboard-detail-card': true }" title="采购商品申请趋势" subtitle="(件)">
+          <template #actions>
             <t-date-picker
-              class="card-date-picker-container"
+              style="width: 240px"
               :default-value="LAST_7_DAYS"
               theme="primary"
               mode="date"
@@ -29,32 +29,33 @@
               @change="onMaterialChange"
             />
           </template>
-          <div id="lineContainer" style="width: 100%; height: 416px"></div>
-        </card>
+          <div id="lineContainer" ref="lineContainer" style="width: 100%; height: 410px"></div>
+        </t-card>
       </t-col>
       <t-col :xs="12" :xl="3">
         <product-card
           v-for="(item, index) in PRODUCT_LIST"
           :key="index"
           :product="item"
-          :class="{ 'card-container-margin': index !== 0 }"
+          :class="{ 'row-margin': index !== 0 }"
         />
       </t-col>
     </t-row>
-    <card title="采购商品满意度分布" class="card-container-margin">
-      <template #option>
+    <t-card :class="{ 'dashboard-detail-card': true }" title="采购商品满意度分布" class="row-margin">
+      <template #actions>
         <t-date-picker
-          class="card-date-picker-container"
+          style="display: inline-block; margin-right: 8px; width: 240px"
           :defaultValue="LAST_7_DAYS"
           theme="primary"
           mode="date"
           range
           @change="onSatisfyChange"
-        ></t-date-picker>
-        <t-button class="card-date-button">导出数据</t-button>
+        >
+        </t-date-picker>
+        <t-button>导出数据</t-button>
       </template>
       <div id="scatterContainer" style="width: 100%; height: 374px"></div>
-    </card>
+    </t-card>
   </div>
 </template>
 <script lang="ts">
@@ -65,23 +66,21 @@ import * as echarts from 'echarts/core';
 import { mapState } from 'vuex';
 
 import Trend from '@/components/trend/index.vue';
-import Card from '@/components/card/index.vue';
-import { prefix } from '@/config/global';
+import ProductCard from '@/components/product-card/index.vue';
 
 import { LAST_7_DAYS } from '@/utils/date';
+import { changeChartsTheme } from '@/utils/color';
 
-import ProductCard from '@/components/card/component-card.vue';
 import { PANE_LIST_DATA, PRODUCT_LIST } from '@/service/service-detail';
-import { changeChartsTheme, getFolderLineDataSet, getScatterDataSet } from '../base';
+import { getFolderLineDataSet, getScatterDataSet } from './index';
 
 echarts.use([GridComponent, LegendComponent, TooltipComponent, LineChart, ScatterChart, CanvasRenderer]);
 
 export default {
   name: 'DashboardDetail',
-  components: { Trend, Card, ProductCard },
+  components: { Trend, ProductCard },
   data() {
     return {
-      prefix,
       PANE_LIST_DATA,
       PRODUCT_LIST,
       dashboardBase: '',
@@ -113,17 +112,20 @@ export default {
     },
   },
   mounted() {
+    this.$nextTick(() => {
+      this.updateContainer();
+    });
     this.renderCharts();
   },
   methods: {
     /** 采购商品满意度选择 */
-    onSatisfyChange(value) {
+    onSatisfyChange(value: string) {
       const { chartColors } = this.$store.state.setting;
 
       this.scatterChart.setOption(getScatterDataSet({ dateTime: value, ...chartColors }));
     },
     /** 采购商品申请趋势选择 */
-    onMaterialChange(value) {
+    onMaterialChange(value: string) {
       const { chartColors } = this.$store.state.setting;
 
       this.lineChart.setOption(getFolderLineDataSet({ dateTime: value, ...chartColors }));
@@ -159,5 +161,82 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-@import './index';
+@import '@/style/variables.less';
+
+.row-margin {
+  margin-top: 16px;
+}
+
+// 统一增加8px;
+.dashboard-detail-card {
+  padding: 8px;
+
+  /deep/ .t-card__title {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  /deep/ .t-card__actions {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.dashboard-list-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 170px;
+  padding: 8px;
+
+  /deep/ .t-card__header {
+    padding-bottom: 8px;
+  }
+
+  /deep/ .t-card__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &.dark {
+    &:hover {
+      background: @gray-color-14;
+      cursor: pointer;
+    }
+  }
+
+  &.light {
+    &:hover {
+      background: @gray-color-14;
+      cursor: pointer;
+    }
+  }
+
+  &__number {
+    font-size: 36px;
+    line-height: 44px;
+    color: @text-color-primary;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: @text-color-placeholder;
+    text-align: left;
+    line-height: 18px;
+
+    &-left {
+      display: flex;
+
+      .icon {
+        margin: 0 8px;
+      }
+    }
+  }
+}
 </style>

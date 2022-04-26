@@ -3,7 +3,7 @@
     <t-form ref="form" :data="formData" :label-width="80" colon @reset="onReset" @submit="onSubmit">
       <t-row>
         <t-col :span="10">
-          <t-row :gutter="[16, 16]">
+          <t-row :gutter="[16]">
             <t-col :flex="1">
               <t-form-item label="合同名称" name="name">
                 <t-input
@@ -65,6 +65,8 @@
         @page-change="rehandlePageChange"
         @change="rehandleChange"
         :loading="dataLoading"
+        :headerAffixedTop="true"
+        :headerAffixProps="{ offsetTop: 0, zIndex: 9999 }"
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">审核失败</t-tag>
@@ -141,7 +143,7 @@ export default {
         {
           title: '合同名称',
           fixed: 'left',
-          minWidth: '300',
+          width: 200,
           align: 'left',
           ellipsis: true,
           colKey: 'name',
@@ -270,10 +272,6 @@ export default {
   background-color: @bg-color-container;
   padding: 30px 32px;
   border-radius: @border-radius;
-
-  .table-container {
-    margin-top: 30px;
-  }
 }
 
 .form-item-content {

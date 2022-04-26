@@ -1,5 +1,6 @@
 <template>
   <div class="list-card">
+    <!-- 搜索区域 -->
     <div class="list-card-operation">
       <t-button @click="formVisible = true">新建产品</t-button>
       <t-input v-model="searchValue" class="search-input" placeholder="请输入你需要搜索的内容" clearable>
@@ -8,7 +9,39 @@
         </template>
       </t-input>
     </div>
-
+    <!-- 卡片列表 -->
+    <template v-if="pagination.total > 0 && !dataLoading">
+      <div class="list-card-items">
+        <t-row :gutter="[16, 16]">
+          <t-col
+            :lg="4"
+            :xs="6"
+            :xl="3"
+            v-for="product in productList.slice(
+              pagination.pageSize * (pagination.current - 1),
+              pagination.pageSize * pagination.current,
+            )"
+            :key="product.index"
+          >
+            <product-card :product="product" @delete-item="handleDeleteItem" @manage-product="handleManageProduct" />
+          </t-col>
+        </t-row>
+      </div>
+      <div class="list-card-pagination">
+        <t-pagination
+          v-model="pagination.current"
+          :total="pagination.total"
+          :pageSizeOptions="[12, 24, 36]"
+          :page-size.sync="pagination.pageSize"
+          @page-size-change="onPageSizeChange"
+          @current-change="onCurrentChange"
+        />
+      </div>
+    </template>
+    <div v-else-if="dataLoading" class="list-card-loading">
+      <t-loading text="加载中..."></t-loading>
+    </div>
+    <!-- 产品管理弹窗 -->
     <t-dialog header="新建产品" :visible.sync="formVisible" :width="680" :footer="false">
       <div slot="body">
         <!-- 表单内容 -->
@@ -43,42 +76,7 @@
         </t-form>
       </div>
     </t-dialog>
-    <template v-if="pagination.total > 0 && !dataLoading">
-      <div class="list-card-items">
-        <t-row :gutter="[16, 16]">
-          <t-col
-            :lg="4"
-            :xs="6"
-            :xl="3"
-            v-for="product in productList.slice(
-              pagination.pageSize * (pagination.current - 1),
-              pagination.pageSize * pagination.current,
-            )"
-            :key="product.index"
-          >
-            <card
-              class="list-card-item"
-              :product="product"
-              @delete-item="handleDeleteItem"
-              @manage-product="handleManageProduct"
-            />
-          </t-col>
-        </t-row>
-      </div>
-      <div class="list-card-pagination">
-        <t-pagination
-          v-model="pagination.current"
-          :total="pagination.total"
-          :pageSizeOptions="[12, 24, 36]"
-          :page-size.sync="pagination.pageSize"
-          @page-size-change="onPageSizeChange"
-          @current-change="onCurrentChange"
-        />
-      </div>
-    </template>
-    <div v-else-if="dataLoading" class="list-card-loading">
-      <t-loading text="加载中..."></t-loading>
-    </div>
+    <!-- 删除操作弹窗 -->
     <t-dialog
       header="确认删除所选产品？"
       :body="confirmBody"
@@ -92,7 +90,7 @@
 <script lang="ts">
 import { prefix } from '@/config/global';
 import { SearchIcon } from 'tdesign-icons-vue';
-import Card from '@/components/card/component-card.vue';
+import ProductCard from '@/components/product-card/index.vue';
 
 const INITIAL_DATA = {
   name: '',
@@ -102,11 +100,12 @@ const INITIAL_DATA = {
   mark: '',
   amount: 0,
 };
+
 export default {
   name: 'ListCard',
   components: {
     SearchIcon,
-    Card,
+    ProductCard,
   },
   data() {
     return {
@@ -206,37 +205,17 @@ export default {
   },
 };
 </script>
+<style scoped lang="less">
+.list-card-operation {
+  display: flex;
+  justify-content: space-between;
 
-<style lang="less" scoped>
-@import '@/style/variables.less';
-
-.list-card {
-  height: 100%;
-
-  &-operation {
-    display: flex;
-    justify-content: space-between;
-
-    .search-input {
-      width: 360px;
-    }
+  .search-input {
+    width: 360px;
   }
+}
 
-  &-items {
-    margin-top: 14px;
-    margin-bottom: 24px;
-  }
-
-  &-pagination {
-    padding: 16px;
-  }
-
-  &-loading {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.list-card-items {
+  margin: 14px 0 24px 0;
 }
 </style>

@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div class="detail-deploy">
     <t-row :gutter="12">
       <t-col :lg="6" :xs="12">
-        <card title="部署趋势">
+        <t-card title="部署趋势">
           <div class="deploy-panel-left">
             <div id="monitorContainer" style="width: 100%; height: 265px" />
           </div>
-        </card>
+        </t-card>
       </t-col>
       <t-col :lg="6" :xs="12">
-        <card title="告警情况">
+        <t-card title="告警情况">
           <template #option>
             <t-radio-group default-value="dateVal" @change="onAlertChange">
               <t-radio-button value="dateVal"> 本周 </t-radio-button>
@@ -17,12 +17,12 @@
             </t-radio-group>
           </template>
           <div id="dataContainer" style="width: 100%; height: 265px" />
-        </card>
+        </t-card>
       </t-col>
     </t-row>
 
     <!-- 项目列表 -->
-    <card title="项目列表" class="container-base-margin-top">
+    <t-card title="项目列表" class="container-base-margin-top">
       <t-table
         :columns="columns"
         :data="data"
@@ -38,7 +38,7 @@
         </template>
         <t-icon slot="op-column" name="descending-order" />
       </t-table>
-    </card>
+    </t-card>
     <t-dialog header="基本信息" :visible.sync="visible" @confirm="onConfirm">
       <div slot="body">
         <div class="dialog-info-block">
@@ -58,15 +58,14 @@
   </div>
 </template>
 <script lang="ts">
-import { prefix } from '@/config/global';
+import { TableSort } from 'tdesign-vue';
 import * as echarts from 'echarts/core';
 import { TitleComponent, ToolboxComponent, TooltipComponent, GridComponent, LegendComponent } from 'echarts/components';
-import Card from '@/components/card/index.vue';
 import { BarChart, LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { mapState } from 'vuex';
+
 import { getSmoothLineDataSet, get2ColBarChartDataSet } from '../../dashboard/base/index';
-import { TableSort } from 'tdesign-vue';
 import model from '@/service/service-detail-deploy';
 
 echarts.use([
@@ -83,7 +82,6 @@ echarts.use([
 /** 部署配置 */
 export default {
   name: 'DetailDeploy',
-  components: { Card },
   data() {
     return {
       monitorContainer: '',
@@ -91,7 +89,6 @@ export default {
       dashboardBase: '',
       formData: {},
       data: [],
-      prefix,
       bordered: true,
       hover: true,
       pagination: {
@@ -206,5 +203,14 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-@import '../base/index.less';
+.detail-deploy {
+  /deep/ .t-card {
+    padding: 8px;
+  }
+
+  /deep/ .t-card__title {
+    font-size: 20px;
+    font-weight: 500;
+  }
+}
 </style>

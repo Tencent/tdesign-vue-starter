@@ -2,14 +2,14 @@
   <div>
     <div class="form-step-container">
       <!-- 简单步骤条 -->
-      <card>
+      <t-card :bordered="false">
         <t-steps :defaultCurrent="1" :current="activeForm" status="process">
           <t-step-item title="申请提交" content="已于12月21日提交"></t-step-item>
           <t-step-item title="电子发票" content="预计1～3个工作日"></t-step-item>
           <t-step-item title="发票已邮寄" content="电子发票开出后7个工作日内联系"></t-step-item>
           <t-step-item title="完成" content=""></t-step-item>
         </t-steps>
-      </card>
+      </t-card>
 
       <!-- 分步表单1 -->
       <div v-show="activeForm === 0" class="rule-tips">
@@ -145,7 +145,6 @@
 </template>
 <script>
 import { prefix } from '@/config/global';
-import Card from '@/components/card/index.vue';
 
 const INITIAL_DATA1 = {
   name: '',
@@ -169,7 +168,6 @@ const INITIAL_DATA3 = {
 
 export default {
   name: 'FormStep',
-  components: { Card },
   data() {
     return {
       prefix,
