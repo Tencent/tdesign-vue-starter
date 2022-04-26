@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { sync } from 'vuex-router-sync';
-import TDesign from 'tdesign-vue/esm';
+import TDesign from 'tdesign-vue';
 import VueClipboard from 'vue-clipboard2';
 import axiosInstance from '@/utils/request';
 import App from './App.vue';
 import router from './router';
-import zhConfig from 'tdesign-vue/esm/locale/zh_CN';
+import zhConfig from 'tdesign-vue/es/locale/zh_CN';
 
-// import enConfig from 'tdesign-vue/esm/locale/en_US'; // 英文多语言配置
+// import enConfig from 'tdesign-vue/es/locale/en_US'; // 英文多语言配置
 
 import '@/style/index.less';
 

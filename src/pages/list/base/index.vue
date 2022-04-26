@@ -1,5 +1,5 @@
 <template>
-  <div ref="tableContainer">
+  <div>
     <t-card class="list-card-container">
       <t-row justify="space-between">
         <div class="left-operation-container">
@@ -14,7 +14,7 @@
         </t-input>
       </t-row>
 
-      <div class="table-container" ref="tableContainer">
+      <div class="table-container">
         <t-table
           :columns="columns"
           :data="data"
@@ -28,7 +28,6 @@
           @change="rehandleChange"
           @select-change="rehandleSelectChange"
           :headerAffixedTop="true"
-          :headerAffixProps="{ offsetTop: 0, container: getContainer }"
         >
           <template #status="{ row }">
             <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">审核失败</t-tag>
@@ -221,9 +220,6 @@ export default Vue.extend({
     },
     resetIdx() {
       this.deleteIdx = -1;
-    },
-    getContainer() {
-      return this.$refs?.tableContainer;
     },
   },
 });
