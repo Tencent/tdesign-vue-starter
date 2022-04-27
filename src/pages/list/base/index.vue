@@ -15,6 +15,7 @@
       </t-row>
 
       <div class="table-container">
+        <!-- 如果开启多标签tab页 请修改offsetTop的配置 -->
         <t-table
           :columns="columns"
           :data="data"
@@ -27,6 +28,8 @@
           @page-change="rehandlePageChange"
           @change="rehandleChange"
           @select-change="rehandleSelectChange"
+          :headerAffixedTop="true"
+          :headerAffixProps="{ offsetTop: 0, container: getContainer }"
         >
           <template #status="{ row }">
             <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">审核失败</t-tag>
@@ -72,8 +75,8 @@
 import Vue from 'vue';
 import { SearchIcon } from 'tdesign-icons-vue';
 import Trend from '@/components/trend/index.vue';
-
 import { prefix } from '@/config/global';
+
 import { CONTRACT_STATUS, CONTRACT_STATUS_OPTIONS, CONTRACT_TYPES, CONTRACT_PAYMENT_TYPES } from '@/constants';
 
 export default Vue.extend({
@@ -182,7 +185,11 @@ export default Vue.extend({
         this.dataLoading = false;
       });
   },
+
   methods: {
+    getContainer() {
+      return document.querySelector('.tdesign-starter-layout');
+    },
     rehandlePageChange(curr, pageInfo) {
       console.log('分页变化', curr, pageInfo);
     },
