@@ -27,7 +27,6 @@
           @page-change="rehandlePageChange"
           @change="rehandleChange"
           @select-change="rehandleSelectChange"
-          :headerAffixedTop="true"
         >
           <template #status="{ row }">
             <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">审核失败</t-tag>

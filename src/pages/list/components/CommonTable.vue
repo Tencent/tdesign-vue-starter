@@ -65,8 +65,6 @@
         @page-change="rehandlePageChange"
         @change="rehandleChange"
         :loading="dataLoading"
-        :headerAffixedTop="true"
-        :headerAffixProps="{ offsetTop: 0, zIndex: 9999 }"
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">审核失败</t-tag>
