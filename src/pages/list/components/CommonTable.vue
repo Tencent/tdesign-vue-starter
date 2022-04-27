@@ -55,6 +55,7 @@
       </t-row>
     </t-form>
     <div class="table-container">
+      <!-- 如果开启多标签tab页 请修改offsetTop的配置 -->
       <t-table
         :data="data"
         :columns="columns"
@@ -65,6 +66,8 @@
         @page-change="rehandlePageChange"
         @change="rehandleChange"
         :loading="dataLoading"
+        :headerAffixedTop="true"
+        :headerAffixProps="{ offsetTop: 0, container: getContainer }"
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">审核失败</t-tag>
@@ -226,6 +229,9 @@ export default {
       });
   },
   methods: {
+    getContainer() {
+      return document.querySelector('.tdesign-starter-layout');
+    },
     onReset(data) {
       console.log(data);
     },
