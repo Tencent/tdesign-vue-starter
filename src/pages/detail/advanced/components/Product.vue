@@ -2,7 +2,7 @@
   <div class="operator-block operator-gap">
     <div class="operator-content">
       <div class="operator-title">
-        <t-icon name="cart" class="operator-title-icon" />
+        <cart-icon class="operator-title-icon" />
         <h1>{{ data.name }}</h1>
         <div class="operator-title-subtitle">
           {{ data.subtitle }}
@@ -21,7 +21,7 @@
       </div>
       <div class="operator-item">
         <span class="operator-item-info">{{ data.info }}</span>
-        <t-icon class="operator-item-icon" name="chevron-right" size="small" />
+        <chevron-right-icon class="operator-item-icon" size="small" />
       </div>
     </div>
     <div class="operator-footer">
@@ -40,8 +40,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { ChevronRightIcon, CartIcon } from 'tdesign-icons-vue';
 
 export default Vue.extend({
+  components: {
+    ChevronRightIcon,
+    CartIcon,
+  },
   props: {
     data: {
       type: Object,

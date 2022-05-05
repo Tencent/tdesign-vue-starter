@@ -11,7 +11,7 @@
       <t-form-item name="phone">
         <t-input v-model="formData.phone" :maxlength="11" size="large" placeholder="请输入您的手机号">
           <template #prefix-icon>
-            <t-icon name="user" />
+            <user-icon />
           </template>
         </t-input>
       </t-form-item>
@@ -21,7 +21,7 @@
       <t-form-item name="email">
         <t-input v-model="formData.email" type="text" size="large" placeholder="请输入您的邮箱">
           <template #prefix-icon>
-            <t-icon name="mail" />
+            <mail-icon />
           </template>
         </t-input>
       </t-form-item>
@@ -36,10 +36,11 @@
         placeholder="请输入登录密码"
       >
         <template #prefix-icon>
-          <t-icon name="lock-on" />
+          <lock-on-icon />
         </template>
         <template #suffix-icon>
-          <t-icon :name="showPsw ? 'browse' : 'browse-off'" @click="showPsw = !showPsw" />
+          <browse-icon v-if="showPsw" key="browse" @click="showPsw = !showPsw" />
+          <browse-off-icon v-else key="browse-off" @click="showPsw = !showPsw" />
         </template>
       </t-input>
     </t-form-item>
@@ -71,6 +72,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
+import { UserIcon, MailIcon, BrowseIcon, BrowseOffIcon, LockOnIcon } from 'tdesign-icons-vue';
 
 const INITIAL_DATA = {
   phone: '',
@@ -90,6 +92,13 @@ const FORM_RULES = {
 /** 高级详情 */
 export default Vue.extend({
   name: 'Register',
+  components: {
+    UserIcon,
+    MailIcon,
+    BrowseIcon,
+    BrowseOffIcon,
+    LockOnIcon,
+  },
   data() {
     return {
       FORM_RULES,

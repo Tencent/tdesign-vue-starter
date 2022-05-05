@@ -3,13 +3,13 @@
     <logo-full-icon class="logo" />
     <div class="operations-container">
       <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
-        <t-icon name="logo-github" class="icon" />
+        <logo-github-icon class="icon" />
       </t-button>
       <t-button theme="default" shape="square" variant="text" @click="navToHelper">
-        <t-icon name="help-circle" class="icon" />
+        <help-circle-icon class="icon" />
       </t-button>
       <t-button theme="default" shape="square" variant="text" @click="toggleSettingPanel">
-        <t-icon name="setting" class="icon" />
+        <setting-icon class="icon" />
       </t-button>
     </div>
   </header>
@@ -17,9 +17,10 @@
 
 <script>
 import LogoFullIcon from '@/assets/assets-logo-full.svg';
+import { LogoGithubIcon, HelpCircleIcon, SettingIcon } from 'tdesign-icons-vue';
 
 export default {
-  components: { LogoFullIcon },
+  components: { LogoFullIcon, LogoGithubIcon, HelpCircleIcon, SettingIcon },
   methods: {
     navToGitHub() {
       window.open('https://github.com/Tencent/tdesign-vue-starter');
@@ -53,6 +54,7 @@ export default {
   .operations-container {
     display: flex;
     align-items: center;
+
     .t-button {
       margin-left: 16px;
     }

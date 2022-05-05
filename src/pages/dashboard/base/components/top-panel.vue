@@ -40,7 +40,7 @@
                 :describe="item.upTrend || item.downTrend"
               />
             </div>
-            <t-icon name="chevron-right" />
+            <chevron-right-icon />
           </div>
         </template>
       </t-card>
@@ -51,7 +51,7 @@
 import { LineChart, BarChart } from 'echarts/charts';
 import * as echarts from 'echarts/core';
 import { CanvasRenderer } from 'echarts/renderers';
-import { UsergroupIcon, FileIcon } from 'tdesign-icons-vue';
+import { UsergroupIcon, FileIcon, ChevronRightIcon } from 'tdesign-icons-vue';
 import { mapState } from 'vuex';
 
 import Trend from '@/components/trend/index.vue';
@@ -68,6 +68,7 @@ export default {
     Trend,
     UsergroupIcon,
     FileIcon,
+    ChevronRightIcon,
   },
   data() {
     return {

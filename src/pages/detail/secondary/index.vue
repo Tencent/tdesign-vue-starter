@@ -20,13 +20,13 @@
                     :content="item.status ? '设为已读' : '设为未读'"
                   >
                     <span class="msg-action-icon" @click="setReadStatus(item)">
-                      <t-icon v-if="!!item.status" name="queue" size="16px" />
-                      <t-icon v-else name="chat" />
+                      <queue-icon v-if="!!item.status" size="16px" />
+                      <chat-icon v-else />
                     </span>
                   </t-tooltip>
                   <t-tooltip content="删除通知" :overlay-style="{ margin: '6px' }">
                     <span @click="handleClickDeleteBtn(item)">
-                      <t-icon name="delete" size="16px" />
+                      <delete-icon size="16px" />
                     </span>
                   </t-tooltip>
                 </div>
@@ -50,6 +50,7 @@
 </template>
 <script lang="ts">
 import { mapState, mapGetters } from 'vuex';
+import { QueueIcon, DeleteIcon, ChatIcon } from 'tdesign-icons-vue';
 import { prefix } from '@/config/global';
 import { NOTIFICATION_TYPES } from '@/constants';
 import { msgDataItem } from '@/store/modules/notification';
@@ -71,6 +72,11 @@ const TAB_LIST = [
 
 export default {
   name: 'DetailSecondary',
+  components: {
+    QueueIcon,
+    DeleteIcon,
+    ChatIcon,
+  },
   data() {
     return {
       NOTIFICATION_TYPES,

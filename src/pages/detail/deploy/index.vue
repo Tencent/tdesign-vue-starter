@@ -36,7 +36,7 @@
           <a class="t-button-link" @click="listClick(slotProps)">管理</a>
           <a class="t-button-link" @click="deleteClickOp(slotProps)">删除</a>
         </template>
-        <t-icon slot="op-column" name="descending-order" />
+        <order-descending-icon slot="op-column" />
       </t-table>
     </t-card>
     <t-dialog header="基本信息" :visible.sync="visible" @confirm="onConfirm">
@@ -59,6 +59,7 @@
 </template>
 <script lang="ts">
 import { TableSort } from 'tdesign-vue';
+import { OrderDescendingIcon } from 'tdesign-icons-vue';
 import * as echarts from 'echarts/core';
 import { TitleComponent, ToolboxComponent, TooltipComponent, GridComponent, LegendComponent } from 'echarts/components';
 import { BarChart, LineChart } from 'echarts/charts';
@@ -82,6 +83,9 @@ echarts.use([
 /** 部署配置 */
 export default {
   name: 'DetailDeploy',
+  components: {
+    OrderDescendingIcon,
+  },
   data() {
     return {
       monitorContainer: '',
