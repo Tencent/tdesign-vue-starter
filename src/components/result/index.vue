@@ -16,6 +16,7 @@ import Result404Icon from '@/assets/assets-result-404.svg';
 import Result500Icon from '@/assets/assets-result-500.svg';
 import ResultIeIcon from '@/assets/assets-result-ie.svg';
 import ResultWifiIcon from '@/assets/assets-result-wifi.svg';
+import ResultMaintenanceIcon from '@/assets/assets-result-maintenance.svg';
 
 export default Vue.extend({
   name: 'Result',
@@ -50,6 +51,8 @@ export default Vue.extend({
         return ResultIeIcon;
       case 'wifi':
         return ResultWifiIcon;
+      case 'maintenance':
+        return ResultMaintenanceIcon;
       default:
         return Result403Icon;
       }
