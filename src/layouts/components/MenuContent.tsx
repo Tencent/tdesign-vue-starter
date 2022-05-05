@@ -39,13 +39,14 @@ export default {
       if (typeof item.icon === 'string') {
         return () => item.icon && <t-icon name={item.icon}></t-icon>;
       }
-      if (item.icon && typeof item.icon.render === 'function') {
+
+      if (typeof item.icon === 'function' || (item.icon && typeof item.icon.render === 'function')) {
         return () =>
           this.$createElement(item.icon, {
             class: 't-icon',
           });
       }
-      return () => '';
+      return '';
     },
     renderNav(list: Array<MenuRoute>) {
       return list.map((item) => {

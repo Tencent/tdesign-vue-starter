@@ -1,7 +1,5 @@
+import { ViewModuleIcon, Edit1Icon, LayersIcon } from 'tdesign-icons-vue';
 import Layout from '@/layouts';
-import ListIcon from '@/assets/assets-slide-list.svg';
-import FormIcon from '@/assets/assets-slide-form.svg';
-import DetailIcon from '@/assets/assets-slide-detail.svg';
 
 export default [
   {
@@ -9,7 +7,7 @@ export default [
     name: 'list',
     component: Layout,
     redirect: '/list/base',
-    meta: { title: '列表页', icon: ListIcon },
+    meta: { title: '列表页', icon: ViewModuleIcon },
     children: [
       {
         path: 'base',
@@ -42,7 +40,7 @@ export default [
     name: 'form',
     component: Layout,
     redirect: '/form/base',
-    meta: { title: '表单页', icon: FormIcon },
+    meta: { title: '表单页', icon: Edit1Icon },
     children: [
       {
         path: 'base',
@@ -63,7 +61,7 @@ export default [
     name: 'detail',
     component: Layout,
     redirect: '/detail/base',
-    meta: { title: '详情页', icon: DetailIcon },
+    meta: { title: '详情页', icon: LayersIcon },
     children: [
       {
         path: 'base',

@@ -44,7 +44,7 @@
         <t-col :xl="4">
           <div class="product-add">
             <div class="product-sub">
-              <t-icon name="add" class="product-sub-icon" />
+              <add-icon class="product-sub-icon" />
               <span>新增产品</span>
             </div>
           </div>
@@ -85,7 +85,7 @@
           <a class="t-button-link" @click="listClick(slotProps)">管理</a>
           <a class="t-button-link" @click="deleteClickOp(slotProps)">删除</a>
         </template>
-        <t-icon slot="op-column" name="descending-order" />
+        <order-descending-icon slot="op-column" />
       </t-table>
     </t-card>
 
@@ -110,10 +110,11 @@
   </div>
 </template>
 <script lang="ts">
+import { TableChangeContext, TableChangeData, TableSort } from 'tdesign-vue';
+import { OrderDescendingIcon, AddIcon } from 'tdesign-icons-vue';
 import { prefix } from '@/config/global';
 import model from '@/service/service-advance';
 import Product from './components/Product.vue';
-import { TableChangeContext, TableChangeData, TableSort } from 'tdesign-vue';
 
 const PRODUCT_LIST = [
   {
@@ -141,7 +142,7 @@ const PRODUCT_LIST = [
 /** 高级详情 */
 export default {
   name: 'DetailAdvanced',
-  components: { Product },
+  components: { Product, OrderDescendingIcon, AddIcon },
   data() {
     return {
       data: [],

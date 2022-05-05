@@ -132,7 +132,7 @@
 
       <!-- 分步表单4 -->
       <div class="step-form-4" v-show="activeForm === 6">
-        <t-icon name="check-circle-filled" style="color: green" size="52px" />
+        <check-circle-filled-icon style="color: green" size="52px" />
         <p class="text">完成开票申请</p>
         <p class="tips">预计1～3个工作日会将电子发票发至邮箱，发票邮寄请耐心等待</p>
         <div class="button-group">
@@ -144,6 +144,7 @@
   </div>
 </template>
 <script>
+import { CheckCircleFilledIcon } from 'tdesign-icons-vue';
 import { prefix } from '@/config/global';
 
 const INITIAL_DATA1 = {
@@ -168,6 +169,9 @@ const INITIAL_DATA3 = {
 
 export default {
   name: 'FormStep',
+  components: {
+    CheckCircleFilledIcon,
+  },
   data() {
     return {
       prefix,

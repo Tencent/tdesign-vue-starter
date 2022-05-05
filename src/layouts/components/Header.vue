@@ -3,11 +3,11 @@
     <t-head-menu :class="menuCls" :theme="theme" expandType="popup" :value="active">
       <template #logo>
         <span v-if="showLogo" class="header-logo-container" @click="handleNav('/dashboard/base')">
-          <tLogoFull class="t-logo" />
+          <logo-full class="t-logo" />
         </span>
         <div v-else class="header-operate-left">
           <t-button theme="default" shape="square" variant="text" @click="changeCollapsed">
-            <t-icon class="collapsed-icon" name="view-list" />
+            <view-list-icon class="collapsed-icon" />
           </t-button>
           <search :layout="layout" />
         </div>
@@ -23,38 +23,38 @@
 
           <t-tooltip placement="bottom" content="代码仓库">
             <t-button theme="default" shape="square" variant="text" @click="navToGitHub">
-              <t-icon name="logo-github" />
+              <logo-github-icon />
             </t-button>
           </t-tooltip>
           <t-tooltip placement="bottom" content="帮助文档">
             <t-button theme="default" shape="square" variant="text" @click="navToHelper">
-              <t-icon name="help-circle" />
+              <help-circle-icon />
             </t-button>
           </t-tooltip>
           <t-dropdown :min-column-width="125" trigger="click">
             <template #dropdown>
               <t-dropdown-menu>
                 <t-dropdown-item class="operations-dropdown-container-item" @click="handleNav('/user/index')">
-                  <t-icon name="user-circle"></t-icon>个人中心
+                  <user-circle-icon />个人中心
                 </t-dropdown-item>
                 <t-dropdown-item class="operations-dropdown-container-item" @click="handleLogout">
-                  <t-icon name="poweroff"></t-icon>退出登录
+                  <poweroff-icon />退出登录
                 </t-dropdown-item>
               </t-dropdown-menu>
             </template>
             <t-button class="header-user-btn" theme="default" variant="text">
               <template #icon>
-                <t-icon class="header-user-avatar" name="user-circle" />
+                <user-circle-icon class="header-user-avatar" />
               </template>
               <div class="header-user-account">
                 Tencent
-                <t-icon name="chevron-down" />
+                <chevron-down-icon />
               </div>
             </t-button>
           </t-dropdown>
           <t-tooltip placement="bottom" content="系统设置">
             <t-button theme="default" shape="square" variant="text" @click="toggleSettingPanel">
-              <t-icon name="setting" />
+              <setting-icon />
             </t-button>
           </t-tooltip>
         </div>
@@ -65,8 +65,17 @@
 
 <script>
 import Vue from 'vue';
+import {
+  ViewListIcon,
+  LogoGithubIcon,
+  HelpCircleIcon,
+  UserCircleIcon,
+  PoweroffIcon,
+  SettingIcon,
+  ChevronDownIcon,
+} from 'tdesign-icons-vue';
 import { prefix } from '@/config/global';
-import tLogoFull from '@/assets/assets-logo-full.svg';
+import LogoFull from '@/assets/assets-logo-full.svg';
 
 import Notice from './Notice.vue';
 import Search from './Search.vue';
@@ -75,9 +84,16 @@ import MenuContent from './MenuContent';
 export default Vue.extend({
   components: {
     MenuContent,
-    tLogoFull,
+    LogoFull,
     Notice,
     Search,
+    ViewListIcon,
+    LogoGithubIcon,
+    HelpCircleIcon,
+    UserCircleIcon,
+    PoweroffIcon,
+    SettingIcon,
+    ChevronDownIcon,
   },
   props: {
     theme: String,
@@ -183,6 +199,7 @@ export default Vue.extend({
 
   .t-button {
     margin: 0 8px;
+
     &.header-user-btn {
       margin: 0;
     }
@@ -190,6 +207,7 @@ export default Vue.extend({
 
   .t-icon {
     font-size: 20px;
+
     &.general {
       margin-right: 16px;
     }
@@ -217,6 +235,7 @@ export default Vue.extend({
   .t-logo {
     width: 100%;
     height: 100%;
+
     &:hover {
       cursor: pointer;
     }
@@ -231,6 +250,7 @@ export default Vue.extend({
   display: inline-flex;
   align-items: center;
   color: @text-color-primary;
+
   .t-icon {
     margin-left: 4px;
     font-size: 16px;
@@ -246,15 +266,19 @@ export default Vue.extend({
     color: @text-color-primary;
   }
 }
+
 .t-menu--dark {
   .t-head-menu__inner {
     border-bottom: 1px solid var(--td-gray-color-10);
   }
+
   .header-user-account {
     color: rgba(255, 255, 255, 0.55);
   }
+
   .t-button {
     --ripple-color: var(--td-gray-color-10) !important;
+
     &:hover {
       background: var(--td-gray-color-12) !important;
     }
@@ -275,6 +299,7 @@ export default Vue.extend({
       display: flex;
       justify-content: center;
     }
+
     .t-dropdown__item__content__text {
       display: flex;
       align-items: center;
@@ -286,6 +311,7 @@ export default Vue.extend({
     width: 100%;
     margin-bottom: 0px;
   }
+
   &:last-child {
     .t-dropdown__item {
       margin-bottom: 8px;

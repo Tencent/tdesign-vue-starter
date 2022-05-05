@@ -11,7 +11,7 @@
       <t-form-item name="account">
         <t-input v-model="formData.account" size="large" placeholder="请输入账号：admin">
           <template #prefix-icon>
-            <t-icon name="user" />
+            <user-icon />
           </template>
         </t-input>
       </t-form-item>
@@ -26,10 +26,11 @@
           placeholder="请输入登录密码：admin"
         >
           <template #prefix-icon>
-            <t-icon name="lock-on" />
+            <lock-on-icon />
           </template>
           <template #suffix-icon>
-            <t-icon :name="showPsw ? 'browse' : 'browse-off'" @click="showPsw = !showPsw" />
+            <browse-icon v-if="showPsw" @click="showPsw = !showPsw" key="browse" />
+            <browse-off-icon v-else @click="showPsw = !showPsw" key="browse-off" />
           </template>
         </t-input>
       </t-form-item>
@@ -44,7 +45,10 @@
     <template v-else-if="type == 'qrcode'">
       <div class="tip-container">
         <span class="tip">请使用微信扫一扫登录</span>
-        <span class="refresh">刷新 <t-icon name="refresh" color="#0052D9" /> </span>
+        <span class="refresh"
+          >刷新
+          <refresh-icon color="#0052D9" />
+        </span>
       </div>
       <qrcode-vue value="" :size="192" level="H" />
     </template>
@@ -54,7 +58,7 @@
       <t-form-item name="phone">
         <t-input v-model="formData.phone" size="large" placeholder="请输入您的手机号">
           <template #prefix-icon>
-            <t-icon name="user" />
+            <user-icon />
           </template>
         </t-input>
       </t-form-item>
@@ -81,6 +85,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import QrcodeVue from 'qrcode.vue';
+import { UserIcon, LockOnIcon, BrowseOffIcon, BrowseIcon, RefreshIcon } from 'tdesign-icons-vue';
 
 const INITIAL_DATA = {
   phone: '',
@@ -101,6 +106,11 @@ export default Vue.extend({
   name: 'Login',
   components: {
     QrcodeVue,
+    UserIcon,
+    LockOnIcon,
+    BrowseOffIcon,
+    BrowseIcon,
+    RefreshIcon,
   },
   data() {
     return {

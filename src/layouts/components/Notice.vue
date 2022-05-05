@@ -45,7 +45,7 @@
     </template>
     <t-badge :count="unreadMsg.length" :offset="[15, 21]">
       <t-button theme="default" shape="square" variant="text" @click="isNoticeVisible = true">
-        <t-icon name="mail" />
+        <mail-icon />
       </t-button>
     </t-badge>
   </t-popup>
@@ -54,9 +54,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import { mapState, mapGetters } from 'vuex';
+import { MailIcon } from 'tdesign-icons-vue';
+
 import { NotificationItem } from '@/interface';
 
 export default Vue.extend({
+  components: {
+    MailIcon,
+  },
   data() {
     return {
       isNoticeVisible: false,
