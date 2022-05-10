@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { sync } from 'vuex-router-sync';
-import TDesign from 'tdesign-vue';
+import TDesign from 'tdesign-vue/esm';
+import 'tdesign-vue/esm/style/index.js';
+
 import VueClipboard from 'vue-clipboard2';
 import axiosInstance from '@/utils/request';
 import App from './App.vue';
