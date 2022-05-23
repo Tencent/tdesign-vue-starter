@@ -1,9 +1,17 @@
 <template>
   <div class="list-common-table">
-    <t-form ref="form" :data="formData" :label-width="80" colon @reset="onReset" @submit="onSubmit">
+    <t-form
+      ref="form"
+      :data="formData"
+      :label-width="80"
+      colon
+      @reset="onReset"
+      @submit="onSubmit"
+      :style="{ marginBottom: '8px' }"
+    >
       <t-row>
         <t-col :span="10">
-          <t-row :gutter="[16]">
+          <t-row :gutter="[16, 24]">
             <t-col :flex="1">
               <t-form-item label="合同名称" name="name">
                 <t-input
@@ -55,7 +63,6 @@
       </t-row>
     </t-form>
     <div class="table-container">
-      <!-- 如果开启多标签tab页 请修改offsetTop的配置 -->
       <t-table
         :data="data"
         :columns="columns"
@@ -67,7 +74,7 @@
         @change="rehandleChange"
         :loading="dataLoading"
         :headerAffixedTop="true"
-        :headerAffixProps="{ offsetTop: 0, container: getContainer }"
+        :headerAffixProps="{ offsetTop, container: getContainer }"
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">审核失败</t-tag>
@@ -205,6 +212,9 @@ export default {
         return `删除后，${name}的所有合同信息将被清空，且无法恢复`;
       }
       return '';
+    },
+    offsetTop() {
+      return this.$store.state.setting.isUseTabsRouter ? 48 : 0;
     },
   },
   mounted() {

@@ -173,8 +173,9 @@ export default Vue.extend({
     renderContent(): VNode {
       const { showBreadcrumb } = this.setting;
       const { showFooter } = this;
+
       return (
-        <t-layout class={[`${prefix}-layout`]}>
+        <t-layout class={[`${prefix}-layout`]} key={this.$route.name}>
           {this.isUseTabsRouter && (
             <t-tabs
               theme="card"
