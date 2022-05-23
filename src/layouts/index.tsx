@@ -175,7 +175,7 @@ export default Vue.extend({
       const { showFooter } = this;
 
       return (
-        <t-layout class={[`${prefix}-layout`]} key={this.$route.name}>
+        <t-layout class={[`${prefix}-layout`]}>
           {this.isUseTabsRouter && (
             <t-tabs
               theme="card"
