@@ -63,7 +63,6 @@
       </t-row>
     </t-form>
     <div class="table-container">
-      <!-- 如果开启多标签tab页 请修改offsetTop的配置 -->
       <t-table
         :data="data"
         :columns="columns"
@@ -75,7 +74,7 @@
         @change="rehandleChange"
         :loading="dataLoading"
         :headerAffixedTop="true"
-        :headerAffixProps="{ offsetTop: 0, container: getContainer }"
+        :headerAffixProps="{ offsetTop, container: getContainer }"
       >
         <template #status="{ row }">
           <t-tag v-if="row.status === CONTRACT_STATUS.FAIL" theme="danger" variant="light">审核失败</t-tag>
@@ -213,6 +212,9 @@ export default {
         return `删除后，${name}的所有合同信息将被清空，且无法恢复`;
       }
       return '';
+    },
+    offsetTop() {
+      return this.$store.state.setting.isUseTabsRouter ? 48 : 0;
     },
   },
   mounted() {
