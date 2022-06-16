@@ -59,7 +59,7 @@
     "vite": "^2.7.10",
     "vite-plugin-mock": "^2.3.0",
     "vite-plugin-theme": "^0.8.1",
-    "vite-plugin-vue2": "^1.2.2",
+    "vite-plugin-vue2": "^2.0.1",
     "vite-plugin-vue2-svg": "^0.1.8"
   },
   "config": {
