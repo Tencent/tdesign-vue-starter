@@ -15,3 +15,10 @@ export default {
   components: { result },
 };
 </script>
+<style lang="less" scoped>
+@import '@/style/variables.less';
+
+.t-button + .t-button {
+    margin-left: @spacer;
+ }
+</style>

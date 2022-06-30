@@ -99,13 +99,13 @@ export default {
   border-radius: 50%;
   color: white;
   font-size: 14px;
-  background-color: @gray-color-5;
+  background-color: var(--td-gray-color-5);
   align-items: center;
   justify-content: center;
   font-weight: 700;
 
   &--top {
-    background: @brand-color;
+    background: var(--td-brand-color);
   }
 }
 </style>

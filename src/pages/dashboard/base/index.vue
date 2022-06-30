@@ -30,4 +30,5 @@ export default {
 .row-container {
   margin-bottom: 16px;
 }
+
 </style>

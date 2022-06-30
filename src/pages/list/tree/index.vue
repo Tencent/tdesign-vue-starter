@@ -149,7 +149,7 @@ export default {
 @import '@/style/variables.less';
 
 .table-tree-container {
-  background-color: @bg-color-container;
+  background-color: var(--td-bg-color-container);
   border-radius: @border-radius;
 
   .t-tree {
@@ -168,7 +168,7 @@ export default {
 }
 
 .list-tree-content {
-  border-left: 1px solid @component-border;
+  border-left: 1px solid var(--td-component-border);
   overflow: auto;
 }
 </style>

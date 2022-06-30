@@ -55,6 +55,11 @@ export default Vue.extend({
     };
   },
   computed: {
+    defaultExpanded() {
+      const path = this.active;
+      const parentPath = path.substring(0, path.lastIndexOf('/'));
+      return parentPath === '' ? [] : [parentPath];
+    },
     iconName(): string {
       return this.$store.state.setting.isSidebarCompact ? 'menu-fold' : 'menu-unfold';
     },
@@ -108,7 +113,14 @@ export default Vue.extend({
   render() {
     return (
       <div class={this.sideNavCls}>
-        <t-menu width="232px" class={this.menuCls} theme={this.theme} value={this.active} collapsed={this.collapsed}>
+        <t-menu
+          width="232px"
+          class={this.menuCls}
+          theme={this.theme}
+          value={this.active}
+          collapsed={this.collapsed}
+          defaultExpanded={this.defaultExpanded}
+        >
           {this.showLogo && (
             <span
               slot="logo"

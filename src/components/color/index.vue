@@ -19,7 +19,7 @@ export default {
     style() {
       const { colorList } = this.$store.state.setting;
       return {
-        background: this.value !== 'dynamic' ? getBrandColor(this.value, colorList)['@brand-color'] : panelColor,
+        background: this.value !== 'dynamic' ? getBrandColor(this.value, colorList)['--td-brand-color'] : panelColor,
       };
     },
   },

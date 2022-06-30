@@ -57,25 +57,25 @@ export default Vue.extend({
   &-container {
 
     &__up {
-      color: @error-color;
+      color: var(--td-error-color);
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
       .trend-icon-container {
-        background: @error-color-2;
+        background: var(--td-error-color-2);
         margin-right: 8px;
       }
     }
 
     &__down {
-      color: @success-color;
+      color: var(--td-success-color);
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
       .trend-icon-container {
-        background: @success-color-2;
+        background: var(--td-success-color-2);
         margin-right: 8px;
       }
     }
@@ -87,7 +87,7 @@ export default Vue.extend({
       justify-content: center;
 
       .trend-icon-container {
-        background: @brand-color-5;
+        background: var(--td-brand-color-5);
         margin-right: 8px;
       }
     }

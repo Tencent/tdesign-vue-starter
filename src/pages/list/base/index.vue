@@ -253,11 +253,15 @@ export default Vue.extend({
   .selected-count {
     display: inline-block;
     margin-left: 8px;
-    color: @text-color-secondary;
+    color: var(--td-text-color-secondary);
   }
 }
 
 .search-input {
   width: 360px;
 }
+
+.t-button + .t-button {
+    margin-left: @spacer;
+ }
 </style>

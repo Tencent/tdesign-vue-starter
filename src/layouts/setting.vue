@@ -300,7 +300,7 @@ export default {
   font-family: PingFang SC;
   font-style: normal;
   font-weight: 500;
-  color: @text-color-primary;
+  color: var(--td-text-color-primary);
 }
 
 .setting-group-color {
@@ -315,7 +315,7 @@ export default {
 
 .setting-link {
   cursor: pointer;
-  color: @brand-color;
+  color: var(--td-brand-color);
   margin-bottom: 8px;
 }
 
@@ -327,9 +327,9 @@ export default {
   line-height: 20px;
   font-size: 12px;
   text-align: center;
-  color: @text-color-placeholder;
+  color: var(--td-text-color-placeholder);
   width: 100%;
-  background: @bg-color-container;
+  background: var(--td-bg-color-container);
 }
 
 .setting-drawer-container {
@@ -356,7 +356,7 @@ export default {
       max-height: 78px;
       padding: 8px;
       border-radius: @border-radius;
-      border: 2px solid @component-border;
+      border: 2px solid var(--td-component-border);
       height: auto;
 
       > .t-radio-button__label {
@@ -365,7 +365,7 @@ export default {
     }
 
     .t-is-checked {
-      border: 2px solid @brand-color !important;
+      border: 2px solid var(--td-brand-color) !important;
     }
 
     .t-form__controls-content {
@@ -381,7 +381,7 @@ export default {
 .setting-route-theme {
   .t-form__label {
     min-width: 310px !important;
-    color: @text-color-secondary;
+    color: var(--td-text-color-secondary);
   }
 }
 
