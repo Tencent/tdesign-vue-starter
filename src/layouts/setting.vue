@@ -43,7 +43,13 @@
                 @visible-change="onPopupVisibleChange"
                 :overlayStyle="{ padding: 0 }"
               >
-                <template #content><color-picker v-model="colors" /></template>
+                <template #content>
+                  <t-color-picker-panel
+                    :on-change="changeColor"
+                    :color-modes="['monochrome']"
+                    format="HEX"
+                    :swatch-colors="[]"
+                /></template>
                 <t-radio-button
                   :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]"
                   class="setting-layout-color-group dynamic-color-btn"
@@ -104,7 +110,6 @@
 <script lang="ts">
 import { mapGetters } from 'vuex';
 import { Color } from 'tvision-color';
-import { Sketch } from 'vue-color';
 import { PopupVisibleChangeContext } from 'tdesign-vue';
 
 import STYLE_CONFIG from '@/config/style';
@@ -127,7 +132,7 @@ const MODE_OPTIONS = [
 
 export default {
   name: 'DefaultLayoutSetting',
-  components: { Thumbnail, ColorContainer, 'color-picker': Sketch },
+  components: { Thumbnail, ColorContainer },
   data() {
     return {
       colors: {
@@ -167,29 +172,9 @@ export default {
       },
       deep: true,
     },
-    colors: {
-      handler(newColor) {
-        const { hex } = newColor;
-        const { setting } = this.$store.state;
-
-        // hex 主题色
-        const newPalette = Color.getPaletteByGradation({
-          colors: [hex],
-          step: 10,
-        })[0];
-        const { mode } = this.$store.state.setting;
-        const colorMap = generateColorMap(hex, newPalette, mode);
-
-        this.$store.commit('setting/addColor', { [hex]: colorMap });
-
-        insertThemeStylesheet(hex, colorMap, mode);
-
-        this.$store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
-      },
-    },
   },
   mounted() {
-    document.querySelector('.dynamic-color-btn').addEventListener('click', () => {
+    document.querySelector('.dynamic-color-btn')?.addEventListener('click', () => {
       this.isColoPickerDisplay = true;
     });
   },
@@ -236,6 +221,23 @@ export default {
         this.$message.success('复制成功');
       });
     },
+    changeColor(hex: string) {
+      const { setting } = this.$store.state;
+
+      // hex 主题色
+      const newPalette = Color.getPaletteByGradation({
+        colors: [hex],
+        step: 10,
+      })[0];
+      const { mode } = this.$store.state.setting;
+      const colorMap = generateColorMap(hex, newPalette, mode);
+
+      this.$store.commit('setting/addColor', { [hex]: colorMap });
+
+      insertThemeStylesheet(hex, colorMap, mode);
+
+      this.$store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
+    },
   },
 };
 </script>
@@ -273,8 +275,6 @@ export default {
 
 .setting-layout-color-group {
   display: inline-flex;
-  width: 36px;
-  height: 36px;
   justify-content: center;
   align-items: center;
   border-radius: 50% !important;
@@ -357,10 +357,7 @@ export default {
       padding: 8px;
       border-radius: @border-radius;
       border: 2px solid @component-border;
-
-      // &:last-child {
-      //   border-right: 2px solid transparent;
-      // }
+      height: auto;
 
       > .t-radio-button__label {
         display: inline-flex;

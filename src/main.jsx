@@ -7,9 +7,9 @@ import axiosInstance from '@/utils/request';
 import App from './App.vue';
 import router from './router';
 import zhConfig from 'tdesign-vue/es/locale/zh_CN';
-
 // import enConfig from 'tdesign-vue/es/locale/en_US'; // 英文多语言配置
 
+import 'tdesign-vue/es/style/index.css';
 import '@/style/index.less';
 
 import './permission';
@@ -38,7 +38,6 @@ sync(store, router);
 new Vue({
   router,
   store,
-  // eslint-disable-next-line no-unused-vars
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   render: (h) => (
     <div>

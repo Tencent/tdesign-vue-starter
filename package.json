@@ -1,6 +1,6 @@
 {
   "name": "tdesign-vue-starter",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "scripts": {
     "dev:mock": "vite --open --mode mock",
     "dev": "vite --open --mode development",
@@ -23,13 +23,12 @@
     "echarts": "~5.1.2",
     "nprogress": "^0.2.0",
     "qrcode.vue": "^1.7.0",
-    "tdesign-icons-vue": "~0.0.8",
-    "tdesign-vue": "~0.41.5",
+    "tdesign-icons-vue": "^0.1.0",
+    "tdesign-vue": "^0.43.0",
     "tvision-color": "~1.4.0",
     "typescript": "^4.2.4",
     "vue": "^2.6.11",
     "vue-clipboard2": "^0.3.1",
-    "vue-color": "^2.8.1",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2",
     "vuex-router-sync": "^5.0.0"

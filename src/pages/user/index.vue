@@ -35,12 +35,11 @@
           <t-tab-panel value="second" label="内容列表">
             <t-card :bordered="false" title="主页访问数据" subtitle="（次）">
               <template #options>
-                <t-date-picker
+                <t-date-rang-picker
                   class="card-date-picker-container"
                   :default-value="LAST_7_DAYS"
                   theme="primary"
                   mode="date"
-                  range
                   @change="onLineChange"
                 />
               </template>

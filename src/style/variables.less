@@ -163,10 +163,6 @@
 @shadow-inset-left: var(--td-shadow-inset-left);
 @shadow-inset: @shadow-inset-top, @shadow-inset-right, @shadow-inset-bottom, @shadow-inset-left;
 
-// 融合阴影
-@shadow-2-inset: @shadow-2, @shadow-inset;
-@shadow-3-inset: @shadow-3, @shadow-inset;
-
 // Spacer
 @spacer: 8px;
 @spacer-s: @spacer * 0.5; // 间距-4
@@ -205,16 +201,6 @@
 @border-radius: 3px; // 圆角-全局
 @border-radius-50: 50%; // 圆角-全圆角
 
-// 表单相关
-@form-height: 30px;
-@form-text-color: @text-color-primary;
-@form-bg-color: @bg-color-container;
-@form-border-color: @border-level-2-color;
-
-// 图标尺寸
-@icon-default: 16px;
-@icon-l: 24px;
-
 // 滚动条颜色
 @scrollbar-color: var(--td-scrollbar-color);
 
@@ -240,12 +226,3 @@
 @anim-duration-base: 0.2s;
 @anim-duration-moderate: 0.24s;
 @anim-duration-slow: 0.28s;
-
-// 统一管理各组件层级关系
-@z-index-affix: 500;
-@z-index-drawer: 1500;
-@z-index-dialog: 2500;
-@z-index-loading: 3500;
-@z-index-message: 5000;
-@z-index-Popup: 5500;
-@z-index-Notification: 6000;

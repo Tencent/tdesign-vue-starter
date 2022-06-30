@@ -22,9 +22,7 @@ export default ({ mode }) => {
     css: {
       preprocessorOptions: {
         less: {
-          modifyVars: {
-            // 如需自定义组件其他 token, 在此处配置
-          },
+          modifyVars: {},
         },
       },
     },
