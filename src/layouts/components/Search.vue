@@ -66,7 +66,7 @@ export default Vue.extend({
   },
 });
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import '@/style/variables.less';
 
 .header-menu-search {
@@ -75,17 +75,17 @@ export default Vue.extend({
 
   .hover-active {
     .t-input {
-      background: @bg-color-secondarycontainer;
+      background: var(--td-bg-color-secondarycontainer);
     }
 
-    .t-icon {
-      color: @brand-color !important;
+    /deep/ .t-icon {
+      color: var(--td-brand-color);
     }
   }
 
-  .t-icon {
-    font-size: 20px !important;
-    color: @text-color-primary !important;
+  /deep/ .t-icon {
+    font-size: 20px;
+    color: var(--td-text-color-primary);
   }
 
   .t-input {
@@ -95,7 +95,7 @@ export default Vue.extend({
     transition: background @anim-duration-base linear;
 
     &:hover {
-      background: @bg-color-secondarycontainer;
+      background: var(--td-bg-color-secondarycontainer);
     }
   }
 }

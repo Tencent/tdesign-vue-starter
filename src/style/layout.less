@@ -7,10 +7,6 @@
   width: fit-content;
 }
 
-.t-button + .t-button {
-  margin-left: @spacer;
-}
-
 .t-layout.t-layout--with-sider {
   > .t-layout {
     flex: 1;
@@ -35,10 +31,10 @@
   background: var(--td-gray-color-13);
 }
 .t-default-menu:not(.t-menu--dark) .t-menu__item.t-is-active:not(.t-is-opened) {
-  background-color: @brand-color-1;
-  color: @brand-color;
+  background-color: var(--td-brand-color-1);
+  color: var(--td-brand-color);
   .t-icon {
-    color: @brand-color;
+    color: var(--td-brand-color);
   }
 }
 
@@ -46,7 +42,7 @@
   background-color: var(--td-brand-color-1);
 }
 
-.@{prefix} {
+.@{starter-prefix} {
   // 布局元素调整
   &-wrapper {
     height: 100vh;
@@ -79,8 +75,20 @@
       overflow: visible;
       z-index: 100;
     }
-    &-tabs-nav + .@{prefix}-content-layout {
+    &-tabs-nav + .@{starter-prefix}-content-layout {
       padding-top: @spacer-3;
+    }
+
+    &::-webkit-scrollbar {
+      width: 8px;
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+      background-color: var(--td-scrollbar-color);
     }
   }
 
@@ -147,11 +155,11 @@
       padding: 0 24px;
       height: 32px;
       width: 100%;
-      color: @text-color-primary;
+      color: var(--td-text-color-primary);
     }
 
     &-logo-normal {
-      color: @brand-color;
+      color: var(--td-brand-color);
       font-size: @font-size-l;
       transition: all 0.3s;
     }
@@ -184,6 +192,6 @@
 }
 
 .version-container {
-  color: @text-color-primary;
+  color: var(--td-text-color-primary);
   opacity: 0.4;
 }

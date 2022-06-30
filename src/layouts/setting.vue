@@ -43,7 +43,13 @@
                 @visible-change="onPopupVisibleChange"
                 :overlayStyle="{ padding: 0 }"
               >
-                <template #content><color-picker v-model="colors" /></template>
+                <template #content>
+                  <t-color-picker-panel
+                    :on-change="changeColor"
+                    :color-modes="['monochrome']"
+                    format="HEX"
+                    :swatch-colors="[]"
+                /></template>
                 <t-radio-button
                   :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]"
                   class="setting-layout-color-group dynamic-color-btn"
@@ -104,7 +110,6 @@
 <script lang="ts">
 import { mapGetters } from 'vuex';
 import { Color } from 'tvision-color';
-import { Sketch } from 'vue-color';
 import { PopupVisibleChangeContext } from 'tdesign-vue';
 
 import STYLE_CONFIG from '@/config/style';
@@ -127,7 +132,7 @@ const MODE_OPTIONS = [
 
 export default {
   name: 'DefaultLayoutSetting',
-  components: { Thumbnail, ColorContainer, 'color-picker': Sketch },
+  components: { Thumbnail, ColorContainer },
   data() {
     return {
       colors: {
@@ -167,29 +172,9 @@ export default {
       },
       deep: true,
     },
-    colors: {
-      handler(newColor) {
-        const { hex } = newColor;
-        const { setting } = this.$store.state;
-
-        // hex 主题色
-        const newPalette = Color.getPaletteByGradation({
-          colors: [hex],
-          step: 10,
-        })[0];
-        const { mode } = this.$store.state.setting;
-        const colorMap = generateColorMap(hex, newPalette, mode);
-
-        this.$store.commit('setting/addColor', { [hex]: colorMap });
-
-        insertThemeStylesheet(hex, colorMap, mode);
-
-        this.$store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
-      },
-    },
   },
   mounted() {
-    document.querySelector('.dynamic-color-btn').addEventListener('click', () => {
+    document.querySelector('.dynamic-color-btn')?.addEventListener('click', () => {
       this.isColoPickerDisplay = true;
     });
   },
@@ -236,6 +221,23 @@ export default {
         this.$message.success('复制成功');
       });
     },
+    changeColor(hex: string) {
+      const { setting } = this.$store.state;
+
+      // hex 主题色
+      const newPalette = Color.getPaletteByGradation({
+        colors: [hex],
+        step: 10,
+      })[0];
+      const { mode } = this.$store.state.setting;
+      const colorMap = generateColorMap(hex, newPalette, mode);
+
+      this.$store.commit('setting/addColor', { [hex]: colorMap });
+
+      insertThemeStylesheet(hex, colorMap, mode);
+
+      this.$store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
+    },
   },
 };
 </script>
@@ -273,8 +275,6 @@ export default {
 
 .setting-layout-color-group {
   display: inline-flex;
-  width: 36px;
-  height: 36px;
   justify-content: center;
   align-items: center;
   border-radius: 50% !important;
@@ -300,7 +300,7 @@ export default {
   font-family: PingFang SC;
   font-style: normal;
   font-weight: 500;
-  color: @text-color-primary;
+  color: var(--td-text-color-primary);
 }
 
 .setting-group-color {
@@ -315,7 +315,7 @@ export default {
 
 .setting-link {
   cursor: pointer;
-  color: @brand-color;
+  color: var(--td-brand-color);
   margin-bottom: 8px;
 }
 
@@ -327,9 +327,9 @@ export default {
   line-height: 20px;
   font-size: 12px;
   text-align: center;
-  color: @text-color-placeholder;
+  color: var(--td-text-color-placeholder);
   width: 100%;
-  background: @bg-color-container;
+  background: var(--td-bg-color-container);
 }
 
 .setting-drawer-container {
@@ -356,11 +356,8 @@ export default {
       max-height: 78px;
       padding: 8px;
       border-radius: @border-radius;
-      border: 2px solid @component-border;
-
-      // &:last-child {
-      //   border-right: 2px solid transparent;
-      // }
+      border: 2px solid var(--td-component-border);
+      height: auto;
 
       > .t-radio-button__label {
         display: inline-flex;
@@ -368,7 +365,7 @@ export default {
     }
 
     .t-is-checked {
-      border: 2px solid @brand-color !important;
+      border: 2px solid var(--td-brand-color) !important;
     }
 
     .t-form__controls-content {
@@ -384,7 +381,7 @@ export default {
 .setting-route-theme {
   .t-form__label {
     min-width: 310px !important;
-    color: @text-color-secondary;
+    color: var(--td-text-color-secondary);
   }
 }
 

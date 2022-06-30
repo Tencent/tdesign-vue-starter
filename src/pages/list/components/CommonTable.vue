@@ -279,11 +279,11 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import '@/style/variables.less';
 
 .list-common-table {
-  background-color: @bg-color-container;
+  background-color: var(--td-bg-color-container);
   padding: 30px 32px;
   border-radius: @border-radius;
 }
@@ -307,4 +307,7 @@ export default {
     margin-left: 8px;
   }
 }
+.t-button + .t-button {
+    margin-left: @spacer;
+ }
 </style>

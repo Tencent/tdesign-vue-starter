@@ -38,7 +38,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  color: @text-color-secondary;
+  color: var(--td-text-color-secondary);
 }
 
 .recommend-container {
@@ -49,8 +49,8 @@ export default {
   top: 175px;
   padding: 24px 48px;
   width: 640px;
-  background: @bg-color-container;
-  box-shadow: 0px 1px 2px @shadow-1;
+  background: var(--td-bg-color-container);
+  box-shadow: 0px 1px 2px var(--td-shadow-1);
   border-radius: 3px;
 }
 

@@ -65,8 +65,8 @@ export default Vue.extend({
 
 .operator-block {
   position: relative;
-  background-color: @bg-color-container;
-  border: 1px solid @component-border;
+  background-color: var(--td-bg-color-container);
+  border: 1px solid var(--td-component-border);
   border-radius: 3px;
 
   .operator-content {
@@ -74,8 +74,8 @@ export default Vue.extend({
     height: 256px;
 
     .operator-title-icon {
-      background: @brand-color-1;
-      color: @brand-color;
+      background: var(--td-brand-color-1);
+      color: var(--td-brand-color);
       font-size: 56px;
       padding: 14px;
       border-radius: 100%;
@@ -89,7 +89,7 @@ export default Vue.extend({
         display: inline-block;
         font-weight: 500;
         font-size: 24px;
-        color: @text-color-primary;
+        color: var(--td-text-color-primary);
       }
 
       &-subtitle {
@@ -97,7 +97,7 @@ export default Vue.extend({
         font-weight: 400;
         font-size: 14px;
         width: 60%;
-        color: @text-color-placeholder;
+        color: var(--td-text-color-placeholder);
       }
 
       &-tag {
@@ -115,11 +115,11 @@ export default Vue.extend({
 
       svg {
         circle {
-          fill: @brand-color-2;
+          fill: var(--td-brand-color-2);
         }
 
         path {
-          fill: @brand-color;
+          fill: var(--td-brand-color);
         }
       }
     }
@@ -134,14 +134,14 @@ export default Vue.extend({
         width: 60%;
         text-align: left;
         font-size: 14px;
-        color: @text-color-placeholder;
+        color: var(--td-text-color-placeholder);
       }
 
       &-icon {
         position: absolute;
         bottom: 8px;
         right: 0;
-        color: @text-color-disabled;
+        color: var(--td-text-color-disabled);
       }
     }
   }
@@ -160,7 +160,7 @@ export default Vue.extend({
       position: absolute;
       bottom: 15px;
       right: 32px;
-      color: @text-color-placeholder;
+      color: var(--td-text-color-placeholder);
     }
   }
 }

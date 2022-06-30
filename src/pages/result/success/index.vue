@@ -33,13 +33,13 @@ export default {
 
   &-icon {
     font-size: 72px;
-    color: @success-color;
+    color: var(--td-success-color);
   }
 
   &-title {
     margin-top: 28px;
     font-size: 20px;
-    color: @text-color-primary;
+    color: var(--td-text-color-primary);
     text-align: center;
     line-height: 28px;
     font-weight: 500;
@@ -48,8 +48,12 @@ export default {
   &-describe {
     margin: 8px 0 32px;
     font-size: 14px;
-    color: @text-color-secondary;
+    color: var(--td-text-color-secondary);
     line-height: 22px;
   }
 }
+
+.t-button + .t-button {
+    margin-left: @spacer;
+ }
 </style>

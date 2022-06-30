@@ -20,12 +20,11 @@
       <t-col :xs="12" :xl="9">
         <t-card :class="{ 'dashboard-detail-card': true }" title="采购商品申请趋势" subtitle="(件)">
           <template #actions>
-            <t-date-picker
+            <t-date-range-picker
               style="width: 240px"
               :default-value="LAST_7_DAYS"
               theme="primary"
               mode="date"
-              range
               @change="onMaterialChange"
             />
           </template>
@@ -43,15 +42,14 @@
     </t-row>
     <t-card :class="{ 'dashboard-detail-card': true }" title="采购商品满意度分布" class="row-margin">
       <template #actions>
-        <t-date-picker
+        <t-date-range-picker
           style="display: inline-block; margin-right: 8px; width: 240px"
           :defaultValue="LAST_7_DAYS"
           theme="primary"
           mode="date"
-          range
           @change="onSatisfyChange"
         >
-        </t-date-picker>
+        </t-date-range-picker>
         <t-button>导出数据</t-button>
       </template>
       <div id="scatterContainer" style="width: 100%; height: 374px"></div>
@@ -203,14 +201,14 @@ export default {
 
   &.dark {
     &:hover {
-      background: @gray-color-14;
+      background: var(--td-gray-color-14);
       cursor: pointer;
     }
   }
 
   &.light {
     &:hover {
-      background: @gray-color-14;
+      background: var(--td-gray-color-14);
       cursor: pointer;
     }
   }
@@ -218,7 +216,7 @@ export default {
   &__number {
     font-size: 36px;
     line-height: 44px;
-    color: @text-color-primary;
+    color: var(--td-text-color-primary);
   }
 
   &__text {
@@ -227,7 +225,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     font-size: 14px;
-    color: @text-color-placeholder;
+    color: var(--td-text-color-placeholder);
     text-align: left;
     line-height: 18px;
 

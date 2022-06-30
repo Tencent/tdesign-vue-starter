@@ -9,11 +9,10 @@
           :class="{ 'dashboard-overview-card': true, 'overview-panel': true }"
         >
           <template #actions>
-            <t-date-picker
+            <t-date-range-picker
               class="card-date-picker-container"
               theme="primary"
               mode="date"
-              range
               :default-value="LAST_7_DAYS"
               @change="onStokeDataChange"
             />
@@ -179,7 +178,7 @@ export default {
       display: flex;
       align-items: center;
       line-height: 22px;
-      color: @text-color-placeholder;
+      color: var(--td-text-color-placeholder);
 
       .trend-tag {
         margin-left: 4px;

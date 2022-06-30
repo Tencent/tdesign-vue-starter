@@ -65,20 +65,20 @@ export default Vue.extend({
 
 .result {
   &-link {
-    color: @brand-color;
+    color: var(--td-brand-color);
     text-decoration: none;
     cursor: pointer;
 
     &:hover {
-      color: @brand-color;
+      color: var(--td-brand-color);
     }
 
     &:active {
-      color: @brand-color;
+      color: var(--td-brand-color);
     }
 
     &--active {
-      color: @brand-color;
+      color: var(--td-brand-color);
     }
 
     &:focus {
@@ -98,14 +98,14 @@ export default Vue.extend({
 
   &-bg-img {
     width: 200px;
-    color: @brand-color;
+    color: var(--td-brand-color);
   }
 
   &-title {
     font-style: normal;
     font-weight: 500;
     margin-top: 8px;
-    color: @text-color-primary;
+    color: var(--td-text-color-primary);
     font-size: @font-size-xl;
     line-height: @text-line-height-xl;
   }
@@ -113,8 +113,9 @@ export default Vue.extend({
   &-tip {
     margin: 8px 0 32px;
     font-size: @font-size-base;
-    color: @text-color-secondary;
+    color: var(--td-text-color-secondary);
     line-height: @text-line-height-base;
   }
 }
+
 </style>
