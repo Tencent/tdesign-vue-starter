@@ -1,5 +1,6 @@
 <template>
   <div>
+    <hello-world />
     <!-- 顶部 card  -->
     <top-panel class="row-container" />
     <!-- 中部图表  -->
@@ -15,6 +16,7 @@ import TopPanel from './components/top-panel.vue';
 import MiddleChart from './components/middle-chart.vue';
 import RankList from './components/rank-list.vue';
 import OverView from './components/overview.vue';
+import HelloWorld from './HelloWorld.vue';
 
 export default {
   name: 'DashboardBase',
@@ -23,6 +25,7 @@ export default {
     MiddleChart,
     RankList,
     OverView,
+    HelloWorld,
   },
 };
 </script>
@@ -30,5 +33,4 @@ export default {
 .row-container {
   margin-bottom: 16px;
 }
-
 </style>
