@@ -1,5 +1,5 @@
 import { ViewModuleIcon, Edit1Icon, LayersIcon } from 'tdesign-icons-vue';
-import Layout from '@/layouts';
+import Layout from '@/layouts/index.vue';
 
 export default [
   {
