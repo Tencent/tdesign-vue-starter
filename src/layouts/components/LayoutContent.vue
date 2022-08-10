@@ -53,11 +53,11 @@
       </t-tab-panel>
     </t-tabs>
     <t-content :class="`${prefix}-content-layout`">
-      <l-breadcrumb v-if="setting.showBreadcrumb" />
-      <l-content />
+      <layout-breadcrumb v-if="setting.showBreadcrumb" />
+      <common-content />
     </t-content>
     <t-footer v-if="showFooter" :class="`${prefix}-footer-layout`">
-      <l-footer />
+      <layout-footer />
     </t-footer>
   </t-layout>
 </template>
@@ -67,9 +67,9 @@ import Vue from 'vue';
 import { mapGetters } from 'vuex';
 import { RefreshIcon, ArrowLeftIcon, ArrowRightIcon, HomeIcon, CloseCircleIcon } from 'tdesign-icons-vue';
 
-import LContent from './Content.vue';
-import LBreadcrumb from './Breadcrumb.vue';
-import LFooter from './Footer.vue';
+import CommonContent from './Content.vue';
+import LayoutBreadcrumb from './Breadcrumb.vue';
+import LayoutFooter from './Footer.vue';
 
 import { prefix } from '@/config/global';
 import { SettingType } from '@/interface';
@@ -77,9 +77,9 @@ import { SettingType } from '@/interface';
 export default Vue.extend({
   name: 'LayoutContent',
   components: {
-    LContent,
-    LFooter,
-    LBreadcrumb,
+    CommonContent,
+    LayoutFooter,
+    LayoutBreadcrumb,
     RefreshIcon,
     ArrowLeftIcon,
     ArrowRightIcon,

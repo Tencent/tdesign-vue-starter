@@ -1,5 +1,5 @@
 <template>
-  <l-header
+  <common-header
     v-if="showHeader"
     :showLogo="showHeaderLogo"
     :theme="mode"
@@ -14,14 +14,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import { mapGetters } from 'vuex';
-import LHeader from './Header.vue';
+import CommonHeader from './Header.vue';
 
 import { SettingType } from '@/interface';
 
 export default Vue.extend({
   name: 'LayoutHeader',
   components: {
-    LHeader,
+    CommonHeader,
   },
   computed: {
     ...mapGetters({

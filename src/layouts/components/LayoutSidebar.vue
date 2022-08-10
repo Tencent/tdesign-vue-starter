@@ -1,5 +1,5 @@
 <template>
-  <l-side-nav
+  <side-nav
     v-if="showSidebar"
     :showLogo="showSidebarLogo"
     :layout="setting.layout"
@@ -14,14 +14,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import { mapGetters } from 'vuex';
-import LSideNav from './SideNav.vue';
+import SideNav from './SideNav.vue';
 
 import { SettingType } from '@/interface';
 
 export default Vue.extend({
   name: 'LayoutSidebar',
   components: {
-    LSideNav,
+    SideNav,
   },
   computed: {
     ...mapGetters({

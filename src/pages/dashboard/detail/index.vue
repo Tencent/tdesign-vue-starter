@@ -21,7 +21,7 @@
         <t-card :class="{ 'dashboard-detail-card': true }" title="采购商品申请趋势" subtitle="(件)">
           <template #actions>
             <t-date-range-picker
-              style="width: 240px"
+              style="width: 250px"
               :default-value="LAST_7_DAYS"
               theme="primary"
               mode="date"
@@ -43,7 +43,7 @@
     <t-card :class="{ 'dashboard-detail-card': true }" title="采购商品满意度分布" class="row-margin">
       <template #actions>
         <t-date-range-picker
-          style="display: inline-block; margin-right: 8px; width: 240px"
+          style="display: inline-block; margin-right: 8px; width: 250px"
           :defaultValue="LAST_7_DAYS"
           theme="primary"
           mode="date"
