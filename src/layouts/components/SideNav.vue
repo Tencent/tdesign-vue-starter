@@ -1,10 +1,35 @@
+<template>
+  <div :class="sideNavCls">
+    <t-menu
+      width="232px"
+      :class="menuCls"
+      :theme="theme"
+      :value="active"
+      :collapsed="collapsed"
+      :defaultExpanded="defaultExpanded"
+    >
+      <template #logo>
+        <span v-if="showLogo" :class="`${prefix}-side-nav-logo-wrapper`" @click="() => handleNav('/dashboard/base')">
+          <component :is="getLogo" :class="`${prefix}-side-nav-logo-${collapsed ? 't' : 'tdesign'}-logo`" />
+        </span>
+      </template>
+      <menu-content :navData="menu" />
+      <template #operations>
+        <span class="version-container"> {{ !collapsed && 'TDesign Starter' }} {{ pgk.version }} </span>
+      </template>
+    </t-menu>
+    <div :class="`${prefix}-side-nav-placeholder${collapsed ? '-hidden' : ''}`"></div>
+  </div>
+</template>
+
+<script lang="ts">
 import Vue from 'vue';
 import { prefix } from '@/config/global';
-
-import MenuContent from './MenuContent.vue';
+import { ClassName } from '@/interface';
 import Logo from '@/assets/assets-t-logo.svg';
 import LogoFull from '@/assets/assets-logo-full.svg';
 
+import MenuContent from './MenuContent.vue';
 import pgk from '../../../package.json';
 
 const MIN_POINT = 992 - 1;
@@ -45,13 +70,7 @@ export default Vue.extend({
   data() {
     return {
       prefix,
-    };
-  },
-  mounted() {
-    this.autoCollapsed();
-
-    window.onresize = () => {
-      this.autoCollapsed();
+      pgk,
     };
   },
   computed: {
@@ -97,6 +116,20 @@ export default Vue.extend({
         .map((item: string) => `/${item}`)
         .join('');
     },
+    getLogo() {
+      if (this.collapsed) {
+        return Logo;
+      } 
+      return LogoFull;
+      
+    },
+  },
+  mounted() {
+    this.autoCollapsed();
+
+    window.onresize = () => {
+      this.autoCollapsed();
+    };
   },
   methods: {
     changeCollapsed(): void {
@@ -110,37 +143,5 @@ export default Vue.extend({
       this.$router.push(url);
     },
   },
-  render() {
-    return (
-      <div class={this.sideNavCls}>
-        <t-menu
-          width="232px"
-          class={this.menuCls}
-          theme={this.theme}
-          value={this.active}
-          collapsed={this.collapsed}
-          defaultExpanded={this.defaultExpanded}
-        >
-          {this.showLogo && (
-            <span
-              slot="logo"
-              class={`${prefix}-side-nav-logo-wrapper`}
-              onClick={() => this.handleNav('/dashboard/base')}
-            >
-              {this.collapsed ? (
-                <Logo class={`${prefix}-side-nav-logo-t-logo`} />
-              ) : (
-                <LogoFull class={`${prefix}-side-nav-logo-tdesign-logo`} />
-              )}
-            </span>
-          )}
-          <menu-content navData={this.menu}></menu-content>
-          <span slot="operations" class="version-container">
-            {!this.collapsed && 'TDesign Starter'} {pgk.version}
-          </span>
-        </t-menu>
-        <div class={`${prefix}-side-nav-placeholder${this.collapsed ? '-hidden' : ''}`}></div>
-      </div>
-    );
-  },
 });
+</script>

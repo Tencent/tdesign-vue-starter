@@ -4,7 +4,7 @@ import { RefreshIcon, ArrowLeftIcon, ArrowRightIcon, HomeIcon, CloseCircleIcon }
 import LayoutHeader from './components/Header.vue';
 import LayoutBreadcrumb from './components/Breadcrumb.vue';
 import LayoutFooter from './components/Footer.vue';
-import LayoutSideNav from './components/SideNav';
+import LayoutSideNav from './components/SideNav.vue';
 import LayoutContent from './components/Content.vue';
 import Setting from './setting.vue';
 
