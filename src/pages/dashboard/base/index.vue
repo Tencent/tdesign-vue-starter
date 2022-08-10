@@ -7,14 +7,14 @@
     <!-- 列表排名 -->
     <rank-list class="row-container" />
     <!-- 出入库概览 -->
-    <over-view class="row-container" />
+    <output-overview class="row-container" />
   </div>
 </template>
 <script>
-import TopPanel from './components/top-panel.vue';
-import MiddleChart from './components/middle-chart.vue';
-import RankList from './components/rank-list.vue';
-import OverView from './components/overview.vue';
+import TopPanel from './components/TopPanel.vue';
+import MiddleChart from './components/MiddleChart.vue';
+import RankList from './components/RankList.vue';
+import OutputOverview from './components/OutputOverview.vue';
 
 export default {
   name: 'DashboardBase',
@@ -22,7 +22,7 @@ export default {
     TopPanel,
     MiddleChart,
     RankList,
-    OverView,
+    OutputOverview,
   },
 };
 </script>
@@ -30,5 +30,4 @@ export default {
 .row-container {
   margin-bottom: 16px;
 }
-
 </style>
