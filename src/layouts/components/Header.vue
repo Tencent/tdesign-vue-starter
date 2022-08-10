@@ -79,7 +79,7 @@ import LogoFull from '@/assets/assets-logo-full.svg';
 
 import Notice from './Notice.vue';
 import Search from './Search.vue';
-import MenuContent from './MenuContent';
+import MenuContent from './MenuContent.vue';
 
 export default Vue.extend({
   components: {

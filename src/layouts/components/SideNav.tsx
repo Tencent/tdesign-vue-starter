@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import { prefix } from '@/config/global';
 
-import MenuContent from './MenuContent';
+import MenuContent from './MenuContent.vue';
 import Logo from '@/assets/assets-t-logo.svg';
 import LogoFull from '@/assets/assets-logo-full.svg';
 
