@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <t-card>
     <div class="form-step-container">
       <!-- 简单步骤条 -->
       <t-card :bordered="false">
@@ -141,7 +141,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </t-card>
 </template>
 <script>
 import { CheckCircleFilledIcon } from 'tdesign-icons-vue';

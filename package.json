@@ -24,10 +24,10 @@
     "nprogress": "^0.2.0",
     "qrcode.vue": "^1.7.0",
     "tdesign-icons-vue": "^0.1.0",
-    "tdesign-vue": "^0.45.0",
+    "tdesign-vue": "^0.46.0",
     "tvision-color": "~1.4.0",
     "typescript": "^4.2.4",
-    "vue": "~2.6.11",
+    "vue": "~2.6.14",
     "vue-clipboard2": "^0.3.1",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2",
@@ -60,7 +60,7 @@
     "vite-plugin-theme": "^0.8.1",
     "vite-plugin-vue2": "^2.0.1",
     "vite-plugin-vue2-svg": "~0.3.0",
-    "vue-template-compiler": "2.6.14"
+    "vue-template-compiler": "~2.6.14"
   },
   "config": {
     "commitizen": {
