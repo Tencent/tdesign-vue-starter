@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <t-card>
     <div class="table-tree-container">
       <div class="list-tree-wrapper">
         <div class="list-tree-operator">
@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </t-card>
 </template>
 <script>
 import { SearchIcon } from 'tdesign-icons-vue';

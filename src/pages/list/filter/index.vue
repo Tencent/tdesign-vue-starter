@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <t-card>
     <common-table />
-  </div>
+  </t-card>
 </template>
 <script lang="ts">
 import CommonTable from '../components/CommonTable.vue';
