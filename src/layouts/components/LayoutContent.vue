@@ -13,7 +13,7 @@
         :value="route.path"
         :key="`${route.path}_${idx}`"
         :removable="!route.isHome"
-        @remove="() => this.handleRemove(route.path, idx)"
+        @remove="() => handleRemove(route.path, idx)"
       >
         <template #label>
           <t-dropdown
@@ -26,23 +26,23 @@
             </template>
             <home-icon v-else />
             <template #dropdown>
-              <t-dropdown-menu v-if="this.$route.path === route.path">
-                <t-dropdown-item @click="() => this.handleRefresh(route.path, idx)">
+              <t-dropdown-menu v-if="$route.path === route.path">
+                <t-dropdown-item @click="() => handleRefresh(route.path, idx)">
                   <refresh-icon />
                   刷新
                 </t-dropdown-item>
-                <t-dropdown-item v-if="idx > 0" @lick="() => this.handleCloseAhead(route.path, idx)">
+                <t-dropdown-item v-if="idx > 0" @lick="() => handleCloseAhead(route.path, idx)">
                   <arrow-left-icon />
                   关闭左侧
                 </t-dropdown-item>
                 <t-dropdown-item
-                  v-if="idx < this.tabRouterList.length - 1"
-                  @click="() => this.handleCloseBehind(route.path, idx)"
+                  v-if="idx < tabRouterList.length - 1"
+                  @click="() => handleCloseBehind(route.path, idx)"
                 >
                   <arrow-right-icon />
                   关闭右侧
                 </t-dropdown-item>
-                <t-dropdown-item @click="() => this.handleCloseOther(route.path, idx)">
+                <t-dropdown-item @click="() => handleCloseOther(route.path, idx)">
                   <close-circle-icon />
                   关闭其它
                 </t-dropdown-item>
