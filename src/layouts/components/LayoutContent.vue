@@ -31,7 +31,7 @@
                   <refresh-icon />
                   刷新
                 </t-dropdown-item>
-                <t-dropdown-item v-if="idx > 0" @lick="() => handleCloseAhead(route.path, idx)">
+                <t-dropdown-item v-if="idx > 0" @click="() => handleCloseAhead(route.path, idx)">
                   <arrow-left-icon />
                   关闭左侧
                 </t-dropdown-item>
