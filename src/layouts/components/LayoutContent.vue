@@ -19,14 +19,18 @@
           <t-dropdown
             trigger="context-menu"
             :minColumnWidth="128"
-            :popupProps="{ overlayClassName: 'route-tabs-dropdown' }"
+            :popupProps="{
+              overlayClassName: 'route-tabs-dropdown',
+              onVisibleChange: (visible, ctx) => handleTabMenuClick(visible, ctx, route.path),
+              visible: activeTabPath === route.path,
+            }"
           >
             <template v-if="!route.isHome">
               {{ route.title }}
             </template>
             <home-icon v-else />
             <template #dropdown>
-              <t-dropdown-menu v-if="$route.path === route.path">
+              <t-dropdown-menu>
                 <t-dropdown-item @click="() => handleRefresh(route.path, idx)">
                   <refresh-icon />
                   刷新
@@ -89,6 +93,7 @@ export default Vue.extend({
   data() {
     return {
       prefix,
+      activeTabPath: '',
     };
   },
   computed: {
@@ -121,15 +126,42 @@ export default Vue.extend({
         this.$store.commit('tabRouter/toggleTabRouterAlive', routeIdx);
         this.$router.replace({ path: currentPath });
       });
+      this.activeTabPath = null;
     },
     handleCloseAhead(path: string, routeIdx: number) {
       this.$store.commit('tabRouter/subtractTabRouterAhead', { path, routeIdx });
+      this.handleOperationEffect('ahead', routeIdx);
     },
     handleCloseBehind(path: string, routeIdx: number) {
       this.$store.commit('tabRouter/subtractTabRouterBehind', { path, routeIdx });
+      this.handleOperationEffect('behind', routeIdx);
     },
     handleCloseOther(path: string, routeIdx: number) {
       this.$store.commit('tabRouter/subtractTabRouterOther', { path, routeIdx });
+      this.handleOperationEffect('other', routeIdx);
+    },
+    handleOperationEffect(type: 'other' | 'ahead' | 'behind', routeIndex: number) {
+      const currentPath = this.$router.history?.current?.path;
+      const tabRouters = this.tabRouterList;
+      const currentIdx = tabRouters.findIndex((i: { path: string }) => i.path === currentPath);
+      // 存在三种情况需要刷新当前路由
+      // 点击非当前路由的关闭其他、点击非当前路由的关闭左侧且当前路由小于触发路由、点击非当前路由的关闭右侧且当前路由大于触发路由
+      const needRefreshRouter =
+        (type === 'other' && currentIdx !== routeIndex) ||
+        (type === 'ahead' && currentIdx < routeIndex) ||
+        (type === 'behind' && currentIdx === -1);
+      if (needRefreshRouter) {
+        const nextRouteIdx = type === 'behind' ? tabRouters.length - 1 : 1;
+        const nextRouter = this.tabRouterList[nextRouteIdx];
+
+        this.$router.push(nextRouter.path);
+      }
+
+      this.activeTabPath = null;
+    },
+    handleTabMenuClick(visible: boolean, ctx, path: string) {
+      if (ctx?.trigger === 'document') this.activeTabPath = null;
+      if (visible) this.activeTabPath = path;
     },
   },
 });
