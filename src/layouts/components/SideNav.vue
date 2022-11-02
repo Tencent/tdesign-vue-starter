@@ -77,6 +77,10 @@ export default Vue.extend({
     defaultExpanded() {
       const path = this.active;
       const parentPath = path.substring(0, path.lastIndexOf('/'));
+      if (parentPath.lastIndexOf('/')) {
+        const threeLevel = parentPath.substring(0, parentPath.lastIndexOf('/'));
+        return threeLevel === '' ? [] : [threeLevel, parentPath];
+      }
       return parentPath === '' ? [] : [parentPath];
     },
     iconName(): string {
