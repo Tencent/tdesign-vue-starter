@@ -77,10 +77,10 @@ export default {
     return { typeMap: ['A', 'B', 'C', 'D', 'E'] };
   },
   methods: {
-    handleClickManage(product) {
+    handleManageProduct(product) {
       this.$emit('manage-product', product);
     },
-    handleClickDelete(product) {
+    handleDeleteItem(product) {
       this.$emit('delete-item', product);
     },
   },
