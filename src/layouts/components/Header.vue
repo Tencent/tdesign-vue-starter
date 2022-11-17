@@ -46,10 +46,10 @@
               <template #icon>
                 <user-circle-icon class="header-user-avatar" />
               </template>
-              <div class="header-user-account">
-                Tencent
+              <div class="header-user-account">Tencent</div>
+              <template #suffix>
                 <chevron-down-icon />
-              </div>
+              </template>
             </t-button>
           </t-dropdown>
           <t-tooltip placement="bottom" content="系统设置">

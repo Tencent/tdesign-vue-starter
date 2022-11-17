@@ -26,8 +26,11 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style scoped lang="less">
 .row-container {
   margin-bottom: 16px;
+}
+/deep/ .t-card__body {
+  padding-top: 0;
 }
 </style>

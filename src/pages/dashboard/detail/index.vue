@@ -195,6 +195,7 @@ export default {
   /deep/ .t-card__body {
     flex: 1;
     display: flex;
+    padding-top: 0;
     flex-direction: column;
     justify-content: space-between;
   }
