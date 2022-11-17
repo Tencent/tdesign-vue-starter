@@ -43,7 +43,7 @@
         </div>
       </div>
     </template>
-    <t-badge :count="unreadMsg.length" :offset="[15, 21]">
+    <t-badge :count="unreadMsg.length" :offset="[15, 6]">
       <t-button theme="default" shape="square" variant="text" @click="isNoticeVisible = true">
         <mail-icon />
       </t-button>

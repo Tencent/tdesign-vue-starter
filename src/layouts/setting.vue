@@ -339,6 +339,7 @@ export default {
 
   .t-radio-group.t-size-m {
     min-height: 32px;
+
     width: 100%;
     height: auto;
     justify-content: space-between;
@@ -353,6 +354,7 @@ export default {
 
     .t-radio-button {
       display: inline-flex;
+      height: 100%;
       max-height: 78px;
       padding: 8px;
       border-radius: @border-radius;
@@ -395,5 +397,8 @@ export default {
       margin-right: 0;
     }
   }
+}
+.setting-drawer-container .t-radio-group.t-radio-group__outline.t-size-m .t-radio-button {
+  height: auto;
 }
 </style>
