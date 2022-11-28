@@ -285,7 +285,7 @@ export default {
 .list-common-table {
   background-color: var(--td-bg-color-container);
   padding: 30px 32px;
-  border-radius: @border-radius;
+  border-radius: var(--td-radius-default);
 }
 
 .form-item-content {
@@ -308,6 +308,6 @@ export default {
   }
 }
 .t-button + .t-button {
-    margin-left: @spacer;
- }
+  margin-left: var(--td-comp-margin-s);
+}
 </style>

@@ -252,7 +252,7 @@ export default Vue.extend({
 
   .selected-count {
     display: inline-block;
-    margin-left: 8px;
+    margin-left: var(--td-comp-margin-s);
     color: var(--td-text-color-secondary);
   }
 }
@@ -262,6 +262,6 @@ export default Vue.extend({
 }
 
 .t-button + .t-button {
-    margin-left: @spacer;
- }
+  margin-left: var(--td-comp-margin-s);
+}
 </style>

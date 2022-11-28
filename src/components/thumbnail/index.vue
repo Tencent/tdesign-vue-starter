@@ -38,7 +38,7 @@ export default Vue.extend({
   }
 
   &-circle {
-    border-radius: @border-radius-50;
+    border-radius: var(--td-radius-circle);
   }
 
   &-layout {

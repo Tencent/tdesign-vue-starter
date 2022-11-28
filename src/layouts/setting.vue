@@ -357,7 +357,7 @@ export default {
       height: 100%;
       max-height: 78px;
       padding: 8px;
-      border-radius: @border-radius;
+      border-radius: var(--td-radius-default);
       border: 2px solid var(--td-component-border);
       height: auto;
 

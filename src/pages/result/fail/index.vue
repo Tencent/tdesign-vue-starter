@@ -51,7 +51,7 @@ export default {
     line-height: 22px;
   }
   .t-button + .t-button {
-    margin-left: @spacer;
- }
+    margin-left: var(--td-comp-margin-s);
+  }
 }
 </style>

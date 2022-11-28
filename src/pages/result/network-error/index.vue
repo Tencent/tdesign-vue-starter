@@ -19,6 +19,6 @@ export default {
 @import '@/style/variables.less';
 
 .t-button + .t-button {
-    margin-left: @spacer;
- }
+  margin-left: var(--td-comp-margin-s);
+}
 </style>
