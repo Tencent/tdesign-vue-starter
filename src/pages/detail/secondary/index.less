@@ -2,8 +2,8 @@
 
 .secondary-notification {
   background-color: var(--td-bg-color-container);
-  border-radius: @border-radius;
-  padding: @spacer-3 @spacer-4;
+  border-radius: var(--td-radius-default);
+  padding: var(--td-comp-paddingTB-xl) var(--td-comp-paddingTB-xxl);
 
   .t-tabs__content {
     padding-top: 0;
@@ -36,16 +36,15 @@
     }
 
     .t-tag.t-size-s {
-      margin-right: @spacer-1;
+      margin-right: var(--td-comp-margin-s);
       margin-left: 0;
     }
   }
 
   .content {
-    font-size: 14px;
     color: var(--td-text-color-placeholder);
+    font: var(--td-font-body-medium);
     text-align: left;
-    line-height: 22px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

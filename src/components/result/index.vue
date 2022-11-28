@@ -102,20 +102,17 @@ export default Vue.extend({
   }
 
   &-title {
-    font-style: normal;
-    font-weight: 500;
-    margin-top: 8px;
     color: var(--td-text-color-primary);
-    font-size: @font-size-xl;
-    line-height: @text-line-height-xl;
+    font: var(--td-font-title-large);
+    font-weight: 500;
+    font-style: normal;
+    margin-top: 8px;
   }
 
   &-tip {
     margin: 8px 0 32px;
-    font-size: @font-size-base;
+    font: var(--td-font-body-medium);
     color: var(--td-text-color-secondary);
-    line-height: @text-line-height-base;
   }
 }
-
 </style>

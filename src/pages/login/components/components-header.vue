@@ -38,7 +38,7 @@ export default {
 @import '@/style/variables.less';
 
 .login-header {
-  height: 64px;
+  height: var(--td-comp-size-xxxl);
   padding: 0 24px;
   display: flex;
   justify-content: space-between;
@@ -48,7 +48,7 @@ export default {
 
   .logo {
     width: 188px;
-    height: 64px;
+    height: var(--td-comp-size-xxxl);
   }
 
   .operations-container {
