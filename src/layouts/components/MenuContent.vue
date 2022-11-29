@@ -3,8 +3,8 @@
     <template v-for="item in list">
       <template v-if="!item.children || !item.children.length || item.meta?.single">
         <t-menu-item
-          :key="item.path"
           v-if="getHref(item)"
+          :key="`href${item.path}`"
           :href="getHref(item)?.[0]"
           :name="item.path"
           :value="item.meta?.single ? item.redirect : item.path"
@@ -16,11 +16,11 @@
           {{ item.title }}
         </t-menu-item>
         <t-menu-item
-          :key="item.path"
           v-else
+          :key="`${item.path}`"
+          :to="item.path"
           :name="item.path"
           :value="item.meta?.single ? item.redirect : item.path"
-          :to="item.path"
         >
           <template #icon>
             <t-icon v-if="typeof item.icon === 'string' && item.icon" :name="item.icon" />
@@ -50,9 +50,10 @@ const getMenuList = (list: MenuRoute[], basePath?: string): MenuRoute[] => {
   if (!list) {
     return [];
   }
+
   return list
     .map((item) => {
-      const path = basePath ? `${basePath}/${item.path}` : item.path;
+      const path = basePath && !item.path.includes(basePath) ? `${basePath}/${item.path}` : item.path;
       return {
         path,
         title: item.meta?.title,
