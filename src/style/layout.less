@@ -70,7 +70,7 @@
   }
 
   &-layout {
-    height: calc(100vh - 64px);
+    height: calc(100vh - var(--td-comp-size-xxxl));
     overflow-y: scroll;
 
     &-tabs-nav {
@@ -107,7 +107,7 @@
   }
 
   &-sidebar-compact {
-    width: 64px;
+    width: var(--td-comp-size-xxxl);
   }
 
   &-sidebar-layout-side {
@@ -123,10 +123,10 @@
     min-height: 100%;
 
     &-mix {
-      top: 64px;
+      top: var(--td-comp-size-xxxl);
 
       &-fixed {
-        top: 64px;
+        top: var(--td-comp-size-xxxl);
         z-index: 0;
       }
     }

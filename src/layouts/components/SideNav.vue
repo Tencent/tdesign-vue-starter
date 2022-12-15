@@ -52,7 +52,7 @@ export default Vue.extend({
     layout: String,
     headerHeight: {
       type: String,
-      default: '64px',
+      default: '56px',
     },
     theme: {
       type: String,
@@ -123,9 +123,8 @@ export default Vue.extend({
     getLogo() {
       if (this.collapsed) {
         return Logo;
-      } 
+      }
       return LogoFull;
-      
     },
   },
   mounted() {
