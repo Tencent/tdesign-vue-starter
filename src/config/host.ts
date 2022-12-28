@@ -17,4 +17,10 @@ export default {
     // 正式环境 cdn 路径
     CDN: '',
   },
+  site: {
+    // 正式环境接口地址
+    API: 'https://service-bv448zsw-1257786608.gz.apigw.tencentcs.com',
+    // 正式环境 cdn 路径
+    CDN: '',
+  },
 };
