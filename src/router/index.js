@@ -23,6 +23,7 @@ const defaultRouterList = [
 
 const createRouter = () =>
   new VueRouter({
+    mode: 'history',
     routes: defaultRouterList,
     scrollBehavior() {
       return { x: 0, y: 0 };
