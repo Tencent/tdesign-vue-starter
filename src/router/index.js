@@ -4,6 +4,8 @@ import baseRouters from './modules/base';
 import componentsRouters from './modules/components';
 import othersRouters from './modules/others';
 
+const env = import.meta.env.MODE || 'development';
+
 // 存放动态路由
 export const asyncRouterList = [...baseRouters, ...componentsRouters, ...othersRouters];
 
@@ -24,6 +26,7 @@ const defaultRouterList = [
 const createRouter = () =>
   new VueRouter({
     mode: 'history',
+    base: env === 'site' ? '/starter/vue/' : null,
     routes: defaultRouterList,
     scrollBehavior() {
       return { x: 0, y: 0 };
