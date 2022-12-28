@@ -7,6 +7,7 @@
     "dev:linux": "vite --mode development",
     "build:test": "vite build --mode test",
     "build": "vite build --mode release",
+    "build:site": "vite build --mode site",
     "site:preview": "npm run build && cp -r dist _site",
     "preview": "vite preview",
     "lint": "eslint --ext .vue,.js,.jsx,.ts,.tsx ./ --max-warnings 0",
