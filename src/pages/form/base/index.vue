@@ -1,5 +1,5 @@
 <template>
-  <t-card>
+  <t-card :bordered="false">
     <t-form
       ref="form"
       :data="formData"

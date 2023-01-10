@@ -1,6 +1,6 @@
 <template>
   <div class="detail-advanced">
-    <t-card title="基本信息" class="advanced-card">
+    <t-card title="基本信息" class="advanced-card" :bordered="false">
       <div class="info-block">
         <div v-for="(item, index) in baseInfoData" :key="index" class="info-item">
           <h1>{{ item.name }}</h1>
@@ -18,7 +18,7 @@
     </t-card>
 
     <!-- 发票进度 -->
-    <t-card title="发票进度" class="container-base-margin-top">
+    <t-card title="发票进度" class="container-base-margin-top" :bordered="false">
       <t-row :class="prefix + '-operator-row row-padding'" justify="space-between">
         <template>
           <t-steps :current="updateCurrent">
@@ -32,7 +32,7 @@
     </t-card>
 
     <!-- 产品目录 -->
-    <t-card title="产品目录" class="container-base-margin-top">
+    <t-card title="产品目录" class="container-base-margin-top" :bordered="false">
       <template slot="option">
         <t-radio-group default-value="dateVal" @change="onAlertChange">
           <t-radio-button value="dateVal">季度</t-radio-button>
@@ -56,7 +56,7 @@
     </t-card>
 
     <!-- 产品采购明细 -->
-    <t-card title="产品采购明细" class="container-base-margin-top">
+    <t-card title="产品采购明细" class="container-base-margin-top" :bordered="false">
       <t-table
         :columns="columns"
         :data="data"
