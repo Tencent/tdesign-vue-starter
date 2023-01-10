@@ -24,11 +24,7 @@
           </t-radio-group>
           <div class="setting-group-title">主题色</div>
           <t-radio-group v-model="formData.brandTheme">
-            <div
-              v-for="(item, index) in COLOR_OPTIONS.slice(0, COLOR_OPTIONS.length - 1)"
-              :key="index"
-              class="setting-layout-drawer"
-            >
+            <div v-for="(item, index) in DEFAULT_COLOR_OPTIONS" :key="index" class="setting-layout-drawer">
               <t-radio-button :key="index" :value="item" class="setting-layout-color-group">
                 <color-container :value="item" />
               </t-radio-button>
@@ -50,11 +46,8 @@
                     format="HEX"
                     :swatch-colors="[]"
                 /></template>
-                <t-radio-button
-                  :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]"
-                  class="setting-layout-color-group dynamic-color-btn"
-                >
-                  <color-container :value="COLOR_OPTIONS[COLOR_OPTIONS.length - 1]" />
+                <t-radio-button :value="dynamicColor" :class="['setting-layout-color-group', 'dynamic-color-btn']">
+                  <color-container :value="dynamicColor" />
                 </t-radio-button>
               </t-popup>
             </div>
@@ -113,7 +106,8 @@ import { Color } from 'tvision-color';
 import { PopupVisibleChangeContext } from 'tdesign-vue';
 
 import STYLE_CONFIG from '@/config/style';
-import { insertThemeStylesheet, generateColorMap } from '@/config/color';
+import { insertThemeStylesheet, generateColorMap } from '@/utils/color';
+import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
 
 import Thumbnail from '@/components/thumbnail/index.vue';
 import ColorContainer from '@/components/color/index.vue';
@@ -123,7 +117,7 @@ import SettingLightIcon from '@/assets/assets-setting-light.svg';
 import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
 
 const LAYOUT_OPTION = ['side', 'top', 'mix'];
-const COLOR_OPTIONS = ['default', 'cyan', 'green', 'yellow', 'orange', 'red', 'pink', 'purple', 'dynamic'];
+
 const MODE_OPTIONS = [
   { type: 'light', text: '明亮' },
   { type: 'dark', text: '暗黑' },
@@ -140,7 +134,7 @@ export default {
       },
       MODE_OPTIONS,
       LAYOUT_OPTION,
-      COLOR_OPTIONS,
+      DEFAULT_COLOR_OPTIONS,
       visible: false,
       formData: { ...STYLE_CONFIG },
       isColoPickerDisplay: false,
@@ -162,10 +156,15 @@ export default {
     showOthers() {
       return (this.formData.showFooter && !this.formData.isSidebarFixed) || !this.formData.splitMenu;
     },
+    dynamicColor() {
+      const isDynamic = DEFAULT_COLOR_OPTIONS.indexOf(this.formData.brandTheme) === -1;
+      return isDynamic ? this.formData.brandTheme : '';
+    },
   },
   watch: {
     formData: {
       handler(newVal) {
+        if (!newVal.brandTheme) return;
         // 没有在formData中 需要从store中同步过来
         const { isSidebarCompact } = this.$store.state.setting;
         this.$store.dispatch('setting/changeTheme', { ...newVal, isSidebarCompact });
@@ -224,19 +223,20 @@ export default {
     changeColor(hex: string) {
       const { setting } = this.$store.state;
 
-      // hex 主题色
-      const newPalette = Color.getPaletteByGradation({
+      const { colors: newPalette, primary: brandColorIndex } = Color.getColorGradations({
         colors: [hex],
         step: 10,
+        remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
       })[0];
+
       const { mode } = this.$store.state.setting;
-      const colorMap = generateColorMap(hex, newPalette, mode);
+      const colorMap = generateColorMap(hex, newPalette, mode, brandColorIndex);
+      this.formData.brandTheme = hex;
 
       this.$store.commit('setting/addColor', { [hex]: colorMap });
+      this.$store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
 
       insertThemeStylesheet(hex, colorMap, mode);
-
-      this.$store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
     },
   },
 };

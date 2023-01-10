@@ -1,12 +1,14 @@
 /* eslint-disable no-param-reassign */
+import { Color } from 'tvision-color';
 import STYLE_CONFIG from '@/config/style';
-import { COLOR_TOKEN, ColorSeries, ColorToken, LIGHT_CHART_COLORS, DARK_CHART_COLORS } from '@/config/color';
+import { TColorSeries, TColorToken, LIGHT_CHART_COLORS, DARK_CHART_COLORS } from '@/config/color';
+import { insertThemeStylesheet, generateColorMap } from '@/utils/color';
 
 // 定义的state初始值
 const state = {
   ...STYLE_CONFIG,
   showSettingPanel: false,
-  colorList: COLOR_TOKEN,
+  colorList: {},
   chartColors: LIGHT_CHART_COLORS,
 };
 
@@ -47,10 +49,10 @@ const mutations = {
   toggleSettingPanel(state: IStateType, payload: boolean) {
     state.showSettingPanel = payload;
   },
-  addColor(state: IStateType, payload: ColorSeries) {
+  addColor(state: IStateType, payload: TColorSeries) {
     state.colorList = { ...state.colorList, ...payload };
   },
-  changeChartColor(state: IStateType, payload: ColorToken) {
+  changeChartColor(state: IStateType, payload: TColorToken) {
     state.chartColors = { ...payload };
   },
 };
@@ -97,7 +99,15 @@ const actions = {
     commit('changeChartColor', isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS);
   },
   changeBrandTheme(_: { state: IStateType }, payload: IStateType) {
-    const { brandTheme } = payload;
+    const { brandTheme, mode } = payload;
+    const { colors: newPalette, primary: brandColorIndex } = Color.getColorGradations({
+      colors: [brandTheme],
+      step: 10,
+      remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
+    })[0];
+    const colorMap = generateColorMap(brandTheme, newPalette, mode as 'light' | 'dark', brandColorIndex);
+
+    insertThemeStylesheet(brandTheme, colorMap, mode as 'light' | 'dark');
 
     document.documentElement.setAttribute('theme-color', brandTheme);
   },
