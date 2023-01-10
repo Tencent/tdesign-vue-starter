@@ -1,5 +1,5 @@
 <template>
-  <t-card>
+  <t-card :bordered="false">
     <div class="table-tree-container">
       <div class="list-tree-wrapper">
         <div class="list-tree-operator">

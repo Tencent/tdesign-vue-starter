@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-detail">
-    <t-card title="本月采购申请情况" class="dashboard-detail-card">
+    <t-card title="本月采购申请情况" class="dashboard-detail-card" :bordered="false">
       <t-row :gutter="[16, 16]">
         <t-col v-for="(item, index) in PANE_LIST_DATA" :key="index" :xs="6" :xl="3">
           <t-card :class="['dashboard-list-card']" :description="item.title">
@@ -18,7 +18,7 @@
     </t-card>
     <t-row :gutter="[16, 16]" class="row-margin">
       <t-col :xs="12" :xl="9">
-        <t-card :class="{ 'dashboard-detail-card': true }" title="采购商品申请趋势" subtitle="(件)">
+        <t-card :class="{ 'dashboard-detail-card': true }" title="采购商品申请趋势" subtitle="(件)" :bordered="false">
           <template #actions>
             <t-date-range-picker
               style="width: 250px"
@@ -40,7 +40,7 @@
         />
       </t-col>
     </t-row>
-    <t-card :class="{ 'dashboard-detail-card': true }" title="采购商品满意度分布" class="row-margin">
+    <t-card :class="{ 'dashboard-detail-card': true }" title="采购商品满意度分布" class="row-margin" :bordered="false">
       <template #actions>
         <t-date-range-picker
           style="display: inline-block; margin-right: 8px; width: 250px"

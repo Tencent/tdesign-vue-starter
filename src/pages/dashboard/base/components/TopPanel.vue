@@ -2,6 +2,7 @@
   <t-row :gutter="[16, 16]">
     <t-col :xs="6" :xl="3" v-for="(item, index) in panelList" :key="item.title">
       <t-card
+        :bordered="false"
         :title="item.title"
         :style="{ height: '168px' }"
         :class="{ 'dashboard-item': true, 'dashboard-item--main-color': index == 0 }"

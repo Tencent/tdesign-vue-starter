@@ -1,5 +1,5 @@
 <template>
-  <t-card>
+  <t-card :bordered="false">
     <common-table />
   </t-card>
 </template>

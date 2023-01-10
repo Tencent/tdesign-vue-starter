@@ -1,5 +1,5 @@
 <template>
-  <t-card>
+  <t-card :bordered="false">
     <div class="form-step-container">
       <!-- 简单步骤条 -->
       <t-card :bordered="false">
