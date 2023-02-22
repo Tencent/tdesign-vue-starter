@@ -90,6 +90,32 @@ export default [
     ],
   },
   {
+    path: '/frame',
+    name: 'frame',
+    component: Layout,
+    redirect: '/frame/doc',
+    meta: { title: '外部页面', icon: 'internet' },
+    children: [
+      {
+        path: 'doc',
+        name: 'Doc',
+        component: () => import('@/pages/frame/doc/index.vue'),
+        meta: { title: '使用文档（内嵌）' },
+      },
+      {
+        path: 'TDesign',
+        name: 'TDesign',
+        component: () => import('@/pages/frame/tdesign/index.vue'),
+        meta: { title: 'TDesign 文档（内嵌）' },
+      },
+      {
+        path: 'https://tdesign.tencent.com/vue-next/getting-started',
+        name: 'TDesign2',
+        meta: { title: 'TDesign 文档（外链）' },
+      },
+    ],
+  },
+  {
     path: '/result',
     name: 'result',
     component: Layout,
