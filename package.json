@@ -55,7 +55,7 @@
     "stylelint": "~13.13.1",
     "stylelint-config-prettier": "~9.0.3",
     "stylelint-less": "1.0.5",
-    "stylelint-order": "~4.1.0",
+    "stylelint-order": "~6.0.3",
     "vite": "^4.1.4",
     "vite-plugin-mock": "^2.3.0",
     "vite-plugin-theme": "^0.8.1",
