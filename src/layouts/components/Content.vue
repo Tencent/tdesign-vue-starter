@@ -7,6 +7,8 @@
 </template>
 <script lang="ts">
 import { mapGetters } from 'vuex';
+import isBoolean from 'lodash/isBoolean';
+import isUndefined from 'lodash/isUndefined';
 
 export default {
   computed: {
@@ -16,7 +18,13 @@ export default {
       isUseTabsRouter: 'setting/isUseTabsRouter',
     }),
     aliveViews() {
-      return this.tabRouterList.filter((route) => route.isAlive).map((route) => route.name);
+      return this.tabRouterList
+        .filter((route) => {
+          const keepAliveConfig = route.meta?.keepAlive;
+          const isRouteKeepAlive = isUndefined(keepAliveConfig) || (isBoolean(keepAliveConfig) && keepAliveConfig); // 默认开启keepalive
+          return route.isAlive && isRouteKeepAlive;
+        })
+        .map((route) => route.name);
     },
   },
 };

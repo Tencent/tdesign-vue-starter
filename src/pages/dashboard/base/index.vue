@@ -1,5 +1,13 @@
 <template>
   <div>
+    <t-back-top
+      container=".tdesign-starter-layout"
+      :visible-height="0"
+      style="position: absolute"
+      :offset="['24px', '80px']"
+    >
+      <t-icon name="backtop" size="20px" />
+    </t-back-top>
     <!-- 顶部 card  -->
     <top-panel class="row-container" />
     <!-- 中部图表  -->

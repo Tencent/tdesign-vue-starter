@@ -27,10 +27,6 @@ const state: TTabRouterType = {
   isRefreshing: false,
 };
 
-// 不需要做多标签tabs页缓存的列表 值为每个页面对应的name 如 DashboardDetail
-// const ignoreCacheRoutes = ['DashboardDetail'];
-const ignoreCacheRoutes = [];
-
 const mutations = {
   // 处理刷新
   toggleTabRouterAlive(state: TTabRouterType, routeIdx: number) {
@@ -39,10 +35,9 @@ const mutations = {
   },
   // 处理新增
   appendTabRouterList(state: TTabRouterType, newRoute: TRouterInfo) {
-    const needAlive = !ignoreCacheRoutes.includes(newRoute.name);
     if (!state.tabRouterList.find((route: TRouterInfo) => route.path === newRoute.path))
       // eslint-disable-next-line no-param-reassign
-      state.tabRouterList = state.tabRouterList.concat({ ...newRoute, isAlive: needAlive });
+      state.tabRouterList = state.tabRouterList.concat({ ...newRoute, isAlive: true });
   },
   // 处理关闭当前
   subtractCurrentTabRouter(state: TTabRouterType, newRoute: TRouterInfo) {
