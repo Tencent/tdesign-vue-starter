@@ -57,7 +57,7 @@
     "stylelint-less": "1.0.5",
     "stylelint-order": "~4.1.0",
     "vite": "^4.1.4",
-    "vite-plugin-mock": "^2.3.0",
+    "vite-plugin-mock": "^3.0.0",
     "vite-plugin-theme": "^0.8.1",
     "vite-plugin-vue2": "^2.0.1",
     "vite-plugin-vue2-svg": "~0.4.0",
