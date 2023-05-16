@@ -1,11 +1,11 @@
 <template>
   <div>
     <t-drawer
-      size="408px"
+      size="348px"
       :footer="false"
       :visible.sync="showSettingPanel"
-      header="页面配置"
-      :closeBtn="true"
+      :header="false"
+      :closeBtn="false"
       :onCloseBtnClick="handleCloseDrawer"
       class="setting-drawer-container"
     >
@@ -17,7 +17,8 @@
               <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
                 <div>
                   <t-radio-button :key="index" :value="item.type">
-                    <component :is="getModeIcon(item.type)" />
+                    <component :is="getModeIcon(item.type)" class="mode-img" />
+                    <picked-icon v-if="formData.mode === item.type" class="picked" />
                   </t-radio-button>
                   <p :style="{ textAlign: 'center', marginTop: '8px' }">{{ item.text }}</p>
                 </div>
@@ -30,25 +31,27 @@
             <t-radio-group v-model="formData.layout">
               <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
                 <t-radio-button :key="index" :value="item">
-                  <thumbnail :src="getThumbnailUrl(item)" />
+                  <component :is="getLayoutIcon(item)" class="layout-img" />
+                  <picked-icon v-if="formData.layout === item" class="picked" />
                 </t-radio-button>
               </div>
             </t-radio-group>
           </div>
-          <t-form-item v-show="formData.layout === 'mix'" label="分割菜单（混合模式下有效）" name="splitMenu">
-            <t-switch v-model="formData.splitMenu"></t-switch>
-          </t-form-item>
+          <div :class="['setting-container-subgroup', 'setting-config-list']">
+            <t-form-item v-if="formData.layout === 'mix'" label="分割菜单（混合模式下有效）" name="splitMenu">
+              <t-switch v-model="formData.splitMenu"></t-switch>
+            </t-form-item>
 
-          <t-form-item v-show="formData.layout !== 'side'" label="固定 Header" name="isHeaderFixed">
-            <t-switch v-model="formData.isHeaderFixed"></t-switch>
-          </t-form-item>
-          <t-form-item v-show="formData.layout !== 'top'" label="固定 Sidebar" name="isSidebarFixed">
-            <t-switch v-model="formData.isSidebarFixed"></t-switch>
-          </t-form-item>
-
+            <t-form-item v-if="formData.layout !== 'side'" label="固定 Header" name="isHeaderFixed">
+              <t-switch v-model="formData.isHeaderFixed"></t-switch>
+            </t-form-item>
+            <t-form-item v-if="formData.layout !== 'top'" label="固定 Sidebar" name="isSidebarFixed">
+              <t-switch v-model="formData.isSidebarFixed"></t-switch>
+            </t-form-item>
+          </div>
           <div class="setting-group-title">元素开关</div>
           <div :class="['setting-container-subgroup', 'setting-config-list']">
-            <t-form-item label="显示 Header" name="showHeader" v-show="formData.layout === 'side'">
+            <t-form-item label="显示 Header" name="showHeader" v-if="formData.layout === 'side'">
               <t-switch v-model="formData.showHeader"></t-switch>
             </t-form-item>
             <t-form-item label="显示 Breadcrumbs" name="showBreadcrumb">
@@ -63,7 +66,7 @@
             <t-form-item
               label="footer 内收"
               name="footerPosition"
-              v-show="formData.showFooter && !formData.isSidebarFixed"
+              v-if="formData.showFooter && !formData.isSidebarFixed"
             >
               <t-switch v-model="formData.isFooterAside"></t-switch>
             </t-form-item>
@@ -87,6 +90,10 @@ import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
 import Thumbnail from '@/components/thumbnail/index.vue';
 import ColorContainer from '@/components/color/index.vue';
 
+import LayoutMixIcon from '@/assets/assets-layout-mix.svg';
+import LayoutSideIcon from '@/assets/assets-layout-side.svg';
+import LayoutTopIcon from '@/assets/assets-layout-top.svg';
+import PickedIcon from '@/assets/assets-picked.svg';
 import SettingDarkIcon from '@/assets/assets-setting-dark.svg';
 import SettingLightIcon from '@/assets/assets-setting-light.svg';
 import SettingAutoIcon from '@/assets/assets-setting-auto.svg';
@@ -101,7 +108,7 @@ const MODE_OPTIONS = [
 
 export default {
   name: 'DefaultLayoutSetting',
-  components: { Thumbnail, ColorContainer },
+  components: { Thumbnail, ColorContainer, PickedIcon },
   data() {
     return {
       colors: {
@@ -177,6 +184,14 @@ export default {
     getThumbnailUrl(name: string) {
       return `https://tdesign.gtimg.com/starter/setting/${name}.png`;
     },
+    getLayoutIcon(mode: string) {
+      const layoutIconMap = {
+        side: LayoutSideIcon,
+        top: LayoutTopIcon,
+        mix: LayoutMixIcon,
+      };
+      return layoutIconMap[mode];
+    },
     handleClick(): void {
       this.$store.commit('setting/toggleSettingPanel', true);
     },
@@ -196,85 +211,27 @@ export default {
 <style lang="less">
 @import '@/style/variables.less';
 
-.tdesign-setting {
-  z-index: 100;
-  position: fixed;
-  bottom: 200px;
-  right: 0;
-  transition: transform 0.3s cubic-bezier(0.7, 0.3, 0.1, 1), visibility 0.3s cubic-bezier(0.7, 0.3, 0.1, 1);
-  height: 40px;
-  width: 40px;
-  border-radius: 20px 0 0 20px;
-  transition: all 0.3s;
-
-  .t-icon {
-    margin-left: 8px;
-  }
-
-  .tdesign-setting-text {
-    font-size: 12px;
-    display: none;
-  }
-
-  &:hover {
-    width: 96px;
-
-    .tdesign-setting-text {
-      display: inline-block;
-    }
-  }
-}
-
-.setting-layout-color-group {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50% !important;
-  padding: 6px !important;
-  border: 2px solid transparent !important;
-
-  > .t-radio-button__label {
-    display: inline-flex;
-  }
-}
-
-.tdesign-setting-close {
-  position: fixed;
-  bottom: 200px;
-  right: 300px;
-}
-
-.setting-group-title {
-  font-size: 14px;
-  line-height: 22px;
-  margin: 32px 0 24px 0;
-  text-align: left;
-  font-family: PingFang SC;
-  font-style: normal;
-  font-weight: 500;
-  color: var(--td-text-color-primary);
-}
-
-.setting-link {
-  cursor: pointer;
-  color: var(--td-brand-color);
-  margin-bottom: 8px;
-}
-
-.setting-info {
-  position: absolute;
-  padding: 24px;
-  bottom: 0;
-  left: 0;
-  line-height: 20px;
-  font-size: 12px;
-  text-align: center;
-  color: var(--td-text-color-placeholder);
-  width: 100%;
-  background: var(--td-bg-color-container);
-}
-
 .setting-drawer-container {
+  .t-drawer__body {
+    padding: var(--td-comp-paddingTB-s) var(--td-comp-paddingLR-s);
+    background-color: var(--td-bg-color-secondarycontainer);
+  }
+
+  .t-radio-group.t-size-m {
+    min-height: 32px;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .t-radio-group {
+    margin: var(--td-comp-margin-m) 0;
+  }
+
+  .t-radio-group.t-size-m .t-radio-button {
+    height: auto;
+  }
+
   .setting-container {
     background-color: var(--td-bg-color-container);
     padding: var(--td-comp-paddingTB-l) var(--td-comp-paddingLR-l);
@@ -285,37 +242,54 @@ export default {
     }
   }
 
-  .t-radio-group.t-size-m {
-    min-height: 32px;
-
-    width: 100%;
-    height: auto;
-    justify-content: space-between;
-    align-items: center;
+  .setting-config-list {
+    background-color: var(--td-bg-color-secondarycontainer);
+    border-radius: var(--td-radius-large);
+    padding: var(--td-comp-paddingTB-xs) var(--td-comp-paddingLR-xs);
+    > .t-form__item {
+      background-color: var(--td-bg-color-container);
+      margin-bottom: var(--td-comp-margin-xs);
+      padding: var(--td-comp-paddingTB-s) var(--td-comp-paddingLR-m);
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  .setting-group-title {
+    text-align: left;
+    font: var(--td-font-title-medium);
+    color: var(--td-text-color-primary);
   }
 
   .setting-layout-drawer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 16px;
 
     .t-radio-button {
       display: inline-flex;
-      height: 100%;
       max-height: 78px;
-      padding: 8px;
+      padding: 0;
       border-radius: var(--td-radius-default);
-      border: 2px solid var(--td-component-border);
-      height: auto;
-
+      border: none;
       > .t-radio-button__label {
         display: inline-flex;
+        position: relative;
+        .mode-img,
+        .layout-img {
+          border-radius: 9px;
+        }
+        .picked {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+        }
       }
     }
 
     .t-is-checked {
-      border: 2px solid var(--td-brand-color) !important;
+      border: none;
     }
 
     .t-form__controls-content {
@@ -326,16 +300,18 @@ export default {
   .t-form__controls-content {
     justify-content: end;
   }
-}
 
-.setting-route-theme {
-  .t-form__label {
-    min-width: 310px !important;
-    color: var(--td-text-color-secondary);
+  .setting-info {
+    position: absolute;
+    padding: 24px;
+    bottom: 0;
+    left: 0;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: center;
+    color: var(--td-text-color-placeholder);
+    width: 100%;
+    background: var(--td-bg-color-container);
   }
-}
-
-.setting-drawer-container .t-radio-group.t-radio-group__outline.t-size-m .t-radio-button {
-  height: auto;
 }
 </style>
