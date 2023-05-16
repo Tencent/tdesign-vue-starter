@@ -35,7 +35,7 @@ import { mapGetters } from 'vuex';
 import LayoutHeader from './components/LayoutHeader.vue';
 import LayoutContent from './components/LayoutContent.vue';
 import LayoutSidebar from './components/LayoutSidebar.vue';
-import Setting from './setting.vue';
+import Setting from './setting/index.vue';
 
 import { prefix } from '@/config/global';
 import { SettingType } from '@/interface';

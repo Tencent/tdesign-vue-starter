@@ -16,7 +16,6 @@
 
       <login v-if="type === 'login'" />
       <register v-else @register-success="switchType('login')" />
-      <tdesign-setting />
     </div>
 
     <footer class="copyright">Copyright @ 2021-2022 Tencent. All Rights Reserved</footer>
@@ -26,7 +25,6 @@
 import Login from './components/components-login.vue';
 import Register from './components/components-register.vue';
 import LoginHeader from './components/components-header.vue';
-import TdesignSetting from '@/layouts/setting.vue';
 
 export default {
   name: 'LoginIndex',
@@ -34,7 +32,6 @@ export default {
     LoginHeader,
     Login,
     Register,
-    TdesignSetting,
   },
   data() {
     return {
