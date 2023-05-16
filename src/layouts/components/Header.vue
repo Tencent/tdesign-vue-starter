@@ -52,11 +52,6 @@
               </template>
             </t-button>
           </t-dropdown>
-          <t-tooltip placement="bottom" content="系统设置">
-            <t-button theme="default" shape="square" variant="text" @click="toggleSettingPanel">
-              <setting-icon />
-            </t-button>
-          </t-tooltip>
         </div>
       </template>
     </t-head-menu>
@@ -71,7 +66,6 @@ import {
   HelpCircleIcon,
   UserCircleIcon,
   PoweroffIcon,
-  SettingIcon,
   ChevronDownIcon,
 } from 'tdesign-icons-vue';
 import { prefix } from '@/config/global';
@@ -92,7 +86,6 @@ export default Vue.extend({
     HelpCircleIcon,
     UserCircleIcon,
     PoweroffIcon,
-    SettingIcon,
     ChevronDownIcon,
   },
   props: {

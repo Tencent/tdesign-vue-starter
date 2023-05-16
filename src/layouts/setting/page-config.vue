@@ -11,55 +11,30 @@
     >
       <div class="setting-container">
         <t-form :data="formData" size="large" ref="form" labelAlign="left" @reset="onReset" @submit="onSubmit">
-          <div class="setting-group-title">主题模式</div>
-          <t-radio-group v-model="formData.mode">
-            <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
-              <div>
-                <t-radio-button :key="index" :value="item.type"
-                  ><component :is="getModeIcon(item.type)"
-                /></t-radio-button>
-                <p :style="{ textAlign: 'center', marginTop: '8px' }">{{ item.text }}</p>
+          <div class="setting-container-subgroup">
+            <div class="setting-group-title">主题模式</div>
+            <t-radio-group v-model="formData.mode">
+              <div v-for="(item, index) in MODE_OPTIONS" :key="index" class="setting-layout-drawer">
+                <div>
+                  <t-radio-button :key="index" :value="item.type">
+                    <component :is="getModeIcon(item.type)" />
+                  </t-radio-button>
+                  <p :style="{ textAlign: 'center', marginTop: '8px' }">{{ item.text }}</p>
+                </div>
               </div>
-            </div>
-          </t-radio-group>
-          <div class="setting-group-title">主题色</div>
-          <t-radio-group v-model="formData.brandTheme">
-            <div v-for="(item, index) in DEFAULT_COLOR_OPTIONS" :key="index" class="setting-layout-drawer">
-              <t-radio-button :key="index" :value="item" class="setting-layout-color-group">
-                <color-container :value="item" />
-              </t-radio-button>
-            </div>
-            <div class="setting-layout-drawer">
-              <t-popup
-                destroy-on-close
-                expand-animation
-                placement="bottom-right"
-                trigger="click"
-                :visible="isColoPickerDisplay"
-                @visible-change="onPopupVisibleChange"
-                :overlayStyle="{ padding: 0 }"
-              >
-                <template #content>
-                  <t-color-picker-panel
-                    :on-change="changeColor"
-                    :color-modes="['monochrome']"
-                    format="HEX"
-                    :swatch-colors="[]"
-                /></template>
-                <t-radio-button :value="dynamicColor" :class="['setting-layout-color-group', 'dynamic-color-btn']">
-                  <color-container :value="dynamicColor" />
+            </t-radio-group>
+          </div>
+          <div class="setting-container-subgroup">
+            <div class="setting-group-title">导航布局</div>
+
+            <t-radio-group v-model="formData.layout">
+              <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
+                <t-radio-button :key="index" :value="item">
+                  <thumbnail :src="getThumbnailUrl(item)" />
                 </t-radio-button>
-              </t-popup>
-            </div>
-          </t-radio-group>
-          <div class="setting-group-title">导航布局</div>
-
-          <t-radio-group v-model="formData.layout">
-            <div v-for="(item, index) in LAYOUT_OPTION" :key="index" class="setting-layout-drawer">
-              <t-radio-button :key="index" :value="item"><thumbnail :src="getThumbnailUrl(item)" /></t-radio-button>
-            </div>
-          </t-radio-group>
-
+              </div>
+            </t-radio-group>
+          </div>
           <t-form-item v-show="formData.layout === 'mix'" label="分割菜单（混合模式下有效）" name="splitMenu">
             <t-switch v-model="formData.splitMenu"></t-switch>
           </t-form-item>
@@ -72,25 +47,27 @@
           </t-form-item>
 
           <div class="setting-group-title">元素开关</div>
-          <t-form-item label="显示 Header" name="showHeader" v-show="formData.layout === 'side'">
-            <t-switch v-model="formData.showHeader"></t-switch>
-          </t-form-item>
-          <t-form-item label="显示 Breadcrumbs" name="showBreadcrumb">
-            <t-switch v-model="formData.showBreadcrumb"></t-switch>
-          </t-form-item>
-          <t-form-item label="显示 Footer" name="showFooter">
-            <t-switch v-model="formData.showFooter"></t-switch>
-          </t-form-item>
-          <t-form-item label="使用 多标签Tab页" name="isUseTabsRouter">
-            <t-switch v-model="formData.isUseTabsRouter"></t-switch>
-          </t-form-item>
-          <t-form-item
-            label="footer 内收"
-            name="footerPosition"
-            v-show="formData.showFooter && !formData.isSidebarFixed"
-          >
-            <t-switch v-model="formData.isFooterAside"></t-switch>
-          </t-form-item>
+          <div :class="['setting-container-subgroup', 'setting-config-list']">
+            <t-form-item label="显示 Header" name="showHeader" v-show="formData.layout === 'side'">
+              <t-switch v-model="formData.showHeader"></t-switch>
+            </t-form-item>
+            <t-form-item label="显示 Breadcrumbs" name="showBreadcrumb">
+              <t-switch v-model="formData.showBreadcrumb"></t-switch>
+            </t-form-item>
+            <t-form-item label="显示 Footer" name="showFooter">
+              <t-switch v-model="formData.showFooter"></t-switch>
+            </t-form-item>
+            <t-form-item label="使用 多标签Tab页" name="isUseTabsRouter">
+              <t-switch v-model="formData.isUseTabsRouter"></t-switch>
+            </t-form-item>
+            <t-form-item
+              label="footer 内收"
+              name="footerPosition"
+              v-show="formData.showFooter && !formData.isSidebarFixed"
+            >
+              <t-switch v-model="formData.isFooterAside"></t-switch>
+            </t-form-item>
+          </div>
         </t-form>
         <div class="setting-info">
           <p>请复制后手动修改配置文件: /src/config/style.ts</p>
@@ -102,11 +79,9 @@
 </template>
 <script lang="ts">
 import { mapGetters } from 'vuex';
-import { Color } from 'tvision-color';
 import { PopupVisibleChangeContext } from 'tdesign-vue';
 
 import STYLE_CONFIG from '@/config/style';
-import { insertThemeStylesheet, generateColorMap } from '@/utils/color';
 import { DEFAULT_COLOR_OPTIONS } from '@/config/color';
 
 import Thumbnail from '@/components/thumbnail/index.vue';
@@ -172,11 +147,6 @@ export default {
       deep: true,
     },
   },
-  mounted() {
-    document.querySelector('.dynamic-color-btn')?.addEventListener('click', () => {
-      this.isColoPickerDisplay = true;
-    });
-  },
   methods: {
     onPopupVisibleChange(visible: boolean, context: PopupVisibleChangeContext) {
       if (!visible && context.trigger === 'document') this.isColoPickerDisplay = visible;
@@ -219,24 +189,6 @@ export default {
         this.$message.closeAll();
         this.$message.success('复制成功');
       });
-    },
-    changeColor(hex: string) {
-      const { setting } = this.$store.state;
-
-      const { colors: newPalette, primary: brandColorIndex } = Color.getColorGradations({
-        colors: [hex],
-        step: 10,
-        remainInput: false, // 是否保留输入 不保留会矫正不合适的主题色
-      })[0];
-
-      const { mode } = this.$store.state.setting;
-      const colorMap = generateColorMap(hex, newPalette, mode, brandColorIndex);
-      this.formData.brandTheme = hex;
-
-      this.$store.commit('setting/addColor', { [hex]: colorMap });
-      this.$store.dispatch('setting/changeTheme', { ...setting, brandTheme: hex });
-
-      insertThemeStylesheet(hex, colorMap, mode);
     },
   },
 };
@@ -303,16 +255,6 @@ export default {
   color: var(--td-text-color-primary);
 }
 
-.setting-group-color {
-  position: relative;
-
-  > div {
-    position: absolute;
-    z-index: 2;
-    right: 0;
-  }
-}
-
 .setting-link {
   cursor: pointer;
   color: var(--td-brand-color);
@@ -334,7 +276,13 @@ export default {
 
 .setting-drawer-container {
   .setting-container {
-    padding-bottom: 100px;
+    background-color: var(--td-bg-color-container);
+    padding: var(--td-comp-paddingTB-l) var(--td-comp-paddingLR-l);
+    border-radius: var(--td-radius-extraLarge);
+    height: 100%;
+    &-subgroup {
+      margin: var(--td-comp-margin-m) 0;
+    }
   }
 
   .t-radio-group.t-size-m {
@@ -387,17 +335,6 @@ export default {
   }
 }
 
-.setting-color-theme {
-  .setting-layout-drawer {
-    .t-radio-button {
-      height: 32px;
-    }
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-}
 .setting-drawer-container .t-radio-group.t-radio-group__outline.t-size-m .t-radio-button {
   height: auto;
 }

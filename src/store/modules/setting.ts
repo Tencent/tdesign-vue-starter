@@ -99,6 +99,7 @@ const actions = {
     commit('changeChartColor', isDarkMode ? DARK_CHART_COLORS : LIGHT_CHART_COLORS);
   },
   changeBrandTheme(_: { state: IStateType }, payload: IStateType) {
+    if (document.querySelector('td-theme-generator')) return; // 项目中若使用了主题插件 则不让主题色在页面配置中使用
     const { brandTheme, mode } = payload;
     const { colors: newPalette, primary: brandColorIndex } = Color.getColorGradations({
       colors: [brandTheme],
