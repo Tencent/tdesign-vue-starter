@@ -12,6 +12,8 @@ import zhConfig from 'tdesign-vue/es/locale/zh_CN';
 import 'tdesign-vue/es/style/index.css';
 import '@/style/index.less';
 
+import 'tdesign-site-components';
+
 import 'tdesign-theme-generator';
 
 import './permission';
