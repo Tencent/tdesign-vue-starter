@@ -72,10 +72,6 @@
             </t-form-item>
           </div>
         </t-form>
-        <div class="setting-info">
-          <p>请复制后手动修改配置文件: /src/config/style.ts</p>
-          <t-button theme="primary" variant="text" @click="handleCopy"> 复制配置项 </t-button>
-        </div>
       </div>
     </t-drawer>
   </div>
@@ -212,6 +208,10 @@ export default {
 @import '@/style/variables.less';
 
 .setting-drawer-container {
+  .t-drawer__mask {
+    background: none;
+  }
+
   .t-drawer__body {
     padding: var(--td-comp-paddingTB-s) var(--td-comp-paddingLR-s);
     background-color: var(--td-bg-color-secondarycontainer);
@@ -254,6 +254,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-radius: var(--td-radius-medium);
     }
   }
   .setting-group-title {
@@ -299,19 +300,6 @@ export default {
 
   .t-form__controls-content {
     justify-content: end;
-  }
-
-  .setting-info {
-    position: absolute;
-    padding: 24px;
-    bottom: 0;
-    left: 0;
-    line-height: 20px;
-    font-size: 12px;
-    text-align: center;
-    color: var(--td-text-color-placeholder);
-    width: 100%;
-    background: var(--td-bg-color-container);
   }
 }
 </style>
