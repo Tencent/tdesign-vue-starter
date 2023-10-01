@@ -52,7 +52,7 @@
     "less": "^4.1.0",
     "lint-staged": "^13.0.3",
     "mockjs": "^1.1.0",
-    "prettier": "^2.6.0",
+    "prettier": "^3.0.3",
     "stylelint": "~13.13.1",
     "stylelint-config-prettier": "~9.0.3",
     "stylelint-less": "1.0.5",
