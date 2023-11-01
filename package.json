@@ -39,7 +39,7 @@
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.1.0",
     "@types/vue-color": "^2.4.3",
-    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
     "@typescript-eslint/parser": "^4.19.0",
     "commitizen": "^4.2.3",
     "eslint": "^7.22.0",
