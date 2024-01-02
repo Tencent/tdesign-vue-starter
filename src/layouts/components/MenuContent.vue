@@ -7,7 +7,7 @@
           :key="`href${item.path}`"
           :href="getHref(item)?.[0]"
           :name="item.path"
-          :value="item.meta?.single ? item.redirect : item.path"
+          :value="item.meta?.single ? item.redirect || item.path : item.path"
         >
           <template #icon>
             <t-icon v-if="typeof item.icon === 'string' && item.icon" :name="item.icon" />
@@ -20,7 +20,7 @@
           :key="`${item.path}`"
           :to="item.path"
           :name="item.path"
-          :value="item.meta?.single ? item.redirect : item.path"
+          :value="item.meta?.single ? item.redirect || item.path : item.path"
         >
           <template #icon>
             <t-icon v-if="typeof item.icon === 'string' && item.icon" :name="item.icon" />
