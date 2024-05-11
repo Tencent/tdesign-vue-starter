@@ -35,7 +35,7 @@ export const CONTRACT_TYPE_OPTIONS: Array<IOption> = [
 // 合同收付类型枚举
 export const CONTRACT_PAYMENT_TYPES = {
   PAYMENT: 0,
-  RECIPT: 1,
+  RECEIPT: 1,
 };
 
 // 通知的优先级对应的TAG类型
