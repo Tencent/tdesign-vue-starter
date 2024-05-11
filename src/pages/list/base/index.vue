@@ -47,7 +47,7 @@
               付款
               <trend class="dashboard-item-trend" type="up" />
             </p>
-            <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECIPT" class="payment-col">
+            <p v-if="row.paymentType === CONTRACT_PAYMENT_TYPES.RECEIPT" class="payment-col">
               收款
               <trend class="dashboard-item-trend" type="down" />
             </p>
