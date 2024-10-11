@@ -36,7 +36,7 @@
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.0.3",
+    "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^17.1.0",
     "@types/vue-color": "^2.4.3",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
