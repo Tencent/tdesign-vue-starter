@@ -3,16 +3,12 @@ import { resetRouter, asyncRouterList } from '@/router';
 function filterPermissionsRouters(routes, roles) {
   const res = [];
   routes.forEach((route) => {
-    const children = [];
-    route.children?.forEach((childRouter) => {
+    const children = route.children?.filter((childRouter) => {
       const roleCode = childRouter.meta?.roleCode || childRouter.name;
-      if (roles.indexOf(roleCode) !== -1) {
-        children.push(childRouter);
-      }
-    });
+      return roles.indexOf(roleCode) !== -1;
+    }) || [];
     if (children.length > 0) {
-      route.children = children;
-      res.push(route);
+      res.push({ ...route, children });
     }
   });
   return res;
