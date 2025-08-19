@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { Color } from 'tvision-color';
 import STYLE_CONFIG from '@/config/style';
-import { TColorSeries, TColorToken, LIGHT_CHART_COLORS, DARK_CHART_COLORS } from '@/config/color';
+import { TColorSeries, TChartColor, LIGHT_CHART_COLORS, DARK_CHART_COLORS } from '@/config/color';
 import { insertThemeStylesheet, generateColorMap } from '@/utils/color';
 
 // 定义的state初始值
@@ -10,12 +10,13 @@ const state = {
   showSettingPanel: false,
   colorList: {},
   chartColors: LIGHT_CHART_COLORS,
+  backgroundTheme: 'light',
 };
 
 type IInitStateType = typeof state;
 
 export interface IStateType extends IInitStateType {
-  isAsideFooter: boolean;
+  isFooterAside: boolean;
   showSettingPanel: boolean;
 }
 
@@ -52,7 +53,7 @@ const mutations = {
   addColor(state: IStateType, payload: TColorSeries) {
     state.colorList = { ...state.colorList, ...payload };
   },
-  changeChartColor(state: IStateType, payload: TColorToken) {
+  changeChartColor(state: IStateType, payload: TChartColor) {
     state.chartColors = { ...payload };
   },
 };

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import proxy from '../config/host';
+import store from '@/store';
+import router from '@/router';
 
 const env = import.meta.env.MODE || 'development';
 
@@ -26,16 +28,50 @@ instance.interceptors.request.use((config) => config);
 
 instance.interceptors.response.use(
   (response) => {
-    if (response.status === 200) {
+    if (response && response.status === 200) {
       const { data } = response;
-      if (data.code === CODE.REQUEST_SUCCESS) {
+
+      // handle custom login timeout code from backend
+      if (data && data.code === CODE.LOGIN_TIMEOUT) {
+        // clear token and redirect to login
+        try {
+          store.commit('user/removeToken');
+        } catch (e) {
+          // ignore
+        }
+        const redirect = window.location.pathname || '/';
+        router.replace(`/login?redirect=${redirect}`);
+        return Promise.reject(data);
+      }
+
+      if (data && data.code === CODE.REQUEST_SUCCESS) {
         return data;
       }
-      return response;
+
+      // if backend returns an error code, reject so callers can handle it
+      return Promise.reject(data || response);
     }
+    return Promise.reject(response);
   },
   (err) => {
-    const { config } = err;
+    const { config, response } = err;
+
+    // if server returned 401, force logout and redirect to login
+    if (response && response.status === 401) {
+      try {
+        store.commit('user/removeToken');
+      } catch (e) {
+        // ignore
+      }
+      const redirect = window.location.pathname || '/';
+      // use router if available
+      try {
+        router.replace(`/login?redirect=${redirect}`);
+      } catch (e) {
+        window.location.href = `/login?redirect=${redirect}`;
+      }
+      return Promise.reject(err);
+    }
 
     if (!config || !config.retry) return Promise.reject(err);
 

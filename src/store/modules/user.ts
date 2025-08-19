@@ -6,7 +6,7 @@ const InitUserInfo = {
 
 // 定义的state初始值
 const state = {
-  token: localStorage.getItem(TOKEN_NAME) || 'main_token', // 默认token不走权限
+  token: localStorage.getItem(TOKEN_NAME) || '',
   userInfo: InitUserInfo,
 };
 
