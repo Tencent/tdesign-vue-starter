@@ -10,5 +10,5 @@ on:
 
 jobs:
   call-test-build:
-    uses: Tencent/tdesign/.github/workflows/test-build.yml@main
+    uses: TDesignOteam/workflows/.github/workflows/reusable-unit-test.yml@main
 # install lint
