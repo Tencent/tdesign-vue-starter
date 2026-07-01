@@ -62,7 +62,7 @@
     "vite-plugin-theme": "^0.8.1",
     "vite-plugin-vue2": "^2.0.1",
     "vite-plugin-vue2-svg": "~0.4.0",
-    "vue-template-compiler": "~2.6.14"
+    "vue-template-compiler": "~2.7.16"
   },
   "config": {
     "commitizen": {
